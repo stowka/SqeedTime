@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LoginViewController.h"
 #import "SBJson.h"
 
-@interface ViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,14 +27,13 @@
 
 - (IBAction)login:(id)sender
 {
-    NSLog(@"Login..."); /* for testing purpose only */
     @try {
         
         if([[_username text] isEqualToString:@""]
         || [[_password text] isEqualToString:@""])
         {
-            [self alertStatus:@"Please enter both Username and Password" :
-                @"Login Failed!"];
+            [self alertStatus:@"Please enter both username and password" :
+                @"Login failed!"];
         }
         else
         {
@@ -42,7 +41,6 @@
                 [[NSString alloc]
                  initWithFormat:@"function=loginRequestV1&username=%@",
                  [_username text]];
-            NSLog(@"PostData: %@", post);
             
             NSURL *url = [NSURL URLWithString:
                           @"http://sqtdbws.net-production.ch/"];
@@ -77,22 +75,18 @@
                 NSString *responseData =
                         [[NSString alloc]initWithData:urlData
                                      encoding:NSUTF8StringEncoding];
-                NSLog(@"Response ==> %@", responseData);
                 
                 SBJsonParser *jsonParser = [SBJsonParser new];
                 NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                     objectWithString:responseData error:nil];
-                NSLog(@"%@", jsonData);
                 NSInteger id = [(NSNumber *) [jsonData
                                         objectForKey:@"id"] integerValue];
-                NSLog(@"login id: %d", id);
                 if (id > 0)
                 {
                     NSString *post =
                     [[NSString alloc]
                      initWithFormat:@"function=loginV1&id=%d&password=%@",
                      id, [_password text]];
-                    NSLog(@"PostData: %@", post);
                     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
                                           allowLossyConversion:YES];
                     
@@ -107,7 +101,6 @@
                    forHTTPHeaderField:@"Content-Type"];
                     [request setHTTPBody:postData];
                     
-                    /* just in case :P */
                     //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
                     
                     NSError *error = [[NSError alloc] init];
@@ -122,18 +115,22 @@
                         NSString *responseData =
                         [[NSString alloc]initWithData:urlData
                                              encoding:NSUTF8StringEncoding];
-                        NSLog(@"Response ==> %@", responseData);
                         
                         SBJsonParser *jsonParser = [SBJsonParser new];
                         NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                                                    objectWithString:responseData error:nil];
-                        NSLog(@"%@", jsonData);
                         NSString *state = [(NSString *) [jsonData
                                                         valueForKey:@"state"] uppercaseString];
-                        NSLog(@"%@", state);
-                        if ([state  isEqual: @"LOG IN: OK"])
+                        if ([state isEqual:@"LOG IN: OK"])
                         {
-                            [self alertStatus:@"Connection Success!" :@":-)"];
+                            [self alertStatus:@"Connection success!":@":-)"];
+                            
+                            // TODO
+                            /* display sqeeds */
+                            UITableViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@""];
+                            [self presentViewController:view animated:YES completion:nil];
+                            
+                            
                         }
                         else
                         {
@@ -146,22 +143,25 @@
             {
                 if (error)
                     NSLog(@"Error: %@", error);
-                [self alertStatus:@"Connection Failed" :@"Login Failed!"];
+                [self alertStatus:@"Connection failed" :@"Error..."];
             }
         }
     }
     @catch (NSException *e) {
         NSLog(@"Exception: %@", e);
-        [self alertStatus:@"Login Failed." :@"Login Failed!"];
+        [self alertStatus:@"Login failed." :@"Exception..."];
     }
 }
 
+/**
+ * provides an alert message
+ */
 - (void) alertStatus:(NSString *)msg :(NSString *)title
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:msg
                                                        delegate:self
-                                              cancelButtonTitle:@"Ok"
+                                              cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil, nil];
     
     [alertView show];
