@@ -22,7 +22,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex: AlphDutilleul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-n2-oIe">
                                 <rect key="frame" x="96" y="193" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="backgroundClick:" destination="x5A-6p-PRh" eventType="editingDidEndOnExit" id="FBA-qA-R34"/>
                                 </connections>
