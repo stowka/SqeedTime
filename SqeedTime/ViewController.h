@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UISwitch *remember;
+- (IBAction)login:(id)sender;
+- (IBAction)backgroundClick:(id)sender;
 
 @end
 
