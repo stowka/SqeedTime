@@ -28,5 +28,7 @@
 }
 
 - (IBAction)backgroundClick:(id)sender {
+    [_password resignFirstResponder];
+    [_username resignFirstResponder];
 }
 @end
