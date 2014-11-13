@@ -23,6 +23,9 @@
                                 <rect key="frame" x="96" y="193" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="backgroundClick:" destination="x5A-6p-PRh" eventType="editingDidEndOnExit" id="FBA-qA-R34"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyV-yW-E3a">
                                 <rect key="frame" x="78" y="164" width="165" height="21"/>
@@ -40,6 +43,9 @@
                                 <rect key="frame" x="96" y="231" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="backgroundClick:" destination="x5A-6p-PRh" eventType="editingDidEndOnExit" id="DoK-d4-2EL"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-Gk-I9d">
                                 <rect key="frame" x="21" y="235" width="67" height="21"/>
