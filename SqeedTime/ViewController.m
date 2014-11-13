@@ -25,6 +25,7 @@
 }
 
 - (IBAction)login:(id)sender {
+    NSLog(@"Login..."); /* for testing purpose only */
 }
 
 - (IBAction)backgroundClick:(id)sender {

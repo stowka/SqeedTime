@@ -45,6 +45,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="backgroundClick:" destination="x5A-6p-PRh" eventType="editingDidEndOnExit" id="DoK-d4-2EL"/>
+                                    <action selector="login:" destination="x5A-6p-PRh" eventType="editingDidEnd" id="Ta3-Hr-hYX"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-Gk-I9d">
