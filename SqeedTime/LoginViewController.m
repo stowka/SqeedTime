@@ -127,10 +127,10 @@
                             
                             // TODO
                             /* display sqeeds */
-                            UITableViewController *view = [self.storyboard instantiateViewControllerWithIdentifier:@""];
-                            [self presentViewController:view animated:YES completion:nil];
+                            //SqeedsViewController *sqeeds = [[SqeedsViewController alloc] init];
+                            //[self presentModalViewController:sqeeds animated:YES];
                             
-                            
+                            [self performSegueWithIdentifier:@"loginToSqeeds" sender:self];
                         }
                         else
                         {

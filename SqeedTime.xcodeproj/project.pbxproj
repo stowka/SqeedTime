@@ -27,7 +27,7 @@
 		7199685E1A150FBD00974683 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968501A150FBD00974683 /* SBJsonTokeniser.m */; };
 		7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968521A150FBD00974683 /* SBJsonUTF8Stream.m */; };
 		719968601A150FBD00974683 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968541A150FBD00974683 /* SBJsonWriter.m */; };
-		719968631A1529F300974683 /* SqeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968621A1529F300974683 /* SqeedsViewController.m */; };
+		71A647361A1A323D0072720F /* UITableViewController+SqeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +80,8 @@
 		719968521A150FBD00974683 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		719968531A150FBD00974683 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		719968541A150FBD00974683 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		719968611A1529F300974683 /* SqeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedsViewController.h; sourceTree = "<group>"; };
-		719968621A1529F300974683 /* SqeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedsViewController.m; sourceTree = "<group>"; };
+		71A647341A1A323D0072720F /* UITableViewController+SqeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+SqeedsViewController.h"; sourceTree = "<group>"; };
+		71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+SqeedsViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +154,8 @@
 				7199681B1A14FA6100974683 /* LoginViewController.h */,
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
-				719968611A1529F300974683 /* SqeedsViewController.h */,
-				719968621A1529F300974683 /* SqeedsViewController.m */,
+				71A647341A1A323D0072720F /* UITableViewController+SqeedsViewController.h */,
+				71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */,
 				719968211A14FA6100974683 /* Images.xcassets */,
 				719968231A14FA6100974683 /* LaunchScreen.xib */,
 				719968141A14FA6100974683 /* Supporting Files */,
@@ -301,7 +301,7 @@
 				719968581A150FBD00974683 /* SBJsonStreamParserAccumulator.m in Sources */,
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
-				719968631A1529F300974683 /* SqeedsViewController.m in Sources */,
+				71A647361A1A323D0072720F /* UITableViewController+SqeedsViewController.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
@@ -496,6 +496,7 @@
 				719968361A14FA6100974683 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		719968371A14FA6100974683 /* Build configuration list for PBXNativeTarget "SqeedTimeTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +505,7 @@
 				719968391A14FA6100974683 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
