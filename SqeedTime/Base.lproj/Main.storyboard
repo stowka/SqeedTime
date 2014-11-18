@@ -19,7 +19,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0A5-Oa-yTr">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex: AlphDutilleul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-n2-oIe">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stowka" borderStyle="roundedRect" placeholder="ex: AlphDutilleul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-n2-oIe">
                                 <rect key="frame" x="96" y="193" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -39,7 +39,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex: w0H7fmv" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-2r-LCn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pass" borderStyle="roundedRect" placeholder="ex: w0H7fmv" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-2r-LCn">
                                 <rect key="frame" x="96" y="231" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
@@ -92,9 +92,28 @@
             <point key="canvasLocation" x="268" y="144"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="jSq-6C-kTv">
+            <objects>
+                <viewController id="gPl-AM-HdR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cMF-zf-AWO"/>
+                        <viewControllerLayoutGuide type="bottom" id="bYb-f2-9Oc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W1E-w3-2fq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qya-xc-H43" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="826" y="-622"/>
+        </scene>
+        <!--Activities View Controller-->
         <scene sceneID="Lzi-E6-dEk">
             <objects>
-                <viewController id="RgM-oh-shf" sceneMemberID="viewController">
+                <viewController id="RgM-oh-shf" customClass="ActivitiesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2AH-ko-b08"/>
                         <viewControllerLayoutGuide type="bottom" id="Vbm-gL-MN0"/>
@@ -105,60 +124,55 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beL-ys-u9G">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <color key="barTintColor" red="1" green="0.19607843137254902" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem title="My Sqeeds" id="Wrt-03-itz">
+                                    <navigationItem title="Activities" id="Wrt-03-itz">
                                         <barButtonItem key="backBarButtonItem" title="Log out" id="fOY-vy-SSB"/>
-                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="zkF-RG-j1o">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="A0F-1X-V30">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="vXZ-lx-hvc" kind="presentation" id="BEq-eC-bJd"/>
+                                                <segue destination="gPl-AM-HdR" kind="presentation" id="XNc-GL-vds"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="A9l-eU-6z9">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="qjO-RG-PDT" kind="presentation" id="9p9-QF-wcF"/>
+                                                <segue destination="qjO-RG-PDT" kind="popoverPresentation" popoverAnchorBarButtonItem="A9l-eU-6z9" id="9p9-QF-wcF">
+                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                </segue>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="N7P-Pi-ceD">
-                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tsD-7w-lXD">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="w0t-rN-SaU">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w0t-rN-SaU" id="l5R-XI-SS0">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="x3L-3F-qBI">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x3L-3F-qBI" id="xPU-xl-TTb">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="BDq-TH-zwT">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BDq-TH-zwT" id="HBM-j9-63b">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="L9B-OE-lnJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L9B-OE-lnJ" id="YNp-kM-7aN">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X0w-Yt-Ih9">
+                                <rect key="frame" x="16" y="77" width="288" height="29"/>
+                                <segments>
+                                    <segment title="My Sqeeds"/>
+                                    <segment title="Discovered"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.1960784314" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="display:" destination="RgM-oh-shf" eventType="valueChanged" id="1YJ-EB-yYl"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wTg-4c-dkI">
+                                <rect key="frame" x="0.0" y="113" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -178,21 +192,46 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ZJ-PZ-oRk">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <color key="barTintColor" red="0.2627450980392157" green="0.61568627450980395" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="New Sqeed (1)" id="E6B-9Z-jJk">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DBC-bV-lfP">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
                                                 <segue destination="RgM-oh-shf" kind="presentation" id="TcL-CW-dBu"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Next" id="4fV-vd-D36">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="ete-aa-soe" kind="presentation" id="WLc-Mb-u50"/>
+                                                <segue destination="ete-aa-soe" kind="show" id="WLc-Mb-u50"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What to do..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="92R-dT-xec">
+                                <rect key="frame" x="16" y="76" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylt-2R-Egh">
+                                <rect key="frame" x="16" y="114" width="75" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-Io-eUb">
+                                <rect key="frame" x="0.0" y="143" width="320" height="162"/>
+                            </pickerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2pi-Na-Sg2">
+                                <rect key="frame" x="16" y="313" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -216,17 +255,48 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrB-HF-myY">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="New Sqeed (2)" id="T8Z-AV-aUb">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="7lM-MR-2tV">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
                                                 <segue destination="RgM-oh-shf" kind="presentation" id="CXy-V3-D0G"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rHR-PN-KWc"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rHR-PN-KWc">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gnt-pp-dfJ">
+                                <rect key="frame" x="0.0" y="103" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="438024617.68269002">
+                                    <!--2014-11-18 17:30:17 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Starts:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHA-HO-T1C">
+                                <rect key="frame" x="16" y="74" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ends:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hou-dv-dnP">
+                                <rect key="frame" x="16" y="273" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HH8-xL-RUn">
+                                <rect key="frame" x="0.0" y="302" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="438024621.60045898">
+                                    <!--2014-11-18 17:30:21 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -241,6 +311,6 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CXy-V3-D0G"/>
+        <segue reference="97L-vN-R9s"/>
     </inferredMetricsTieBreakers>
 </document>

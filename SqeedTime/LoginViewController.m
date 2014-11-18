@@ -67,8 +67,7 @@
             NSHTTPURLResponse *response = nil;
             NSData *urlData=[NSURLConnection sendSynchronousRequest:request
                                     returningResponse:&response error:&error];
-            
-            NSLog(@"Response code: %d", [response statusCode]);
+            //NSLog(@"Response code: %d", [response statusCode]);
             if ([response statusCode] >= 200
             && [response statusCode] < 300)
             {
@@ -108,7 +107,7 @@
                     NSData *urlData=[NSURLConnection sendSynchronousRequest:request
                                                           returningResponse:&response error:&error];
                     
-                    NSLog(@"Response code: %d", [response statusCode]);
+                    //NSLog(@"Response code: %d", [response statusCode]);
                     if ([response statusCode] >= 200
                         && [response statusCode] < 300)
                     {
@@ -122,20 +121,9 @@
                         NSString *state = [(NSString *) [jsonData
                                                         valueForKey:@"state"] uppercaseString];
                         if ([state isEqual:@"LOG IN: OK"])
-                        {
-                            [self alertStatus:@"Connection success!":@":-)"];
-                            
-                            // TODO
-                            /* display sqeeds */
-                            //SqeedsViewController *sqeeds = [[SqeedsViewController alloc] init];
-                            //[self presentModalViewController:sqeeds animated:YES];
-                            
                             [self performSegueWithIdentifier:@"loginToSqeeds" sender:self];
-                        }
                         else
-                        {
                             [self alertStatus:@"Connection Failed!" :state];
-                        }
                     }
                 }
             }

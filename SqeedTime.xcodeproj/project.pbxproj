@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */; };
 		719968171A14FA6100974683 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968161A14FA6100974683 /* main.m */; };
 		7199681A1A14FA6100974683 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968191A14FA6100974683 /* AppDelegate.m */; };
 		7199681D1A14FA6100974683 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7199681C1A14FA6100974683 /* LoginViewController.m */; };
@@ -27,7 +28,6 @@
 		7199685E1A150FBD00974683 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968501A150FBD00974683 /* SBJsonTokeniser.m */; };
 		7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968521A150FBD00974683 /* SBJsonUTF8Stream.m */; };
 		719968601A150FBD00974683 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968541A150FBD00974683 /* SBJsonWriter.m */; };
-		71A647361A1A323D0072720F /* UITableViewController+SqeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesViewController.h; sourceTree = "<group>"; };
+		710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesViewController.m; sourceTree = "<group>"; };
 		719968111A14FA6100974683 /* SqeedTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SqeedTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719968151A14FA6100974683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719968161A14FA6100974683 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,8 +82,6 @@
 		719968521A150FBD00974683 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		719968531A150FBD00974683 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		719968541A150FBD00974683 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		71A647341A1A323D0072720F /* UITableViewController+SqeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+SqeedsViewController.h"; sourceTree = "<group>"; };
-		71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+SqeedsViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +154,8 @@
 				7199681B1A14FA6100974683 /* LoginViewController.h */,
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
-				71A647341A1A323D0072720F /* UITableViewController+SqeedsViewController.h */,
-				71A647351A1A323D0072720F /* UITableViewController+SqeedsViewController.m */,
+				710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */,
+				710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */,
 				719968211A14FA6100974683 /* Images.xcassets */,
 				719968231A14FA6100974683 /* LaunchScreen.xib */,
 				719968141A14FA6100974683 /* Supporting Files */,
@@ -300,8 +300,8 @@
 				719968561A150FBD00974683 /* SBJsonParser.m in Sources */,
 				719968581A150FBD00974683 /* SBJsonStreamParserAccumulator.m in Sources */,
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
+				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
-				71A647361A1A323D0072720F /* UITableViewController+SqeedsViewController.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
