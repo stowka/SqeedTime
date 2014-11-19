@@ -8,6 +8,7 @@
 
 #import "ActivitiesViewController.h"
 #import "SBJson.h"
+#import "SqeedsTableView.h"
 
 @interface ActivitiesViewController ()
 
@@ -90,6 +91,7 @@
             
             // TODO
             // display event in uitableview cells!
+            
         }
     }
     else

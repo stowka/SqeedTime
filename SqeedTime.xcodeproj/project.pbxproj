@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */; };
+		7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */; };
+		7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A21A1CB96C00A8C995 /* icon-camera.png */; };
+		7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A31A1CB96C00A8C995 /* icon-coconut.png */; };
+		7195D7A91A1CB96C00A8C995 /* icon-music.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A41A1CB96C00A8C995 /* icon-music.png */; };
+		7195D7AA1A1CB96C00A8C995 /* icon-tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A51A1CB96C00A8C995 /* icon-tennis.png */; };
+		7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A61A1CB96C00A8C995 /* icon-theater.png */; };
+		7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */; };
 		719968171A14FA6100974683 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968161A14FA6100974683 /* main.m */; };
 		7199681A1A14FA6100974683 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968191A14FA6100974683 /* AppDelegate.m */; };
 		7199681D1A14FA6100974683 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7199681C1A14FA6100974683 /* LoginViewController.m */; };
@@ -43,6 +50,15 @@
 /* Begin PBXFileReference section */
 		710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesViewController.h; sourceTree = "<group>"; };
 		710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesViewController.m; sourceTree = "<group>"; };
+		7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedTableViewCell.h; sourceTree = "<group>"; };
+		7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedTableViewCell.m; sourceTree = "<group>"; };
+		7195D7A21A1CB96C00A8C995 /* icon-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-camera.png"; sourceTree = "<group>"; };
+		7195D7A31A1CB96C00A8C995 /* icon-coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-coconut.png"; sourceTree = "<group>"; };
+		7195D7A41A1CB96C00A8C995 /* icon-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-music.png"; sourceTree = "<group>"; };
+		7195D7A51A1CB96C00A8C995 /* icon-tennis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-tennis.png"; sourceTree = "<group>"; };
+		7195D7A61A1CB96C00A8C995 /* icon-theater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-theater.png"; sourceTree = "<group>"; };
+		7195D7AD1A1CBDE000A8C995 /* SqeedsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedsTableView.h; sourceTree = "<group>"; };
+		7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedsTableView.m; sourceTree = "<group>"; };
 		719968111A14FA6100974683 /* SqeedTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SqeedTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719968151A14FA6100974683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719968161A14FA6100974683 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -102,6 +118,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7195D7AC1A1CB97400A8C995 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				7195D7A21A1CB96C00A8C995 /* icon-camera.png */,
+				7195D7A31A1CB96C00A8C995 /* icon-coconut.png */,
+				7195D7A41A1CB96C00A8C995 /* icon-music.png */,
+				7195D7A51A1CB96C00A8C995 /* icon-tennis.png */,
+				7195D7A61A1CB96C00A8C995 /* icon-theater.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +165,7 @@
 				719968471A150FBD00974683 /* SBJsonStreamParserState.h */,
 				719968481A150FBD00974683 /* SBJsonStreamParserState.m */,
 				719968491A150FBD00974683 /* SBJsonStreamWriter.h */,
+				7195D7AC1A1CB97400A8C995 /* icons */,
 				7199684A1A150FBD00974683 /* SBJsonStreamWriter.m */,
 				7199684B1A150FBD00974683 /* SBJsonStreamWriterAccumulator.h */,
 				7199684C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m */,
@@ -154,8 +183,12 @@
 				7199681B1A14FA6100974683 /* LoginViewController.h */,
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
+				7195D7AD1A1CBDE000A8C995 /* SqeedsTableView.h */,
+				7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */,
 				710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */,
 				710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */,
+				7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */,
+				7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */,
 				719968211A14FA6100974683 /* Images.xcassets */,
 				719968231A14FA6100974683 /* LaunchScreen.xib */,
 				719968141A14FA6100974683 /* Supporting Files */,
@@ -270,9 +303,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7199683B1A14FA9B00974683 /* logo.png in Resources */,
+				7195D7AA1A1CB96C00A8C995 /* icon-tennis.png in Resources */,
+				7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */,
 				719968201A14FA6100974683 /* Main.storyboard in Resources */,
+				7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */,
 				719968251A14FA6100974683 /* LaunchScreen.xib in Resources */,
 				719968221A14FA6100974683 /* Images.xcassets in Resources */,
+				7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */,
+				7195D7A91A1CB96C00A8C995 /* icon-music.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +340,8 @@
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
+				7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */,
+				7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
