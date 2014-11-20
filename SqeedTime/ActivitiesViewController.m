@@ -16,10 +16,16 @@
 @end
 
 @implementation ActivitiesViewController
+NSDictionary* myData;
+NSArray* myKeys;
+NSArray* myValues;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    myData = [self fetchMySqeeds:14];
+//    myKeys = [myData ]
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,7 +33,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchMySqeeds:(int)userId {
+- (NSInteger)tableView:(SqeedsTableView *)tableView numberOfRowsInSection:
+(NSInteger)section{
+    return [myData count];
+}
+
+- (UITableViewCell *)tableView:(SqeedsTableView *)tableView cellForRowAtIndexPath:
+(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"cellID";
+    SqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             cellIdentifier];
+    if (cell == nil) {
+        cell = [[SqeedTableViewCell alloc]initWithStyle:
+                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    NSString* uniqueKey = [NSString stringWithFormat:@"%d",indexPath.row];
+    NSLog(@"%@", (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"title"]);
+    cell.eventTitle.text = @"Tennis !";
+    cell.eventMinMax.text = [NSString stringWithFormat:@"%d / %d", 11, 22];
+    cell.eventCreator.text = [NSString stringWithFormat:@"created by %@", @"Stowka"];
+    
+    return cell;
+}
+
+-(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:
+(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"Section:%d Row:%d selected and its data is %@",
+          indexPath.section,indexPath.row,cell.textLabel.text);
+}
+
+- (NSDictionary*)fetchMySqeeds:(int)userId {
     NSString *post =
     [[NSString alloc]
      initWithFormat:@"function=eventsByUser&id=%d",
@@ -69,51 +106,41 @@
         NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                                    objectWithString:responseData error:nil];
         // iterates over sqeed events:
-        NSLog(@"%@", jsonData);
-        NSString *description;
-        NSString *place;
-        NSString *title;
-        
-        NSInteger category_id;
-        NSInteger people_max;
-        NSInteger people_min;
-        NSInteger event_id;
-        for(id event in jsonData)
-        {
-            NSLog(@"%@", [jsonData objectForKey:event]);
-            description = (NSString*)[[jsonData objectForKey:event] valueForKey:@"description"];
-            place = (NSString*)[[jsonData objectForKey:event] valueForKey:@"place"];
-            title = (NSString*)[[jsonData objectForKey:event] valueForKey:@"title"];
-            category_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"category_id"] integerValue];
-            people_max = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_max"] integerValue];
-            people_min = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_min"] integerValue];
-            event_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"id"] integerValue];
-           NSLog(@"title: %@\nplace: %@\ndescription: %@\n\n", title, place, description);
-           // NSLog(@"category_id: %d\npeople_max: %d\npeople_min: %d\nevent_id: %d", category_id, people_max, people_min, event_id);
-            
-            // TODO
-            // display event in uitableview cells!
-        }
+//        NSLog(@"%@", jsonData);
+//        NSString *description;
+//        NSString *place;
+//        NSString *title;
+//        
+//        NSInteger category_id;
+//        NSInteger people_max;
+//        NSInteger people_min;
+//        NSInteger event_id;
+        return jsonData;
+//        for(id event in jsonData)
+//        {
+//            NSLog(@"%@", [jsonData objectForKey:event]);
+//            description = (NSString*)[[jsonData objectForKey:event] valueForKey:@"description"];
+//            place = (NSString*)[[jsonData objectForKey:event] valueForKey:@"place"];
+//            title = (NSString*)[[jsonData objectForKey:event] valueForKey:@"title"];
+//            category_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"category_id"] integerValue];
+//            people_max = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_max"] integerValue];
+//            people_min = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_min"] integerValue];
+//            event_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"id"] integerValue];
+//           NSLog(@"title: %@\nplace: %@\ndescription: %@\n\n", title, place, description);
+//        }
     }
     else
     {
         if (error)
             NSLog(@"Error: %@", error);
         [self alertStatus:@"Connection failed" :@"Error..."];
+        return nil;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSDictionary*)fetchDiscovered:(int)userId
 {
-    SqeedTableViewCell *cell = [[SqeedTableViewCell alloc]init];
-    cell.eventTitle.text = @"ANTOINE";
-    
-    return cell;
-}
-
-- (void)fetchDiscovered:(int)userId
-{
-    return;
+    return nil;
 }
 
 
