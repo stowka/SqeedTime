@@ -9,6 +9,7 @@
 #import "ActivitiesViewController.h"
 #import "SBJson.h"
 #import "SqeedsTableView.h"
+#import "SqeedTableViewCell.h"
 
 @interface ActivitiesViewController ()
 
@@ -18,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,7 +27,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)displayMySqeeds:(int)userId {
+- (void)fetchMySqeeds:(int)userId {
     NSString *post =
     [[NSString alloc]
      initWithFormat:@"function=eventsByUser&id=%d",
@@ -91,7 +93,6 @@
             
             // TODO
             // display event in uitableview cells!
-            
         }
     }
     else
@@ -102,17 +103,34 @@
     }
 }
 
-- (void)displayDiscovered:(int)userId {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SqeedTableViewCell *cell = [[SqeedTableViewCell alloc]init];
+    cell.eventTitle.text = @"ANTOINE";
+    
+    return cell;
+}
+
+- (void)fetchDiscovered:(int)userId
+{
+    return;
+}
+
+
+
+- (void)displaySqeeds:(NSDictionary*)data
+{
+    return;
 }
 
 - (IBAction)display:(id)sender {
-    int segment = [sender selectedSegmentIndex];
+    long segment = [sender selectedSegmentIndex];
     if (segment == 0)
     {
-        [self displayMySqeeds:14];
+        [self fetchMySqeeds:14];
     } else if (segment == 1)
     {
-        [self displayDiscovered:14];
+        [self fetchDiscovered:14];
     }
 }
 

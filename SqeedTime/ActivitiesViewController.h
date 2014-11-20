@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActivitiesViewController : UIViewController
+@interface ActivitiesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *sqeedsTable;
 
-- (void)displayMySqeeds:(int)userId;
-- (void)displayDiscovered:(int)userId;
+- (void)fetchMySqeeds:(int)userId;
+- (void)fetchDiscovered:(int)userId;
+- (void)displaySqeeds:(NSDictionary*)data;
 - (IBAction)display:(id)sender;
 @end

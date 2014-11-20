@@ -172,7 +172,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HPj-Y5-JAH" id="4hT-fC-juE">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCc-NK-5rP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Football entre amis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCc-NK-5rP">
                                                     <rect key="frame" x="48" y="9" width="214" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -216,6 +216,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="eventCreator" destination="nmJ-NU-6La" id="oM0-i4-vRL"/>
+                                            <outlet property="eventDateEnd" destination="eBf-4f-EHN" id="nQI-hQ-gLE"/>
+                                            <outlet property="eventDateStart" destination="aFz-by-v5q" id="er6-LO-6sM"/>
+                                            <outlet property="eventMinMax" destination="QKS-yK-eQI" id="umG-gG-Fiq"/>
+                                            <outlet property="eventPlace" destination="e9Y-Cv-nN9" id="WhZ-aJ-l5i"/>
                                             <outlet property="eventTitle" destination="VCc-NK-5rP" id="wO6-Ia-bZk"/>
                                         </connections>
                                     </tableViewCell>
