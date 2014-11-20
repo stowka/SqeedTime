@@ -12,8 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *eventCategoryIcon;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *eventMinMax;
-@property (weak, nonatomic) IBOutlet UILabel *eventDateStart;
-@property (weak, nonatomic) IBOutlet UILabel *eventDateEnd;
 @property (weak, nonatomic) IBOutlet UILabel *eventPlace;
-@property (weak, nonatomic) IBOutlet UILabel *eventCreator;
 @end

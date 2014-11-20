@@ -47,11 +47,12 @@ NSArray* myValues;
         cell = [[SqeedTableViewCell alloc]initWithStyle:
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    
     NSString* uniqueKey = [NSString stringWithFormat:@"%d",indexPath.row];
-    NSLog(@"%@", (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"title"]);
-    cell.eventTitle.text = @"Tennis !";
-    cell.eventMinMax.text = [NSString stringWithFormat:@"%d / %d", 11, 22];
-    cell.eventCreator.text = [NSString stringWithFormat:@"created by %@", @"Stowka"];
+    
+    cell.eventTitle.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"title"];
+    cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_min"], (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_max"]];
+    cell.eventPlace.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"place"];
     
     return cell;
 }
@@ -105,29 +106,7 @@ NSArray* myValues;
         SBJsonParser *jsonParser = [SBJsonParser new];
         NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                                    objectWithString:responseData error:nil];
-        // iterates over sqeed events:
-//        NSLog(@"%@", jsonData);
-//        NSString *description;
-//        NSString *place;
-//        NSString *title;
-//        
-//        NSInteger category_id;
-//        NSInteger people_max;
-//        NSInteger people_min;
-//        NSInteger event_id;
         return jsonData;
-//        for(id event in jsonData)
-//        {
-//            NSLog(@"%@", [jsonData objectForKey:event]);
-//            description = (NSString*)[[jsonData objectForKey:event] valueForKey:@"description"];
-//            place = (NSString*)[[jsonData objectForKey:event] valueForKey:@"place"];
-//            title = (NSString*)[[jsonData objectForKey:event] valueForKey:@"title"];
-//            category_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"category_id"] integerValue];
-//            people_max = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_max"] integerValue];
-//            people_min = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"people_min"] integerValue];
-//            event_id = [(NSNumber *) [[jsonData objectForKey:event] objectForKey:@"id"] integerValue];
-//           NSLog(@"title: %@\nplace: %@\ndescription: %@\n\n", title, place, description);
-//        }
     }
     else
     {
@@ -140,7 +119,55 @@ NSArray* myValues;
 
 - (NSDictionary*)fetchDiscovered:(int)userId
 {
-    return nil;
+    NSString *post =
+    [[NSString alloc]
+     initWithFormat:@"function=eventsByUser&id=%d",
+     userId];
+    
+    NSURL *url = [NSURL URLWithString:
+                  @"http://sqtdbws.net-production.ch/"];
+    
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
+                          allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d",
+                            [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded"
+   forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *response = nil;
+    NSData *urlData=[NSURLConnection sendSynchronousRequest:request
+                                          returningResponse:&response error:&error];
+    //NSLog(@"Response code: %d", [response statusCode]);
+    if ([response statusCode] >= 200
+        && [response statusCode] < 300)
+    {
+        NSString *responseData =
+        [[NSString alloc]initWithData:urlData
+                             encoding:NSUTF8StringEncoding];
+        
+        SBJsonParser *jsonParser = [SBJsonParser new];
+        NSDictionary *jsonData = (NSDictionary *) [jsonParser
+                                                   objectWithString:responseData error:nil];
+        return jsonData;
+    }
+    else
+    {
+        if (error)
+            NSLog(@"Error: %@", error);
+        [self alertStatus:@"Connection failed" :@"Error..."];
+        return nil;
+    }
 }
 
 
