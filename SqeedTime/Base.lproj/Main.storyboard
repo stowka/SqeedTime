@@ -102,6 +102,72 @@
                     <view key="view" contentMode="scaleToFill" id="W1E-w3-2fq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faT-ed-LWH">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Search Sqeeds" id="ZIL-F4-Mla">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Bf8-ow-00F">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="RgM-oh-shf" kind="presentation" id="IPl-sv-0sH"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4eE-cY-fKW">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqs-Pk-TlL">
+                                <rect key="frame" x="0.0" y="116" width="320" height="452"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" rowHeight="120" id="5z2-vL-B59" customClass="SqeedTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5z2-vL-B59" id="nLv-WP-zno">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Football entre amis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16u-Fj-QB3">
+                                                    <rect key="frame" x="48" y="9" width="214" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-theater.png" translatesAutoresizingMaskIntoConstraints="NO" id="bm6-yp-Z60">
+                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 / 20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bg-Mc-zkk">
+                                                    <rect key="frame" x="252" y="11" width="60" height="30"/>
+                                                    <color key="backgroundColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Port d'Ouchy, Lausanne, VD, CH" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRj-0T-gUe">
+                                                    <rect key="frame" x="162" y="51" width="150" height="41"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventMinMax" destination="7bg-Mc-zkk" id="g0J-6e-Q9o"/>
+                                            <outlet property="eventPlace" destination="GRj-0T-gUe" id="ovY-B0-mu4"/>
+                                            <outlet property="eventTitle" destination="16u-Fj-QB3" id="Fjb-H0-6t8"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -134,15 +200,13 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="A0F-1X-V30">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="gPl-AM-HdR" kind="presentation" id="XNc-GL-vds"/>
+                                                <segue destination="gPl-AM-HdR" kind="presentation" identifier="segueSearch" id="XNc-GL-vds"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="A9l-eU-6z9">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="qjO-RG-PDT" kind="popoverPresentation" popoverAnchorBarButtonItem="A9l-eU-6z9" id="9p9-QF-wcF">
-                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                </segue>
+                                                <segue destination="qjO-RG-PDT" kind="show" identifier="segueNewSqeed1" id="9p9-QF-wcF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -197,10 +261,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="eventMinMax" destination="QKS-yK-eQI" id="umG-gG-Fiq"/>
                                             <outlet property="eventPlace" destination="e9Y-Cv-nN9" id="WhZ-aJ-l5i"/>
                                             <outlet property="eventTitle" destination="VCc-NK-5rP" id="wO6-Ia-bZk"/>
+                                            <segue destination="1o5-e8-4sL" kind="presentation" identifier="segueSqeed" id="BdP-3w-ymU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -211,6 +277,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -220,6 +287,118 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="826" y="125"/>
+        </scene>
+        <!--Sqeed View Controller-->
+        <scene sceneID="l2d-82-d1k">
+            <objects>
+                <viewController id="1o5-e8-4sL" customClass="SqeedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vd3-sM-ORG"/>
+                        <viewControllerLayoutGuide type="bottom" id="dfF-Bc-gtb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LVI-fr-IWE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vbt-aT-pP6">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <color key="barTintColor" red="1" green="0.1960784314" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Sqeed" id="WjI-DR-G3K">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="SFt-fh-dwR">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="RgM-oh-shf" kind="presentation" id="qwm-km-WBN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wx-hO-Stg">
+                                <rect key="frame" x="56" y="84" width="180" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="9l9-lK-e7x">
+                                <rect key="frame" x="16" y="79" width="32" height="32"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo0-rV-gjX">
+                                <rect key="frame" x="16" y="273" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6b-HN-xcM">
+                                <rect key="frame" x="16" y="302" width="288" height="246"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mte-L0-Sfd">
+                                <rect key="frame" x="16" y="237" width="288" height="29"/>
+                                <segments>
+                                    <segment title="Join!"/>
+                                    <segment title="Sorry..."/>
+                                </segments>
+                                <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 / 20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okz-le-d9a">
+                                <rect key="frame" x="244" y="79" width="60" height="30"/>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Port d'Ouchy, Lausanne, VD, CH" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgB-zA-0W7">
+                                <rect key="frame" x="154" y="117" width="150" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date and day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xke-cl-rcP">
+                                <rect key="frame" x="16" y="127" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mcj-C8-dBx">
+                                <rect key="frame" x="16" y="201" width="288" height="29"/>
+                                <segments>
+                                    <segment title="16:00"/>
+                                    <segment title="17:00"/>
+                                    <segment title="18:00"/>
+                                </segments>
+                                <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="created by Stowka" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysu-sF-Wpk">
+                                <rect key="frame" x="154" y="172" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="eventCreator" destination="Ysu-sF-Wpk" id="827-Ze-62k"/>
+                        <outlet property="eventDay" destination="Xke-cl-rcP" id="o3D-qU-em2"/>
+                        <outlet property="eventDescription" destination="S6b-HN-xcM" id="GIn-ya-yBb"/>
+                        <outlet property="eventMinMax" destination="okz-le-d9a" id="N47-GZ-Io7"/>
+                        <outlet property="eventPlace" destination="JgB-zA-0W7" id="Usq-fj-v4K"/>
+                        <outlet property="eventTitle" destination="4Wx-hO-Stg" id="LDv-22-d9o"/>
+                        <outlet property="voteChoice" destination="mte-L0-Sfd" id="fxZ-X8-uUs"/>
+                        <outlet property="voteTime" destination="Mcj-C8-dBx" id="gH3-Mh-rCs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JI0-Jq-VC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="826" y="867"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xKF-fr-1lS">
@@ -250,7 +429,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="Next" id="4fV-vd-D36">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="ete-aa-soe" kind="show" id="WLc-Mb-u50"/>
+                                                <segue destination="ete-aa-soe" kind="showDetail" identifier="segueNewSqeed2" id="WLc-Mb-u50"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -351,10 +530,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-camera.png" width="32" height="32"/>
         <image name="icon-theater.png" width="32" height="32"/>
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CXy-V3-D0G"/>
+        <segue reference="qwm-km-WBN"/>
     </inferredMetricsTieBreakers>
 </document>

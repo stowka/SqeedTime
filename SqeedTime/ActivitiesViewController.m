@@ -10,6 +10,7 @@
 #import "SBJson.h"
 #import "SqeedsTableView.h"
 #import "SqeedTableViewCell.h"
+#import "SqeedViewController.h"
 
 @interface ActivitiesViewController ()
 
@@ -21,25 +22,56 @@ NSArray* myKeys;
 NSArray* myValues;
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    myData = [self fetchMySqeeds:14];
-//    myKeys = [myData ]
+    // FETCH DATA
+    myData = [self fetchMySqeeds: [self.userId integerValue]];
+    
+    //NSLog(@"%@", myData); /* for testing purpose only */
+    
+    // SWIPE LEFT TO ADD NEW SQEED
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
+    [self.view addGestureRecognizer:panRecognizer];
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger)tableView:(SqeedsTableView *)tableView numberOfRowsInSection:
-(NSInteger)section{
+// PASS DATA BY SEGUE
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueSqeed"])
+    {
+        NSIndexPath *indexPath = [self.sqeedsTable indexPathForCell:sender];
+        SqeedViewController *destViewController = segue.destinationViewController;
+        SqeedTableViewCell *cell = (SqeedTableViewCell*)[self.sqeedsTable cellForRowAtIndexPath:indexPath];
+        destViewController.eventId = cell.eventId;
+    }
+}
+
+// PERFORM CALL SEGUE ON SWIPE LEFT
+- (void)panDetected:(UIPanGestureRecognizer *)panRecognizer
+{
+    CGPoint velocity = [panRecognizer velocityInView:self.view];
+    if (velocity.x < 0)
+        [self performSegueWithIdentifier:@"segueNewSqeed1" sender:panRecognizer];
+}
+
+
+// DISPLAY SQEEDS IN A TABLE VIEW
+- (NSInteger)tableView:(SqeedsTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [myData count];
 }
 
-- (UITableViewCell *)tableView:(SqeedsTableView *)tableView cellForRowAtIndexPath:
-(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(SqeedsTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *cellIdentifier = @"cellID";
     SqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                              cellIdentifier];
@@ -53,19 +85,24 @@ NSArray* myValues;
     cell.eventTitle.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"title"];
     cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_min"], (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_max"]];
     cell.eventPlace.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"place"];
-    
+    cell.eventId = (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"id"];
     return cell;
 }
 
--(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:
-(NSIndexPath *)indexPath{
+
+// DISPLAY SQEED AFTER SELECTION
+-(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"Section:%d Row:%d selected and its data is %@",
-          indexPath.section,indexPath.row,cell.textLabel.text);
+    SqeedTableViewCell *cell = (SqeedTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    NSNumber* eventId = cell.eventId;
+    //[self performSegueWithIdentifier:@"segueSqeed" sender:self];
 }
 
-- (NSDictionary*)fetchMySqeeds:(int)userId {
+
+// FETCH DATA FROM MYSQEEDS
+- (NSDictionary*)fetchMySqeeds:(int)userId
+{
     NSString *post =
     [[NSString alloc]
      initWithFormat:@"function=eventsByUser&id=%d",
@@ -177,14 +214,15 @@ NSArray* myValues;
     return;
 }
 
-- (IBAction)display:(id)sender {
+- (IBAction)display:(id)sender
+{
     long segment = [sender selectedSegmentIndex];
     if (segment == 0)
     {
-        [self fetchMySqeeds:14];
+        [self fetchMySqeeds: [self.userId integerValue]];
     } else if (segment == 1)
     {
-        [self fetchDiscovered:14];
+        [self fetchDiscovered: [self.userId integerValue]];
     }
 }
 

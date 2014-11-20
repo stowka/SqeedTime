@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SBJson.h"
+#import "ActivitiesViewController.h"
 
 @interface LoginViewController ()
 
@@ -17,12 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)login:(id)sender
@@ -67,7 +66,6 @@
             NSHTTPURLResponse *response = nil;
             NSData *urlData=[NSURLConnection sendSynchronousRequest:request
                                     returningResponse:&response error:&error];
-            //NSLog(@"Response code: %d", [response statusCode]);
             if ([response statusCode] >= 200
             && [response statusCode] < 300)
             {
@@ -78,14 +76,13 @@
                 SBJsonParser *jsonParser = [SBJsonParser new];
                 NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                     objectWithString:responseData error:nil];
-                NSInteger id = [(NSNumber *) [jsonData
-                                        objectForKey:@"id"] integerValue];
-                if (id > 0)
+                NSNumber* userId = (NSNumber *) [jsonData objectForKey:@"id"];
+                if (userId > 0)
                 {
                     NSString *post =
                     [[NSString alloc]
-                     initWithFormat:@"function=loginV1&id=%d&password=%@",
-                     id, [_password text]];
+                     initWithFormat:@"function=loginV1&id=%@&password=%@",
+                     userId, [_password text]];
                     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
                                           allowLossyConversion:YES];
                     
@@ -107,7 +104,6 @@
                     NSData *urlData=[NSURLConnection sendSynchronousRequest:request
                                                           returningResponse:&response error:&error];
                     
-                    //NSLog(@"Response code: %d", [response statusCode]);
                     if ([response statusCode] >= 200
                         && [response statusCode] < 300)
                     {
@@ -118,10 +114,12 @@
                         SBJsonParser *jsonParser = [SBJsonParser new];
                         NSDictionary *jsonData = (NSDictionary *) [jsonParser
                                                                    objectWithString:responseData error:nil];
-                        NSString *state = [(NSString *) [jsonData
-                                                        valueForKey:@"state"] uppercaseString];
+                        NSString* state = [(NSString *) [jsonData valueForKey:@"state"] uppercaseString];
                         if ([state isEqual:@"LOG IN: OK"])
+                        {
+                            self.userId = userId;
                             [self performSegueWithIdentifier:@"loginToSqeeds" sender:self];
+                        }
                         else
                             [self alertStatus:@"Connection Failed!" :state];
                     }
@@ -138,6 +136,16 @@
     @catch (NSException *e) {
         NSLog(@"Exception: %@", e);
         [self alertStatus:@"Login failed." :@"Exception..."];
+    }
+}
+
+// PASS DATA BY A SEGUE
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"loginToSqeeds"])
+    {
+        ActivitiesViewController* destViewController = segue.destinationViewController;
+        destViewController.userId = self.userId;
     }
 }
 

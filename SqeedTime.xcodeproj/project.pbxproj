@@ -15,6 +15,7 @@
 		7195D7AA1A1CB96C00A8C995 /* icon-tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A51A1CB96C00A8C995 /* icon-tennis.png */; };
 		7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A61A1CB96C00A8C995 /* icon-theater.png */; };
 		7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */; };
+		7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7B11A1E30B100A8C995 /* SqeedViewController.m */; };
 		719968171A14FA6100974683 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968161A14FA6100974683 /* main.m */; };
 		7199681A1A14FA6100974683 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968191A14FA6100974683 /* AppDelegate.m */; };
 		7199681D1A14FA6100974683 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7199681C1A14FA6100974683 /* LoginViewController.m */; };
@@ -59,6 +60,8 @@
 		7195D7A61A1CB96C00A8C995 /* icon-theater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-theater.png"; sourceTree = "<group>"; };
 		7195D7AD1A1CBDE000A8C995 /* SqeedsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedsTableView.h; sourceTree = "<group>"; };
 		7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedsTableView.m; sourceTree = "<group>"; };
+		7195D7B01A1E30B100A8C995 /* SqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedViewController.h; sourceTree = "<group>"; };
+		7195D7B11A1E30B100A8C995 /* SqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedViewController.m; sourceTree = "<group>"; };
 		719968111A14FA6100974683 /* SqeedTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SqeedTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719968151A14FA6100974683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719968161A14FA6100974683 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -130,6 +133,38 @@
 			name = icons;
 			sourceTree = "<group>";
 		};
+		7195D7B31A1E3A2D00A8C995 /* SBJson */ = {
+			isa = PBXGroup;
+			children = (
+				7199683C1A150FBD00974683 /* NSObject+SBJson.h */,
+				7199683D1A150FBD00974683 /* NSObject+SBJson.m */,
+				7199683E1A150FBD00974683 /* SBJson.h */,
+				7199683F1A150FBD00974683 /* SBJsonParser.h */,
+				719968401A150FBD00974683 /* SBJsonParser.m */,
+				719968411A150FBD00974683 /* SBJsonStreamParser.h */,
+				719968421A150FBD00974683 /* SBJsonStreamParser.m */,
+				719968431A150FBD00974683 /* SBJsonStreamParserAccumulator.h */,
+				719968441A150FBD00974683 /* SBJsonStreamParserAccumulator.m */,
+				719968451A150FBD00974683 /* SBJsonStreamParserAdapter.h */,
+				719968461A150FBD00974683 /* SBJsonStreamParserAdapter.m */,
+				719968471A150FBD00974683 /* SBJsonStreamParserState.h */,
+				719968481A150FBD00974683 /* SBJsonStreamParserState.m */,
+				719968491A150FBD00974683 /* SBJsonStreamWriter.h */,
+				7199684A1A150FBD00974683 /* SBJsonStreamWriter.m */,
+				7199684B1A150FBD00974683 /* SBJsonStreamWriterAccumulator.h */,
+				7199684C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m */,
+				7199684D1A150FBD00974683 /* SBJsonStreamWriterState.h */,
+				7199684E1A150FBD00974683 /* SBJsonStreamWriterState.m */,
+				7199684F1A150FBD00974683 /* SBJsonTokeniser.h */,
+				719968501A150FBD00974683 /* SBJsonTokeniser.m */,
+				719968511A150FBD00974683 /* SBJsonUTF8Stream.h */,
+				719968521A150FBD00974683 /* SBJsonUTF8Stream.m */,
+				719968531A150FBD00974683 /* SBJsonWriter.h */,
+				719968541A150FBD00974683 /* SBJsonWriter.m */,
+			);
+			name = SBJson;
+			sourceTree = "<group>";
+		};
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
@@ -151,46 +186,24 @@
 		719968131A14FA6100974683 /* SqeedTime */ = {
 			isa = PBXGroup;
 			children = (
-				7199683C1A150FBD00974683 /* NSObject+SBJson.h */,
-				7199683D1A150FBD00974683 /* NSObject+SBJson.m */,
-				7199683E1A150FBD00974683 /* SBJson.h */,
-				7199683F1A150FBD00974683 /* SBJsonParser.h */,
-				719968401A150FBD00974683 /* SBJsonParser.m */,
-				719968411A150FBD00974683 /* SBJsonStreamParser.h */,
-				719968421A150FBD00974683 /* SBJsonStreamParser.m */,
-				719968431A150FBD00974683 /* SBJsonStreamParserAccumulator.h */,
-				719968441A150FBD00974683 /* SBJsonStreamParserAccumulator.m */,
-				719968451A150FBD00974683 /* SBJsonStreamParserAdapter.h */,
-				719968461A150FBD00974683 /* SBJsonStreamParserAdapter.m */,
-				719968471A150FBD00974683 /* SBJsonStreamParserState.h */,
-				719968481A150FBD00974683 /* SBJsonStreamParserState.m */,
-				719968491A150FBD00974683 /* SBJsonStreamWriter.h */,
-				7195D7AC1A1CB97400A8C995 /* icons */,
-				7199684A1A150FBD00974683 /* SBJsonStreamWriter.m */,
-				7199684B1A150FBD00974683 /* SBJsonStreamWriterAccumulator.h */,
-				7199684C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m */,
-				7199684D1A150FBD00974683 /* SBJsonStreamWriterState.h */,
-				7199684E1A150FBD00974683 /* SBJsonStreamWriterState.m */,
-				7199684F1A150FBD00974683 /* SBJsonTokeniser.h */,
-				719968501A150FBD00974683 /* SBJsonTokeniser.m */,
-				719968511A150FBD00974683 /* SBJsonUTF8Stream.h */,
-				719968521A150FBD00974683 /* SBJsonUTF8Stream.m */,
-				719968531A150FBD00974683 /* SBJsonWriter.h */,
-				719968541A150FBD00974683 /* SBJsonWriter.m */,
-				7199683A1A14FA9B00974683 /* logo.png */,
-				719968181A14FA6100974683 /* AppDelegate.h */,
-				719968191A14FA6100974683 /* AppDelegate.m */,
-				7199681B1A14FA6100974683 /* LoginViewController.h */,
-				7199681C1A14FA6100974683 /* LoginViewController.m */,
-				7199681E1A14FA6100974683 /* Main.storyboard */,
-				7195D7AD1A1CBDE000A8C995 /* SqeedsTableView.h */,
-				7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */,
 				710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */,
-				710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */,
+				719968181A14FA6100974683 /* AppDelegate.h */,
+				7199681B1A14FA6100974683 /* LoginViewController.h */,
+				7195D7AD1A1CBDE000A8C995 /* SqeedsTableView.h */,
 				7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */,
+				7195D7B01A1E30B100A8C995 /* SqeedViewController.h */,
+				710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */,
+				719968191A14FA6100974683 /* AppDelegate.m */,
+				7199681C1A14FA6100974683 /* LoginViewController.m */,
+				7195D7AE1A1CBDE000A8C995 /* SqeedsTableView.m */,
 				7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */,
+				7195D7B11A1E30B100A8C995 /* SqeedViewController.m */,
+				7199683A1A14FA9B00974683 /* logo.png */,
 				719968211A14FA6100974683 /* Images.xcassets */,
+				7195D7AC1A1CB97400A8C995 /* icons */,
 				719968231A14FA6100974683 /* LaunchScreen.xib */,
+				7199681E1A14FA6100974683 /* Main.storyboard */,
+				7195D7B31A1E3A2D00A8C995 /* SBJson */,
 				719968141A14FA6100974683 /* Supporting Files */,
 			);
 			path = SqeedTime;
@@ -340,6 +353,7 @@
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
+				7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */,
 				7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */,
 				7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
