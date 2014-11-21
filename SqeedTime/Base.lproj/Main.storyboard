@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="268" y="144"/>
+            <point key="canvasLocation" x="268" y="125"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jSq-6C-kTv">
@@ -111,10 +111,10 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Search Sqeeds" id="ZIL-F4-Mla">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Bf8-ow-00F">
+                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="Bf8-ow-00F">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" id="IPl-sv-0sH"/>
+                                                <segue destination="RgM-oh-shf" kind="presentation" identifier="segueSearchBack" id="IPl-sv-0sH"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -245,7 +245,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="fs4-Qu-mJc">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" id="wRP-UC-TqU"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueDisplaySettingsBack" id="wRP-UC-TqU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -297,7 +297,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="BYj-19-Bmi">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="show" id="UJ5-Ea-zF4"/>
+                                                <segue destination="RgM-oh-shf" kind="show" identifier="segueSettingsBack" id="UJ5-Ea-zF4"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -310,7 +310,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="presentation" id="V2b-Ks-Mah"/>
+                                    <segue destination="vXZ-lx-hvc" kind="presentation" identifier="segueLogOut" id="V2b-Ks-Mah"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-MU-8Yr" customClass="SettingsTableView">
@@ -385,7 +385,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pBP-Hp-7pZ">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" id="iOI-Sj-far"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueEditSettingsCancel" id="iOI-Sj-far"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -407,8 +407,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="QHu-ow-cMf" kind="show" id="QiO-NC-xs7"/>
-                        <segue destination="QHu-ow-cMf" kind="show" id="BV3-Mp-s6C"/>
+                        <segue destination="QHu-ow-cMf" kind="show" identifier="segueEditSettingsSave" id="QiO-NC-xs7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6R-XB-Shw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -438,7 +437,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="OmJ-ol-IQR">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="gPl-AM-HdR" kind="presentation" id="dfe-lE-hxe"/>
+                                                <segue destination="gPl-AM-HdR" kind="presentation" identifier="segueSearch" id="dfe-lE-hxe"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="oRw-Xa-8Xw">
@@ -611,16 +610,16 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Sqeed" id="WjI-DR-G3K">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="SFt-fh-dwR">
+                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="SFt-fh-dwR">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" id="qwm-km-WBN"/>
+                                                <segue destination="RgM-oh-shf" kind="presentation" identifier="segueSqeedBack" id="qwm-km-WBN"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Chat" id="QFw-mU-UJp">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="Ghm-QB-n0j" kind="show" id="7M8-Jc-V2X"/>
+                                                <segue destination="Ghm-QB-n0j" kind="show" identifier="segueChat" id="7M8-Jc-V2X"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -639,7 +638,7 @@
                         <outlet property="eventTitle" destination="4Wx-hO-Stg" id="LDv-22-d9o"/>
                         <outlet property="voteChoice" destination="mte-L0-Sfd" id="fxZ-X8-uUs"/>
                         <outlet property="voteTime" destination="Mcj-C8-dBx" id="gH3-Mh-rCs"/>
-                        <segue destination="Ycb-dW-Xg8" kind="show" id="L63-Hu-wqc"/>
+                        <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="L63-Hu-wqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI0-Jq-VC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,7 +672,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="QvI-FF-hCh">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="1o5-e8-4sL" kind="show" id="eQr-ld-YuE"/>
+                                                <segue destination="1o5-e8-4sL" kind="show" identifier="segueMapBack" id="eQr-ld-YuE"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="l06-5i-HAl">
@@ -715,7 +714,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="0g8-NQ-tt8">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="1o5-e8-4sL" kind="show" id="Xi9-Sr-WNw"/>
+                                                <segue destination="1o5-e8-4sL" kind="show" identifier="segueChatBack" id="Xi9-Sr-WNw"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -882,8 +881,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="qjO-RG-PDT" kind="show" id="Z0x-gN-NBZ"/>
-                        <segue destination="1o5-e8-4sL" kind="show" id="qVf-dW-YLF"/>
+                        <segue destination="1o5-e8-4sL" kind="show" identifier="segueSaveNewSqeed" id="qVf-dW-YLF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sH-pT-xNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,9 +895,9 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xi9-Sr-WNw"/>
-        <segue reference="qwm-km-WBN"/>
-        <segue reference="mxi-W6-neG"/>
-        <segue reference="Z0x-gN-NBZ"/>
+        <segue reference="eQr-ld-YuE"/>
+        <segue reference="wRP-UC-TqU"/>
+        <segue reference="IPl-sv-0sH"/>
+        <segue reference="LrC-Yv-Id1"/>
     </inferredMetricsTieBreakers>
 </document>

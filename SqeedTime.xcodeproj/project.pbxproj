@@ -11,6 +11,7 @@
 		71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C221A1F5C2B003B7B09 /* SettingsViewController.m */; };
 		71290C261A1F5C77003B7B09 /* SettingsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C251A1F5C77003B7B09 /* SettingsTableView.m */; };
 		71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */; };
+		71290CCB1A1FB898003B7B09 /* GlobalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CCA1A1FB898003B7B09 /* GlobalClass.m */; };
 		7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */; };
 		7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A21A1CB96C00A8C995 /* icon-camera.png */; };
 		7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A31A1CB96C00A8C995 /* icon-coconut.png */; };
@@ -60,6 +61,8 @@
 		71290C251A1F5C77003B7B09 /* SettingsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableView.m; sourceTree = "<group>"; };
 		71290C271A1F5C8A003B7B09 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
 		71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
+		71290CC91A1FB897003B7B09 /* GlobalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalClass.h; sourceTree = "<group>"; };
+		71290CCA1A1FB898003B7B09 /* GlobalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalClass.m; sourceTree = "<group>"; };
 		7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedTableViewCell.h; sourceTree = "<group>"; };
 		7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedTableViewCell.m; sourceTree = "<group>"; };
 		7195D7A21A1CB96C00A8C995 /* icon-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-camera.png"; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199683A1A14FA9B00974683 /* logo.png */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
+				71290CC91A1FB897003B7B09 /* GlobalClass.h */,
+				71290CCA1A1FB898003B7B09 /* GlobalClass.m */,
 				7195D7B31A1E3A2D00A8C995 /* SBJson */,
 				71290CC71A1F9C6F003B7B09 /* SettingsVC */,
 				7195D7B01A1E30B100A8C995 /* SqeedViewController.h */,
@@ -398,6 +403,7 @@
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
+				71290CCB1A1FB898003B7B09 /* GlobalClass.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */,
 				7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */,

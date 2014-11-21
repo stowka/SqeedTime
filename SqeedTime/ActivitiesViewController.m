@@ -12,6 +12,7 @@
 #import "SqeedTableViewCell.h"
 #import "SqeedViewController.h"
 #import "SettingsViewController.h"
+#import "GlobalClass.h"
 
 @interface ActivitiesViewController ()
 
@@ -28,8 +29,12 @@ NSArray* myValues;
 {
     [super viewDidLoad];
     
+    // STORE GLOBAL USER ID AND TOKEN
+    if ([self.userId integerValue])
+        [[GlobalClass globalClass] setUSER_ID:(int)[self.userId integerValue]];
+    
     // FETCH DATA
-    myData = [self fetchMySqeeds: [self.userId integerValue]];
+    myData = [self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]];
     
     //NSLog(@"%@", myData); /* for testing purpose only */
     

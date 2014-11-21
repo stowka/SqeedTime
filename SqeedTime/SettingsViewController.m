@@ -10,6 +10,7 @@
 #import "SettingsTableView.h"
 #import "SettingsTableViewCell.h"
 #import "SBJson.h"
+#import "GlobalClass.h"
 
 @interface SettingsViewController ()
 
@@ -24,7 +25,7 @@ NSDictionary* myData;
     [super viewDidLoad];
     
     // FETCH USER DATA
-    myData = [self fetchUser: [self.userId integerValue]];
+    myData = [self fetchUser: [[GlobalClass globalClass] USER_ID]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,8 +57,6 @@ NSDictionary* myData;
         cell = [[SettingsTableViewCell alloc]initWithStyle:
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    NSLog(@"%d", indexPath.row);
     
     if (!indexPath.section)
     {

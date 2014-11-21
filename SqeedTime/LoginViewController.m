@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SBJson.h"
 #import "ActivitiesViewController.h"
+#import "GlobalClass.h"
 
 @interface LoginViewController ()
 
