@@ -14,6 +14,14 @@
 @synthesize CURRENT_SQEED;
 @synthesize USER_TOKEN;
 
+// properties to cache new sqeed data
+@synthesize NEW_SQEED_CATEGORY_ID;
+@synthesize NEW_SQEED_DESCRIPTION;
+@synthesize NEW_SQEED_END;
+@synthesize NEW_SQEED_START;
+@synthesize NEW_SQEED_PLACE;
+@synthesize NEW_SQEED_TITLE;
+
 static GlobalClass* globalClass = nil;
 
 + (GlobalClass*)globalClass

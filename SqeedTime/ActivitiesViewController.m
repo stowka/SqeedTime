@@ -36,8 +36,6 @@ NSArray* myValues;
     // FETCH DATA
     myData = [self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]];
     
-    //NSLog(@"%@", myData); /* for testing purpose only */
-    
     // SWIPE LEFT TO ADD NEW SQEED
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
     [self.view addGestureRecognizer:panRecognizer];
