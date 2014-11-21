@@ -22,7 +22,7 @@ NSDictionary* myData;
     [super viewDidLoad];
     if ([self.eventId integerValue])
         [[GlobalClass globalClass] setCURRENT_SQEED:(int)[self.eventId integerValue]];
-    myData = [self fetchSqeed: [[GlobalClass globalClass] USER_ID]];
+    myData = [self fetchSqeed: [[GlobalClass globalClass] CURRENT_SQEED]];
     self.eventTitle.text = (NSString*)[myData valueForKey:@"title"];
     self.eventPlace.text = (NSString*)[myData valueForKey:@"place"];
     self.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", (NSNumber *)[myData valueForKey:@"people_min"], (NSNumber *)[myData valueForKey:@"people_max"]];
