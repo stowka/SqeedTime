@@ -11,6 +11,7 @@
 @implementation GlobalClass
 
 @synthesize USER_ID;
+@synthesize CURRENT_SQEED;
 @synthesize USER_TOKEN;
 
 static GlobalClass* globalClass = nil;

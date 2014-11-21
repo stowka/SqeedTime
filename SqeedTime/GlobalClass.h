@@ -11,6 +11,7 @@
 @interface GlobalClass : NSObject
 
 @property (nonatomic) int USER_ID;
+@property (nonatomic) int CURRENT_SQEED;
 @property (nonatomic) NSString* USER_TOKEN;
 
 + (GlobalClass*)globalClass;

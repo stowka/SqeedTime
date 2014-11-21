@@ -577,9 +577,13 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Port d'Ouchy, Lausanne, VD, CH" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgB-zA-0W7">
                                 <rect key="frame" x="154" y="117" width="150" height="41"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="NnH-IE-M9x" appends="YES" id="9CP-mv-fns"/>
+                                </connections>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date and day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xke-cl-rcP">
                                 <rect key="frame" x="16" y="127" width="130" height="21"/>
@@ -642,6 +646,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI0-Jq-VC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NnH-IE-M9x">
+                    <connections>
+                        <segue destination="Ycb-dW-Xg8" kind="show" id="nlD-8G-hFz"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="826" y="867"/>
         </scene>
@@ -895,9 +904,10 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="nlD-8G-hFz"/>
         <segue reference="eQr-ld-YuE"/>
+        <segue reference="qwm-km-WBN"/>
         <segue reference="wRP-UC-TqU"/>
-        <segue reference="IPl-sv-0sH"/>
         <segue reference="LrC-Yv-Id1"/>
     </inferredMetricsTieBreakers>
 </document>

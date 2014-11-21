@@ -8,6 +8,7 @@
 
 #import "SqeedViewController.h"
 #import "SBJson.h"
+#import "GlobalClass.h"
 
 @interface SqeedViewController()
 
@@ -19,8 +20,9 @@ NSDictionary* myData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    myData = [self fetchSqeed: [self.eventId integerValue]];
+    if ([self.eventId integerValue])
+        [[GlobalClass globalClass] setCURRENT_SQEED:(int)[self.eventId integerValue]];
+    myData = [self fetchSqeed: [[GlobalClass globalClass] USER_ID]];
     self.eventTitle.text = (NSString*)[myData valueForKey:@"title"];
     self.eventPlace.text = (NSString*)[myData valueForKey:@"place"];
     self.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", (NSNumber *)[myData valueForKey:@"people_min"], (NSNumber *)[myData valueForKey:@"people_max"]];
