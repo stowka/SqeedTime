@@ -11,12 +11,14 @@
 #import "SqeedsTableView.h"
 #import "SqeedTableViewCell.h"
 #import "SqeedViewController.h"
+#import "SettingsViewController.h"
 
 @interface ActivitiesViewController ()
 
 @end
 
 @implementation ActivitiesViewController
+
 NSDictionary* myData;
 NSArray* myKeys;
 NSArray* myValues;
@@ -49,9 +51,15 @@ NSArray* myValues;
     if ([segue.identifier isEqualToString:@"segueSqeed"])
     {
         NSIndexPath *indexPath = [self.sqeedsTable indexPathForCell:sender];
-        SqeedViewController *destViewController = segue.destinationViewController;
-        SqeedTableViewCell *cell = (SqeedTableViewCell*)[self.sqeedsTable cellForRowAtIndexPath:indexPath];
+        SqeedViewController* destViewController = segue.destinationViewController;
+        SqeedTableViewCell* cell = (SqeedTableViewCell*)[self.sqeedsTable cellForRowAtIndexPath:indexPath];
         destViewController.eventId = cell.eventId;
+    }
+    
+    if ([segue.identifier isEqualToString:@"segueSettings"])
+    {
+        SettingsViewController* destViewController = segue.destinationViewController;
+        destViewController.userId = self.userId;
     }
 }
 
@@ -91,13 +99,13 @@ NSArray* myValues;
 
 
 // DISPLAY SQEED AFTER SELECTION
--(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SqeedTableViewCell *cell = (SqeedTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    NSNumber* eventId = cell.eventId;
-    //[self performSegueWithIdentifier:@"segueSqeed" sender:self];
-}
+//-(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    SqeedTableViewCell *cell = (SqeedTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+//    NSNumber* eventId = cell.eventId;
+//    //[self performSegueWithIdentifier:@"segueSqeed" sender:self];
+//}
 
 
 // FETCH DATA FROM MYSQEEDS

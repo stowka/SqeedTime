@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingsTableViewCell : UITableViewCell
-
+@property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) IBOutlet UILabel *value;
 @end

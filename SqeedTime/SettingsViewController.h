@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet NSNumber *userId;
 
+- (NSDictionary*)fetchUser:(int) userId;
+- (void) alertStatus:(NSString *)msg :(NSString *)title;
 @end

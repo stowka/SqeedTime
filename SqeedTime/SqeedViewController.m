@@ -20,8 +20,6 @@ NSDictionary* myData;
 {
     [super viewDidLoad];
     
-    //NSLog(@"TESSSSSSSST: %@", self.eventId); /* for testing purpose only */
-    
     myData = [self fetchSqeed: [self.eventId integerValue]];
     self.eventTitle.text = (NSString*)[myData valueForKey:@"title"];
     self.eventPlace.text = (NSString*)[myData valueForKey:@"place"];
