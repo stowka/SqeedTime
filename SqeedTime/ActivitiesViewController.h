@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SqeedTableViewCell.h"
+#import "SqeedsTableView.h"
 
 @interface ActivitiesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet UITableView* sqeedsTable;
+@property (strong, nonatomic) IBOutlet SqeedsTableView* sqeedsTable;
 @property (strong, nonatomic) IBOutlet SqeedTableViewCell* cell;
 @property (strong, nonatomic) IBOutlet NSNumber* userId;
 

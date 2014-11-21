@@ -71,7 +71,7 @@ NSArray* myValues;
 {
     CGPoint velocity = [panRecognizer velocityInView:self.view];
     if (velocity.x < 0)
-        [self performSegueWithIdentifier:@"segueNewSqeed1" sender:panRecognizer];
+        [self performSegueWithIdentifier:@"segueCreateSqeed" sender:panRecognizer];
 }
 
 

@@ -9,6 +9,9 @@
 #import "SettingsViewController.h"
 #import "SettingsTableView.h"
 #import "SettingsTableViewCell.h"
+#import "EditSettingsViewController.h"
+#import "DisplaySettingsViewController.h"
+#import "ProfileViewController.h"
 #import "SBJson.h"
 #import "GlobalClass.h"
 
@@ -72,15 +75,15 @@ NSDictionary* myData;
                 break;
             case 2:
                 cell.title.text = @"E-mail";
-                cell.value.text = ![[myData valueForKey:@"email"]  isEqual: @"<null>"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"email"]] : @"";
+                cell.value.text = ![[myData valueForKey:@"email"]  isEqual: @"(null)"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"email"]] : @"";
                 break;
             case 3:
                 cell.title.text = @"Phone";
-                cell.value.text = ![[myData valueForKey:@"phone"]  isEqual: @"<null>"] && ![[myData valueForKey:@"phone_ext"] isEqual: @"<null>"] ? [NSString stringWithFormat:@"+%@.%@", [myData valueForKey:@"phone_ext"], [myData valueForKey:@"phone"]] : @"";
+                cell.value.text = ![[myData valueForKey:@"phone"]  isEqual: @"(null)"] && ![[myData valueForKey:@"phone_ext"] isEqual: @"(null)"] ? [NSString stringWithFormat:@"+%@.%@", [myData valueForKey:@"phone_ext"], [myData valueForKey:@"phone"]] : @"";
                 break;
             case 4:
                 cell.title.text = @"Facebook URL";
-                cell.value.text = ![[myData valueForKey:@"facebook_url"]  isEqual: @"<null>"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"facebook_url"]] : @"";
+                cell.value.text = ![[myData valueForKey:@"facebook_url"]  isEqual: @"(null)"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"facebook_url"]] : @"";
                 break;
             case 5:
                 cell.title.text = @"Profile";
@@ -122,59 +125,16 @@ NSDictionary* myData;
     return cell;
 }
 
--(void)tableView:(SettingsTableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(SettingsTableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    NSString* segue;
     if (!indexPath.section) // MY ACCOUNT
-    {
-        switch(indexPath.row)
-        {
-            case 0:
-                
-                break;
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-               
-                break;
-            case 5:
-               
-                break;
-            default:
-                
-                break;
-        }
-    }
+        segue = indexPath.row == 5 ? @"segueSelfProfile" : @"segueEditSettings";
     else // MORE INFO
-    {
-        switch(indexPath.row)
-        {
-            case 0:
-                
-                break;
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            default:
-                
-                break;
-        }
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        segue = indexPath.row == 2 ? @"segueMap" : @"segueDisplaySettings";
     
-    [self performSegueWithIdentifier:@"segueEditSettings" sender:self];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self performSegueWithIdentifier:segue sender:self];
 }
 
 - (NSDictionary*)fetchUser:(int) userId
@@ -246,14 +206,21 @@ NSDictionary* myData;
     [alertView show];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.settingsTable indexPathForSelectedRow];
+    EditSettingsViewController* destViewController = segue.destinationViewController;
+    SettingsTableViewCell* cell = (SettingsTableViewCell*)[self.settingsTable cellForRowAtIndexPath:indexPath];
+    if ([segue.identifier isEqualToString:@"segueEditSettings"])
+    {
+        destViewController.key = cell.title.text;
+        destViewController.value = cell.value.text;
+    }
+    
+    if ([segue.identifier isEqualToString:@"segueDisplaySettings"])
+    {
+         // TODO
+    }
 }
-*/
 
 @end

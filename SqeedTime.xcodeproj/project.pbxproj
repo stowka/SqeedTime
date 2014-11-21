@@ -12,6 +12,15 @@
 		71290C261A1F5C77003B7B09 /* SettingsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C251A1F5C77003B7B09 /* SettingsTableView.m */; };
 		71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */; };
 		71290CCB1A1FB898003B7B09 /* GlobalClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CCA1A1FB898003B7B09 /* GlobalClass.m */; };
+		71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CCD1A1FC3DC003B7B09 /* EditSettingsViewController.m */; };
+		71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CD01A1FC3F3003B7B09 /* DisplaySettingsViewController.m */; };
+		71290CD41A1FC407003B7B09 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CD31A1FC407003B7B09 /* ProfileViewController.m */; };
+		71290CD71A1FC5FE003B7B09 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CD61A1FC5FE003B7B09 /* SearchViewController.m */; };
+		71290CDA1A1FC61E003B7B09 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CD91A1FC61E003B7B09 /* MapViewController.m */; };
+		71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CDC1A1FC63E003B7B09 /* ChatViewController.m */; };
+		71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71290CDE1A1FE619003B7B09 /* MapKit.framework */; };
+		71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */; };
+		71290CE51A1FF315003B7B09 /* CategoryPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CE41A1FF315003B7B09 /* CategoryPickerView.m */; };
 		7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */; };
 		7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A21A1CB96C00A8C995 /* icon-camera.png */; };
 		7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A31A1CB96C00A8C995 /* icon-coconut.png */; };
@@ -63,6 +72,23 @@
 		71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
 		71290CC91A1FB897003B7B09 /* GlobalClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalClass.h; sourceTree = "<group>"; };
 		71290CCA1A1FB898003B7B09 /* GlobalClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalClass.m; sourceTree = "<group>"; };
+		71290CCC1A1FC3DC003B7B09 /* EditSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSettingsViewController.h; sourceTree = "<group>"; };
+		71290CCD1A1FC3DC003B7B09 /* EditSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSettingsViewController.m; sourceTree = "<group>"; };
+		71290CCF1A1FC3F3003B7B09 /* DisplaySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplaySettingsViewController.h; sourceTree = "<group>"; };
+		71290CD01A1FC3F3003B7B09 /* DisplaySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySettingsViewController.m; sourceTree = "<group>"; };
+		71290CD21A1FC407003B7B09 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		71290CD31A1FC407003B7B09 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		71290CD51A1FC5FE003B7B09 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		71290CD61A1FC5FE003B7B09 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		71290CD81A1FC61E003B7B09 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		71290CD91A1FC61E003B7B09 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		71290CDB1A1FC63E003B7B09 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		71290CDC1A1FC63E003B7B09 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		71290CDE1A1FE619003B7B09 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSqeedViewController.h; sourceTree = "<group>"; };
+		71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSqeedViewController.m; sourceTree = "<group>"; };
+		71290CE31A1FF314003B7B09 /* CategoryPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryPickerView.h; sourceTree = "<group>"; };
+		71290CE41A1FF315003B7B09 /* CategoryPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerView.m; sourceTree = "<group>"; };
 		7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedTableViewCell.h; sourceTree = "<group>"; };
 		7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedTableViewCell.m; sourceTree = "<group>"; };
 		7195D7A21A1CB96C00A8C995 /* icon-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-camera.png"; sourceTree = "<group>"; };
@@ -120,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +169,10 @@
 				71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */,
 				71290C211A1F5C2B003B7B09 /* SettingsViewController.h */,
 				71290C221A1F5C2B003B7B09 /* SettingsViewController.m */,
+				71290CCC1A1FC3DC003B7B09 /* EditSettingsViewController.h */,
+				71290CCD1A1FC3DC003B7B09 /* EditSettingsViewController.m */,
+				71290CCF1A1FC3F3003B7B09 /* DisplaySettingsViewController.h */,
+				71290CD01A1FC3F3003B7B09 /* DisplaySettingsViewController.m */,
 			);
 			name = SettingsVC;
 			sourceTree = "<group>";
@@ -157,6 +188,17 @@
 				7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */,
 			);
 			name = ActivitiesVC;
+			sourceTree = "<group>";
+		};
+		71290CE61A1FF31C003B7B09 /* CreateSqeed */ = {
+			isa = PBXGroup;
+			children = (
+				71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */,
+				71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */,
+				71290CE31A1FF314003B7B09 /* CategoryPickerView.h */,
+				71290CE41A1FF315003B7B09 /* CategoryPickerView.m */,
+			);
+			name = CreateSqeed;
 			sourceTree = "<group>";
 		};
 		7195D7AC1A1CB97400A8C995 /* icons */ = {
@@ -206,6 +248,7 @@
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
+				71290CDE1A1FE619003B7B09 /* MapKit.framework */,
 				719968131A14FA6100974683 /* SqeedTime */,
 				7199682D1A14FA6100974683 /* SqeedTimeTests */,
 				719968121A14FA6100974683 /* Products */,
@@ -227,15 +270,24 @@
 				71290CC81A1F9C83003B7B09 /* ActivitiesVC */,
 				719968181A14FA6100974683 /* AppDelegate.h */,
 				719968191A14FA6100974683 /* AppDelegate.m */,
+				71290CC91A1FB897003B7B09 /* GlobalClass.h */,
+				71290CCA1A1FB898003B7B09 /* GlobalClass.m */,
 				7195D7AC1A1CB97400A8C995 /* icons */,
 				719968211A14FA6100974683 /* Images.xcassets */,
 				719968231A14FA6100974683 /* LaunchScreen.xib */,
 				7199681B1A14FA6100974683 /* LoginViewController.h */,
+				71290CDB1A1FC63E003B7B09 /* ChatViewController.h */,
+				71290CDC1A1FC63E003B7B09 /* ChatViewController.m */,
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199683A1A14FA9B00974683 /* logo.png */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
-				71290CC91A1FB897003B7B09 /* GlobalClass.h */,
-				71290CCA1A1FB898003B7B09 /* GlobalClass.m */,
+				71290CE61A1FF31C003B7B09 /* CreateSqeed */,
+				71290CD81A1FC61E003B7B09 /* MapViewController.h */,
+				71290CD91A1FC61E003B7B09 /* MapViewController.m */,
+				71290CD51A1FC5FE003B7B09 /* SearchViewController.h */,
+				71290CD61A1FC5FE003B7B09 /* SearchViewController.m */,
+				71290CD21A1FC407003B7B09 /* ProfileViewController.h */,
+				71290CD31A1FC407003B7B09 /* ProfileViewController.m */,
 				7195D7B31A1E3A2D00A8C995 /* SBJson */,
 				71290CC71A1F9C6F003B7B09 /* SettingsVC */,
 				7195D7B01A1E30B100A8C995 /* SqeedViewController.h */,
@@ -394,25 +446,33 @@
 				719968601A150FBD00974683 /* SBJsonWriter.m in Sources */,
 				7199681A1A14FA6100974683 /* AppDelegate.m in Sources */,
 				7199685E1A150FBD00974683 /* SBJsonTokeniser.m in Sources */,
+				71290CD71A1FC5FE003B7B09 /* SearchViewController.m in Sources */,
 				719968551A150FBD00974683 /* NSObject+SBJson.m in Sources */,
+				71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */,
 				7199685B1A150FBD00974683 /* SBJsonStreamWriter.m in Sources */,
 				719968571A150FBD00974683 /* SBJsonStreamParser.m in Sources */,
 				71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */,
+				71290CE51A1FF315003B7B09 /* CategoryPickerView.m in Sources */,
 				719968561A150FBD00974683 /* SBJsonParser.m in Sources */,
 				719968581A150FBD00974683 /* SBJsonStreamParserAccumulator.m in Sources */,
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
+				71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */,
 				71290CCB1A1FB898003B7B09 /* GlobalClass.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */,
 				7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */,
 				7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */,
+				71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */,
+				71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
+				71290CD41A1FC407003B7B09 /* ProfileViewController.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
 				719968591A150FBD00974683 /* SBJsonStreamParserAdapter.m in Sources */,
 				71290C261A1F5C77003B7B09 /* SettingsTableView.m in Sources */,
+				71290CDA1A1FC61E003B7B09 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

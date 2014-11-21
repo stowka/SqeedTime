@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="268" y="125"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="jSq-6C-kTv">
             <objects>
-                <viewController id="gPl-AM-HdR" sceneMemberID="viewController">
+                <viewController id="gPl-AM-HdR" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cMF-zf-AWO"/>
                         <viewControllerLayoutGuide type="bottom" id="bYb-f2-9Oc"/>
@@ -176,10 +176,10 @@
             </objects>
             <point key="canvasLocation" x="826" y="-622"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="YUJ-a3-8et">
             <objects>
-                <viewController id="QGL-eC-05x" sceneMemberID="viewController">
+                <viewController id="QGL-eC-05x" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7TC-9d-QoW"/>
                         <viewControllerLayoutGuide type="bottom" id="APy-8o-LDH"/>
@@ -222,10 +222,10 @@
             </objects>
             <point key="canvasLocation" x="1377" y="-1378"/>
         </scene>
-        <!--View Controller-->
+        <!--Display Settings View Controller-->
         <scene sceneID="Tah-5M-IaQ">
             <objects>
-                <viewController id="hKB-xQ-lZu" sceneMemberID="viewController">
+                <viewController id="hKB-xQ-lZu" customClass="DisplaySettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tmy-ul-3Qi"/>
                         <viewControllerLayoutGuide type="bottom" id="jQX-uB-KH2"/>
@@ -251,24 +251,17 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1UZ-m1-GaO">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ta5-0c-XCj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="webView" destination="Ta5-0c-XCj" id="UvO-8b-Im8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYt-d8-508" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -353,19 +346,21 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="28n-fn-VLc" kind="show" identifier="segueEditSettings" id="Qat-5h-ZOa"/>
-                        <segue destination="QGL-eC-05x" kind="showDetail" identifier="segueDisplaySelfProfile" id="5nQ-DT-8jX"/>
-                        <segue destination="hKB-xQ-lZu" kind="showDetail" identifier="segueDisplaySettings" id="M4t-v7-mGz"/>
+                        <outlet property="settingsTable" destination="6h0-MU-8Yr" id="hS0-9W-6j7"/>
+                        <segue destination="QGL-eC-05x" kind="showDetail" identifier="segueSelfProfile" id="5nQ-DT-8jX"/>
+                        <segue destination="28n-fn-VLc" kind="show" identifier="segueEditSettings" id="bFh-iX-yY5"/>
+                        <segue destination="hKB-xQ-lZu" kind="show" identifier="segueDisplaySettings" id="7hh-fJ-mpI"/>
+                        <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="mE5-KL-4OM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wad-Ua-Pt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1377" y="-622"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Settings View Controller-->
         <scene sceneID="Ip4-DN-tgW">
             <objects>
-                <viewController id="28n-fn-VLc" sceneMemberID="viewController">
+                <viewController id="28n-fn-VLc" customClass="EditSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXT-yJ-hSn"/>
                         <viewControllerLayoutGuide type="bottom" id="yB8-u7-0gn"/>
@@ -407,6 +402,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="navigationBar" destination="ooP-oK-n4V" id="RWC-XD-eOn"/>
+                        <outlet property="textField" destination="J35-xW-Qud" id="JBL-fE-zZN"/>
                         <segue destination="QHu-ow-cMf" kind="show" identifier="segueEditSettingsSave" id="QiO-NC-xs7"/>
                     </connections>
                 </viewController>
@@ -489,6 +486,7 @@
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="eventCategoryIcon" destination="7Gf-yk-rkX" id="FXm-pa-RNb"/>
                                             <outlet property="eventMinMax" destination="QKS-yK-eQI" id="umG-gG-Fiq"/>
                                             <outlet property="eventPlace" destination="e9Y-Cv-nN9" id="WhZ-aJ-l5i"/>
                                             <outlet property="eventTitle" destination="VCc-NK-5rP" id="wO6-Ia-bZk"/>
@@ -519,7 +517,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
-                        <segue destination="qjO-RG-PDT" kind="show" identifier="segueNewSqeed1" id="YnE-Az-aiz"/>
+                        <segue destination="qjO-RG-PDT" kind="show" identifier="segueCreateSqeed" id="YnE-Az-aiz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,22 +640,17 @@
                         <outlet property="eventTitle" destination="4Wx-hO-Stg" id="LDv-22-d9o"/>
                         <outlet property="voteChoice" destination="mte-L0-Sfd" id="fxZ-X8-uUs"/>
                         <outlet property="voteTime" destination="Mcj-C8-dBx" id="gH3-Mh-rCs"/>
-                        <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="L63-Hu-wqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI0-Jq-VC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="NnH-IE-M9x">
-                    <connections>
-                        <segue destination="Ycb-dW-Xg8" kind="show" id="nlD-8G-hFz"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="NnH-IE-M9x"/>
             </objects>
             <point key="canvasLocation" x="826" y="867"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="AIP-i8-8UO">
             <objects>
-                <viewController id="Ycb-dW-Xg8" sceneMemberID="viewController">
+                <viewController id="Ycb-dW-Xg8" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S6E-oy-z5v"/>
                         <viewControllerLayoutGuide type="bottom" id="cud-rn-QaF"/>
@@ -681,7 +674,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="QvI-FF-hCh">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="1o5-e8-4sL" kind="show" identifier="segueMapBack" id="eQr-ld-YuE"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueMapBack" id="DLR-Pq-FP4"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="l06-5i-HAl">
@@ -694,15 +687,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapView" destination="Lwr-E3-fD0" id="0BE-CV-N55"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPm-r5-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="268" y="867"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="lKt-mQ-Flr">
             <objects>
-                <viewController id="Ghm-QB-n0j" sceneMemberID="viewController">
+                <viewController id="Ghm-QB-n0j" customClass="ChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jlY-Se-Ym7"/>
                         <viewControllerLayoutGuide type="bottom" id="OaS-vT-qnH"/>
@@ -765,10 +761,10 @@
             </objects>
             <point key="canvasLocation" x="1377" y="867"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Sqeed View Controller-->
         <scene sceneID="xKF-fr-1lS">
             <objects>
-                <viewController id="qjO-RG-PDT" sceneMemberID="viewController">
+                <viewController id="qjO-RG-PDT" customClass="CreateSqeedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="INt-ua-mLE"/>
                         <viewControllerLayoutGuide type="bottom" id="dLg-1H-4XM"/>
@@ -784,17 +780,17 @@
                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="New Sqeed (1)" id="E6B-9Z-jJk">
+                                    <navigationItem title="SqeedTime" id="E6B-9Z-jJk">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DBC-bV-lfP">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
                                                 <segue destination="RgM-oh-shf" kind="presentation" id="TcL-CW-dBu"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Next" id="4fV-vd-D36">
+                                        <barButtonItem key="rightBarButtonItem" title="Next ❯" id="NZd-vo-IGM">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="ete-aa-soe" kind="show" identifier="segueNewSqeed2" id="WLc-Mb-u50"/>
+                                                <action selector="save:" destination="qjO-RG-PDT" id="fJU-8Z-w85"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -802,112 +798,78 @@
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What to do..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="92R-dT-xec">
                                 <rect key="frame" x="16" y="76" width="288" height="30"/>
+                                <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylt-2R-Egh">
-                                <rect key="frame" x="16" y="114" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-Io-eUb">
-                                <rect key="frame" x="0.0" y="143" width="320" height="162"/>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-Io-eUb" customClass="CategoryPickerView">
+                                <rect key="frame" x="0.0" y="114" width="320" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qjO-RG-PDT" id="mIL-1n-0px"/>
+                                    <outlet property="delegate" destination="qjO-RG-PDT" id="H9c-LM-46f"/>
+                                </connections>
                             </pickerView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2pi-Na-Sg2">
-                                <rect key="frame" x="16" y="313" width="288" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b6Q-Te-g61" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1377" y="144"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Blh-rV-enm">
-            <objects>
-                <viewController id="ete-aa-soe" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hff-7I-tOw"/>
-                        <viewControllerLayoutGuide type="bottom" id="7iQ-Xi-duw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rkk-KL-H1L">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gnt-pp-dfJ">
-                                <rect key="frame" x="0.0" y="103" width="320" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="438024617.68269002">
-                                    <!--2014-11-18 17:30:17 +0000-->
-                                </date>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Starts:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHA-HO-T1C">
-                                <rect key="frame" x="16" y="74" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ends:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hou-dv-dnP">
-                                <rect key="frame" x="16" y="273" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HH8-xL-RUn">
-                                <rect key="frame" x="0.0" y="302" width="320" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="438024621.60045898">
-                                    <!--2014-11-18 17:30:21 +0000-->
-                                </date>
-                            </datePicker>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrB-HF-myY">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="New Sqeed (2)" id="T8Z-AV-aUb">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="qTL-SQ-9b8"/>
-                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="tYL-8s-E9T">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="qjO-RG-PDT" kind="show" id="LrC-Yv-Id1"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rHR-PN-KWc">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-RK-xsG">
+                                <rect key="frame" x="28" y="284" width="128" height="128"/>
+                                <state key="normal" title="Where?" backgroundImage="icon-theater.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showWherePopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="cs2-V6-Vo0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l90-Uj-jk7">
+                                <rect key="frame" x="164" y="284" width="133" height="128"/>
+                                <state key="normal" title="How many people?" backgroundImage="icon-coconut.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showHowManyPeoplePopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="4eE-Ry-P3G"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtS-xz-dRr">
+                                <rect key="frame" x="28" y="420" width="128" height="128"/>
+                                <state key="normal" title="Description" backgroundImage="icon-music.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDescriptionPopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="HAH-uf-wen"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-So-Gmd">
+                                <rect key="frame" x="164" y="420" width="128" height="128"/>
+                                <state key="normal" title="When" backgroundImage="icon-tennis.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showWhenPopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="ZO7-Vs-28S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="1o5-e8-4sL" kind="show" identifier="segueSaveNewSqeed" id="qVf-dW-YLF"/>
+                        <outlet property="categoryPickerView" destination="srW-Io-eUb" id="Fn4-7l-BtW"/>
+                        <outlet property="whatToDoTextField" destination="92R-dT-xec" id="5ux-r2-DoQ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8sH-pT-xNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6Q-Te-g61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="144"/>
+            <point key="canvasLocation" x="1377" y="144"/>
         </scene>
     </scenes>
     <resources>
         <image name="icon-camera.png" width="32" height="32"/>
+        <image name="icon-coconut.png" width="32" height="32"/>
+        <image name="icon-music.png" width="32" height="32"/>
+        <image name="icon-tennis.png" width="32" height="32"/>
         <image name="icon-theater.png" width="32" height="32"/>
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nlD-8G-hFz"/>
-        <segue reference="eQr-ld-YuE"/>
-        <segue reference="qwm-km-WBN"/>
-        <segue reference="wRP-UC-TqU"/>
-        <segue reference="LrC-Yv-Id1"/>
+        <segue reference="bL9-u0-cdO"/>
+        <segue reference="TcL-CW-dBu"/>
+        <segue reference="BdP-3w-ymU"/>
     </inferredMetricsTieBreakers>
 </document>
