@@ -176,6 +176,55 @@
             </objects>
             <point key="canvasLocation" x="826" y="-622"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="pmw-Rf-jvY">
+            <objects>
+                <viewController id="QHu-ow-cMf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kwc-2b-E62"/>
+                        <viewControllerLayoutGuide type="bottom" id="vVX-iX-pNp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cuc-Ll-ccD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ags-IJ-hXz">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Settings" id="KuY-pp-0Ks">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="iqa-Ur-S31"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="SEU-z6-3jH">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-MU-8Yr">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wq3-4S-9p2">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wq3-4S-9p2" id="Qhy-RZ-n9x">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wad-Ua-Pt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1377" y="-558"/>
+        </scene>
         <!--Activities View Controller-->
         <scene sceneID="Lzi-E6-dEk">
             <objects>
@@ -195,18 +244,17 @@
                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Activities" id="Wrt-03-itz">
-                                        <barButtonItem key="backBarButtonItem" title="Log out" id="fOY-vy-SSB"/>
-                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="A0F-1X-V30">
+                                    <navigationItem title="Activities" id="snh-SK-bje">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="OmJ-ol-IQR">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="gPl-AM-HdR" kind="presentation" identifier="segueSearch" id="XNc-GL-vds"/>
+                                                <segue destination="gPl-AM-HdR" kind="presentation" id="dfe-lE-hxe"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="A9l-eU-6z9">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="oRw-Xa-8Xw">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="qjO-RG-PDT" kind="show" identifier="segueNewSqeed1" id="9p9-QF-wcF"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" id="bL9-u0-cdO"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -282,6 +330,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
+                        <segue destination="qjO-RG-PDT" kind="show" identifier="segueNewSqeed1" id="YnE-Az-aiz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -312,6 +361,12 @@
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <segue destination="RgM-oh-shf" kind="presentation" id="qwm-km-WBN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Chat" id="QFw-mU-UJp">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <connections>
+                                                <segue destination="Ghm-QB-n0j" kind="show" id="7M8-Jc-V2X"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -394,11 +449,114 @@
                         <outlet property="eventTitle" destination="4Wx-hO-Stg" id="LDv-22-d9o"/>
                         <outlet property="voteChoice" destination="mte-L0-Sfd" id="fxZ-X8-uUs"/>
                         <outlet property="voteTime" destination="Mcj-C8-dBx" id="gH3-Mh-rCs"/>
+                        <segue destination="Ycb-dW-Xg8" kind="show" id="L63-Hu-wqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI0-Jq-VC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="826" y="867"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="AIP-i8-8UO">
+            <objects>
+                <viewController id="Ycb-dW-Xg8" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S6E-oy-z5v"/>
+                        <viewControllerLayoutGuide type="bottom" id="cud-rn-QaF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TzV-9F-xU1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pp-rN-H7N">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Map" id="CXI-rd-uAC">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="kby-E9-2kf"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="l06-5i-HAl">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lwr-E3-fD0">
+                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QPm-r5-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="826" y="1610"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lKt-mQ-Flr">
+            <objects>
+                <viewController id="Ghm-QB-n0j" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jlY-Se-Ym7"/>
+                        <viewControllerLayoutGuide type="bottom" id="OaS-vT-qnH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1ex-RD-NIn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UB4-io-rm2">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Chat" id="9Hx-tF-wgr">
+                                        <barButtonItem key="backBarButtonItem" title="Details" id="FBn-vf-6zN"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8yV-gu-58j">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hwy-nR-66E">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hwy-nR-66E" id="Xmi-3a-cOn">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ub-dd-pup">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="QQW-Xk-uxn">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Bjj-Ds-n9F">
+                                            <rect key="frame" x="16" y="7" width="243" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem title="Send" style="plain" id="3Ql-8j-WyT"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="1o5-e8-4sL" kind="show" id="Byu-7L-3Ji"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yci-EM-0Vl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1377" y="867"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xKF-fr-1lS">
@@ -429,7 +587,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="Next" id="4fV-vd-D36">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="ete-aa-soe" kind="showDetail" identifier="segueNewSqeed2" id="WLc-Mb-u50"/>
+                                                <segue destination="ete-aa-soe" kind="show" identifier="segueNewSqeed2" id="WLc-Mb-u50"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -483,12 +641,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="New Sqeed (2)" id="T8Z-AV-aUb">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="7lM-MR-2tV">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" id="CXy-V3-D0G"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="qTL-SQ-9b8"/>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="rHR-PN-KWc">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </barButtonItem>
@@ -523,6 +676,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="qjO-RG-PDT" kind="show" id="Z0x-gN-NBZ"/>
+                        <segue destination="1o5-e8-4sL" kind="show" id="qVf-dW-YLF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sH-pT-xNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -535,6 +692,8 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qwm-km-WBN"/>
+        <segue reference="97L-vN-R9s"/>
+        <segue reference="YnE-Az-aiz"/>
+        <segue reference="Byu-7L-3Ji"/>
     </inferredMetricsTieBreakers>
 </document>
