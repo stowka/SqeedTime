@@ -40,7 +40,7 @@ NSDictionary* myData;
                           allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d",
-                            [postData length]];
+                            (int)[postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];

@@ -58,6 +58,7 @@
 		71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */; };
 		71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */; };
 		71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */; };
+		71CB189F1A21556000A6FB93 /* icon-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB189E1A21555F00A6FB93 /* icon-gear.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhoViewController.m; sourceTree = "<group>"; };
 		71CB189A1A20EA9700A6FB93 /* ModalWhatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhatViewController.h; sourceTree = "<group>"; };
 		71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhatViewController.m; sourceTree = "<group>"; };
+		71CB189E1A21555F00A6FB93 /* icon-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-gear.png"; path = "../../../../Downloads/icon-gear.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +230,7 @@
 		7195D7AC1A1CB97400A8C995 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				71CB189E1A21555F00A6FB93 /* icon-gear.png */,
 				71CB188B1A20E95100A6FB93 /* icon-people.png */,
 				71CB18891A20E71100A6FB93 /* icon-location.png */,
 				7195D7A21A1CB96C00A8C995 /* icon-camera.png */,
@@ -472,6 +475,7 @@
 				71CB188A1A20E71100A6FB93 /* icon-location.png in Resources */,
 				71CB188F1A20E9E300A6FB93 /* icon-calendar.png in Resources */,
 				71CB188C1A20E95100A6FB93 /* icon-people.png in Resources */,
+				71CB189F1A21556000A6FB93 /* icon-gear.png in Resources */,
 				7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */,
 				7195D7A91A1CB96C00A8C995 /* icon-music.png in Resources */,
 			);

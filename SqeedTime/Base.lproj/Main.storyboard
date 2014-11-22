@@ -462,7 +462,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-theater.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Gf-yk-rkX">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-tennis.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Gf-yk-rkX">
                                                     <rect key="frame" x="8" y="8" width="32" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 / 20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKS-yK-eQI">
@@ -510,14 +510,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="hEF-Zi-QKu" appends="YES" id="LIP-Ss-riG"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
-                        <segue destination="qjO-RG-PDT" kind="show" identifier="segueCreateSqeed" id="YnE-Az-aiz"/>
+                        <segue destination="qjO-RG-PDT" kind="presentation" identifier="segueCreateSqeed" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="YnE-Az-aiz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="hEF-Zi-QKu">
+                    <connections>
+                        <action selector="swipe:" destination="RgM-oh-shf" id="xRf-ca-SPq"/>
+                        <outlet property="delegate" destination="RgM-oh-shf" id="Lgj-ZF-Qd3"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="826" y="125"/>
         </scene>
@@ -781,7 +790,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DBC-bV-lfP">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" id="TcL-CW-dBu"/>
+                                                <segue destination="RgM-oh-shf" kind="custom" identifier="segueCreateSqeedCancel" customClass="DismissStoryboardSegue" id="TcL-CW-dBu"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="NZd-vo-IGM">
@@ -856,6 +865,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="EUB-Kp-CQc" appends="YES" id="A2C-Td-6pf"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -865,6 +878,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6Q-Te-g61" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="EUB-Kp-CQc">
+                    <connections>
+                        <outlet property="delegate" destination="qjO-RG-PDT" id="CuL-E1-ZB4"/>
+                        <segue destination="RgM-oh-shf" kind="custom" customClass="DismissStoryboardSegue" id="JyD-hQ-nHe"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1377" y="150"/>
         </scene>
@@ -1011,13 +1030,14 @@
         <image name="icon-description.png" width="512" height="512"/>
         <image name="icon-location.png" width="512" height="512"/>
         <image name="icon-people.png" width="256" height="256"/>
+        <image name="icon-tennis.png" width="32" height="32"/>
         <image name="icon-theater.png" width="32" height="32"/>
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TcL-CW-dBu"/>
-        <segue reference="dn6-0a-er9"/>
-        <segue reference="cyx-W0-6lm"/>
-        <segue reference="QiO-NC-xs7"/>
+        <segue reference="JyD-hQ-nHe"/>
+        <segue reference="YnE-Az-aiz"/>
+        <segue reference="bL9-u0-cdO"/>
+        <segue reference="BdP-3w-ymU"/>
     </inferredMetricsTieBreakers>
 </document>

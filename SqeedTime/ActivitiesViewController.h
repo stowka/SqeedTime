@@ -14,10 +14,10 @@
 @property (strong, nonatomic) IBOutlet SqeedsTableView* sqeedsTable;
 @property (strong, nonatomic) IBOutlet SqeedTableViewCell* cell;
 @property (strong, nonatomic) IBOutlet NSNumber* userId;
+@property (strong, nonatomic) UIRefreshControl* refreshControl;
 
-
+- (IBAction)swipe:(id)sender;
 - (NSDictionary*)fetchMySqeeds:(int)userId;
 - (NSDictionary*)fetchDiscovered:(int)userId;
-- (void)displaySqeeds:(NSDictionary*)data;
 - (IBAction)display:(id)sender;
 @end

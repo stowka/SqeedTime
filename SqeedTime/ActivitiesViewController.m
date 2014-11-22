@@ -41,11 +41,12 @@ NSArray* myValues;
     }
     myData = [[GlobalClass globalClass] MY_SQEEDS_DATA];
     
-    // SWIPE LEFT TO ADD NEW SQEED
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
-    [self.view addGestureRecognizer:panRecognizer];
-    
-    
+    // PULL DOWN TO REFRESH
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.sqeedsTable addSubview:self.refreshControl];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,7 +54,31 @@ NSArray* myValues;
     [super didReceiveMemoryWarning];
 }
 
-// PASS DATA BY SEGUE
+#pragma mark - REFRESH HANDLER
+- (void)handleRefresh:(id)sender
+{
+    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] MY_SQEEDS_DATA_LC] timeIntervalSinceReferenceDate] > 1)
+    {
+        [[GlobalClass globalClass] setMY_SQEEDS_DATA:[self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]]];
+        [[GlobalClass globalClass] setMY_SQEEDS_DATA_LC:[NSDate date]];
+        myData = [[GlobalClass globalClass] MY_SQEEDS_DATA];
+        [self.sqeedsTable reloadData];
+        if (self.refreshControl)
+        {
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MMM d, h:mm a"];
+            NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+            NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                        forKey:NSForegroundColorAttributeName];
+            NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+            self.refreshControl.attributedTitle = attributedTitle;
+        }
+    }
+    [self.refreshControl endRefreshing];
+}
+
+#pragma mark - PASS DATA BY SEGUE
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"segueSqeed"])
@@ -71,16 +96,8 @@ NSArray* myValues;
     }
 }
 
-// PERFORM CALL SEGUE ON SWIPE LEFT
-- (void)panDetected:(UIPanGestureRecognizer *)panRecognizer
-{
-    CGPoint velocity = [panRecognizer velocityInView:self.view];
-    if (velocity.x < 0)
-        [self performSegueWithIdentifier:@"segueCreateSqeed" sender:panRecognizer];
-}
 
-
-// DISPLAY SQEEDS IN A TABLE VIEW
+#pragma mark - DISPLAY SQEEDS IN A TABLE VIEW
 - (NSInteger)tableView:(SqeedsTableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [myData count];
@@ -96,13 +113,18 @@ NSArray* myValues;
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    NSString* uniqueKey = [NSString stringWithFormat:@"%d",indexPath.row];
+    NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)indexPath.row];
     
     cell.eventTitle.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"title"];
     cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_min"], (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"people_max"]];
     cell.eventPlace.text = (NSString*)[[myData valueForKey:uniqueKey] valueForKey:@"place"];
     cell.eventId = (NSNumber *)[[myData valueForKey:uniqueKey] valueForKey:@"id"];
     return cell;
+}
+
+- (IBAction)swipe:(id)sender
+{
+    [self performSegueWithIdentifier:@"segueCreateSqeed" sender:self];
 }
 
 
@@ -116,7 +138,7 @@ NSArray* myValues;
 //}
 
 
-// FETCH DATA FROM MYSQEEDS
+#pragma mark - FETCH DATA FROM MYSQEEDS
 - (NSDictionary*)fetchMySqeeds:(int)userId
 {
     NSString *post =
@@ -131,7 +153,7 @@ NSArray* myValues;
                           allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d",
-                            [postData length]];
+                            (int)[postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
@@ -184,7 +206,7 @@ NSArray* myValues;
                           allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d",
-                            [postData length]];
+                            (int)[postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
@@ -223,28 +245,20 @@ NSArray* myValues;
     }
 }
 
-
-
-- (void)displaySqeeds:(NSDictionary*)data
-{
-    return;
-}
-
 - (IBAction)display:(id)sender
 {
     long segment = [sender selectedSegmentIndex];
     if (segment == 0)
     {
-        [self fetchMySqeeds: [self.userId integerValue]];
+        [self fetchMySqeeds: (int)[self.userId integerValue]];
     } else if (segment == 1)
     {
-        [self fetchDiscovered: [self.userId integerValue]];
+        [self fetchDiscovered: (int)[self.userId integerValue]];
     }
 }
 
-/**
- * provides an alert message
- */
+
+#pragma mark - PROVIDES AN ALERT MESSAGE
 - (void) alertStatus:(NSString *)msg :(NSString *)title
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
