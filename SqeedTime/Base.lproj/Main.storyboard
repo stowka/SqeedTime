@@ -386,17 +386,14 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J35-xW-Qud">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J35-xW-Qud">
                                 <rect key="frame" x="16" y="73" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="28n-fn-VLc" id="EsA-Al-qYM"/>
+                                </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XA5-cO-oda">
-                                <rect key="frame" x="137" y="111" width="46" height="30"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -868,8 +865,8 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bL9-u0-cdO"/>
-        <segue reference="TcL-CW-dBu"/>
+        <segue reference="iOI-Sj-far"/>
+        <segue reference="UJ5-Ea-zF4"/>
         <segue reference="BdP-3w-ymU"/>
     </inferredMetricsTieBreakers>
 </document>

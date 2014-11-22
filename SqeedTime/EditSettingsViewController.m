@@ -14,14 +14,25 @@
 
 @implementation EditSettingsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationBar.title = self.key;
     self.textField.text = self.value;
+    [self.textField becomeFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // TODO save changes to server
+    
+    [self performSegueWithIdentifier:@"segueEditSettingsSave" sender:self];
+    return YES;
 }
 
 /*
