@@ -20,6 +20,10 @@
 @synthesize DISCOVERED_DATA;
 @synthesize LAST_SQEED_DATA;
 
+@synthesize USER_DATA_LC;
+@synthesize MY_SQEEDS_DATA_LC;
+@synthesize DISCOVERED_DATA_LC;
+
 // properties to cache new sqeed data
 @synthesize NEW_SQEED_CATEGORY_ID;
 @synthesize NEW_SQEED_DESCRIPTION;

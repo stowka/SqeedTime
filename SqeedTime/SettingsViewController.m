@@ -27,8 +27,13 @@ NSDictionary* myData;
 {
     [super viewDidLoad];
     
-    // FETCH USER DATA
-    myData = [self fetchUser: [[GlobalClass globalClass] USER_ID]];
+    // FETCH USER DATA IF MORE THAN 2 MINUTES ELAPSED SINCE LAST FETCH
+    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] USER_DATA_LC] timeIntervalSinceReferenceDate] > 120)
+    {
+        [[GlobalClass globalClass] setUSER_DATA:[self fetchUser: [[GlobalClass globalClass] USER_ID]]];
+        [[GlobalClass globalClass] setUSER_DATA_LC:[NSDate date]];
+    }
+    myData = [[GlobalClass globalClass] USER_DATA];
 }
 
 - (void)didReceiveMemoryWarning

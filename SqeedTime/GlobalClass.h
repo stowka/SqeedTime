@@ -20,6 +20,10 @@
 @property (nonatomic) NSDictionary* DISCOVERED_DATA;
 @property (nonatomic) NSDictionary* LAST_SQEED_DATA;
 
+@property (nonatomic) NSDate* USER_DATA_LC;
+@property (nonatomic) NSDate* MY_SQEEDS_DATA_LC;
+@property (nonatomic) NSDate* DISCOVERED_DATA_LC;
+
 // properties to cache new sqeed data
 @property (nonatomic) NSString* NEW_SQEED_TITLE;
 @property (nonatomic) NSString* NEW_SQEED_DESCRIPTION;

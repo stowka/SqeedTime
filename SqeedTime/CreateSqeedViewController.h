@@ -18,5 +18,6 @@
 - (IBAction)showDescriptionPopUp:(id)sender;
 - (IBAction)showWhenPopUp:(id)sender;
 - (IBAction)save:(id)sender;
+- (IBAction)backgroundClick:(id)sender;
 
 @end

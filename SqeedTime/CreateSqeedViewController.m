@@ -36,12 +36,17 @@
 
 - (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"Choice %d", row];
+    return [NSString stringWithFormat:@"Category %d", row];
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"Index of selected: %i", row);
+    // TODO save category
+}
+
+- (IBAction)backgroundClick:(id)sender
+{
+    [_whatToDoTextField resignFirstResponder];
 }
 
 /*

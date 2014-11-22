@@ -19,7 +19,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0A5-Oa-yTr">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stowka" borderStyle="roundedRect" placeholder="ex: AlphDutilleul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-n2-oIe">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stowka" placeholder="ex: AlphDutilleul" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-n2-oIe">
                                 <rect key="frame" x="96" y="193" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -39,7 +39,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pass" borderStyle="roundedRect" placeholder="ex: w0H7fmv" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-2r-LCn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="pass" placeholder="ex: w0H7fmv" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kM4-2r-LCn">
                                 <rect key="frame" x="96" y="231" width="209" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
@@ -794,10 +794,14 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What to do..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="92R-dT-xec">
-                                <rect key="frame" x="16" y="76" width="288" height="30"/>
+                                <rect key="frame" x="16" y="64" width="288" height="42"/>
                                 <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="backgroundClick:" destination="qjO-RG-PDT" eventType="editingDidEndOnExit" id="NGZ-ZJ-cZ9"/>
+                                    <outlet property="delegate" destination="qjO-RG-PDT" id="izu-c2-6VG"/>
+                                </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-Io-eUb" customClass="CategoryPickerView">
                                 <rect key="frame" x="16" y="114" width="281" height="162"/>

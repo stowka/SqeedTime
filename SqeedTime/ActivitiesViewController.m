@@ -33,8 +33,13 @@ NSArray* myValues;
     if ([self.userId integerValue])
         [[GlobalClass globalClass] setUSER_ID:(int)[self.userId integerValue]];
     
-    // FETCH DATA
-    myData = [self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]];
+    // FETCH DATA IF MORE THAN 2 MINUTES ELAPSED SINCE LAST FETCH
+    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] MY_SQEEDS_DATA_LC] timeIntervalSinceReferenceDate] > 120)
+    {
+        [[GlobalClass globalClass] setMY_SQEEDS_DATA:[self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]]];
+        [[GlobalClass globalClass] setMY_SQEEDS_DATA_LC:[NSDate date]];
+    }
+    myData = [[GlobalClass globalClass] MY_SQEEDS_DATA];
     
     // SWIPE LEFT TO ADD NEW SQEED
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
