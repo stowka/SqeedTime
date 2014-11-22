@@ -49,6 +49,15 @@
 		7199685E1A150FBD00974683 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968501A150FBD00974683 /* SBJsonTokeniser.m */; };
 		7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968521A150FBD00974683 /* SBJsonUTF8Stream.m */; };
 		719968601A150FBD00974683 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968541A150FBD00974683 /* SBJsonWriter.m */; };
+		71CB18851A20E47400A6FB93 /* DismissStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */; };
+		71CB188A1A20E71100A6FB93 /* icon-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB18891A20E71100A6FB93 /* icon-location.png */; };
+		71CB188C1A20E95100A6FB93 /* icon-people.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB188B1A20E95100A6FB93 /* icon-people.png */; };
+		71CB188F1A20E9E300A6FB93 /* icon-calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB188D1A20E9E300A6FB93 /* icon-calendar.png */; };
+		71CB18901A20E9E300A6FB93 /* icon-description.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB188E1A20E9E300A6FB93 /* icon-description.png */; };
+		71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */; };
+		71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */; };
+		71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */; };
+		71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +148,20 @@
 		719968521A150FBD00974683 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		719968531A150FBD00974683 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		719968541A150FBD00974683 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissStoryboardSegue.h; sourceTree = "<group>"; };
+		71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissStoryboardSegue.m; sourceTree = "<group>"; };
+		71CB18891A20E71100A6FB93 /* icon-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-location.png"; path = "../../../../Downloads/icon-location.png"; sourceTree = "<group>"; };
+		71CB188B1A20E95100A6FB93 /* icon-people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-people.png"; path = "../../../../Downloads/icon-people.png"; sourceTree = "<group>"; };
+		71CB188D1A20E9E300A6FB93 /* icon-calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-calendar.png"; path = "../../../../Downloads/icon-calendar.png"; sourceTree = "<group>"; };
+		71CB188E1A20E9E300A6FB93 /* icon-description.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-description.png"; path = "../../../../Downloads/icon-description.png"; sourceTree = "<group>"; };
+		71CB18911A20EA6B00A6FB93 /* ModalWhereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhereViewController.h; sourceTree = "<group>"; };
+		71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhereViewController.m; sourceTree = "<group>"; };
+		71CB18941A20EA7500A6FB93 /* ModalWhenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhenViewController.h; sourceTree = "<group>"; };
+		71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhenViewController.m; sourceTree = "<group>"; };
+		71CB18971A20EA8A00A6FB93 /* ModalWhoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhoViewController.h; sourceTree = "<group>"; };
+		71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhoViewController.m; sourceTree = "<group>"; };
+		71CB189A1A20EA9700A6FB93 /* ModalWhatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhatViewController.h; sourceTree = "<group>"; };
+		71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhatViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +216,7 @@
 		71290CE61A1FF31C003B7B09 /* CreateSqeed */ = {
 			isa = PBXGroup;
 			children = (
+				71CB189D1A20EAB200A6FB93 /* Modals */,
 				71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */,
 				71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */,
 				71290CE31A1FF314003B7B09 /* CategoryPickerView.h */,
@@ -204,7 +228,11 @@
 		7195D7AC1A1CB97400A8C995 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				71CB188B1A20E95100A6FB93 /* icon-people.png */,
+				71CB18891A20E71100A6FB93 /* icon-location.png */,
 				7195D7A21A1CB96C00A8C995 /* icon-camera.png */,
+				71CB188D1A20E9E300A6FB93 /* icon-calendar.png */,
+				71CB188E1A20E9E300A6FB93 /* icon-description.png */,
 				7195D7A31A1CB96C00A8C995 /* icon-coconut.png */,
 				7195D7A41A1CB96C00A8C995 /* icon-music.png */,
 				7195D7A51A1CB96C00A8C995 /* icon-tennis.png */,
@@ -281,6 +309,8 @@
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199683A1A14FA9B00974683 /* logo.png */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
+				71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */,
+				71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */,
 				71290CE61A1FF31C003B7B09 /* CreateSqeed */,
 				71290CD81A1FC61E003B7B09 /* MapViewController.h */,
 				71290CD91A1FC61E003B7B09 /* MapViewController.m */,
@@ -321,6 +351,21 @@
 				7199682F1A14FA6100974683 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		71CB189D1A20EAB200A6FB93 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				71CB18911A20EA6B00A6FB93 /* ModalWhereViewController.h */,
+				71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */,
+				71CB18941A20EA7500A6FB93 /* ModalWhenViewController.h */,
+				71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */,
+				71CB18971A20EA8A00A6FB93 /* ModalWhoViewController.h */,
+				71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */,
+				71CB189A1A20EA9700A6FB93 /* ModalWhatViewController.h */,
+				71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */,
+			);
+			name = Modals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,9 +465,13 @@
 				7195D7AA1A1CB96C00A8C995 /* icon-tennis.png in Resources */,
 				7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */,
 				719968201A14FA6100974683 /* Main.storyboard in Resources */,
+				71CB18901A20E9E300A6FB93 /* icon-description.png in Resources */,
 				7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */,
 				719968251A14FA6100974683 /* LaunchScreen.xib in Resources */,
 				719968221A14FA6100974683 /* Images.xcassets in Resources */,
+				71CB188A1A20E71100A6FB93 /* icon-location.png in Resources */,
+				71CB188F1A20E9E300A6FB93 /* icon-calendar.png in Resources */,
+				71CB188C1A20E95100A6FB93 /* icon-people.png in Resources */,
 				7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */,
 				7195D7A91A1CB96C00A8C995 /* icon-music.png in Resources */,
 			);
@@ -446,6 +495,7 @@
 				719968601A150FBD00974683 /* SBJsonWriter.m in Sources */,
 				7199681A1A14FA6100974683 /* AppDelegate.m in Sources */,
 				7199685E1A150FBD00974683 /* SBJsonTokeniser.m in Sources */,
+				71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */,
 				71290CD71A1FC5FE003B7B09 /* SearchViewController.m in Sources */,
 				719968551A150FBD00974683 /* NSObject+SBJson.m in Sources */,
 				71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */,
@@ -459,7 +509,10 @@
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
 				71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */,
+				71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */,
+				71CB18851A20E47400A6FB93 /* DismissStoryboardSegue.m in Sources */,
 				71290CCB1A1FB898003B7B09 /* GlobalClass.m in Sources */,
+				71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */,
 				7199685C1A150FBD00974683 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */,
 				7195D7AF1A1CBDE000A8C995 /* SqeedsTableView.m in Sources */,
@@ -470,6 +523,7 @@
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
 				71290CD41A1FC407003B7B09 /* ProfileViewController.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
+				71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */,
 				719968591A150FBD00974683 /* SBJsonStreamParserAdapter.m in Sources */,
 				71290C261A1F5C77003B7B09 /* SettingsTableView.m in Sources */,
 				71290CDA1A1FC61E003B7B09 /* MapViewController.m in Sources */,

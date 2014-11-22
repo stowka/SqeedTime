@@ -348,7 +348,7 @@
                     <connections>
                         <outlet property="settingsTable" destination="6h0-MU-8Yr" id="hS0-9W-6j7"/>
                         <segue destination="QGL-eC-05x" kind="showDetail" identifier="segueSelfProfile" id="5nQ-DT-8jX"/>
-                        <segue destination="28n-fn-VLc" kind="show" identifier="segueEditSettings" id="bFh-iX-yY5"/>
+                        <segue destination="28n-fn-VLc" kind="showDetail" identifier="segueEditSettings" id="bFh-iX-yY5"/>
                         <segue destination="hKB-xQ-lZu" kind="show" identifier="segueDisplaySettings" id="7hh-fJ-mpI"/>
                         <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="mE5-KL-4OM"/>
                     </connections>
@@ -784,7 +784,7 @@
                                                 <segue destination="RgM-oh-shf" kind="presentation" id="TcL-CW-dBu"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Next ❯" id="NZd-vo-IGM">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NZd-vo-IGM">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
                                                 <action selector="save:" destination="qjO-RG-PDT" id="fJU-8Z-w85"/>
@@ -793,14 +793,14 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What to do..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="92R-dT-xec">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What to do..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="92R-dT-xec">
                                 <rect key="frame" x="16" y="76" width="288" height="30"/>
                                 <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srW-Io-eUb" customClass="CategoryPickerView">
-                                <rect key="frame" x="0.0" y="114" width="320" height="162"/>
+                                <rect key="frame" x="16" y="114" width="281" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="qjO-RG-PDT" id="mIL-1n-0px"/>
                                     <outlet property="delegate" destination="qjO-RG-PDT" id="H9c-LM-46f"/>
@@ -808,38 +808,46 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-RK-xsG">
                                 <rect key="frame" x="28" y="284" width="128" height="128"/>
-                                <state key="normal" title="Where?" backgroundImage="icon-theater.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Where?" backgroundImage="icon-location.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showWherePopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="cs2-V6-Vo0"/>
+                                    <segue destination="eoD-hc-qpM" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="taq-67-nJB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l90-Uj-jk7">
                                 <rect key="frame" x="164" y="284" width="133" height="128"/>
-                                <state key="normal" title="How many people?" backgroundImage="icon-coconut.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Who?" backgroundImage="icon-people.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showHowManyPeoplePopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="4eE-Ry-P3G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtS-xz-dRr">
-                                <rect key="frame" x="28" y="420" width="128" height="128"/>
-                                <state key="normal" title="Description" backgroundImage="icon-music.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showDescriptionPopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="HAH-uf-wen"/>
+                                    <segue destination="2fi-xU-PmR" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="UKT-DG-aSI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-So-Gmd">
                                 <rect key="frame" x="164" y="420" width="128" height="128"/>
-                                <state key="normal" title="When" backgroundImage="icon-tennis.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="When?" backgroundImage="icon-calendar.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showWhenPopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="ZO7-Vs-28S"/>
+                                    <segue destination="keR-Va-FeD" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="y0x-cE-uCo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtS-xz-dRr">
+                                <rect key="frame" x="28" y="419" width="128" height="129"/>
+                                <state key="normal" title="What?" backgroundImage="icon-description.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDescriptionPopUp:" destination="qjO-RG-PDT" eventType="touchUpInside" id="HAH-uf-wen"/>
+                                    <segue destination="dVg-23-GGW" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="koH-SR-xwg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -849,24 +857,163 @@
                     <connections>
                         <outlet property="categoryPickerView" destination="srW-Io-eUb" id="Fn4-7l-BtW"/>
                         <outlet property="whatToDoTextField" destination="92R-dT-xec" id="5ux-r2-DoQ"/>
+                        <segue destination="1o5-e8-4sL" kind="show" id="cyx-W0-6lm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6Q-Te-g61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="144"/>
+            <point key="canvasLocation" x="1377" y="150"/>
+        </scene>
+        <!--Modal When View Controller-->
+        <scene sceneID="b2o-Yr-IOt">
+            <objects>
+                <viewController id="eoD-hc-qpM" customClass="ModalWhenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9W9-02-6fd"/>
+                        <viewControllerLayoutGuide type="bottom" id="6vJ-V5-KcZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zbI-Yl-wah">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArM-BM-EZf">
+                                <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="NFk-E1-8zc"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-location.png" translatesAutoresizingMaskIntoConstraints="NO" id="E05-y6-fga">
+                                <rect key="frame" x="96" y="28" width="128" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aY9-gk-xav" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529" y="125"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dfb-km-YpO">
+            <objects>
+                <viewController id="dVg-23-GGW" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zbm-F7-Q54"/>
+                        <viewControllerLayoutGuide type="bottom" id="icY-08-zf0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="93T-9B-xvr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73o-vF-ApX">
+                                <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="dn6-0a-er9"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-description.png" translatesAutoresizingMaskIntoConstraints="NO" id="adS-DC-o9S">
+                                <rect key="frame" x="96" y="28" width="128" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xGs-XV-h4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529" y="867"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="y2B-Cf-xxD">
+            <objects>
+                <viewController id="keR-Va-FeD" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4d4-Lk-e61"/>
+                        <viewControllerLayoutGuide type="bottom" id="HmV-OX-PgA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pAA-7c-due">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJ1-Bq-0Sa">
+                                <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="p4l-fZ-tqh"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-calendar.png" translatesAutoresizingMaskIntoConstraints="NO" id="LBT-jS-fsb">
+                                <rect key="frame" x="96" y="28" width="128" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jld-9h-DMX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529" y="1596"/>
+        </scene>
+        <!--Modal Who View Controller-->
+        <scene sceneID="rY3-LV-SXd">
+            <objects>
+                <viewController id="2fi-xU-PmR" customClass="ModalWhoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Oiy-nh-JlQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0J2-VY-YT0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lKz-XU-eus">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l46-qf-uAx">
+                                <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <state key="normal" title="×">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="Z64-wf-tf3"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-people.png" translatesAutoresizingMaskIntoConstraints="NO" id="PPS-IJ-d9c">
+                                <rect key="frame" x="96" y="28" width="128" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8N7-FX-I4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529" y="-622"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icon-calendar.png" width="256" height="256"/>
         <image name="icon-camera.png" width="32" height="32"/>
-        <image name="icon-coconut.png" width="32" height="32"/>
-        <image name="icon-music.png" width="32" height="32"/>
-        <image name="icon-tennis.png" width="32" height="32"/>
+        <image name="icon-description.png" width="512" height="512"/>
+        <image name="icon-location.png" width="512" height="512"/>
+        <image name="icon-people.png" width="256" height="256"/>
         <image name="icon-theater.png" width="32" height="32"/>
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iOI-Sj-far"/>
-        <segue reference="UJ5-Ea-zF4"/>
-        <segue reference="BdP-3w-ymU"/>
+        <segue reference="TcL-CW-dBu"/>
+        <segue reference="dn6-0a-er9"/>
+        <segue reference="cyx-W0-6lm"/>
+        <segue reference="QiO-NC-xs7"/>
     </inferredMetricsTieBreakers>
 </document>
