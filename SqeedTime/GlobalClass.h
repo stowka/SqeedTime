@@ -14,6 +14,12 @@
 @property (nonatomic) int CURRENT_SQEED;
 @property (nonatomic) NSString* USER_TOKEN;
 
+// cache main activity
+@property (nonatomic) NSDictionary* USER_DATA;
+@property (nonatomic) NSDictionary* MY_SQEEDS_DATA;
+@property (nonatomic) NSDictionary* DISCOVERED_DATA;
+@property (nonatomic) NSDictionary* LAST_SQEED_DATA;
+
 // properties to cache new sqeed data
 @property (nonatomic) NSString* NEW_SQEED_TITLE;
 @property (nonatomic) NSString* NEW_SQEED_DESCRIPTION;

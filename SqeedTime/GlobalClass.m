@@ -14,6 +14,12 @@
 @synthesize CURRENT_SQEED;
 @synthesize USER_TOKEN;
 
+// main activity cache
+@synthesize USER_DATA;
+@synthesize MY_SQEEDS_DATA;
+@synthesize DISCOVERED_DATA;
+@synthesize LAST_SQEED_DATA;
+
 // properties to cache new sqeed data
 @synthesize NEW_SQEED_CATEGORY_ID;
 @synthesize NEW_SQEED_DESCRIPTION;
