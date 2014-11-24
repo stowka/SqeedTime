@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710CBF621A2330B50077B2B7 /* ZHStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CBF611A2330B50077B2B7 /* ZHStoryboardSegue.m */; };
+		710CBF651A2331160077B2B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710CBF641A2331160077B2B7 /* QuartzCore.framework */; };
 		710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */; };
 		71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C221A1F5C2B003B7B09 /* SettingsViewController.m */; };
 		71290C261A1F5C77003B7B09 /* SettingsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290C251A1F5C77003B7B09 /* SettingsTableView.m */; };
@@ -72,6 +74,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		710CBF601A2330B50077B2B7 /* ZHStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHStoryboardSegue.h; sourceTree = "<group>"; };
+		710CBF611A2330B50077B2B7 /* ZHStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHStoryboardSegue.m; sourceTree = "<group>"; };
+		710CBF641A2331160077B2B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesViewController.h; sourceTree = "<group>"; };
 		710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesViewController.m; sourceTree = "<group>"; };
 		71290C211A1F5C2B003B7B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -171,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				710CBF651A2331160077B2B7 /* QuartzCore.framework in Frameworks */,
 				71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +191,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		710CBF631A2330E20077B2B7 /* CustomSegues */ = {
+			isa = PBXGroup;
+			children = (
+				710CBF601A2330B50077B2B7 /* ZHStoryboardSegue.h */,
+				710CBF611A2330B50077B2B7 /* ZHStoryboardSegue.m */,
+				71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */,
+				71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */,
+			);
+			name = CustomSegues;
+			sourceTree = "<group>";
+		};
 		71290CC71A1F9C6F003B7B09 /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +296,7 @@
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
+				710CBF641A2331160077B2B7 /* QuartzCore.framework */,
 				71290CDE1A1FE619003B7B09 /* MapKit.framework */,
 				719968131A14FA6100974683 /* SqeedTime */,
 				7199682D1A14FA6100974683 /* SqeedTimeTests */,
@@ -312,8 +330,7 @@
 				7199681C1A14FA6100974683 /* LoginViewController.m */,
 				7199683A1A14FA9B00974683 /* logo.png */,
 				7199681E1A14FA6100974683 /* Main.storyboard */,
-				71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */,
-				71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */,
+				710CBF631A2330E20077B2B7 /* CustomSegues */,
 				71290CE61A1FF31C003B7B09 /* CreateSqeed */,
 				71290CD81A1FC61E003B7B09 /* MapViewController.h */,
 				71290CD91A1FC61E003B7B09 /* MapViewController.m */,
@@ -420,6 +437,7 @@
 				TargetAttributes = {
 					719968101A14FA6100974683 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = BDG9GR3LL5;
 					};
 					719968291A14FA6100974683 = {
 						CreatedOnToolsVersion = 6.1;
@@ -525,6 +543,7 @@
 				71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */,
 				7199685D1A150FBD00974683 /* SBJsonStreamWriterState.m in Sources */,
 				7199685F1A150FBD00974683 /* SBJsonUTF8Stream.m in Sources */,
+				710CBF621A2330B50077B2B7 /* ZHStoryboardSegue.m in Sources */,
 				71290CD41A1FC407003B7B09 /* ProfileViewController.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,
 				71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */,
@@ -652,9 +671,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SqeedTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -662,9 +684,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SqeedTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
