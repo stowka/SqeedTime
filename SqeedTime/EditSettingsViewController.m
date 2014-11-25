@@ -7,6 +7,7 @@
 //
 
 #import "EditSettingsViewController.h"
+#import "CCacheHandler.h"
 
 @interface EditSettingsViewController ()
 
@@ -17,9 +18,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationBar.title = self.key;
-    self.textField.text = self.value;
-    [self.textField becomeFirstResponder];
+    [[self navigationBar] setTitle:[self key]];
+    [[self textField] setText:[self value]];
+    [[self textField] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,20 +30,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    // TODO save changes to server
-    
+    [[[CCacheHandler instance] cache_currentUser] update:[self key] :[[self textField] text]];
     [self performSegueWithIdentifier:@"segueEditSettingsSave" sender:self];
     return YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

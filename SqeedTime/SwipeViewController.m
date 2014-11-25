@@ -1,27 +1,27 @@
 //
-//  SearchViewController.m
+//  SwipeViewController.m
 //  SqeedTime
 //
-//  Created by Antoine De Gieter on 21/11/14.
+//  Created by Antoine De Gieter on 24/11/14.
 //  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
 //
 
-#import "SearchViewController.h"
+#import "SwipeViewController.h"
 
-@interface SearchViewController ()
+@interface SwipeViewController ()
 
 @end
 
-@implementation SearchViewController
+@implementation SwipeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

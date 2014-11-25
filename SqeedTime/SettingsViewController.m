@@ -11,9 +11,7 @@
 #import "SettingsTableViewCell.h"
 #import "EditSettingsViewController.h"
 #import "DisplaySettingsViewController.h"
-#import "ProfileViewController.h"
-#import "SBJson.h"
-#import "GlobalClass.h"
+#import "CCacheHandler.h"
 
 @interface SettingsViewController ()
 
@@ -26,14 +24,6 @@ NSDictionary* myData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // FETCH USER DATA IF MORE THAN 2 MINUTES ELAPSED SINCE LAST FETCH
-    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] USER_DATA_LC] timeIntervalSinceReferenceDate] > 120)
-    {
-        [[GlobalClass globalClass] setUSER_DATA:[self fetchUser: [[GlobalClass globalClass] USER_ID]]];
-        [[GlobalClass globalClass] setUSER_DATA_LC:[NSDate date]];
-    }
-    myData = [[GlobalClass globalClass] USER_DATA];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,10 +43,10 @@ NSDictionary* myData;
 
 - (NSInteger)tableView:(SettingsTableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section ? 4 : 6;
+    return section ? 4 : 5;
 }
 
-- (UITableViewCell*)tableView:(SettingsTableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(SettingsTableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     static NSString *cellIdentifier = @"settingsCellID";
     SettingsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:
@@ -71,28 +61,24 @@ NSDictionary* myData;
         switch(indexPath.row)
         {
             case 0:
-                cell.title.text = @"Name";
-                cell.value.text = ![[myData valueForKey:@"name"]  isEqual: @"<null>"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"name"]] : @"";
+                cell.title.text = @"Username"; // NON MUTABLE
+                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uUsername];
                 break;
             case 1:
-                cell.title.text = @"Forname";
-                cell.value.text = ![[myData valueForKey:@"forname"]  isEqual: @"<null>"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"forname"]] : @"";
+                cell.title.text = @"Phone"; // NON MUTABLE
+                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uPhoneNumber];
                 break;
             case 2:
-                cell.title.text = @"E-mail";
-                cell.value.text = ![[myData valueForKey:@"email"]  isEqual: @"(null)"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"email"]] : @"";
+                cell.title.text = @"Forname";
+                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uForname];
                 break;
             case 3:
-                cell.title.text = @"Phone";
-                cell.value.text = ![[myData valueForKey:@"phone"]  isEqual: @"(null)"] && ![[myData valueForKey:@"phone_ext"] isEqual: @"(null)"] ? [NSString stringWithFormat:@"+%@.%@", [myData valueForKey:@"phone_ext"], [myData valueForKey:@"phone"]] : @"";
+                cell.title.text = @"Name";
+                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uName];
                 break;
             case 4:
-                cell.title.text = @"Facebook URL";
-                cell.value.text = ![[myData valueForKey:@"facebook_url"]  isEqual: @"(null)"] ? [NSString stringWithFormat:@"%@", [myData valueForKey:@"facebook_url"]] : @"";
-                break;
-            case 5:
-                cell.title.text = @"Profile";
-                cell.value.text = @"❯";
+                cell.title.text = @"E-mail";
+                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uEmail];
                 break;
             default:
                 cell.title.text = @"ERROR";
@@ -133,82 +119,16 @@ NSDictionary* myData;
 -(void)tableView:(SettingsTableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     NSString* segue;
-    if (!indexPath.section) // MY ACCOUNT
-        segue = indexPath.row == 5 ? @"segueSelfProfile" : @"segueEditSettings";
-    else // MORE INFO
-        segue = indexPath.row == 2 ? @"segueMap" : @"segueDisplaySettings";
-    
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self performSegueWithIdentifier:segue sender:self];
-}
-
-- (NSDictionary*)fetchUser:(int) userId
-{
-    NSString *post =
-    [[NSString alloc]
-     initWithFormat:@"function=getUser&id=%d",
-     userId];
-    
-    NSURL *url = [NSURL URLWithString:
-                  @"http://sqtdbws.net-production.ch/"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
-                          allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d",
-                            [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded"
-   forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-    
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request
-                                          returningResponse:&response error:&error];
-    //NSLog(@"Response code: %d", [response statusCode]);
-    if ([response statusCode] >= 200
-        && [response statusCode] < 300)
-    {
-        NSString *responseData =
-        [[NSString alloc]initWithData:urlData
-                             encoding:NSUTF8StringEncoding];
-        
-        SBJsonParser *jsonParser = [SBJsonParser new];
-        NSDictionary *jsonData = (NSDictionary *) [jsonParser
-                                                   objectWithString:responseData error:nil];
-        return jsonData;
-    }
+    if (!indexPath.section && (indexPath.row >= 2 && indexPath.row <= 4))       // MY ACCOUNT
+        segue = @"segueEditSettings";
+    else if (indexPath.section)                                                 // MORE INFO
+        segue = @"segueDisplaySettings";
     else
     {
-        if (error)
-            NSLog(@"Error: %@", error);
-        [self alertStatus:@"Connection failed" :@"Error..."];
-        return nil;
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
     }
-
-}
-
-
-/**
- * provides an alert message
- */
-- (void) alertStatus:(NSString *)msg :(NSString *)title
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:msg
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-    
-    [alertView show];
+    [self performSegueWithIdentifier:segue sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -7,12 +7,11 @@
 //
 
 #import "ActivitiesViewController.h"
-#import "SBJson.h"
 #import "SqeedsTableView.h"
 #import "SqeedTableViewCell.h"
 #import "SqeedViewController.h"
 #import "SettingsViewController.h"
-#import "GlobalClass.h"
+#import "CCacheHandler.h"
 
 @interface ActivitiesViewController ()
 
@@ -21,25 +20,16 @@
 @implementation ActivitiesViewController
 
 NSDictionary* myData;
-NSArray* myKeys;
-NSArray* myValues;
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // STORE GLOBAL USER ID AND TOKEN
-    if ([self.userId integerValue])
-        [[GlobalClass globalClass] setUSER_ID:(int)[self.userId integerValue]];
-    
-    // FETCH DATA IF MORE THAN 2 MINUTES ELAPSED SINCE LAST FETCH
-    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] MY_SQEEDS_DATA_LC] timeIntervalSinceReferenceDate] > 120)
+    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CCacheHandler instance] cache_lastUpdate] timeIntervalSinceReferenceDate] > 120)
     {
-        [[GlobalClass globalClass] setMY_SQEEDS_DATA:[self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]]];
-        [[GlobalClass globalClass] setMY_SQEEDS_DATA_LC:[NSDate date]];
+        [[[CCacheHandler instance] cache_currentUser] fetchMySqeeds];
+        [[CCacheHandler instance] setCache_lastUpdate:[NSDate date]];
     }
-    myData = [[GlobalClass globalClass] MY_SQEEDS_DATA];
+    myData = [[[CCacheHandler instance] cache_currentUser] uMySqeeds];
     
     // PULL DOWN TO REFRESH
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -57,15 +47,14 @@ NSArray* myValues;
 #pragma mark - REFRESH HANDLER
 - (void)handleRefresh:(id)sender
 {
-    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[GlobalClass globalClass] MY_SQEEDS_DATA_LC] timeIntervalSinceReferenceDate] > 1)
+    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CCacheHandler instance] cache_lastUpdate] timeIntervalSinceReferenceDate] > 1)
     {
-        [[GlobalClass globalClass] setMY_SQEEDS_DATA:[self fetchMySqeeds: [[GlobalClass globalClass] USER_ID]]];
-        [[GlobalClass globalClass] setMY_SQEEDS_DATA_LC:[NSDate date]];
-        myData = [[GlobalClass globalClass] MY_SQEEDS_DATA];
+        [[[CCacheHandler instance] cache_currentUser] fetchMySqeeds];
+        [[CCacheHandler instance] setCache_lastUpdate:[NSDate date]];
+        myData = [[[CCacheHandler instance] cache_currentUser] uMySqeeds];
         [self.sqeedsTable reloadData];
         if (self.refreshControl)
         {
-            
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"MMM d, h:mm a"];
             NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
@@ -87,12 +76,6 @@ NSArray* myValues;
         SqeedViewController* destViewController = segue.destinationViewController;
         SqeedTableViewCell* cell = (SqeedTableViewCell*)[self.sqeedsTable cellForRowAtIndexPath:indexPath];
         destViewController.eventId = cell.eventId;
-    }
-    
-    if ([segue.identifier isEqualToString:@"segueSettings"])
-    {
-        SettingsViewController* destViewController = segue.destinationViewController;
-        destViewController.userId = self.userId;
     }
 }
 
@@ -122,11 +105,6 @@ NSArray* myValues;
     return cell;
 }
 
-- (IBAction)swipe:(id)sender
-{
-    [self performSegueWithIdentifier:@"segueCreateSqeed" sender:self];
-}
-
 
 // DISPLAY SQEED AFTER SELECTION
 //-(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,137 +114,4 @@ NSArray* myValues;
 //    NSNumber* eventId = cell.eventId;
 //    //[self performSegueWithIdentifier:@"segueSqeed" sender:self];
 //}
-
-
-#pragma mark - FETCH DATA FROM MYSQEEDS
-- (NSDictionary*)fetchMySqeeds:(int)userId
-{
-    NSString *post =
-    [[NSString alloc]
-     initWithFormat:@"function=eventsByUser&id=%d",
-     userId];
-    
-    NSURL *url = [NSURL URLWithString:
-                  @"http://sqtdbws.net-production.ch/"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
-                          allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d",
-                            (int)[postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded"
-   forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-
-    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-    
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request
-                                          returningResponse:&response error:&error];
-    //NSLog(@"Response code: %d", [response statusCode]);
-    if ([response statusCode] >= 200
-        && [response statusCode] < 300)
-    {
-        NSString *responseData =
-        [[NSString alloc]initWithData:urlData
-                             encoding:NSUTF8StringEncoding];
-        
-        SBJsonParser *jsonParser = [SBJsonParser new];
-        NSDictionary *jsonData = (NSDictionary *) [jsonParser
-                                                   objectWithString:responseData error:nil];
-        return jsonData;
-    }
-    else
-    {
-        if (error)
-            NSLog(@"Error: %@", error);
-        [self alertStatus:@"Connection failed" :@"Error..."];
-        return nil;
-    }
-}
-
-- (NSDictionary*)fetchDiscovered:(int)userId
-{
-    NSString *post =
-    [[NSString alloc]
-     initWithFormat:@"function=eventsByUser&id=%d",
-     userId];
-    
-    NSURL *url = [NSURL URLWithString:
-                  @"http://sqtdbws.net-production.ch/"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding
-                          allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d",
-                            (int)[postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded"
-   forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-    
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request
-                                          returningResponse:&response error:&error];
-    //NSLog(@"Response code: %d", [response statusCode]);
-    if ([response statusCode] >= 200
-        && [response statusCode] < 300)
-    {
-        NSString *responseData =
-        [[NSString alloc]initWithData:urlData
-                             encoding:NSUTF8StringEncoding];
-        
-        SBJsonParser *jsonParser = [SBJsonParser new];
-        NSDictionary *jsonData = (NSDictionary *) [jsonParser
-                                                   objectWithString:responseData error:nil];
-        return jsonData;
-    }
-    else
-    {
-        if (error)
-            NSLog(@"Error: %@", error);
-        [self alertStatus:@"Connection failed" :@"Error..."];
-        return nil;
-    }
-}
-
-- (IBAction)display:(id)sender
-{
-    long segment = [sender selectedSegmentIndex];
-    if (segment == 0)
-    {
-        [self fetchMySqeeds: (int)[self.userId integerValue]];
-    } else if (segment == 1)
-    {
-        [self fetchDiscovered: (int)[self.userId integerValue]];
-    }
-}
-
-
-#pragma mark - PROVIDES AN ALERT MESSAGE
-- (void) alertStatus:(NSString *)msg :(NSString *)title
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:msg
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-    
-    [alertView show];
-}
 @end

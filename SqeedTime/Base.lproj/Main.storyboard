@@ -84,143 +84,12 @@
                         <outlet property="password" destination="kM4-2r-LCn" id="cM6-da-g7Y"/>
                         <outlet property="remember" destination="Zuv-rW-aHG" id="qpg-3D-Keb"/>
                         <outlet property="username" destination="2fr-n2-oIe" id="Zry-RF-MC9"/>
-                        <segue destination="RgM-oh-shf" kind="presentation" identifier="loginToSqeeds" modalTransitionStyle="flipHorizontal" id="97L-vN-R9s"/>
+                        <segue destination="W5V-3o-ge3" kind="presentation" identifier="segueActivities" modalTransitionStyle="flipHorizontal" id="FVu-YV-z4i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="268" y="125"/>
-        </scene>
-        <!--Search View Controller-->
-        <scene sceneID="jSq-6C-kTv">
-            <objects>
-                <viewController id="gPl-AM-HdR" customClass="SearchViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cMF-zf-AWO"/>
-                        <viewControllerLayoutGuide type="bottom" id="bYb-f2-9Oc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W1E-w3-2fq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faT-ed-LWH">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Search Sqeeds" id="ZIL-F4-Mla">
-                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="Bf8-ow-00F">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" identifier="segueSearchBack" id="IPl-sv-0sH"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqs-Pk-TlL">
-                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellID" rowHeight="120" id="5z2-vL-B59" customClass="SqeedTableViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5z2-vL-B59" id="nLv-WP-zno">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Football entre amis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16u-Fj-QB3">
-                                                    <rect key="frame" x="48" y="9" width="214" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-theater.png" translatesAutoresizingMaskIntoConstraints="NO" id="bm6-yp-Z60">
-                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 / 20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bg-Mc-zkk">
-                                                    <rect key="frame" x="252" y="11" width="60" height="30"/>
-                                                    <color key="backgroundColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Port d'Ouchy, Lausanne, VD, CH" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRj-0T-gUe">
-                                                    <rect key="frame" x="162" y="51" width="150" height="41"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="eventMinMax" destination="7bg-Mc-zkk" id="g0J-6e-Q9o"/>
-                                            <outlet property="eventPlace" destination="GRj-0T-gUe" id="ovY-B0-mu4"/>
-                                            <outlet property="eventTitle" destination="16u-Fj-QB3" id="Fjb-H0-6t8"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4eE-cY-fKW">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qya-xc-H43" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="826" y="-622"/>
-        </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="YUJ-a3-8et">
-            <objects>
-                <viewController id="QGL-eC-05x" customClass="ProfileViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7TC-9d-QoW"/>
-                        <viewControllerLayoutGuide type="bottom" id="APy-8o-LDH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="su5-by-oAx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0d8-uL-NHR">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Profile" id="hLd-1e-o17">
-                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="QkE-YZ-yBr">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" id="mxi-W6-neG"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdn-fZ-3Me">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2cT-NZ-SES">
-                                        <rect key="frame" x="105" y="197" width="110" height="110"/>
-                                    </imageView>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0eV-L3-odm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1377" y="-1378"/>
+            <point key="canvasLocation" x="-188" y="124.5"/>
         </scene>
         <!--Display Settings View Controller-->
         <scene sceneID="Tah-5M-IaQ">
@@ -245,7 +114,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="fs4-Qu-mJc">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueDisplaySettingsBack" id="wRP-UC-TqU"/>
+                                                <segue destination="QHu-ow-cMf" kind="custom" identifier="segueDisplaySettingsBack" customClass="DismissStoryboardSegue" id="wRP-UC-TqU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -290,7 +159,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="BYj-19-Bmi">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="show" identifier="segueSettingsBack" id="UJ5-Ea-zF4"/>
+                                                <segue destination="W5V-3o-ge3" kind="custom" customClass="DismissStoryboardSegue" id="RHm-lK-AOL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -303,7 +172,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="presentation" identifier="segueLogOut" id="V2b-Ks-Mah"/>
+                                    <segue destination="vXZ-lx-hvc" kind="presentation" identifier="segueLogOut" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="V2b-Ks-Mah"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-MU-8Yr" customClass="SettingsTableView">
@@ -347,9 +216,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="settingsTable" destination="6h0-MU-8Yr" id="hS0-9W-6j7"/>
-                        <segue destination="QGL-eC-05x" kind="showDetail" identifier="segueSelfProfile" id="5nQ-DT-8jX"/>
-                        <segue destination="28n-fn-VLc" kind="showDetail" identifier="segueEditSettings" id="bFh-iX-yY5"/>
-                        <segue destination="hKB-xQ-lZu" kind="show" identifier="segueDisplaySettings" id="7hh-fJ-mpI"/>
+                        <segue destination="28n-fn-VLc" kind="presentation" identifier="segueEditSettings" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="bFh-iX-yY5"/>
+                        <segue destination="hKB-xQ-lZu" kind="presentation" identifier="segueDisplaySettings" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="7hh-fJ-mpI"/>
                         <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="mE5-KL-4OM"/>
                     </connections>
                 </viewController>
@@ -380,7 +248,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pBP-Hp-7pZ">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueEditSettingsCancel" id="iOI-Sj-far"/>
+                                                <segue destination="QHu-ow-cMf" kind="custom" identifier="segueEditSettingsCancel" customClass="DismissStoryboardSegue" id="iOI-Sj-far"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -401,7 +269,7 @@
                     <connections>
                         <outlet property="navigationBar" destination="ooP-oK-n4V" id="RWC-XD-eOn"/>
                         <outlet property="textField" destination="J35-xW-Qud" id="JBL-fE-zZN"/>
-                        <segue destination="QHu-ow-cMf" kind="show" identifier="segueEditSettingsSave" id="QiO-NC-xs7"/>
+                        <segue destination="QHu-ow-cMf" kind="custom" identifier="segueEditSettingsSave" customClass="DismissStoryboardSegue" id="QiO-NC-xs7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6R-XB-Shw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,7 +279,7 @@
         <!--Activities View Controller-->
         <scene sceneID="Lzi-E6-dEk">
             <objects>
-                <viewController id="RgM-oh-shf" customClass="ActivitiesViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivitiesViewController" id="RgM-oh-shf" customClass="ActivitiesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2AH-ko-b08"/>
                         <viewControllerLayoutGuide type="bottom" id="Vbm-gL-MN0"/>
@@ -428,17 +296,14 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Activities" id="snh-SK-bje">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="OmJ-ol-IQR">
+                                        <barButtonItem key="leftBarButtonItem" image="icon-settings.png" id="oRw-Xa-8Xw">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="gPl-AM-HdR" kind="presentation" identifier="segueSearch" id="dfe-lE-hxe"/>
+                                                <segue destination="QHu-ow-cMf" kind="presentation" identifier="segueSettings" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="bL9-u0-cdO"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="oRw-Xa-8Xw">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueSettings" id="bL9-u0-cdO"/>
-                                            </connections>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cYe-J4-zY3">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -510,23 +375,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="hEF-Zi-QKu" appends="YES" id="LIP-Ss-riG"/>
-                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
-                        <segue destination="qjO-RG-PDT" kind="presentation" identifier="segueCreateSqeed" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="YnE-Az-aiz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="hEF-Zi-QKu">
-                    <connections>
-                        <action selector="swipe:" destination="RgM-oh-shf" id="xRf-ca-SPq"/>
-                        <outlet property="delegate" destination="RgM-oh-shf" id="Lgj-ZF-Qd3"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="826" y="125"/>
         </scene>
@@ -621,7 +476,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="SFt-fh-dwR">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="RgM-oh-shf" kind="presentation" identifier="segueSqeedBack" id="qwm-km-WBN"/>
+                                                <segue destination="W5V-3o-ge3" kind="presentation" id="bpe-6g-AhF"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Chat" id="QFw-mU-UJp">
@@ -680,7 +535,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="QvI-FF-hCh">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueMapBack" id="DLR-Pq-FP4"/>
+                                                <segue destination="QHu-ow-cMf" kind="presentation" identifier="segueMapBack" modalTransitionStyle="coverVertical" id="DLR-Pq-FP4"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="l06-5i-HAl">
@@ -700,6 +555,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPm-r5-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="268" y="867"/>
+        </scene>
+        <!--Swipe View Controller-->
+        <scene sceneID="W6j-jz-xEk">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bLe-fk-NLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController storyboardIdentifier="SwipeViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dCs-OX-2x4" customClass="SwipeViewController" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </pageViewController>
+            </objects>
+            <point key="canvasLocation" x="288" y="-622.5"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="zBy-lm-Wso">
+            <objects>
+                <viewController storyboardIdentifier="RootViewController" id="W5V-3o-ge3" customClass="RootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dji-rr-Iat"/>
+                        <viewControllerLayoutGuide type="bottom" id="daB-v8-a62"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fBU-QY-JpH">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EB1-dg-VxZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="288" y="124.5"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="lKt-mQ-Flr">
@@ -770,12 +653,12 @@
         <!--Create Sqeed View Controller-->
         <scene sceneID="xKF-fr-1lS">
             <objects>
-                <viewController id="qjO-RG-PDT" customClass="CreateSqeedViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateSqeedViewController" id="qjO-RG-PDT" customClass="CreateSqeedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="INt-ua-mLE"/>
                         <viewControllerLayoutGuide type="bottom" id="dLg-1H-4XM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Lie-Yk-i6Q">
+                    <view key="view" contentMode="scaleToFill" id="Lie-Yk-i6Q" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -787,16 +670,14 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="SqeedTime" id="E6B-9Z-jJk">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DBC-bV-lfP">
+                                        <barButtonItem key="leftBarButtonItem" image="icon-sqeeds.png" id="DBC-bV-lfP">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="RgM-oh-shf" kind="custom" identifier="segueCreateSqeedCancel" customClass="DismissStoryboardSegue" id="TcL-CW-dBu"/>
-                                            </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NZd-vo-IGM">
+                                        <barButtonItem key="rightBarButtonItem" title="Next" id="NZd-vo-IGM">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
                                                 <action selector="save:" destination="qjO-RG-PDT" id="fJU-8Z-w85"/>
+                                                <segue destination="EBY-W0-xaT" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="flipHorizontal" id="E0t-wa-pfi"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -821,7 +702,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-RK-xsG">
                                 <rect key="frame" x="28" y="284" width="128" height="128"/>
-                                <state key="normal" title="Where?" backgroundImage="icon-location.png">
+                                <state key="normal" backgroundImage="icon-large-where.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -832,7 +713,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l90-Uj-jk7">
                                 <rect key="frame" x="164" y="284" width="133" height="128"/>
-                                <state key="normal" title="Who?" backgroundImage="icon-people.png">
+                                <state key="normal" backgroundImage="icon-large-people.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -843,7 +724,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-So-Gmd">
                                 <rect key="frame" x="164" y="420" width="128" height="128"/>
-                                <state key="normal" title="When?" backgroundImage="icon-calendar.png">
+                                <state key="normal" backgroundImage="icon-large-when.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -854,7 +735,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtS-xz-dRr">
                                 <rect key="frame" x="28" y="419" width="128" height="129"/>
-                                <state key="normal" title="What?" backgroundImage="icon-description.png">
+                                <state key="normal" backgroundImage="icon-large-description.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -881,11 +762,10 @@
                 <swipeGestureRecognizer direction="right" id="EUB-Kp-CQc">
                     <connections>
                         <outlet property="delegate" destination="qjO-RG-PDT" id="CuL-E1-ZB4"/>
-                        <segue destination="RgM-oh-shf" kind="custom" customClass="DismissStoryboardSegue" id="JyD-hQ-nHe"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1377" y="150"/>
+            <point key="canvasLocation" x="1377" y="124.5"/>
         </scene>
         <!--Modal When View Controller-->
         <scene sceneID="b2o-Yr-IOt">
@@ -901,15 +781,19 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArM-BM-EZf">
                                 <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="×">
                                     <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="272" y="28" width="32" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="NFk-E1-8zc"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-location.png" translatesAutoresizingMaskIntoConstraints="NO" id="E05-y6-fga">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-large-where.png" translatesAutoresizingMaskIntoConstraints="NO" id="E05-y6-fga">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
                         </subviews>
@@ -919,12 +803,126 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aY9-gk-xav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2529" y="125"/>
+            <point key="canvasLocation" x="2529" y="124.5"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="pPV-B2-aUw">
+            <objects>
+                <viewController id="EBY-W0-xaT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qxh-2B-Y9Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dfe-KF-0tu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Aia-3L-0sW">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QUS-Ud-tmH">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Add people" id="f7s-Z8-XY1">
+                                        <barButtonItem key="leftBarButtonItem" title="❮ Back" id="j9Q-xg-FWh">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <connections>
+                                                <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="CCd-TO-PpD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="1xH-2s-8uB">
+                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                </variation>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Rnm-eA-sfj">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                </variation>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="W6E-2y-TOy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="UserCell" textLabel="PmN-s8-UyG" detailTextLabel="xig-Nn-tkM" imageView="zyt-jc-Afr" style="IBUITableViewCellStyleSubtitle" id="wsX-jq-eBq">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wsX-jq-eBq" id="SSW-G3-AFD">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PmN-s8-UyG">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xig-Nn-tkM">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    </variation>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon-coconut.png" id="zyt-jc-Afr">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                                </variation>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="QUS-Ud-tmH"/>
+                                <exclude reference="Rnm-eA-sfj"/>
+                                <exclude reference="W6E-2y-TOy"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="QUS-Ud-tmH"/>
+                                <include reference="Rnm-eA-sfj"/>
+                                <include reference="W6E-2y-TOy"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="IFf-zM-2rP" id="DBM-zZ-C84"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6lm-Gz-Zwg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="IFf-zM-2rP">
+                    <connections>
+                        <outlet property="delegate" destination="EBY-W0-xaT" id="TfH-8l-ktV"/>
+                        <outlet property="searchContentsController" destination="EBY-W0-xaT" id="kPA-Ms-vyA"/>
+                        <outlet property="searchResultsDataSource" destination="EBY-W0-xaT" id="aC4-Th-oer"/>
+                        <outlet property="searchResultsDelegate" destination="EBY-W0-xaT" id="DEd-Cc-jmM"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="2963" y="124.5"/>
+        </scene>
+        <!--Modal What View Controller-->
         <scene sceneID="dfb-km-YpO">
             <objects>
-                <viewController id="dVg-23-GGW" sceneMemberID="viewController">
+                <viewController id="dVg-23-GGW" customClass="ModalWhatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zbm-F7-Q54"/>
                         <viewControllerLayoutGuide type="bottom" id="icY-08-zf0"/>
@@ -935,15 +933,19 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73o-vF-ApX">
                                 <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="×">
                                     <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="272" y="28" width="32" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="dn6-0a-er9"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-description.png" translatesAutoresizingMaskIntoConstraints="NO" id="adS-DC-o9S">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-large-description.png" translatesAutoresizingMaskIntoConstraints="NO" id="adS-DC-o9S">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
                         </subviews>
@@ -955,10 +957,10 @@
             </objects>
             <point key="canvasLocation" x="2529" y="867"/>
         </scene>
-        <!--View Controller-->
+        <!--Modal When View Controller-->
         <scene sceneID="y2B-Cf-xxD">
             <objects>
-                <viewController id="keR-Va-FeD" sceneMemberID="viewController">
+                <viewController id="keR-Va-FeD" customClass="ModalWhenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4d4-Lk-e61"/>
                         <viewControllerLayoutGuide type="bottom" id="HmV-OX-PgA"/>
@@ -969,15 +971,19 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJ1-Bq-0Sa">
                                 <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="×">
                                     <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="272" y="28" width="32" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="p4l-fZ-tqh"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-calendar.png" translatesAutoresizingMaskIntoConstraints="NO" id="LBT-jS-fsb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-large-when.png" translatesAutoresizingMaskIntoConstraints="NO" id="LBT-jS-fsb">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
                         </subviews>
@@ -1003,15 +1009,19 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l46-qf-uAx">
                                 <rect key="frame" x="282" y="28" width="22" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="×">
                                     <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="272" y="28" width="32" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="qjO-RG-PDT" kind="custom" customClass="DismissStoryboardSegue" id="Z64-wf-tf3"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-people.png" translatesAutoresizingMaskIntoConstraints="NO" id="PPS-IJ-d9c">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-large-people.png" translatesAutoresizingMaskIntoConstraints="NO" id="PPS-IJ-d9c">
                                 <rect key="frame" x="96" y="28" width="128" height="128"/>
                             </imageView>
                         </subviews>
@@ -1021,23 +1031,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8N7-FX-I4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2529" y="-622"/>
+            <point key="canvasLocation" x="2529" y="-622.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="icon-calendar.png" width="256" height="256"/>
         <image name="icon-camera.png" width="32" height="32"/>
-        <image name="icon-description.png" width="512" height="512"/>
-        <image name="icon-location.png" width="512" height="512"/>
-        <image name="icon-people.png" width="256" height="256"/>
+        <image name="icon-coconut.png" width="32" height="32"/>
+        <image name="icon-large-description.png" width="300" height="300"/>
+        <image name="icon-large-people.png" width="300" height="300"/>
+        <image name="icon-large-when.png" width="300" height="300"/>
+        <image name="icon-large-where.png" width="300" height="300"/>
+        <image name="icon-settings.png" width="30" height="30"/>
+        <image name="icon-sqeeds.png" width="30" height="30"/>
         <image name="icon-tennis.png" width="32" height="32"/>
-        <image name="icon-theater.png" width="32" height="32"/>
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="97L-vN-R9s"/>
         <segue reference="bL9-u0-cdO"/>
-        <segue reference="YnE-Az-aiz"/>
         <segue reference="BdP-3w-ymU"/>
+        <segue reference="RHm-lK-AOL"/>
+        <segue reference="CCd-TO-PpD"/>
     </inferredMetricsTieBreakers>
 </document>

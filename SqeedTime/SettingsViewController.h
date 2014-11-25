@@ -10,9 +10,5 @@
 #import "SettingsTableView.h"
 
 @interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet NSNumber *userId;
 @property (strong, nonatomic) IBOutlet SettingsTableView* settingsTable;
-
-- (NSDictionary*)fetchUser:(int) userId;
-- (void) alertStatus:(NSString *)msg :(NSString *)title;
 @end

@@ -18,9 +18,5 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *voteChoice;
 @property (strong, nonatomic) IBOutlet UILabel *eventDescription;
 
-
 @property (strong, nonatomic) IBOutlet NSNumber *eventId;
-
-- (NSDictionary*) fetchSqeed:(int) eventId;
-- (void) alertStatus:(NSString *)msg :(NSString *)title;
 @end
