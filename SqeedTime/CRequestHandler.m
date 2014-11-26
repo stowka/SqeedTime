@@ -20,11 +20,12 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     NSURL *url = [NSURL URLWithString:serverURL];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", (int)[postData length]];
-    NSDictionary *headerFields = @{
-                                   @"Content-Length" : postLength,
-                                   @"Accept" : @"application/json",
-                                   @"Content-Type" : @"application/x-www-form-urlencoded"
-                                   };
+    NSDictionary *headerFields =
+    @{
+      @"Content-Length" : postLength,
+      @"Accept" : @"application/json",
+      @"Content-Type" : @"application/x-www-form-urlencoded"
+    };
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];

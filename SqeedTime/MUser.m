@@ -23,6 +23,11 @@
 @synthesize uDiscovered;
 @synthesize uFriends;
 
+// temp
+@synthesize uPhone;
+@synthesize uPhoneExt;
+@synthesize uFacebookUrl;
+
 - (id) initWithId: (NSInteger)userId
 {
     self = [super init];
@@ -38,6 +43,12 @@
     [self fetchMySqeeds];
     [self fetchDiscovered];
     [[CCacheHandler instance] setCache_lastUpdate:[NSDate date]];
+    
+    // temp
+    uPhoneExt = [data valueForKey:@"phone_ext"];
+    uPhone = [data valueForKey:@"phone"];
+    uFacebookUrl = [data valueForKey:@"facebook_url"];
+    
     return self;
 }
 
@@ -48,7 +59,7 @@
         NSLog(@"User not initialized! (@see initWithId method)");
         return;
     }
-    NSString* request = [NSString stringWithFormat:@"function=eventsByUser&id=%d", uId];
+    NSString* request = [NSString stringWithFormat:@"function=eventsByUser&id=%d", (int)uId];
     uMySqeeds = [CRequestHandler post:request];
 }
 
@@ -59,7 +70,7 @@
         NSLog(@"User not initialized! (@see initWithId method)");
         return;
     }
-    NSString* request = [NSString stringWithFormat:@"function=eventsByUser&id=%d", uId];
+    NSString* request = [NSString stringWithFormat:@"function=eventsByUser&id=%d", (int)uId];
     uDiscovered = [CRequestHandler post:request];
 }
 
@@ -70,12 +81,23 @@
         NSLog(@"User not initialized! (@see initWithId method)");
         return;
     }
-    NSString* request = [NSString stringWithFormat:@"function=listFriends&id=%d", uId];
+    NSString* request = [NSString stringWithFormat:@"function=listFriends&id=%d", (int)uId];
     uFriends = [CRequestHandler post:request];
 }
 
-- (void) update: (NSString*) key :(NSString*) value
+- (void) update:(NSString*) key :(NSString*) value
 {
-    NSLog(@"UPDATING...");
+    NSMutableDictionary* userData = [[NSMutableDictionary alloc] init];
+    [userData setObject:uForname forKey:@"forname"];
+    [userData setObject:uName forKey:@"name"];
+    [userData setObject:uEmail forKey:@"email"];
+    
+    [userData setObject:value forKey:key];
+    
+    uForname = [userData valueForKey:@"forname"];
+    uName = [userData valueForKey:@"name"];
+    uEmail = [userData valueForKey:@"email"];
+    NSString* request = [NSString stringWithFormat:@"function=updateUser&id=%d&email=%@&forname=%@&name=%@&phoneExt=%@&phone=%@&facebookUrl=%@", (int)uId, uEmail, uForname, uName, uPhoneExt, uPhone, uFacebookUrl];
+    [CRequestHandler post:request];
 }
 @end

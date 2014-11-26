@@ -63,22 +63,29 @@ NSDictionary* myData;
             case 0:
                 cell.title.text = @"Username"; // NON MUTABLE
                 cell.value.text = [[[CCacheHandler instance] cache_currentUser] uUsername];
+                cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
+                cell.key = @"username";
                 break;
             case 1:
                 cell.title.text = @"Phone"; // NON MUTABLE
                 cell.value.text = [[[CCacheHandler instance] cache_currentUser] uPhoneNumber];
+                cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
+                cell.key = @"phone";
                 break;
             case 2:
                 cell.title.text = @"Forname";
                 cell.value.text = [[[CCacheHandler instance] cache_currentUser] uForname];
+                cell.key = @"forname";
                 break;
             case 3:
                 cell.title.text = @"Name";
                 cell.value.text = [[[CCacheHandler instance] cache_currentUser] uName];
+                cell.key = @"name";
                 break;
             case 4:
                 cell.title.text = @"E-mail";
                 cell.value.text = [[[CCacheHandler instance] cache_currentUser] uEmail];
+                cell.key = @"email";
                 break;
             default:
                 cell.title.text = @"ERROR";
@@ -129,6 +136,8 @@ NSDictionary* myData;
         return;
     }
     [self performSegueWithIdentifier:segue sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -138,7 +147,7 @@ NSDictionary* myData;
     SettingsTableViewCell* cell = (SettingsTableViewCell*)[self.settingsTable cellForRowAtIndexPath:indexPath];
     if ([segue.identifier isEqualToString:@"segueEditSettings"])
     {
-        destViewController.key = cell.title.text;
+        destViewController.key = cell.key;
         destViewController.value = cell.value.text;
     }
     

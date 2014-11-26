@@ -19,6 +19,10 @@
 @property NSDictionary* uMySqeeds;
 @property NSDictionary* uDiscovered;
 @property NSDictionary* uFriends; // key: User*, value: state (requestSent, requestReceived, friend)
+// temp
+@property NSString* uPhone;
+@property NSString* uPhoneExt;
+@property NSString* uFacebookUrl;
 
 - (id) initWithId:(NSInteger) userId;
 - (void) fetchMySqeeds;

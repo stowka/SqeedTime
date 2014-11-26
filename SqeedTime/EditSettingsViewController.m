@@ -30,7 +30,8 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [[[CCacheHandler instance] cache_currentUser] update:[self key] :[[self textField] text]];
+    if (![[self value] isEqualToString:[[self textField] text]])
+        [[[CCacheHandler instance] cache_currentUser] update:[self key] :[[self textField] text]];
     [self performSegueWithIdentifier:@"segueEditSettingsSave" sender:self];
     return YES;
 }
