@@ -8,6 +8,7 @@
 
 #import "CRequestHandler.h"
 #import "SBJson.h"
+#import "CAlertHelper.h"
 
 @implementation CRequestHandler
 
@@ -39,26 +40,19 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     if ([response statusCode] >= 200 && [response statusCode] < 300)
     {
         NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", responseData);
         SBJsonParser *jsonParser = [SBJsonParser new];
         NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+        NSLog(@"%@", jsonData);
         return jsonData;
     }
     else
     {
-        if (error)
+        if (error) {
             NSLog(@"Error: %@", error);
-        [CRequestHandler alertStatus:@"Connection failed" :@"Error..."];
+        }
+        [CAlertHelper error:@"Connection failed"];
         return nil;
     }
-}
-
-+ (void) alertStatus:(NSString *)message :(NSString *)title
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
 }
 @end

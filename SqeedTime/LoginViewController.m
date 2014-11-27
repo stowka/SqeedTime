@@ -10,6 +10,7 @@
 #import "ActivitiesViewController.h"
 #import "CRequestHandler.h"
 #import "CCacheHandler.h"
+#import "CAlertHelper.h"
 #import "MUser.h"
 
 
@@ -31,12 +32,13 @@
 {
     if([[_username text] isEqualToString:@""]
     || [[_password text] isEqualToString:@""])
-        [CRequestHandler alertStatus:@"Please enter both username and password" :@"Login failed!"];
+        [CAlertHelper error:@"Please enter both username and password"];
     else
     {
         NSString* request = [NSString stringWithFormat:@"function=loginRequestV1&username=%@", [_username text]];
         NSDictionary* data = [CRequestHandler post:request];
         NSInteger userId = [[data valueForKey:@"id"] integerValue];
+        
         if (userId)
         {
             request = [NSString stringWithFormat:@"function=login&username=%@&password=%@", [_username text], [_password text]];

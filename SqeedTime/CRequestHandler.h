@@ -11,5 +11,4 @@
 
 @interface CRequestHandler : NSObject
 + (NSDictionary*) post:(NSString*)args;
-+ (void) alertStatus:(NSString*)message :(NSString*)title;
 @end

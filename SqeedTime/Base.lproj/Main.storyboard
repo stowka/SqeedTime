@@ -144,7 +144,7 @@
                         <viewControllerLayoutGuide type="top" id="kwc-2b-E62"/>
                         <viewControllerLayoutGuide type="bottom" id="vVX-iX-pNp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Cuc-Ll-ccD">
+                    <view key="view" contentMode="scaleToFill" id="Cuc-Ll-ccD" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -376,6 +376,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="sqeedsTable" destination="wTg-4c-dkI" id="aDS-TW-NzD"/>
@@ -559,10 +560,10 @@
         <!--Swipe View Controller-->
         <scene sceneID="W6j-jz-xEk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bLe-fk-NLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pageViewController storyboardIdentifier="SwipeViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dCs-OX-2x4" customClass="SwipeViewController" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bLe-fk-NLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="288" y="-622.5"/>
         </scene>
@@ -575,6 +576,7 @@
                         <viewControllerLayoutGuide type="bottom" id="daB-v8-a62"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fBU-QY-JpH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -816,7 +818,7 @@
                     <view key="view" contentMode="scaleToFill" id="Aia-3L-0sW">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QUS-Ud-tmH">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUS-Ud-tmH">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -1047,9 +1049,9 @@
         <image name="logo.png" width="430" height="430"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bL9-u0-cdO"/>
-        <segue reference="BdP-3w-ymU"/>
-        <segue reference="RHm-lK-AOL"/>
+        <segue reference="cyx-W0-6lm"/>
         <segue reference="CCd-TO-PpD"/>
+        <segue reference="bL9-u0-cdO"/>
+        <segue reference="RHm-lK-AOL"/>
     </inferredMetricsTieBreakers>
 </document>

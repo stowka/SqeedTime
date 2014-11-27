@@ -41,6 +41,7 @@
 		715E9DD61A23CDA3007D4006 /* CRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9DD51A23CDA3007D4006 /* CRequestHandler.m */; };
 		715E9E151A24AF5A007D4006 /* CCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9E141A24AF5A007D4006 /* CCacheHandler.m */; };
 		715E9E181A24B4CF007D4006 /* MCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9E171A24B4CF007D4006 /* MCategory.m */; };
+		71630B921A27ADD000E71015 /* CAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 71630B911A27ADD000E71015 /* CAlertHelper.m */; };
 		7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */; };
 		7195D7A71A1CB96C00A8C995 /* icon-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A21A1CB96C00A8C995 /* icon-camera.png */; };
 		7195D7A81A1CB96C00A8C995 /* icon-coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A31A1CB96C00A8C995 /* icon-coconut.png */; };
@@ -138,6 +139,8 @@
 		715E9E141A24AF5A007D4006 /* CCacheHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCacheHandler.m; sourceTree = "<group>"; };
 		715E9E161A24B4CF007D4006 /* MCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCategory.h; sourceTree = "<group>"; };
 		715E9E171A24B4CF007D4006 /* MCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCategory.m; sourceTree = "<group>"; };
+		71630B901A27ADD000E71015 /* CAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAlertHelper.h; sourceTree = "<group>"; };
+		71630B911A27ADD000E71015 /* CAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAlertHelper.m; sourceTree = "<group>"; };
 		7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedTableViewCell.h; sourceTree = "<group>"; };
 		7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedTableViewCell.m; sourceTree = "<group>"; };
 		7195D7A21A1CB96C00A8C995 /* icon-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-camera.png"; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 				715E9E141A24AF5A007D4006 /* CCacheHandler.m */,
 				715E9DD41A23CDA3007D4006 /* CRequestHandler.h */,
 				715E9DD51A23CDA3007D4006 /* CRequestHandler.m */,
+				71630B901A27ADD000E71015 /* CAlertHelper.h */,
+				71630B911A27ADD000E71015 /* CAlertHelper.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 				719968581A150FBD00974683 /* SBJsonStreamParserAccumulator.m in Sources */,
 				7199685A1A150FBD00974683 /* SBJsonStreamParserState.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
+				71630B921A27ADD000E71015 /* CAlertHelper.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
 				71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */,
 				71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */,

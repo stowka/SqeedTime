@@ -7,21 +7,25 @@
 //
 
 #import "CreateSqeedViewController.h"
+#import "CRequestHandler.h"
 
 @interface CreateSqeedViewController ()
 
 @end
 
+NSDictionary* categories;
+
 @implementation CreateSqeedViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    categories = [CRequestHandler post:@"function=getCategories"];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)thePickerView
@@ -31,12 +35,13 @@
 
 - (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 11;
+    return [categories count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"Category %d", row];
+    NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)row];
+    return (NSString*)[[categories valueForKey:uniqueKey] valueForKey:@"title"];
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
