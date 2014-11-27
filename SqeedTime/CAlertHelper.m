@@ -12,22 +12,12 @@
 
 + (void) error:(NSString*)message
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
+    [self alert:message :@"Error"];
 }
 
 + (void) status:(NSString*)message
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Status"
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
+    [self alert:message :@"Status"];
 }
 
 + (void) alert:(NSString*)message :(NSString*)title
