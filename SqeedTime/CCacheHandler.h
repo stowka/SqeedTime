@@ -14,6 +14,7 @@
 @interface CCacheHandler : NSObject
 @property (strong) MUser* cache_currentUser;
 @property (strong) MSqeed* cache_currentSqeed;
+@property (strong) MSqeed* cache_newSqeed;
 @property (weak, nonatomic) NSDate* cache_lastUpdate;
 @property (strong) NSDictionary* cache_categories;
 @property (strong, nonatomic) NSString* cache_token;

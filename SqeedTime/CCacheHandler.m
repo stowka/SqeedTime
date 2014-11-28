@@ -11,6 +11,7 @@
 @implementation CCacheHandler
 @synthesize cache_currentUser;
 @synthesize cache_currentSqeed;
+@synthesize cache_newSqeed;
 @synthesize cache_lastUpdate;
 @synthesize cache_categories;
 @synthesize cache_token;
@@ -25,6 +26,8 @@ static CCacheHandler* instance = nil;
         dispatch_once(&pred, ^{
             instance = [[CCacheHandler alloc] init];
         });
+        [MCategory getCategories];
+        [instance setCache_currentSqeed:[[MSqeed alloc] init]];
     }
     return instance;
 }

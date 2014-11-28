@@ -7,7 +7,7 @@
 //
 
 #import "CreateSqeedViewController.h"
-#import "CRequestHandler.h"
+#import "CCacheHandler.h"
 
 @interface CreateSqeedViewController ()
 
@@ -20,7 +20,6 @@ NSDictionary* categories;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    categories = [CRequestHandler post:@"function=getCategories"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,18 +34,19 @@ NSDictionary* categories;
 
 - (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [categories count];
+    return [[[CCacheHandler instance] cache_categories] count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)row];
-    return (NSString*)[[categories valueForKey:uniqueKey] valueForKey:@"title"];
+    return (NSString*)[[[[CCacheHandler instance] cache_categories] valueForKey:uniqueKey] valueForKey:@"title"];
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    // TODO save category
+    NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)row];
+    [[[CCacheHandler instance] cache_newSqeed] setSCategory:[[MCategory alloc] initWithId:[[[[[CCacheHandler instance] cache_categories] valueForKey:uniqueKey] valueForKey:@"id"] integerValue]]];
 }
 
 - (IBAction)backgroundClick:(id)sender
