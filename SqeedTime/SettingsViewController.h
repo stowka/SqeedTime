@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingsTableView.h"
 
 @interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet SettingsTableView* settingsTable;
+@property (strong, nonatomic) IBOutlet UITableView* settingsTable;
 @end

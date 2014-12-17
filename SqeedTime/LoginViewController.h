@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField* password;
 @property (weak, nonatomic) IBOutlet UISwitch* remember;
 @property (strong, nonatomic) IBOutlet NSNumber* userId;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)login:(id)sender;
 - (IBAction)backgroundClick:(id)sender;

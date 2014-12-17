@@ -8,10 +8,11 @@
 
 #import "LoginViewController.h"
 #import "ActivitiesViewController.h"
-#import "CRequestHandler.h"
-#import "CCacheHandler.h"
-#import "CAlertHelper.h"
-#import "MUser.h"
+#import "CacheHandler.h"
+#import "AlertHelper.h"
+#import "User.h"
+#import "AFNetworking.h"
+#import "DatabaseManager.h"
 
 
 @interface LoginViewController ()
@@ -22,42 +23,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self activityIndicator] setHidden:true];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)login:(id)sender
-{
+- (IBAction)login:(id)sender {
     if([[_username text] isEqualToString:@""]
     || [[_password text] isEqualToString:@""])
-        [CAlertHelper error:@"Please enter both username and password"];
+        [AlertHelper error:@"Please enter both username and password"];
     else
-    {
-        NSString* request = [NSString stringWithFormat:@"function=loginRequestV1&username=%@", [_username text]];
-        NSDictionary* data = [CRequestHandler post:request];
-        NSInteger userId = [[data valueForKey:@"id"] integerValue];
-        
-        if (userId)
-        {
-            request = [NSString stringWithFormat:@"function=login&username=%@&password=%@", [_username text], [_password text]];
-            NSDictionary* data = [CRequestHandler post:request];
-            NSInteger code = [[data valueForKey:@"code"] integerValue];
-            NSString* message = [data valueForKey:@"message"];
-            NSLog(@"%@", message);
-            if (200 == code)
-            {
-                [[CCacheHandler instance] setCache_token:[NSString stringWithFormat:@"%@", [data valueForKey:@"token"]]];
-                [[CCacheHandler instance] setCache_currentUser:[[MUser alloc] initWithId:userId]];
-                [self performSegueWithIdentifier: @"segueActivities" sender: self];
-            }
-        }
-    }
+        [[self activityIndicator] setHidden:false];
+        [[self activityIndicator] startAnimating];
+        [DatabaseManager loginRequest:[_username text] :[_password text]];
 }
 
-- (IBAction)backgroundClick:(id)sender
-{
+- (IBAction)backgroundClick:(id)sender {
     [_password resignFirstResponder];
     [_username resignFirstResponder];
 }

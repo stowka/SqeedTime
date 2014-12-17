@@ -1,0 +1,292 @@
+//
+//  DatabaseManager.m
+//  SqeedTime
+//
+//  Created by Antoine De Gieter on 30/11/14.
+//  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
+//
+
+#import "DatabaseManager.h"
+#import "CacheHandler.h"
+#import "AFNetworking.h"
+#import "AlertHelper.h"
+#import "ActivitiesViewController.h"
+#import "RootViewController.h"
+
+@implementation DatabaseManager
+
+static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
+
++ (void) loginRequest: (NSString*) username : (NSString*) password {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"loginRequestV1",
+                             @"username": username
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSString* userId = [response valueForKey:@"id"];
+        NSLog(@"Login request for user id: %@", userId);
+        [[CacheHandler instance] setCurrentUserId:userId];
+        [[CacheHandler instance] setCurrentUser:[[User alloc] init:userId]];
+        [DatabaseManager login:username :password];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to log in: username doesn't exist!"];
+        NSLog(@"Error: %@", error);
+    }];
+
+}
+
++ (void) login :(NSString*) username :(NSString*) password {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"login",
+                             @"username": username,
+                             @"password": password
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Login user %@", username);
+        if (200 == [[response valueForKey:@"code"] integerValue]) {
+            [DatabaseManager fetchUser:[[CacheHandler instance] currentUser]];
+            
+            // Performs segue to ActivitiesViewController
+            [[UIApplication sharedApplication] delegate] ;
+            UIViewController *vc = [self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+            [vc performSegueWithIdentifier: @"segueActivities" sender:vc];
+            
+            [[CacheHandler instance] setToken:[response valueForKey:@"token"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to log in: wrong password!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void) fetchUser: (User*) user {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"getUser",
+                             @"id": [user userId]
+                            };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSString* username = [response valueForKey:@"username"];
+        NSLog(@"Fetching user: %@", username);
+        NSString* name = [response valueForKey:@"name"];
+        NSString* forname = [response valueForKey:@"forname"];
+        NSString* email = [response valueForKey:@"email"];
+        NSString* phoneExt = [response valueForKey:@"phoneExt"];
+        NSString* phone = [response valueForKey:@"phone"];
+        NSString* salt = [response valueForKey:@"salt"];
+        NSString* facebookUrl = [response valueForKey:@"facebookUrl"];
+        [user set :username :name :forname :email :phoneExt :phone :salt :facebookUrl];
+        [[CacheHandler instance] setCurrentUser:user];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch user!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void) fetchMySqeeds: (User*) user {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"eventsByUser",
+                             @"id": [user userId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching my sqeeds for user: %@", [user username]);
+        NSArray* tmp_sqeeds = response[@"result"];
+        NSMutableArray* sqeeds = [[NSMutableArray alloc] init];
+        Sqeed* tmp_sqeed;
+        NSString* sqeedId;
+        NSString* title;
+        NSString* place;
+        SqeedCategory* category;
+        NSString* peopleMin;
+        NSString* peopleMax;
+        NSDate* dateStart;
+        NSDate* dateEnd;
+        
+        for (NSDictionary* sqeed in tmp_sqeeds) {
+            sqeedId = sqeed[@"id"];
+            title = sqeed[@"title"];
+            place = sqeed[@"place"];
+            category = [[SqeedCategory alloc] initWithId:sqeed[@"category_id"]];
+            peopleMin = sqeed[@"people_min"];
+            peopleMax = sqeed[@"people_max"];
+            dateStart = sqeed[@"dateStart"];
+            dateEnd = sqeed[@"dateEnd"];
+            
+            tmp_sqeed = [[Sqeed alloc] init: sqeedId];
+            [tmp_sqeed setHeaders:title :place :category :peopleMin :peopleMax :dateStart :dateEnd];
+            
+            [sqeeds addObject:tmp_sqeed];
+        }
+        [user setMySqeeds:sqeeds];
+        [[CacheHandler instance] setCurrentUser:user];
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        
+        [avc refresh];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch my sqeeds!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void) fetchDiscovered: (User*) user {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"eventsByUser",
+                             @"id": [user userId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching discovered for user: %@", [user username]);
+        NSArray* tmp_sqeeds = response[@"result"];
+        NSMutableArray* sqeeds = [[NSMutableArray alloc] init];
+        Sqeed* tmp_sqeed;
+        NSString* sqeedId;
+        NSString* title;
+        NSString* place;
+        SqeedCategory* category;
+        NSString* peopleMin;
+        NSString* peopleMax;
+        NSDate* dateStart;
+        NSDate* dateEnd;
+        
+        for (NSDictionary* sqeed in tmp_sqeeds) {
+            sqeedId = sqeed[@"id"];
+            title = sqeed[@"title"];
+            place = sqeed[@"place"];
+            category = [[SqeedCategory alloc] initWithId:sqeed[@"category_id"]];
+            peopleMin = sqeed[@"people_min"];
+            peopleMax = sqeed[@"people_max"];
+            dateStart = sqeed[@"datetime_start"];
+            dateEnd = sqeed[@"datetime_end"];
+            
+            tmp_sqeed = [[Sqeed alloc] init: sqeedId];
+            [tmp_sqeed setHeaders:title :place :category :peopleMin :peopleMax :dateStart :dateEnd];
+            
+            [sqeeds addObject:tmp_sqeed];
+        }
+        [user setDiscovered:sqeeds];
+        [[CacheHandler instance] setCurrentUser:user];
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        
+        [avc refresh];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch discovered!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
++ (void) fetchFriends: (User*) user {
+    
+}
+
++ (void) fetchFriendRequests: (User*) user {
+    
+}
+
++ (void) fetchSqeed: (Sqeed*) sqeed {
+
+}
+
++ (void) fetchCategories {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{ @"function": @"getCategories" };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching categories");
+        SqeedCategory* tmp_cat;
+        NSMutableDictionary* categories = [[NSMutableDictionary alloc] init];
+        
+        for (NSDictionary* category in response) {
+            tmp_cat = [[SqeedCategory alloc] init];
+            [tmp_cat setCategoryId:category[@"id"]];
+            [tmp_cat setLabel:category[@"title"]];
+            [categories setObject:tmp_cat forKey:[tmp_cat categoryId]];
+        }
+        
+        [[CacheHandler instance] setCategories:categories];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch categories!"];
+        NSLog(@"Error: %@", error);
+    }];
+    
+}
+
++ (void) fetchGoing: (Sqeed*) sqeed {
+    
+}
+
++ (void) fetchWaiting: (Sqeed*) sqeed {
+    
+}
+
+// ######################
+
++ (void) participate: (NSString*) userId : (NSString*) sqeedId {
+
+}
+
++ (void) notParticipate: (NSString*) userId : (NSString*) sqeedId {
+
+}
+
++ (void) addFriend: (NSString*) userId : (NSString*) friendId {
+
+}
+
++ (void) deleteFriend: (NSString*) userId : (NSString*) friendId {
+
+}
+
++ (void) createSqeed: (NSString*) title : (NSString*) place : (NSString*) creatorId : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (NSString*) categoryId :(NSString*) datetimeStart : (NSString*) datetimeEnd {
+
+}
+
++ (void) deleteSqeed: (NSString*) sqeedId {
+
+}
+
++ (void) invite: (NSString*) sqeedId : (NSArray*) friendIds {
+
+}
+
++ (void) updateUser: (NSString*) userId : (NSString*) email : (NSString*) forname : (NSString*) name : (NSString*) phoneExt : (NSString*) phone : (NSString*) facebookUrl {
+
+}
+
++ (UIViewController *)visibleViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil)
+    {
+        return rootViewController;
+    }
+    if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]])
+    {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        
+        return [self visibleViewController:lastViewController];
+    }
+    if ([rootViewController.presentedViewController isKindOfClass:[UITabBarController class]])
+    {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController.presentedViewController;
+        UIViewController *selectedViewController = tabBarController.selectedViewController;
+        
+        return [self visibleViewController:selectedViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    
+    return [self visibleViewController:presentedViewController];
+}
+
+@end

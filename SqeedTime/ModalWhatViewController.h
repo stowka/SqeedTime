@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ModalWhatViewController : UIViewController
-
+@property (strong, nonatomic, readonly) IBOutlet UITextField *description;
+- (IBAction)saveToCache:(id)sender;
 @end

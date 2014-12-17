@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ModalWhereViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *place;
+- (IBAction)saveToCache:(id)sender;
 
 @end

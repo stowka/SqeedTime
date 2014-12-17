@@ -7,7 +7,7 @@
 //
 
 #import "SqeedViewController.h"
-#import "CCacheHandler.h"
+#import "CacheHandler.h"
 
 @interface SqeedViewController()
 
@@ -18,14 +18,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([self.eventId integerValue])
-        [[CCacheHandler instance] setCache_currentSqeed:[[MSqeed alloc] initWithId:(int)[self.eventId integerValue]]];
+    [[CacheHandler instance] setCurrentSqeed:[[Sqeed alloc] init:self.eventId]];
     
-    
-    self.eventTitle.text = [[[CCacheHandler instance] cache_currentSqeed] sTitle];
-    self.eventPlace.text = [[[CCacheHandler instance] cache_currentSqeed] sPlace];
-    self.eventMinMax.text = [NSString stringWithFormat:@"%d / %d", [[[CCacheHandler instance] cache_currentSqeed] sPeopleMin], [[[CCacheHandler instance] cache_currentSqeed] sPeopleMax]];
-    self.eventDescription.text = [[[CCacheHandler instance] cache_currentSqeed] sDescription];
+    self.eventTitle.text = [[[CacheHandler instance] currentSqeed] title];
+    self.eventPlace.text = [[[CacheHandler instance] currentSqeed] place];
+    self.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] currentSqeed] peopleMin], [[[CacheHandler instance] currentSqeed] peopleMax]];
+    self.eventDescription.text = [[[CacheHandler instance] currentSqeed] sqeedDescription];
 }
 
 @end

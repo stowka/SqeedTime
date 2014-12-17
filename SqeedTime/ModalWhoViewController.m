@@ -7,6 +7,7 @@
 //
 
 #import "ModalWhoViewController.h"
+#import "CacheHandler.h"
 
 @interface ModalWhoViewController ()
 
@@ -34,4 +35,8 @@
 }
 */
 
+- (IBAction)saveToCache:(id)sender {
+    //[[[CacheHandler instance] createSqeed] setPeopleMin:(int)[[self min] text]];
+    //[[[CacheHandler instance] createSqeed] setPeopleMax:(int)[[self max] text]];
+}
 @end

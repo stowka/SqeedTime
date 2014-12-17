@@ -7,7 +7,7 @@
 //
 
 #import "EditSettingsViewController.h"
-#import "CCacheHandler.h"
+#import "CacheHandler.h"
 
 @interface EditSettingsViewController ()
 
@@ -31,7 +31,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (![[self value] isEqualToString:[[self textField] text]])
-        [[[CCacheHandler instance] cache_currentUser] update:[self key] :[[self textField] text]];
+        [[[CacheHandler instance] currentUser] update:[self key] :[[self textField] text]];
     [self performSegueWithIdentifier:@"segueEditSettingsSave" sender:self];
     return YES;
 }

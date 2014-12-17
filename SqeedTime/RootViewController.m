@@ -9,6 +9,8 @@
 #import "RootViewController.h"
 #import "ActivitiesViewController.h"
 #import "CreateSqeedViewController.h"
+#import "AddFriendsToSqeedViewController.h"
+#import "CacheHandler.h"
 
 @interface RootViewController ()
 
@@ -44,13 +46,21 @@
 {
     if ([viewController class] == [ActivitiesViewController class])
         return nil;
-    return [self viewActivities];
+    else if ([viewController class] == [CreateSqeedViewController class])
+        return [self viewActivities];
+    return [self viewCreateSqeed];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    if ([viewController class] == [CreateSqeedViewController class])
+    if ([viewController class] == [AddFriendsToSqeedViewController class])
         return nil;
+    if ([viewController class] == [CreateSqeedViewController class]) {
+        if ([[[[CacheHandler instance] createSqeed] title] isEqualToString:@""])
+            return [self viewAddFriends];
+        else
+            return nil;
+    }
     return [self viewCreateSqeed];
 }
 
@@ -60,12 +70,16 @@
     return activitiesVC;
 }
 
-
-
 - (CreateSqeedViewController*)viewCreateSqeed
 {
     CreateSqeedViewController *createSqeedVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateSqeedViewController"];
     return createSqeedVC;
+}
+
+- (AddFriendsToSqeedViewController*)viewAddFriends
+{
+    AddFriendsToSqeedViewController *addFriendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddFriendsToSqeedViewController"];
+    return addFriendsVC;
 }
 
 @end

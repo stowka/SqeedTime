@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SqeedTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *eventCategoryIcon;
-@property (weak, nonatomic) IBOutlet UILabel *eventTitle;
-@property (weak, nonatomic) IBOutlet UILabel *eventMinMax;
-@property (weak, nonatomic) IBOutlet UILabel *eventPlace;
-@property (strong, nonatomic) IBOutlet NSNumber *eventId;
+@property (strong, nonatomic) IBOutlet UIImageView *eventCategoryIcon;
+@property (strong, nonatomic) IBOutlet UILabel *eventTitle;
+@property (strong, nonatomic) IBOutlet UILabel *eventMinMax;
+@property (strong, nonatomic) IBOutlet UILabel *eventPlace;
+@property (strong, nonatomic) IBOutlet NSString *eventId;
 @end

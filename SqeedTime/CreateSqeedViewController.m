@@ -7,7 +7,8 @@
 //
 
 #import "CreateSqeedViewController.h"
-#import "CCacheHandler.h"
+#import "CacheHandler.h"
+#import "SwipeViewController.h"
 
 @interface CreateSqeedViewController ()
 
@@ -34,24 +35,27 @@ NSDictionary* categories;
 
 - (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[[CCacheHandler instance] cache_categories] count];
+    
+    return [[[CacheHandler instance] categories] count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)row];
-    return (NSString*)[[[[CCacheHandler instance] cache_categories] valueForKey:uniqueKey] valueForKey:@"title"];
+    return (NSString*)[[[CacheHandler instance] categories][[NSString stringWithFormat:@"%d", row]] label];
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSString* uniqueKey = [NSString stringWithFormat:@"%d", (int)row];
-    [[[CCacheHandler instance] cache_newSqeed] setSCategory:[[MCategory alloc] initWithId:[[[[[CCacheHandler instance] cache_categories] valueForKey:uniqueKey] valueForKey:@"id"] integerValue]]];
+    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithId:[NSString stringWithFormat:@"%d", row]]];
 }
 
 - (IBAction)backgroundClick:(id)sender
 {
     [_whatToDoTextField resignFirstResponder];
+}
+
+- (IBAction)saveToCache:(id)sender {
+    [[[CacheHandler instance] createSqeed] setTitle:[[self whatToDoTextField] text]];
 }
 
 /*

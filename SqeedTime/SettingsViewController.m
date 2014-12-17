@@ -7,11 +7,10 @@
 //
 
 #import "SettingsViewController.h"
-#import "SettingsTableView.h"
 #import "SettingsTableViewCell.h"
 #import "EditSettingsViewController.h"
 #import "DisplaySettingsViewController.h"
-#import "CCacheHandler.h"
+#import "CacheHandler.h"
 
 @interface SettingsViewController ()
 
@@ -41,12 +40,12 @@ NSDictionary* myData;
     return section ? @"More informations" : @"My account";
 }
 
-- (NSInteger)tableView:(SettingsTableView*)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     return section ? 4 : 5;
 }
 
-- (UITableViewCell*)tableView:(SettingsTableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     static NSString *cellIdentifier = @"settingsCellID";
     SettingsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:
@@ -62,29 +61,29 @@ NSDictionary* myData;
         {
             case 0:
                 cell.title.text = @"Username"; // NON MUTABLE
-                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uUsername];
+                cell.value.text = [[[CacheHandler instance] currentUser] username];
                 cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
                 cell.key = @"username";
                 break;
             case 1:
                 cell.title.text = @"Phone"; // NON MUTABLE
-                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uPhoneNumber];
+                cell.value.text = [[[CacheHandler instance] currentUser] phoneNumber];
                 cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
                 cell.key = @"phone";
                 break;
             case 2:
                 cell.title.text = @"Forname";
-                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uForname];
+                cell.value.text = [[[CacheHandler instance] currentUser] forname];
                 cell.key = @"forname";
                 break;
             case 3:
                 cell.title.text = @"Name";
-                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uName];
+                cell.value.text = [[[CacheHandler instance] currentUser] name];
                 cell.key = @"name";
                 break;
             case 4:
                 cell.title.text = @"E-mail";
-                cell.value.text = [[[CCacheHandler instance] cache_currentUser] uEmail];
+                cell.value.text = [[[CacheHandler instance] currentUser] email];
                 cell.key = @"email";
                 break;
             default:
@@ -123,7 +122,7 @@ NSDictionary* myData;
     return cell;
 }
 
--(void)tableView:(SettingsTableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+-(void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     NSString* segue;
     if (!indexPath.section && (indexPath.row >= 2 && indexPath.row <= 4))       // MY ACCOUNT

@@ -19,5 +19,6 @@
 - (IBAction)showWhenPopUp:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)backgroundClick:(id)sender;
+- (IBAction)saveToCache:(id)sender;
 
 @end

@@ -18,5 +18,5 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *voteChoice;
 @property (strong, nonatomic) IBOutlet UILabel *eventDescription;
 
-@property (strong, nonatomic) IBOutlet NSNumber *eventId;
+@property (strong, nonatomic) IBOutlet NSString *eventId;
 @end

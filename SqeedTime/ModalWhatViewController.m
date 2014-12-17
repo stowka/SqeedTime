@@ -7,6 +7,7 @@
 //
 
 #import "ModalWhatViewController.h"
+#import "CacheHandler.h"
 
 @interface ModalWhatViewController ()
 
@@ -34,4 +35,7 @@
 }
 */
 
+- (IBAction)saveToCache:(id)sender {
+    [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self description] text]];
+}
 @end

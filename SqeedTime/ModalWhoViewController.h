@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ModalWhoViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *min;
+@property (strong, nonatomic) IBOutlet UITextField *max;
+- (IBAction)saveToCache:(id)sender;
 
 @end
