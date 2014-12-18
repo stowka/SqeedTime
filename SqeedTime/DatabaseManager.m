@@ -303,8 +303,29 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 
 }
 
-+ (void) createSqeed: (NSString*) title : (NSString*) place : (NSString*) creatorId : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (NSString*) categoryId :(NSString*) datetimeStart : (NSString*) datetimeEnd {
-
++ (void) createSqeed: (NSString*) title : (NSString*) place : (User*) creator : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (SqeedCategory*) category :(NSDate*) datetimeStart : (NSDate*) datetimeEnd : (NSArray*) friends {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"addEvent",
+                             @"title": title,
+                             @"place": place,
+                             @"creatorId": [creator userId],
+                             @"description": description,
+                             @"peopleMax": peopleMax,
+                             @"peopleMin": peopleMin,
+                             @"categoryId": [category categoryId],
+                             @"datetimeStart": [NSString stringWithFormat:@"%f", [datetimeStart timeIntervalSince1970]],
+                             @"datetimeEnd": [NSString stringWithFormat:@"%f", [datetimeEnd timeIntervalSince1970]],
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSString* sqeedId = response[@"event"][@"id"];
+        NSLog(@"%@", sqeedId);
+        [self invite:sqeedId :friends];
+        [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to create sqeed!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) deleteSqeed: (NSString*) sqeedId {
@@ -312,7 +333,23 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 }
 
 + (void) invite: (NSString*) sqeedId : (NSArray*) friendIds {
-
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSError *error;
+    NSData *dataFriendIds = [NSJSONSerialization dataWithJSONObject:friendIds
+                                                        options:kNilOptions
+                                                          error:&error];
+    NSString *jsonFriendIds = [[NSString alloc] initWithData:dataFriendIds encoding:NSUTF8StringEncoding];
+    NSDictionary *params = @{
+                             @"function": @"invite",
+                             @"sqeedId": sqeedId,
+                             @"friendIds": jsonFriendIds
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Sqeed created!");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch user!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) updateUser: (NSString*) userId : (NSString*) email : (NSString*) forname : (NSString*) name : (NSString*) phoneExt : (NSString*) phone : (NSString*) facebookUrl {

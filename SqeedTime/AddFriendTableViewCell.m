@@ -14,6 +14,8 @@
 
 @implementation AddFriendTableViewCell
 
+@synthesize userId;
+
 - (void)awakeFromNib {
     
 }

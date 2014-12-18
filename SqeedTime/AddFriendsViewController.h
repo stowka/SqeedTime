@@ -10,6 +10,7 @@
 
 @interface AddFriendsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
+- (IBAction)save:(id)sender;
 
 
 @end

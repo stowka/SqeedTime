@@ -513,6 +513,9 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="7SD-wE-QfW">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="save:" destination="fmC-T3-pwO" id="uTI-1X-vwD"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>

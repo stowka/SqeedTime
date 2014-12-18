@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel* name;
 @property (strong, nonatomic) IBOutlet UILabel* username;
+@property (strong, nonatomic) IBOutlet NSString* userId;
 @end
