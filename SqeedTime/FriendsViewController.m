@@ -55,3 +55,4 @@ NSArray* friends;
     NSLog(@"Remove friend: %@",@"");
 }
 @end
+

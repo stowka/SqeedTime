@@ -1,5 +1,5 @@
 //
-//  AddFriendsToSqeedViewController.h
+//  AddFriendsViewController.h
 //  SqeedTime
 //
 //  Created by Antoine De Gieter on 29/11/14.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFriendsToSqeedViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface AddFriendsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
-- (IBAction)save:(id)sender;
-- (IBAction)addToList:(id)sender;
+
+
 @end

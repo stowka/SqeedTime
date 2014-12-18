@@ -8,13 +8,17 @@
 
 #import "AddFriendTableViewCell.h"
 
+@interface AddFriendTableViewCell()
+
+@end
+
 @implementation AddFriendTableViewCell
 
 - (void)awakeFromNib {
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-
 @end

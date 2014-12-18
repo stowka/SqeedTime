@@ -84,12 +84,14 @@
 		71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */; };
 		71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */; };
 		71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */; };
-		71CDAE621A2A11C000186FDB /* AddFriendsToSqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE611A2A11C000186FDB /* AddFriendsToSqeedViewController.m */; };
+		71CDAE621A2A11C000186FDB /* AddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE611A2A11C000186FDB /* AddFriendsViewController.m */; };
 		71CDAE651A2A173300186FDB /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE641A2A173300186FDB /* FriendTableViewCell.m */; };
 		71CDAE681A2B503500186FDB /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE671A2B503500186FDB /* DatabaseManager.m */; };
 		71CDAE6B1A2B511400186FDB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE6A1A2B511400186FDB /* Constants.m */; };
 		71CDF0261A427BD400757EED /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDF0251A427BD400757EED /* SearchViewController.m */; };
 		71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */; };
+		71CDF02D1A42A14800757EED /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CDF02C1A42A14800757EED /* AddressBook.framework */; };
+		71CDF02F1A42A18000757EED /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CDF02E1A42A18000757EED /* AddressBookUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,8 +223,8 @@
 		71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhoViewController.m; sourceTree = "<group>"; };
 		71CB189A1A20EA9700A6FB93 /* ModalWhatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhatViewController.h; sourceTree = "<group>"; };
 		71CB189B1A20EA9700A6FB93 /* ModalWhatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhatViewController.m; sourceTree = "<group>"; };
-		71CDAE601A2A11C000186FDB /* AddFriendsToSqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsToSqeedViewController.h; sourceTree = "<group>"; };
-		71CDAE611A2A11C000186FDB /* AddFriendsToSqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsToSqeedViewController.m; sourceTree = "<group>"; };
+		71CDAE601A2A11C000186FDB /* AddFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsViewController.h; sourceTree = "<group>"; };
+		71CDAE611A2A11C000186FDB /* AddFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsViewController.m; sourceTree = "<group>"; };
 		71CDAE631A2A173300186FDB /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		71CDAE641A2A173300186FDB /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		71CDAE661A2B503500186FDB /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
@@ -233,6 +235,8 @@
 		71CDF0251A427BD400757EED /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		71CDF0291A428CFB00757EED /* AddFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendTableViewCell.h; sourceTree = "<group>"; };
 		71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendTableViewCell.m; sourceTree = "<group>"; };
+		71CDF02C1A42A14800757EED /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		71CDF02E1A42A18000757EED /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71CDF02F1A42A18000757EED /* AddressBookUI.framework in Frameworks */,
+				71CDF02D1A42A14800757EED /* AddressBook.framework in Frameworks */,
 				710CBF651A2331160077B2B7 /* QuartzCore.framework in Frameworks */,
 				71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */,
 			);
@@ -292,8 +298,8 @@
 		71290CE61A1FF31C003B7B09 /* CreateSqeed */ = {
 			isa = PBXGroup;
 			children = (
-				71CDAE601A2A11C000186FDB /* AddFriendsToSqeedViewController.h */,
-				71CDAE611A2A11C000186FDB /* AddFriendsToSqeedViewController.m */,
+				71CDAE601A2A11C000186FDB /* AddFriendsViewController.h */,
+				71CDAE611A2A11C000186FDB /* AddFriendsViewController.m */,
 				71CB189D1A20EAB200A6FB93 /* Modals */,
 				71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */,
 				71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */,
@@ -512,6 +518,8 @@
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
+				71CDF02E1A42A18000757EED /* AddressBookUI.framework */,
+				71CDF02C1A42A14800757EED /* AddressBook.framework */,
 				710CBF641A2331160077B2B7 /* QuartzCore.framework */,
 				71290CDE1A1FE619003B7B09 /* MapKit.framework */,
 				719968131A14FA6100974683 /* SqeedTime */,
@@ -758,7 +766,7 @@
 				71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */,
 				71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */,
 				714B1E3A1A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m in Sources */,
-				71CDAE621A2A11C000186FDB /* AddFriendsToSqeedViewController.m in Sources */,
+				71CDAE621A2A11C000186FDB /* AddFriendsViewController.m in Sources */,
 				71CDAE651A2A173300186FDB /* FriendTableViewCell.m in Sources */,
 				715E9DA81A23A07D007D4006 /* RootViewController.m in Sources */,
 				71CB18851A20E47400A6FB93 /* DismissStoryboardSegue.m in Sources */,
