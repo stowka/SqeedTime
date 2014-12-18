@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "ActivitiesViewController.h"
 #import "CreateSqeedViewController.h"
-#import "AddFriendsToSqeedViewController.h"
+#import "FriendsViewController.h"
 #import "CacheHandler.h"
 
 @interface RootViewController ()
@@ -53,11 +53,11 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    if ([viewController class] == [AddFriendsToSqeedViewController class])
+    if ([viewController class] == [FriendsViewController class])
         return nil;
     if ([viewController class] == [CreateSqeedViewController class]) {
         if ([[[[CacheHandler instance] createSqeed] title] isEqualToString:@""])
-            return [self viewAddFriends];
+            return [self viewFriends];
         else
             return nil;
     }
@@ -76,10 +76,10 @@
     return createSqeedVC;
 }
 
-- (AddFriendsToSqeedViewController*)viewAddFriends
+- (FriendsViewController*)viewFriends
 {
-    AddFriendsToSqeedViewController *addFriendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddFriendsToSqeedViewController"];
-    return addFriendsVC;
+    FriendsViewController *friendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddFriendsToSqeedViewController"];
+    return friendsVC;
 }
 
 @end

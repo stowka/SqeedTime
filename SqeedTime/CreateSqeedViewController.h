@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CategoryPickerView.h"
 
 @interface CreateSqeedViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate>
-@property (strong, nonatomic) IBOutlet CategoryPickerView *categoryPickerView;
+@property (strong, nonatomic) IBOutlet UIPickerView *categoryPickerView;
 @property (strong, nonatomic) IBOutlet UITextField *whatToDoTextField;
 
 @property (strong, nonatomic) IBOutlet UILabel *whereLabel;

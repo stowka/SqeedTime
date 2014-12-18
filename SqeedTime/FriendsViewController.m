@@ -1,22 +1,22 @@
 //
-//  AddFriendsToSqeedViewController.m
+//  FriendsViewController.m
 //  SqeedTime
 //
-//  Created by Antoine De Gieter on 29/11/14.
+//  Created by Antoine De Gieter on 18/12/14.
 //  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
 //
 
-#import "AddFriendsToSqeedViewController.h"
+#import "FriendsViewController.h"
+#import "FriendTableViewCell.h"
 #import "CacheHandler.h"
-#import "AddFriendTableViewCell.h"
 
-@interface AddFriendsToSqeedViewController ()
+@interface FriendsViewController ()
 
 @end
 
-@implementation AddFriendsToSqeedViewController
-
 NSArray* friends;
+
+@implementation FriendsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,30 +27,31 @@ NSArray* friends;
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - DISPLAY SQEEDS IN A TABLE VIEW
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [friends count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* cellIdentifier = @"cellAddFriendID";
-    AddFriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:
+    static NSString *cellIdentifier = @"cellFriendID";
+    FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                 cellIdentifier];
     if (cell == nil) {
-        cell = [[AddFriendTableViewCell alloc]initWithStyle:
-       
+        cell = [[FriendTableViewCell alloc]initWithStyle:
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    
     cell.name.text = [NSString stringWithFormat:@"%@ %@", [friends[indexPath.row] forname], [friends[indexPath.row] name]];
     cell.username.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row] username]];
     return cell;
 }
 
-- (IBAction)save:(id)sender {
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 
-- (IBAction)addToList:(id)sender {
-    
+
+- (IBAction)remove:(id)sender {
+    NSLog(@"Remove friend: %@",@"");
 }
 @end

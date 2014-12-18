@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)login:(id)sender;
+- (IBAction)signin:(id)sender;
 - (IBAction)backgroundClick:(id)sender;
 @end
 

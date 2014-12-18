@@ -27,6 +27,8 @@ NSDictionary* categories;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[[CacheHandler instance] currentUser] fetchFriends];
+    [[[CacheHandler instance] currentUser] fetchFriendRequests];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +54,7 @@ NSDictionary* categories;
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    NSLog(@"Saving category to cache...");
     [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithId:[NSString stringWithFormat:@"%d", row]]];
 }
 

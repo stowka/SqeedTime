@@ -48,8 +48,7 @@
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
-- (void) fetchMySqeeds
-{
+- (void) fetchMySqeeds {
     if (self == nil)
     {
         NSLog(@"User not initialized!");
@@ -58,8 +57,7 @@
     [DatabaseManager fetchMySqeeds:self];
 }
 
-- (void) fetchDiscovered
-{
+- (void) fetchDiscovered {
     if (self == nil)
     {
         NSLog(@"User not initialized!");
@@ -68,8 +66,7 @@
     [DatabaseManager fetchDiscovered:self];
 }
 
-- (void) fetchFriends
-{
+- (void) fetchFriends {
     if (self == nil)
     {
         NSLog(@"User not initialized!");
@@ -78,8 +75,7 @@
     [DatabaseManager fetchFriends:self];
 }
 
-- (void) fetchFriendRequests
-{
+- (void) fetchFriendRequests {
     if (self == nil)
     {
         NSLog(@"User not initialized!");
@@ -88,8 +84,7 @@
     [DatabaseManager fetchFriendRequests:self];
 }
 
-- (void) update:(NSString*) key :(NSString*) value
-{
+- (void) update:(NSString*) key :(NSString*) value {
     NSMutableDictionary* userData = [[NSMutableDictionary alloc] init];
     [userData setObject:forname forKey:@"forname"];
     [userData setObject:name forKey:@"name"];

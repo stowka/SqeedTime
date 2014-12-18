@@ -26,10 +26,9 @@ NSArray* sqeeds;
     [super viewDidLoad];
     if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CacheHandler instance] lastUpdate] timeIntervalSinceReferenceDate] > 120)
         [[CacheHandler instance] setLastUpdate:[NSDate date]];
-//    
-//    [DatabaseManager fetchFriends:[[CacheHandler instance] tmpUser]];
-//    [DatabaseManager fetchFriendRequests:[[CacheHandler instance] tmpUser]];
-    [[CacheHandler instance] setCurrentUser:[[CacheHandler instance] tmpUser]];
+    if (NULL == [[[CacheHandler instance] currentUser] username])
+        [[CacheHandler instance] setCurrentUser:[[CacheHandler instance] tmpUser]];
+    
     [self handleRefresh:self];
     
     // PULL DOWN TO REFRESH
@@ -114,6 +113,10 @@ NSArray* sqeeds;
     cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
     cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
     cell.eventId = [sqeeds[indexPath.row] sqeedId];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, HH:mm"];
+    cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
     return cell;
 }
 

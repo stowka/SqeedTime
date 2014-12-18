@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFriendsToSqeedViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *name;
-@property (strong, nonatomic) IBOutlet UILabel *username;
-@property (strong, nonatomic) IBOutlet UIImageView *picture;
+@interface AddFriendsToSqeedViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *friendTable;
 - (IBAction)save:(id)sender;
-
+- (IBAction)addToList:(id)sender;
 @end

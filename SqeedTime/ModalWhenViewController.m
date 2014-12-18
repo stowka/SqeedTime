@@ -7,6 +7,7 @@
 //
 
 #import "ModalWhenViewController.h"
+#import "CacheHandler.h"
 
 @interface ModalWhenViewController ()
 
@@ -32,7 +33,7 @@
     [self.view addSubview:close];
     [self.view addSubview:startLabel];
     [self.view addSubview:startPicker];
-    //[self.endPicker setDate:[NSDate dateWithTimeIntervalSinceNow:3600]];
+    [self.endPicker setDate:[NSDate dateWithTimeIntervalSinceNow:3600]];
     [self.view addSubview:endLabel];
     [self.view addSubview:endPicker];
 }
@@ -53,7 +54,9 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-   
+    NSLog(@"Saving dates to cache...");
+    [[[CacheHandler instance] createSqeed] setDateStart:[[self startPicker] date]];
+    [[[CacheHandler instance] createSqeed] setDateEnd:[[self endPicker] date]];
 }
 
 @end

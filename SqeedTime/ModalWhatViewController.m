@@ -48,6 +48,7 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
+    NSLog(@"Saving description to cache...");
     [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self description] text]];
 }
 @end

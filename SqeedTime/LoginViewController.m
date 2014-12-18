@@ -40,6 +40,10 @@
         [DatabaseManager loginRequest:[_username text] :[_password text]];
 }
 
+- (IBAction)signin:(id)sender {
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"http://sqtdbws.net-production.ch"]];
+}
+
 - (IBAction)backgroundClick:(id)sender {
     [_password resignFirstResponder];
     [_username resignFirstResponder];

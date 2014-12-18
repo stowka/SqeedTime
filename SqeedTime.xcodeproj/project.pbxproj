@@ -17,7 +17,6 @@
 		71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CDC1A1FC63E003B7B09 /* ChatViewController.m */; };
 		71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71290CDE1A1FE619003B7B09 /* MapKit.framework */; };
 		71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */; };
-		71290CE51A1FF315003B7B09 /* CategoryPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CE41A1FF315003B7B09 /* CategoryPickerView.m */; };
 		714B1E3A1A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 714B1E391A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m */; };
 		714B1E631A42226D0025BEA6 /* add70.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1E431A42226C0025BEA6 /* add70.png */; };
 		714B1E641A42226D0025BEA6 /* rarr.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1E441A42226C0025BEA6 /* rarr.png */; };
@@ -52,6 +51,7 @@
 		714B1EAF1A42343F0025BEA6 /* larr.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1EAD1A42343F0025BEA6 /* larr.png */; };
 		714B1EB01A42343F0025BEA6 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1EAE1A42343F0025BEA6 /* list.png */; };
 		714B1EB21A4258250025BEA6 /* blurbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B1EB11A4258250025BEA6 /* blurbg.jpg */; };
+		714B1EB51A42688A0025BEA6 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714B1EB41A42688A0025BEA6 /* FriendsViewController.m */; };
 		715E9DA81A23A07D007D4006 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9DA71A23A07D007D4006 /* RootViewController.m */; };
 		715E9DAB1A23A24A007D4006 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9DAA1A23A24A007D4006 /* User.m */; };
 		715E9DAE1A23A258007D4006 /* Sqeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E9DAD1A23A258007D4006 /* Sqeed.m */; };
@@ -70,7 +70,6 @@
 		71931EEE1A3F60EE00133385 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 71931EE41A3F60EE00133385 /* AFURLResponseSerialization.m */; };
 		71931EEF1A3F60EE00133385 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71931EE61A3F60EE00133385 /* AFURLSessionManager.m */; };
 		7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */; };
-		7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */ = {isa = PBXBuildFile; fileRef = 7195D7A61A1CB96C00A8C995 /* icon-theater.png */; };
 		7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7195D7B11A1E30B100A8C995 /* SqeedViewController.m */; };
 		719968171A14FA6100974683 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968161A14FA6100974683 /* main.m */; };
 		7199681A1A14FA6100974683 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968191A14FA6100974683 /* AppDelegate.m */; };
@@ -89,6 +88,8 @@
 		71CDAE651A2A173300186FDB /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE641A2A173300186FDB /* FriendTableViewCell.m */; };
 		71CDAE681A2B503500186FDB /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE671A2B503500186FDB /* DatabaseManager.m */; };
 		71CDAE6B1A2B511400186FDB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDAE6A1A2B511400186FDB /* Constants.m */; };
+		71CDF0261A427BD400757EED /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDF0251A427BD400757EED /* SearchViewController.m */; };
+		71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,8 +121,6 @@
 		71290CDE1A1FE619003B7B09 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSqeedViewController.h; sourceTree = "<group>"; };
 		71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSqeedViewController.m; sourceTree = "<group>"; };
-		71290CE31A1FF314003B7B09 /* CategoryPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryPickerView.h; sourceTree = "<group>"; };
-		71290CE41A1FF315003B7B09 /* CategoryPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerView.m; sourceTree = "<group>"; };
 		714B1E381A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsSqeedTableViewCell.h; sourceTree = "<group>"; };
 		714B1E391A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsSqeedTableViewCell.m; sourceTree = "<group>"; };
 		714B1E431A42226C0025BEA6 /* add70.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add70.png; sourceTree = "<group>"; };
@@ -158,6 +157,8 @@
 		714B1EAD1A42343F0025BEA6 /* larr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = larr.png; sourceTree = "<group>"; };
 		714B1EAE1A42343F0025BEA6 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		714B1EB11A4258250025BEA6 /* blurbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurbg.jpg; sourceTree = "<group>"; };
+		714B1EB31A42688A0025BEA6 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		714B1EB41A42688A0025BEA6 /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 		715E9DA61A23A07C007D4006 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		715E9DA71A23A07D007D4006 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		715E9DA91A23A24A007D4006 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -194,7 +195,6 @@
 		71931EE61A3F60EE00133385 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		7195D79F1A1CA7E400A8C995 /* SqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedTableViewCell.h; sourceTree = "<group>"; };
 		7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedTableViewCell.m; sourceTree = "<group>"; };
-		7195D7A61A1CB96C00A8C995 /* icon-theater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-theater.png"; sourceTree = "<group>"; };
 		7195D7B01A1E30B100A8C995 /* SqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedViewController.h; sourceTree = "<group>"; };
 		7195D7B11A1E30B100A8C995 /* SqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedViewController.m; sourceTree = "<group>"; };
 		719968111A14FA6100974683 /* SqeedTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SqeedTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +229,10 @@
 		71CDAE671A2B503500186FDB /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		71CDAE691A2B511400186FDB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		71CDAE6A1A2B511400186FDB /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		71CDF0241A427BD400757EED /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		71CDF0251A427BD400757EED /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		71CDF0291A428CFB00757EED /* AddFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendTableViewCell.h; sourceTree = "<group>"; };
+		71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,8 +297,6 @@
 				71CB189D1A20EAB200A6FB93 /* Modals */,
 				71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */,
 				71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */,
-				71290CE31A1FF314003B7B09 /* CategoryPickerView.h */,
-				71290CE41A1FF315003B7B09 /* CategoryPickerView.m */,
 			);
 			name = CreateSqeed;
 			sourceTree = "<group>";
@@ -411,6 +413,10 @@
 		715E9DB11A23A35C007D4006 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				71CDF0241A427BD400757EED /* SearchViewController.h */,
+				71CDF0251A427BD400757EED /* SearchViewController.m */,
+				714B1EB31A42688A0025BEA6 /* FriendsViewController.h */,
+				714B1EB41A42688A0025BEA6 /* FriendsViewController.m */,
 				715E9DD11A23BCF7007D4006 /* SwipeViewController.h */,
 				715E9DD21A23BCF7007D4006 /* SwipeViewController.m */,
 				71290CC81A1F9C83003B7B09 /* Sqeed */,
@@ -445,6 +451,8 @@
 		715E9E1B1A24B63E007D4006 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				71CDF0291A428CFB00757EED /* AddFriendTableViewCell.h */,
+				71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */,
 				714B1E381A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.h */,
 				714B1E391A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m */,
 				71CDAE631A2A173300186FDB /* FriendTableViewCell.h */,
@@ -497,7 +505,6 @@
 			isa = PBXGroup;
 			children = (
 				715E9DBB1A23B85F007D4006 /* icon-settings.png */,
-				7195D7A61A1CB96C00A8C995 /* icon-theater.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -688,7 +695,6 @@
 				714B1E6C1A42226D0025BEA6 /* facebook55.png in Resources */,
 				714B1E721A42226D0025BEA6 /* notebook.png in Resources */,
 				714B1E7D1A42226D0025BEA6 /* next.png in Resources */,
-				7195D7AB1A1CB96C00A8C995 /* icon-theater.png in Resources */,
 				714B1E6D1A42226D0025BEA6 /* instagram12.png in Resources */,
 				714B1E751A42226D0025BEA6 /* 3.png in Resources */,
 				719968201A14FA6100974683 /* Main.storyboard in Resources */,
@@ -742,12 +748,12 @@
 				71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */,
 				71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */,
 				715E9DAE1A23A258007D4006 /* Sqeed.m in Sources */,
-				71290CE51A1FF315003B7B09 /* CategoryPickerView.m in Sources */,
 				71CDAE6B1A2B511400186FDB /* Constants.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				71931EED1A3F60EE00133385 /* AFURLRequestSerialization.m in Sources */,
 				71630B921A27ADD000E71015 /* AlertHelper.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
+				71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */,
 				71931EEE1A3F60EE00133385 /* AFURLResponseSerialization.m in Sources */,
 				71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */,
 				71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */,
@@ -763,6 +769,8 @@
 				7195D7B21A1E30B100A8C995 /* SqeedViewController.m in Sources */,
 				715E9DAB1A23A24A007D4006 /* User.m in Sources */,
 				7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */,
+				71CDF0261A427BD400757EED /* SearchViewController.m in Sources */,
+				714B1EB51A42688A0025BEA6 /* FriendsViewController.m in Sources */,
 				71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */,
 				715E9E181A24B4CF007D4006 /* SqeedCategory.m in Sources */,
 				71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */,

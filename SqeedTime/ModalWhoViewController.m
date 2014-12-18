@@ -52,6 +52,7 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
+    NSLog(@"Saving people to cache...");
     [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
     [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
 }

@@ -1,14 +1,14 @@
 //
-//  FriendTableViewCell.h
+//  AddFriendTableViewCell.h
 //  SqeedTime
 //
-//  Created by Antoine De Gieter on 29/11/14.
+//  Created by Antoine De Gieter on 18/12/14.
 //  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FriendTableViewCell : UITableViewCell
+@interface AddFriendTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel* name;
 @property (strong, nonatomic) IBOutlet UILabel* username;

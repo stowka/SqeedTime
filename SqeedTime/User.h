@@ -30,5 +30,6 @@
 - (void) fetchMySqeeds;
 - (void) fetchDiscovered;
 - (void) fetchFriends;
+- (void) fetchFriendRequests;
 - (void) update:(NSString*) key :(NSString*) value;
 @end

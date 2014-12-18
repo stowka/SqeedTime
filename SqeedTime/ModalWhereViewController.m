@@ -49,7 +49,7 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    NSLog(@"Saving place to cache: %@", [[self place] text]);
+    NSLog(@"Saving place to cache...");
     [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
 }
 @end
