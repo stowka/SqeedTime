@@ -35,10 +35,12 @@
     return self;
 }
 
-- (void) setHeaders:(NSString *)_title :(NSString *)_place :(SqeedCategory *)_category :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd {
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd {
     title = _title;
     place = _place;
     sqeedCategory = _category;
+    creatorFirstName = _creatorFirstName;
+    creatorName = _creatorName;
     peopleMin = _peopleMin;
     peopleMax = _peopleMax;
     dateStart = _dateStart;

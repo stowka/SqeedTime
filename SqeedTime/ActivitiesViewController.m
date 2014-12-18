@@ -112,6 +112,7 @@ NSArray* sqeeds;
     cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
     cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
     cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
+    cell.eventCreator.text = [NSString stringWithFormat:@"by %@ %@", [sqeeds[indexPath.row] creatorFirstName], [sqeeds[indexPath.row] creatorName]];
     cell.eventId = [sqeeds[indexPath.row] sqeedId];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

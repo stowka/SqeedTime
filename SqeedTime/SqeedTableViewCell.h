@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *eventMinMax;
 @property (strong, nonatomic) IBOutlet UILabel *eventPlace;
 @property (strong, nonatomic) IBOutlet UILabel *eventDate;
+@property (strong, nonatomic) IBOutlet UILabel *eventCreator;
 @property (strong, nonatomic) IBOutlet NSString *eventId;
 @end

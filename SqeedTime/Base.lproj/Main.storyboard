@@ -368,7 +368,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="by user" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-Ge-ZYC">
-                                                    <rect key="frame" x="48" y="24" width="80" height="21"/>
+                                                    <rect key="frame" x="48" y="25" width="196" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -384,6 +384,7 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="eventCategoryIcon" destination="7Gf-yk-rkX" id="FXm-pa-RNb"/>
+                                            <outlet property="eventCreator" destination="Rcq-Ge-ZYC" id="XUi-3S-LLe"/>
                                             <outlet property="eventDate" destination="ie1-Cb-FUQ" id="5uy-si-ysV"/>
                                             <outlet property="eventMinMax" destination="QKS-yK-eQI" id="umG-gG-Fiq"/>
                                             <outlet property="eventPlace" destination="e9Y-Cv-nN9" id="WhZ-aJ-l5i"/>
@@ -483,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826" y="115"/>
+            <point key="canvasLocation" x="826" y="114"/>
         </scene>
         <!--Add Friends View Controller-->
         <scene sceneID="iKE-b6-Vyg">
@@ -515,6 +516,7 @@
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="save:" destination="fmC-T3-pwO" id="uTI-1X-vwD"/>
+                                                <segue destination="W5V-3o-ge3" kind="showDetail" id="MTg-WM-iZK"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

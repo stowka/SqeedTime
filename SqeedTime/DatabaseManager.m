@@ -103,6 +103,8 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSString* title;
         NSString* place;
         SqeedCategory* category;
+        NSString* creatorFirstName;
+        NSString* creatorName;
         NSString* peopleMin;
         NSString* peopleMax;
         NSDate* dateStart;
@@ -113,6 +115,8 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             title = sqeed[@"title"];
             place = sqeed[@"place"];
             category = [[SqeedCategory alloc] initWithId:sqeed[@"category_id"]];
+            creatorFirstName = sqeed[@"creator_first_name"];
+            creatorName = sqeed[@"creator_name"];
             peopleMin = sqeed[@"people_min"];
             peopleMax = sqeed[@"people_max"];
             if (![sqeed[@"datetime_start"] isKindOfClass:[NSNull class]])
@@ -125,7 +129,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
                 dateEnd = [NSDate dateWithTimeIntervalSince1970:0];
             
             tmp_sqeed = [[Sqeed alloc] init: sqeedId];
-            [tmp_sqeed setHeaders:title :place :category :peopleMin :peopleMax :dateStart :dateEnd];
+            [tmp_sqeed setHeaders:title :place :category :creatorFirstName :creatorName :peopleMin :peopleMax :dateStart :dateEnd];
             
             [sqeeds addObject:tmp_sqeed];
         }
@@ -161,6 +165,8 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSString* title;
         NSString* place;
         SqeedCategory* category;
+        NSString* creatorFirstName;
+        NSString* creatorName;
         NSString* peopleMin;
         NSString* peopleMax;
         NSDate* dateStart;
@@ -171,13 +177,15 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             title = sqeed[@"title"];
             place = sqeed[@"place"];
             category = [[SqeedCategory alloc] initWithId:sqeed[@"category_id"]];
+            creatorFirstName = sqeed[@"creator_first_name"];
+            creatorName = sqeed[@"creator_name"];
             peopleMin = sqeed[@"people_min"];
             peopleMax = sqeed[@"people_max"];
             dateStart = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_start"] doubleValue]];
             dateEnd = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_end"] doubleValue]];
             
             tmp_sqeed = [[Sqeed alloc] init: sqeedId];
-            [tmp_sqeed setHeaders:title :place :category :peopleMin :peopleMax :dateStart :dateEnd];
+            [tmp_sqeed setHeaders:title :place :category :creatorFirstName :creatorName :peopleMin :peopleMax :dateStart :dateEnd];
             
             [sqeeds addObject:tmp_sqeed];
         }
