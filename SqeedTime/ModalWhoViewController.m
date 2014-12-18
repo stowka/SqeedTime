@@ -24,6 +24,8 @@
     [super viewDidLoad];
     min.text = [[[CacheHandler instance] createSqeed] peopleMin];
     max.text = [[[CacheHandler instance] createSqeed] peopleMax];
+    min.text = [min.text isEqualToString:@""] ? @"1" : min.text;
+    max.text = [max.text isEqualToString:@""] ? @"10" : max.text;
     self.view.backgroundColor = [UIColor clearColor];
     UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
     backView.image = imageOfUnderlyingView;
@@ -38,18 +40,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)saveToCache:(id)sender {
     NSLog(@"Saving people to cache...");

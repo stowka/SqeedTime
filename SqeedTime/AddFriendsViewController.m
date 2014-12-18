@@ -22,6 +22,7 @@ NSArray* friends;
 - (void)viewDidLoad {
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
+    [_switchButton setOn:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +49,13 @@ NSArray* friends;
 }
 - (IBAction)save:(id)sender {
     if (![[[[CacheHandler instance] createSqeed] title] isEqualToString:@""]) {
+        [_saveButton setTitle:@""];
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+        [self navigationItem].rightBarButtonItem = barButton;
+        [activityIndicator startAnimating];
+        
         if (nil == [[[CacheHandler instance] createSqeed] sqeedDescription])
             [[[CacheHandler instance] createSqeed] setSqeedDescription: @""];
     
@@ -55,10 +63,16 @@ NSArray* friends;
             [[[CacheHandler instance] createSqeed] setPlace: @""];
     
         if (nil == [[[CacheHandler instance] createSqeed] peopleMin])
-            [[[CacheHandler instance] createSqeed] setPeopleMin: @""];
-    
+            [[[CacheHandler instance] createSqeed] setPeopleMin: @"1"];
+        
         if (nil == [[[CacheHandler instance] createSqeed] peopleMax])
-            [[[CacheHandler instance] createSqeed] setPeopleMax: @""];
+            [[[CacheHandler instance] createSqeed] setPeopleMax: @"10"];
+        
+        if (nil == [[[CacheHandler instance] createSqeed] dateStart])
+            [[[CacheHandler instance] createSqeed] setDateStart: [NSDate date]];
+        
+        if (nil == [[[CacheHandler instance] createSqeed] dateEnd])
+            [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeIntervalSinceNow:3600]];
     
         NSArray *selectedIndexPaths = [_friendTable indexPathsForSelectedRows];
         NSMutableArray *friendIds = [[NSMutableArray alloc] init];
@@ -81,6 +95,17 @@ NSArray* friends;
             :friendIds];
     } else {
         NSLog(@"Error: You are a dumbass!");
+    }
+}
+
+- (IBAction)switchAccess:(id)sender {
+    UISwitch *switchPublicPrivate = sender;
+    if ([switchPublicPrivate isOn]) {
+        self.publicPrivate.image = [UIImage imageNamed:@"private.png"];
+        [[[CacheHandler instance] createSqeed] setPublicAccess:@"false"];
+    } else {
+        self.publicPrivate.image = [UIImage imageNamed:@"public.png"];
+        [[[CacheHandler instance] createSqeed] setPublicAccess:@"true"];
     }
 }
 @end

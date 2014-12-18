@@ -509,21 +509,20 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5ka-iy-JrJ">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="W5V-3o-ge3" kind="show" id="1Oc-jq-8dQ"/>
+                                                <segue destination="W5V-3o-ge3" kind="showDetail" identifier="segueBackToActivities" id="1Oc-jq-8dQ"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="7SD-wE-QfW">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="save:" destination="fmC-T3-pwO" id="uTI-1X-vwD"/>
-                                                <segue destination="W5V-3o-ge3" kind="showDetail" id="MTg-WM-iZK"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uml-iz-D0w">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="cellInviteFriendID" textLabel="VZY-l9-KZb" detailTextLabel="ENE-RL-p71" style="IBUITableViewCellStyleSubtitle" id="CAG-DD-OrW" customClass="AddFriendTableViewCell">
@@ -557,12 +556,30 @@
                                     <outlet property="delegate" destination="fmC-T3-pwO" id="F6i-iR-N94"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-gx-Z5A">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdP-nK-I0h">
+                                        <rect key="frame" x="8" y="10" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchAccess:" destination="fmC-T3-pwO" eventType="valueChanged" id="oJR-2l-UsO"/>
+                                        </connections>
+                                    </switch>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="public.png" translatesAutoresizingMaskIntoConstraints="NO" id="wyW-vG-BxX">
+                                        <rect key="frame" x="280" y="8" width="32" height="32"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="friendTable" destination="Uml-iz-D0w" id="dlu-Pw-z3H"/>
+                        <outlet property="publicPrivate" destination="wyW-vG-BxX" id="XkK-1Z-vzR"/>
+                        <outlet property="saveButton" destination="7SD-wE-QfW" id="uhF-dR-6Pl"/>
+                        <outlet property="switchButton" destination="tdP-nK-I0h" id="w1C-nn-diQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wjB-pZ-4GH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -749,7 +766,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="fmC-T3-pwO" kind="showDetail" id="QM2-FP-RHw"/>
+                                            <segue destination="fmC-T3-pwO" kind="showDetail" identifier="segueAddFriends" id="QM2-FP-RHw"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqv-mF-j99">
@@ -1342,6 +1359,7 @@
         <image name="list.png" width="32" height="32"/>
         <image name="next.png" width="64" height="64"/>
         <image name="power.png" width="64" height="72"/>
+        <image name="public.png" width="64" height="56"/>
         <image name="what.png" width="256" height="256"/>
         <image name="when.png" width="256" height="256"/>
         <image name="where.png" width="256" height="256"/>

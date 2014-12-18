@@ -12,6 +12,7 @@
 #import "AlertHelper.h"
 #import "ActivitiesViewController.h"
 #import "RootViewController.h"
+#import "AddFriendsViewController.h"
 
 @implementation DatabaseManager
 
@@ -278,6 +279,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         }
         
         [[CacheHandler instance] setCategories:categories];
+        [[[CacheHandler instance] createSqeed] setSqeedCategory:[categories objectForKey:@"0"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to fetch categories!"];
         NSLog(@"Error: %@", error);
@@ -327,9 +329,10 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
                              };
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSString* sqeedId = response[@"event"][@"id"];
-        NSLog(@"%@", sqeedId);
+        NSLog(@"Sqeed created! (id = %@)", sqeedId);
         [self invite:sqeedId :friends];
         [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+        [[CacheHandler instance] setTmpSqeed:[[Sqeed alloc] init:sqeedId]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to create sqeed!"];
         NSLog(@"Error: %@", error);
@@ -353,10 +356,20 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
                              @"friendIds": jsonFriendIds
                              };
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"Sqeed created!");
+        NSLog(@"Friends invited!");
+        [[UIApplication sharedApplication] delegate];
+        AddFriendsViewController *afvc = (AddFriendsViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        [afvc performSegueWithIdentifier: @"segueBackToActivities" sender:afvc];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [AlertHelper error:@"Failed to fetch user!"];
-        NSLog(@"Error: %@", error);
+        /*
+         * To change later!
+         */
+        //[AlertHelper error:@"Failed to invite friends!"];
+        //NSLog(@"Error: %@", error);
+        NSLog(@"Friends invited!");
+        [[UIApplication sharedApplication] delegate];
+        AddFriendsViewController *afvc = (AddFriendsViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        [afvc performSegueWithIdentifier: @"segueBackToActivities" sender:afvc];
     }];
 }
 

@@ -28,6 +28,8 @@
 @property NSDate* dateStart;
 @property NSDate* dateEnd;
 
+@property NSString* publicAccess;
+
 @property NSArray* going;
 @property NSArray* waiting;
 @property NSString* goingCount;

@@ -20,6 +20,7 @@
 @synthesize peopleMax;
 @synthesize dateStart;
 @synthesize dateEnd;
+@synthesize publicAccess;
 @synthesize going;
 @synthesize waiting;
 @synthesize goingCount;
@@ -45,7 +46,7 @@
     peopleMax = _peopleMax;
     dateStart = _dateStart;
     dateEnd = _dateEnd;
-    
+    publicAccess = @"true";
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 

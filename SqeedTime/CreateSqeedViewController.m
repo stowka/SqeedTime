@@ -54,7 +54,6 @@ NSDictionary* categories;
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"Saving category to cache...");
     [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithId:[NSString stringWithFormat:@"%d", row]]];
 }
 
@@ -76,6 +75,13 @@ NSDictionary* categories;
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"segueAddFriends"])
+        return ![[_whatToDoTextField text] isEqualToString:@""];
+    else
+        return YES;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UIImage* imageOfUnderlyingView = [UIImage imageNamed:@"blurbg.jpg"];
@@ -102,11 +108,11 @@ NSDictionary* categories;
 }
 
 - (void) updateLabels {
-    [_whereLabel setText:[[[CacheHandler instance] createSqeed] place]];
-    [_whatLabel setText:[[[CacheHandler instance] createSqeed] sqeedDescription]];
+    _whereLabel.text = [[[CacheHandler instance] createSqeed] place];
+    _whatLabel.text = [[[CacheHandler instance] createSqeed] sqeedDescription];
     NSString *peopleLabel = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] createSqeed] peopleMin], [[[CacheHandler instance] createSqeed] peopleMax]];
-    [_whoLabel setText:peopleLabel];
-    [_whereLabel setText:[[[[CacheHandler instance] createSqeed] dateStart] description]];
+    _whoLabel.text = peopleLabel;
+    _whereLabel.text = [[[[CacheHandler instance] createSqeed] dateStart] description];
 }
 
 - (IBAction)showWherePopUp:(id)sender {

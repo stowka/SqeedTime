@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface AddFriendsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (strong, nonatomic) IBOutlet UIImageView *publicPrivate;
+@property (strong, nonatomic) IBOutlet UISwitch *switchButton;
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
 - (IBAction)save:(id)sender;
+- (IBAction)switchAccess:(id)sender;
 
 
 @end
