@@ -13,10 +13,28 @@
 @end
 
 @implementation ModalWhenViewController
+@synthesize imageOfUnderlyingView;
+@synthesize icon;
+@synthesize close;
+@synthesize startLabel;
+@synthesize endLabel;
+@synthesize startPicker;
+@synthesize endPicker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor clearColor];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backView.image = imageOfUnderlyingView;
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    [self.view addSubview:backView];
+    [self.view addSubview:icon];
+    [self.view addSubview:close];
+    [self.view addSubview:startLabel];
+    [self.view addSubview:startPicker];
+    //[self.endPicker setDate:[NSDate dateWithTimeIntervalSinceNow:3600]];
+    [self.view addSubview:endLabel];
+    [self.view addSubview:endPicker];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +51,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)saveToCache:(id)sender {
+   
+}
 
 @end

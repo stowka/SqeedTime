@@ -8,9 +8,11 @@
 
 #import "ActivitiesViewController.h"
 #import "SqeedTableViewCell.h"
+#import "DetailsSqeedTableViewCell.h"
 #import "SqeedViewController.h"
 #import "SettingsViewController.h"
 #import "CacheHandler.h"
+#import "DatabaseManager.h"
 
 @interface ActivitiesViewController ()
 
@@ -24,6 +26,11 @@ NSArray* sqeeds;
     [super viewDidLoad];
     if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CacheHandler instance] lastUpdate] timeIntervalSinceReferenceDate] > 120)
         [[CacheHandler instance] setLastUpdate:[NSDate date]];
+//    
+//    [DatabaseManager fetchFriends:[[CacheHandler instance] tmpUser]];
+//    [DatabaseManager fetchFriendRequests:[[CacheHandler instance] tmpUser]];
+    [[CacheHandler instance] setCurrentUser:[[CacheHandler instance] tmpUser]];
+    [self handleRefresh:self];
     
     // PULL DOWN TO REFRESH
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -56,6 +63,10 @@ NSArray* sqeeds;
 
 - (IBAction)display:(id)sender {
     [self handleRefresh:sender];
+}
+
+- (IBAction)createSqeed:(id)sender {
+    
 }
 
 - (void) refresh {
@@ -106,13 +117,33 @@ NSArray* sqeeds;
     return cell;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView getDetailsSqeedCell:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"cellDetailsID";
+    DetailsSqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                cellIdentifier];
+    if (cell == nil) {
+        cell = [[DetailsSqeedTableViewCell alloc]initWithStyle:
+                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+//    NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[indexPath.row] sqeedCategory] categoryId]];
+//    UIImage *image = [UIImage imageNamed: categoryIconPath];
+//    [cell.eventCategoryIcon setImage:image];
+//    cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
+//    cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
+//    cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
+//    cell.eventId = [sqeeds[indexPath.row] sqeedId];
+    return cell;
+}
+
+
 
 // DISPLAY SQEED AFTER SELECTION
-//-(void)tableView:(SqeedsTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    SqeedTableViewCell *cell = (SqeedTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-//    NSNumber* eventId = cell.eventId;
-//    //[self performSegueWithIdentifier:@"segueSqeed" sender:self];
-//}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    [tableView beginUpdates];
+    //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+   // [tableView insertRowsAtIndexPaths:@[tableView getDetailsSqeedCell:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+  //  [tableView endUpdates];
+}
 @end

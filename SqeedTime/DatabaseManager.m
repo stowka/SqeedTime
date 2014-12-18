@@ -28,6 +28,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSLog(@"Login request for user id: %@", userId);
         [[CacheHandler instance] setCurrentUserId:userId];
         [[CacheHandler instance] setCurrentUser:[[User alloc] init:userId]];
+        [[CacheHandler instance] setTmpUser:[[User alloc] init:userId]];
         [DatabaseManager login:username :password];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to log in: username doesn't exist!"];
@@ -46,7 +47,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Login user %@", username);
         if (200 == [[response valueForKey:@"code"] integerValue]) {
-            [DatabaseManager fetchUser:[[CacheHandler instance] currentUser]];
+            [DatabaseManager fetchUser:[[CacheHandler instance] tmpUser]];
             
             // Performs segue to ActivitiesViewController
             [[UIApplication sharedApplication] delegate] ;
@@ -54,9 +55,11 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             [vc performSegueWithIdentifier: @"segueActivities" sender:vc];
             
             [[CacheHandler instance] setToken:[response valueForKey:@"token"]];
+        } else {
+            [AlertHelper error:@"Failed to log in: wrong password!"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [AlertHelper error:@"Failed to log in: wrong password!"];
+        [AlertHelper error:@"Failed to log in"];
         NSLog(@"Error: %@", error);
     }];
 }
@@ -78,7 +81,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSString* salt = [response valueForKey:@"salt"];
         NSString* facebookUrl = [response valueForKey:@"facebookUrl"];
         [user set :username :name :forname :email :phoneExt :phone :salt :facebookUrl];
-        [[CacheHandler instance] setCurrentUser:user];
+        [[CacheHandler instance] setTmpUser:user];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to fetch user!"];
         NSLog(@"Error: %@", error);
@@ -121,15 +124,16 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             [sqeeds addObject:tmp_sqeed];
         }
         [user setMySqeeds:sqeeds];
-        [[CacheHandler instance] setCurrentUser:user];
+        [[CacheHandler instance] setTmpUser:user];
         
         // Refreshes (loads) the activity table
         [[UIApplication sharedApplication] delegate] ;
         RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         
-        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
-        
-        [avc refresh];
+        if ([[[[rvc swipeViewController] viewControllers] lastObject] class] == [ActivitiesViewController class]) {
+            ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+            [avc refresh];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to fetch my sqeeds!"];
         NSLog(@"Error: %@", error);
@@ -172,7 +176,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             [sqeeds addObject:tmp_sqeed];
         }
         [user setDiscovered:sqeeds];
-        [[CacheHandler instance] setCurrentUser:user];
+        [[CacheHandler instance] setTmpUser:user];
         
         // Refreshes (loads) the activity table
         [[UIApplication sharedApplication] delegate] ;
@@ -187,15 +191,61 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     }];
 }
 + (void) fetchFriends: (User*) user {
-    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"listFriends",
+                             @"userId": [user userId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching friend list for user: %@", [user username]);
+        NSArray* tmp_friends = response[@"list"];
+        NSMutableArray* friends = [[NSMutableArray alloc] init];
+        User* tmp_friend;
+        NSString* friendId;
+        
+        for (NSDictionary* friend in tmp_friends) {
+            friendId = friend[@"id"];
+            tmp_friend = [[User alloc] init: friendId];
+            [self fetchUser:tmp_friend];
+            [friends addObject:tmp_friend];
+        }
+        [user setFriends:friends];
+        [[CacheHandler instance] setTmpUser:user];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch friends!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) fetchFriendRequests: (User*) user {
-    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"listFriendRequests",
+                             @"userId": [user userId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching friend requests for user: %@", [user username]);
+        NSArray* tmp_friends = response[@"list"];
+        NSMutableArray* friends = [[NSMutableArray alloc] init];
+        User* tmp_friend;
+        NSString* friendId;
+        
+        for (NSDictionary* friend in tmp_friends) {
+            friendId = friend[@"id"];
+            tmp_friend = [[User alloc] init: friendId];
+            [self fetchUser:tmp_friend];
+            [friends addObject:tmp_friend];
+        }
+        [user setFriendRequests:friends];
+        [[CacheHandler instance] setTmpUser:user];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch friend requests!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) fetchSqeed: (Sqeed*) sqeed {
-
+    
 }
 
 + (void) fetchCategories {

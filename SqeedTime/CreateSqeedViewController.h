@@ -13,6 +13,13 @@
 @property (strong, nonatomic) IBOutlet CategoryPickerView *categoryPickerView;
 @property (strong, nonatomic) IBOutlet UITextField *whatToDoTextField;
 
+@property (strong, nonatomic) IBOutlet UILabel *whereLabel;
+@property (strong, nonatomic) IBOutlet UILabel *whoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *whatLabel;
+@property (strong, nonatomic) IBOutlet UILabel *whenLabel;
+
+- (void) updateLabels;
+
 - (IBAction)showWherePopUp:(id)sender;
 - (IBAction)showHowManyPeoplePopUp:(id)sender;
 - (IBAction)showDescriptionPopUp:(id)sender;

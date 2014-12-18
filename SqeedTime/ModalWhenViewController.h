@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ModalWhenViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
+@property (strong, nonatomic) IBOutlet UIButton *close;
+@property (strong, nonatomic) IBOutlet UILabel *startLabel;
+@property (strong, nonatomic) IBOutlet UILabel *endLabel;
+@property (strong, nonatomic) IBOutlet UIDatePicker *startPicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *endPicker;
+@property (strong) UIImage* imageOfUnderlyingView;
 
+- (IBAction)saveToCache:(id)sender;
 @end

@@ -14,10 +14,23 @@
 @end
 
 @implementation ModalWhereViewController
+@synthesize imageOfUnderlyingView;
+@synthesize place;
+@synthesize icon;
+@synthesize close;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    place.text = [[[CacheHandler instance] createSqeed] place];
+    self.view.backgroundColor = [UIColor clearColor];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backView.image = imageOfUnderlyingView;
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    [self.view addSubview:backView];
+    [self.view addSubview:icon];
+    [self.view addSubview:close];
+    [self.view addSubview:place];
+    [[self place] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +49,7 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
+    NSLog(@"Saving place to cache: %@", [[self place] text]);
     [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
 }
 @end

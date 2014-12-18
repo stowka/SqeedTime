@@ -14,10 +14,26 @@
 @end
 
 @implementation ModalWhoViewController
+@synthesize imageOfUnderlyingView;
+@synthesize icon;
+@synthesize close;
+@synthesize min;
+@synthesize max;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    min.text = [[[CacheHandler instance] createSqeed] peopleMin];
+    max.text = [[[CacheHandler instance] createSqeed] peopleMax];
+    self.view.backgroundColor = [UIColor clearColor];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backView.image = imageOfUnderlyingView;
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    [self.view addSubview:backView];
+    [self.view addSubview:icon];
+    [self.view addSubview:close];
+    [self.view addSubview:min];
+    [self.view addSubview:max];
+    [[self min] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +52,7 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    //[[[CacheHandler instance] createSqeed] setPeopleMin:(int)[[self min] text]];
-    //[[[CacheHandler instance] createSqeed] setPeopleMax:(int)[[self max] text]];
+    [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
+    [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
 }
 @end

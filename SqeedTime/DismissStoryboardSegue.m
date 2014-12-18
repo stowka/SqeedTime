@@ -7,13 +7,17 @@
 //
 
 #import "DismissStoryboardSegue.h"
+#import "CreateSqeedViewController.h"
 
 @implementation DismissStoryboardSegue
 
 - (void)perform
 {
     UIViewController *sourceViewController = self.sourceViewController;
-    [sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    CreateSqeedViewController *destViewController = self.destinationViewController;
+    [sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [destViewController updateLabels];
+    }];
 }
 
 @end

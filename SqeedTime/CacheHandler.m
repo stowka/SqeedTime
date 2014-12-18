@@ -12,7 +12,9 @@
 @implementation CacheHandler
 @synthesize currentUserId;
 @synthesize currentUser;
+@synthesize tmpUser;
 @synthesize currentSqeed;
+@synthesize tmpSqeed;
 @synthesize createSqeed;
 @synthesize lastUpdate;
 @synthesize categories;
@@ -20,10 +22,8 @@
 
 static CacheHandler* instance = nil;
 
-+ (CacheHandler*)instance
-{
-    if (instance == NULL)
-    {
++ (CacheHandler*)instance {
+    if (NULL == instance) {
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
             instance = [[CacheHandler alloc] init];

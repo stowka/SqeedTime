@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ModalWhereViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
+@property (strong, nonatomic) IBOutlet UIButton *close;
 @property (strong, nonatomic) IBOutlet UITextField *place;
+@property (strong) UIImage* imageOfUnderlyingView;
 - (IBAction)saveToCache:(id)sender;
 
 @end

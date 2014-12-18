@@ -14,10 +14,22 @@
 @end
 
 @implementation ModalWhatViewController
+@synthesize description;
+@synthesize icon;
+@synthesize close;
+@synthesize imageOfUnderlyingView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor clearColor];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backView.image = imageOfUnderlyingView;
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    [self.view addSubview:backView];
+    [self.view addSubview:icon];
+    [self.view addSubview:close];
+    [self.view addSubview:description];
+    [[self description] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

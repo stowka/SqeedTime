@@ -45,12 +45,6 @@
     phoneNumber = [NSString stringWithFormat:@"+%@.%@", phoneExt, phone];
     salt = _salt;
     facebookUrl = _facebookUrl;
-
-    [self fetchMySqeeds];
-    [self fetchDiscovered];
-    [self fetchFriends];
-    [self fetchFriendRequests];
-    
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
