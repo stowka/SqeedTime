@@ -19,7 +19,7 @@
 @property (strong) Sqeed* tmpSqeed;
 @property (strong) Sqeed* createSqeed;
 @property (weak, nonatomic) NSDate* lastUpdate;
-@property (strong) NSDictionary* categories;
+@property (strong) NSArray* categories;
 @property (strong, nonatomic) NSString* token;
 
 + (CacheHandler*) instance;

@@ -49,12 +49,12 @@ NSDictionary* categories;
 
 - (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return (NSString*)[[[CacheHandler instance] categories][[NSString stringWithFormat:@"%d", row]] label];
+    return (NSString*)[[[CacheHandler instance] categories][row] label];
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithId:[NSString stringWithFormat:@"%d", row]]];
+    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:row]];
 }
 
 - (IBAction)backgroundClick:(id)sender

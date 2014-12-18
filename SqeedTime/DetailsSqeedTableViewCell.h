@@ -9,5 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsSqeedTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *eventCategoryIcon;
+@property (strong, nonatomic) IBOutlet UILabel *eventTitle;
+@property (strong, nonatomic) IBOutlet UILabel *eventMinMax;
+@property (strong, nonatomic) IBOutlet UILabel *eventPlace;
+@property (strong, nonatomic) IBOutlet UILabel *eventDate;
+@property (strong, nonatomic) IBOutlet UILabel *eventCreator;
+@property (strong, nonatomic) IBOutlet NSString *eventId;
+@property (strong, nonatomic) IBOutlet UILabel *eventDescription;
+@property (strong, nonatomic) IBOutlet UIButton *eventDeleteButton;
+- (IBAction)delete:(id)sender;
 
+- (IBAction)answer:(id)sender;
 @end

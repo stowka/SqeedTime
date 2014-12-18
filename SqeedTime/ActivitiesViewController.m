@@ -21,6 +21,7 @@
 @implementation ActivitiesViewController
 
 NSArray* sqeeds;
+int flag = -1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,57 +98,84 @@ NSArray* sqeeds;
     return [sqeeds count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == flag) {
+        //DetailsSqeedTableViewCell *cell = (DetailsSqeedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        return 300;
+    } else {
+        //SqeedTableViewCell *cell = (SqeedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        return 120;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"cellID";
-    SqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+    if (indexPath.row == flag) {
+        static NSString *cellIdentifier = @"cellDetailsID";
+        DetailsSqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                               cellIdentifier];
+        if (cell == nil) {
+            cell = [[DetailsSqeedTableViewCell alloc]initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+            
+        NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[indexPath.row] sqeedCategory] categoryId]];
+        UIImage *image = [UIImage imageNamed: categoryIconPath];
+        [cell.eventCategoryIcon setImage:image];
+        cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
+        cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
+        cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
+        cell.eventCreator.text = [NSString stringWithFormat:@"by %@ %@", [sqeeds[indexPath.row] creatorFirstName], [sqeeds[indexPath.row] creatorName]];
+        cell.eventId = [sqeeds[indexPath.row] sqeedId];
+        if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
+            cell.eventDeleteButton.hidden = NO;
+        } else {
+            cell.eventDeleteButton.hidden = YES;
+        }
+        cell.eventDescription.text = [sqeeds[indexPath.row] sqeedDescription];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, HH:mm"];
+        cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
+        return cell;
+    } else {
+        static NSString *cellIdentifier = @"cellID";
+        SqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                              cellIdentifier];
-    if (cell == nil) {
-        cell = [[SqeedTableViewCell alloc]initWithStyle:
+        if (cell == nil) {
+            cell = [[SqeedTableViewCell alloc]initWithStyle:
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+    
+        NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[indexPath.row] sqeedCategory] categoryId]];
+        UIImage *image = [UIImage imageNamed: categoryIconPath];
+        [cell.eventCategoryIcon setImage:image];
+        cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
+        cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
+        cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
+        cell.eventCreator.text = [NSString stringWithFormat:@"by %@ %@", [sqeeds[indexPath.row] creatorFirstName], [sqeeds[indexPath.row] creatorName]];
+        cell.eventId = [sqeeds[indexPath.row] sqeedId];
+    
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, HH:mm"];
+        cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
+        return cell;
     }
-    
-    NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[indexPath.row] sqeedCategory] categoryId]];
-    UIImage *image = [UIImage imageNamed: categoryIconPath];
-    [cell.eventCategoryIcon setImage:image];
-    cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
-    cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
-    cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
-    cell.eventCreator.text = [NSString stringWithFormat:@"by %@ %@", [sqeeds[indexPath.row] creatorFirstName], [sqeeds[indexPath.row] creatorName]];
-    cell.eventId = [sqeeds[indexPath.row] sqeedId];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM d, HH:mm"];
-    cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
-    return cell;
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView getDetailsSqeedCell:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"cellDetailsID";
-    DetailsSqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                cellIdentifier];
-    if (cell == nil) {
-        cell = [[DetailsSqeedTableViewCell alloc]initWithStyle:
-                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-//    NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[indexPath.row] sqeedCategory] categoryId]];
-//    UIImage *image = [UIImage imageNamed: categoryIconPath];
-//    [cell.eventCategoryIcon setImage:image];
-//    cell.eventTitle.text = (NSString*)[sqeeds[indexPath.row] title];
-//    cell.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [sqeeds[indexPath.row] peopleMin], [sqeeds[indexPath.row] peopleMax]];
-//    cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
-//    cell.eventId = [sqeeds[indexPath.row] sqeedId];
-    return cell;
-}
-
 
 
 // DISPLAY SQEED AFTER SELECTION
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView beginUpdates];
-    //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-   // [tableView insertRowsAtIndexPaths:@[tableView getDetailsSqeedCell:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-  //  [tableView endUpdates];
+    // [tableView indexPathsForVisibleRows]
+    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+    if (flag == indexPath.row) {
+        flag = -1;
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        int old_flag = flag;
+        flag = indexPath.row;
+        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 @end

@@ -32,7 +32,7 @@ static CacheHandler* instance = nil;
         [instance setCurrentSqeed:[[Sqeed alloc] init]];
         [instance setCreateSqeed:[[Sqeed alloc] init]];
         [[instance createSqeed] setTitle:@""];
-        [[instance createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithId:@"1"]];
+        [[instance createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:0]];
     }
     return instance;
 }

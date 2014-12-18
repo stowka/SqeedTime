@@ -269,17 +269,16 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Fetching categories");
         SqeedCategory* tmp_cat;
-        NSMutableDictionary* categories = [[NSMutableDictionary alloc] init];
+        NSMutableArray* categories = [[NSMutableArray alloc] init];
         
         for (NSDictionary* category in response) {
             tmp_cat = [[SqeedCategory alloc] init];
             [tmp_cat setCategoryId:category[@"id"]];
+            NSLog(@"%@", category[@"title"]);
             [tmp_cat setLabel:category[@"title"]];
-            [categories setObject:tmp_cat forKey:[tmp_cat categoryId]];
+            [categories addObject:tmp_cat];
         }
-        
         [[CacheHandler instance] setCategories:categories];
-        [[[CacheHandler instance] createSqeed] setSqeedCategory:[categories objectForKey:@"0"]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to fetch categories!"];
         NSLog(@"Error: %@", error);

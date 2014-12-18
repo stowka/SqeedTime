@@ -20,4 +20,11 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)delete:(id)sender {
+    NSLog(@"Delete");
+}
+
+- (IBAction)answer:(id)sender {
+    NSLog(@"Answer");
+}
 @end

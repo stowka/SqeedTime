@@ -17,7 +17,5 @@
 
 - (IBAction)display:(id)sender;
 - (IBAction)createSqeed:(id)sender;
-- (UITableViewCell *)tableView:(UITableView *)tableView getDetailsSqeedCell:(NSIndexPath *)indexPath;
-
 - (void) refresh;
 @end

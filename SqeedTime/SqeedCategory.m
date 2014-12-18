@@ -15,10 +15,18 @@
 
 static NSDictionary* categories;
 
-- (id) initWithId: (NSString*) _categoryId
-{
-    self = [[CacheHandler instance] categories][_categoryId];
-    
+- (id) initWithIndex: (int) index {
+    self = [[CacheHandler instance] categories][index];
     return self;
+}
+
+- (id) initWithId :(NSString *)_categoryId {
+    for (SqeedCategory *sc in [[CacheHandler instance] categories]) {
+        if ([[sc categoryId] isEqualToString:_categoryId]) {
+            self = sc;
+            return self;
+        }
+    }
+    return nil;
 }
 @end
