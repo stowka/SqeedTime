@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Net Production Köbe & Co. All rights reserved.
 //
 
-#import "DismissStoryboardSegue.h"
+#import "DismissModalSegue.h"
 #import "CreateSqeedViewController.h"
 
-@implementation DismissStoryboardSegue
+@implementation DismissModalSegue
 
 - (void)perform
 {

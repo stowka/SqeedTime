@@ -198,7 +198,6 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         
         ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
-        
         [avc refresh];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to fetch discovered!"];
@@ -259,8 +258,52 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
     }];
 }
 
-+ (void) fetchSqeed: (Sqeed*) sqeed {
-    
++ (void) fetchSqeed: (Sqeed*) sqeed :(NSIndexPath *)indexPath {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"getEvent",
+                             @"id": [sqeed sqeedId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching sqeed: %@", [sqeed title]);
+        NSDictionary *result = [response valueForKey:@"result"];
+        NSString *sqeedDescritpion = [result valueForKey:@"description"];
+        
+        NSArray *tmp_going = [NSArray arrayWithArray:[result objectForKey:@"going"]];
+        NSArray *tmp_waiting = [NSArray arrayWithArray:[result objectForKey:@"waiting"]];
+        
+        NSMutableArray *going = [[NSMutableArray alloc] init];
+        NSMutableArray *waiting = [[NSMutableArray alloc] init];
+        User *tmp_user;
+        
+        for (NSDictionary* g in tmp_going) {
+            tmp_user = [[User alloc] init:g[@"user_id"]];
+            [tmp_user setName:g[@"name"]];
+            [tmp_user setForname:g[@"forname"]];
+            [going addObject:tmp_user];
+        }
+        
+        for (NSDictionary* w in tmp_waiting) {
+            tmp_user = [[User alloc] init:w[@"user_id"]];
+            [tmp_user setName:w[@"name"]];
+            [tmp_user setForname:w[@"forname"]];
+            [waiting addObject:tmp_user];
+        }
+        [sqeed setDescription:sqeedDescritpion];
+        [[CacheHandler instance] setTmpSqeed:sqeed];
+        [[[CacheHandler instance] tmpSqeed] setGoing:going];
+        [[[CacheHandler instance] tmpSqeed] setWaiting:waiting];
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        [avc showDetails:indexPath];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch user!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) fetchCategories {
@@ -283,7 +326,6 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         [AlertHelper error:@"Failed to fetch categories!"];
         NSLog(@"Error: %@", error);
     }];
-    
 }
 
 + (void) fetchGoing: (Sqeed*) sqeed {
@@ -297,11 +339,41 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 // ######################
 
 + (void) participate: (NSString*) userId : (NSString*) sqeedId {
-
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"participate",
+                             @"userId": userId,
+                             @"sqeedId": sqeedId
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Participate! (id = %@)", sqeedId);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to participate!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) notParticipate: (NSString*) userId : (NSString*) sqeedId {
-
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"notParticipate",
+                             @"userId": userId,
+                             @"sqeedId": sqeedId
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Not participate! (id = %@)", sqeedId);
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        
+        [avc refresh];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to not participate!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) addFriend: (NSString*) userId : (NSString*) friendId {
@@ -309,7 +381,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 }
 
 + (void) deleteFriend: (NSString*) userId : (NSString*) friendId {
-
+    
 }
 
 + (void) createSqeed: (NSString*) title : (NSString*) place : (User*) creator : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (SqeedCategory*) category :(NSDate*) datetimeStart : (NSDate*) datetimeEnd : (NSArray*) friends {
@@ -339,7 +411,25 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 }
 
 + (void) deleteSqeed: (NSString*) sqeedId {
-
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"deleteEvent",
+                             @"eventId": sqeedId
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Deleted! (id = %@)", sqeedId);
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        
+        [avc refresh];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to not participate!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) invite: (NSString*) sqeedId : (NSArray*) friendIds {
@@ -360,15 +450,8 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         AddFriendsViewController *afvc = (AddFriendsViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         [afvc performSegueWithIdentifier: @"segueBackToActivities" sender:afvc];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        /*
-         * To change later!
-         */
-        //[AlertHelper error:@"Failed to invite friends!"];
-        //NSLog(@"Error: %@", error);
-        NSLog(@"Friends invited!");
-        [[UIApplication sharedApplication] delegate];
-        AddFriendsViewController *afvc = (AddFriendsViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-        [afvc performSegueWithIdentifier: @"segueBackToActivities" sender:afvc];
+        [AlertHelper error:@"Failed to invite friends!"];
+        NSLog(@"Error: %@", error);
     }];
 }
 

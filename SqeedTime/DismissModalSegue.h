@@ -1,5 +1,5 @@
 //
-//  DismissStoryboardSegue.h
+//  DismissModalSegue.h
 //  SqeedTime
 //
 //  Created by Antoine De Gieter on 22/11/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DismissStoryboardSegue : UIStoryboardSegue
+@interface DismissModalSegue : UIStoryboardSegue
 
 @end

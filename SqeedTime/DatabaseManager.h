@@ -22,7 +22,7 @@
 + (void) fetchFriends: (User*) user;
 + (void) fetchFriendRequests: (User*) user;
 
-+ (void) fetchSqeed: (Sqeed*) sqeed;
++ (void) fetchSqeed: (Sqeed*) sqeed :(NSIndexPath *)indexPath;
 + (void) fetchGoing: (Sqeed*) sqeed;
 + (void) fetchWaiting: (Sqeed*) sqeed;
 
@@ -33,6 +33,7 @@
 + (void) addFriend: (NSString*) userId : (NSString*) friendId;
 + (void) deleteFriend: (NSString*) userId : (NSString*) friendId;
 + (void) createSqeed: (NSString*) title : (NSString*) place : (User*) creator : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (SqeedCategory*) category :(NSDate*) datetimeStart : (NSDate*) datetimeEnd : (NSArray*) friends;
++ (void) deleteSqeed: (NSString*) sqeedId;
 + (void) invite: (NSString*) sqeedId : (NSArray*) friendIds;
 + (void) updateUser: (NSString*) userId : (NSString*) email : (NSString*) forname : (NSString*) name : (NSString*) phoneExt : (NSString*) phone : (NSString*) facebookUrl;
 

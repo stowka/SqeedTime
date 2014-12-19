@@ -7,6 +7,8 @@
 //
 
 #import "DetailsSqeedTableViewCell.h"
+#import "DatabaseManager.h"
+#import "CacheHandler.h"
 
 @implementation DetailsSqeedTableViewCell
 
@@ -16,15 +18,37 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
-- (IBAction)delete:(id)sender {
-    NSLog(@"Delete");
+- (void) confirm :(NSString *)message :(NSString *)title {
+    UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:title
+                              message:message
+                              delegate:self
+                              cancelButtonTitle:@"Yes"
+                              otherButtonTitles:nil];
+    
+    [alertView addButtonWithTitle:@"No"];
+    [alertView show];
+}
+
+- (void)alertView :(UIAlertView *)alertView clickedButtonAtIndex :(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [DatabaseManager deleteSqeed:_eventId];
+    } else if (buttonIndex == 1) {
+        NSLog(@"NO");
+    }
+}
+
+- (IBAction)deleteSqeed:(id)sender {
+    [self confirm:@"Are you sure you want to delete this Sqeed?" :@"Delete Sqeed"];
 }
 
 - (IBAction)answer:(id)sender {
-    NSLog(@"Answer");
+    if ([_eventAnswer selectedSegmentIndex] == 0) {
+        [DatabaseManager participate:[[CacheHandler instance] currentUserId] :_eventId];
+    } else if ([_eventAnswer selectedSegmentIndex] == 1) {
+        [DatabaseManager notParticipate:[[CacheHandler instance] currentUserId] :_eventId];
+    }
 }
 @end

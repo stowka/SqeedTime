@@ -17,8 +17,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *eventCreator;
 @property (strong, nonatomic) IBOutlet NSString *eventId;
 @property (strong, nonatomic) IBOutlet UILabel *eventDescription;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *eventAnswer;
 @property (strong, nonatomic) IBOutlet UIButton *eventDeleteButton;
-- (IBAction)delete:(id)sender;
 
+- (IBAction)deleteSqeed:(id)sender;
 - (IBAction)answer:(id)sender;
+- (void) confirm :(NSString *)message :(NSString *)title;
 @end

@@ -54,6 +54,7 @@ NSDictionary* categories;
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    [_whatToDoTextField resignFirstResponder];
     [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:row]];
 }
 
@@ -116,17 +117,22 @@ NSDictionary* categories;
 }
 
 - (IBAction)showWherePopUp:(id)sender {
+    [_whatToDoTextField resignFirstResponder];
 }
 
 - (IBAction)showHowManyPeoplePopUp:(id)sender {
+    [_whatToDoTextField resignFirstResponder];
 }
 
 - (IBAction)showDescriptionPopUp:(id)sender {
+    [_whatToDoTextField resignFirstResponder];
 }
 
 - (IBAction)showWhenPopUp:(id)sender {
+    [_whatToDoTextField resignFirstResponder];
 }
 
 - (IBAction)save:(id)sender {
+    [_whatToDoTextField resignFirstResponder];
 }
 @end

@@ -50,7 +50,7 @@
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
-- (void) setDetails:(NSString *)_description {
+- (void) setDescription:(NSString *)_description {
     sqeedDescription = _description;
     [self fetchGoing];
     [self fetchWaiting];

@@ -71,6 +71,7 @@ int flag = -1;
 
 - (void) refresh {
     if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CacheHandler instance] lastUpdate] timeIntervalSinceReferenceDate] > 1) {
+        flag = -1;
         [[CacheHandler instance] setLastUpdate:[NSDate date]];
         if ([[self segmentedControl] selectedSegmentIndex] == 0) {
             sqeeds = [[[CacheHandler instance] currentUser] mySqeeds];
@@ -126,16 +127,20 @@ int flag = -1;
         cell.eventPlace.text = (NSString*)[sqeeds[indexPath.row] place];
         cell.eventCreator.text = [NSString stringWithFormat:@"by %@ %@", [sqeeds[indexPath.row] creatorFirstName], [sqeeds[indexPath.row] creatorName]];
         cell.eventId = [sqeeds[indexPath.row] sqeedId];
-        if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
-            cell.eventDeleteButton.hidden = NO;
-        } else {
-            cell.eventDeleteButton.hidden = YES;
-        }
-        cell.eventDescription.text = [sqeeds[indexPath.row] sqeedDescription];
-        
+        cell.eventDescription.text = [[[CacheHandler instance] tmpSqeed] sqeedDescription];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"MMM d, HH:mm"];
         cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
+
+        cell.eventAnswer.selectedSegmentIndex = -1;
+        if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
+            cell.eventDeleteButton.hidden = NO;
+            cell.eventAnswer.hidden = YES;
+        } else {
+            cell.eventDeleteButton.hidden = YES;
+            cell.eventAnswer.hidden = NO;
+        }
+        
         return cell;
     } else {
         static NSString *cellIdentifier = @"cellID";
@@ -162,20 +167,23 @@ int flag = -1;
     }
 }
 
+- (void) showDetails :(NSIndexPath *)indexPath {
+    // [tableView indexPathsForVisibleRows]
+    [[_sqeedsTable cellForRowAtIndexPath:indexPath] setSelected:NO];
+    int old_flag = flag;
+    flag = indexPath.row;
+    [_sqeedsTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_sqeedsTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 
 // DISPLAY SQEED AFTER SELECTION
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // [tableView indexPathsForVisibleRows]
-    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
-    if (flag == indexPath.row) {
-        flag = -1;
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
+    if (flag != indexPath.row) {
+        [DatabaseManager fetchSqeed:sqeeds[indexPath.row] :indexPath];
     } else {
-        int old_flag = flag;
-        flag = indexPath.row;
-        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        flag = -1;
+        [_sqeedsTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 @end

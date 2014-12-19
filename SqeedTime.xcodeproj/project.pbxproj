@@ -79,7 +79,7 @@
 		719968251A14FA6100974683 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 719968231A14FA6100974683 /* LaunchScreen.xib */; };
 		719968311A14FA6100974683 /* SqeedTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968301A14FA6100974683 /* SqeedTimeTests.m */; };
 		7199683B1A14FA9B00974683 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7199683A1A14FA9B00974683 /* logo.png */; };
-		71CB18851A20E47400A6FB93 /* DismissStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */; };
+		71CB18851A20E47400A6FB93 /* DismissModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18841A20E47400A6FB93 /* DismissModalSegue.m */; };
 		71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */; };
 		71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */; };
 		71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18981A20EA8A00A6FB93 /* ModalWhoViewController.m */; };
@@ -92,6 +92,7 @@
 		71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */; };
 		71CDF02D1A42A14800757EED /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CDF02C1A42A14800757EED /* AddressBook.framework */; };
 		71CDF02F1A42A18000757EED /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CDF02E1A42A18000757EED /* AddressBookUI.framework */; };
+		71EA18891A434FB00059BCDD /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EA18881A434FB00059BCDD /* DismissSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,8 +214,8 @@
 		7199682F1A14FA6100974683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719968301A14FA6100974683 /* SqeedTimeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SqeedTimeTests.m; sourceTree = "<group>"; };
 		7199683A1A14FA9B00974683 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissStoryboardSegue.h; sourceTree = "<group>"; };
-		71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissStoryboardSegue.m; sourceTree = "<group>"; };
+		71CB18831A20E47400A6FB93 /* DismissModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissModalSegue.h; sourceTree = "<group>"; };
+		71CB18841A20E47400A6FB93 /* DismissModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissModalSegue.m; sourceTree = "<group>"; };
 		71CB18911A20EA6B00A6FB93 /* ModalWhereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhereViewController.h; sourceTree = "<group>"; };
 		71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWhereViewController.m; sourceTree = "<group>"; };
 		71CB18941A20EA7500A6FB93 /* ModalWhenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhenViewController.h; sourceTree = "<group>"; };
@@ -237,6 +238,8 @@
 		71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendTableViewCell.m; sourceTree = "<group>"; };
 		71CDF02C1A42A14800757EED /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		71CDF02E1A42A18000757EED /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		71EA18871A434FB00059BCDD /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
+		71EA18881A434FB00059BCDD /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,8 +267,10 @@
 		710CBF631A2330E20077B2B7 /* Segues */ = {
 			isa = PBXGroup;
 			children = (
-				71CB18831A20E47400A6FB93 /* DismissStoryboardSegue.h */,
-				71CB18841A20E47400A6FB93 /* DismissStoryboardSegue.m */,
+				71EA18871A434FB00059BCDD /* DismissSegue.h */,
+				71EA18881A434FB00059BCDD /* DismissSegue.m */,
+				71CB18831A20E47400A6FB93 /* DismissModalSegue.h */,
+				71CB18841A20E47400A6FB93 /* DismissModalSegue.m */,
 			);
 			name = Segues;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				71CDAE6B1A2B511400186FDB /* Constants.m in Sources */,
 				710E25801A1BBE4E007C137E /* ActivitiesViewController.m in Sources */,
 				71931EED1A3F60EE00133385 /* AFURLRequestSerialization.m in Sources */,
+				71EA18891A434FB00059BCDD /* DismissSegue.m in Sources */,
 				71630B921A27ADD000E71015 /* AlertHelper.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
 				71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */,
@@ -769,7 +775,7 @@
 				71CDAE621A2A11C000186FDB /* AddFriendsViewController.m in Sources */,
 				71CDAE651A2A173300186FDB /* FriendTableViewCell.m in Sources */,
 				715E9DA81A23A07D007D4006 /* RootViewController.m in Sources */,
-				71CB18851A20E47400A6FB93 /* DismissStoryboardSegue.m in Sources */,
+				71CB18851A20E47400A6FB93 /* DismissModalSegue.m in Sources */,
 				715E9DD31A23BCF7007D4006 /* SwipeViewController.m in Sources */,
 				715E9E151A24AF5A007D4006 /* CacheHandler.m in Sources */,
 				71CB18991A20EA8A00A6FB93 /* ModalWhoViewController.m in Sources */,
