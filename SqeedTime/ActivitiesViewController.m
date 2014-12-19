@@ -102,10 +102,8 @@ int flag = -1;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == flag) {
-        //DetailsSqeedTableViewCell *cell = (DetailsSqeedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         return 300;
     } else {
-        //SqeedTableViewCell *cell = (SqeedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         return 120;
     }
 }
@@ -136,9 +134,14 @@ int flag = -1;
         if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
             cell.eventDeleteButton.hidden = NO;
             cell.eventAnswer.hidden = YES;
+            cell.eventPeopleGoingWaiting.hidden = NO;
+            cell.eventPeopleGoingWaiting.selectedSegmentIndex = -1;
+            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going", [[[[CacheHandler instance] tmpSqeed] going] count]] forSegmentAtIndex:0];
+            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting", [[[[CacheHandler instance] tmpSqeed] waiting] count]] forSegmentAtIndex:1];
         } else {
             cell.eventDeleteButton.hidden = YES;
             cell.eventAnswer.hidden = NO;
+            cell.eventPeopleGoingWaiting.hidden = YES;
         }
         
         return cell;

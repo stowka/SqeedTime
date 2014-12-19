@@ -13,4 +13,5 @@
 + (void) error :(NSString *)message;
 + (void) status :(NSString *)message;
 + (void) alert :(NSString *)message :(NSString *)title;
++ (void) show :(NSString *)message :(NSString *)title;
 @end

@@ -9,6 +9,7 @@
 #import "DetailsSqeedTableViewCell.h"
 #import "DatabaseManager.h"
 #import "CacheHandler.h"
+#import "AlertHelper.h"
 
 @implementation DetailsSqeedTableViewCell
 
@@ -50,5 +51,14 @@
     } else if ([_eventAnswer selectedSegmentIndex] == 1) {
         [DatabaseManager notParticipate:[[CacheHandler instance] currentUserId] :_eventId];
     }
+}
+
+- (IBAction)showPeople:(id)sender {
+    if ([_eventPeopleGoingWaiting selectedSegmentIndex] == 0) {
+        [AlertHelper show:[NSString stringWithFormat:@"%d", [[[[CacheHandler instance] tmpSqeed] going] count]] :@"Going"];
+    } else {
+        [AlertHelper show:[NSString stringWithFormat:@"%d", [[[[CacheHandler instance] tmpSqeed] waiting] count]] :@"Waiting"];
+    }
+    [_eventPeopleGoingWaiting setSelectedSegmentIndex:-1];
 }
 @end

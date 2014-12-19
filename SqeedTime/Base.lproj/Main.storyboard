@@ -448,6 +448,12 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6b-HN-xcM">
+                                                    <rect key="frame" x="16" y="184" width="228" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUX-5W-N6z">
                                                     <rect key="frame" x="252" y="262" width="60" height="30"/>
                                                     <state key="normal" title="Delete">
@@ -458,12 +464,17 @@
                                                         <action selector="deleteSqeed:" destination="zaB-Dd-afF" eventType="touchUpInside" id="gZa-lu-uhc"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="16" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6b-HN-xcM">
-                                                    <rect key="frame" x="16" y="184" width="228" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="uXV-h2-iPc">
+                                                    <rect key="frame" x="16" y="120" width="288" height="29"/>
+                                                    <segments>
+                                                        <segment title="Going"/>
+                                                        <segment title="Waiting"/>
+                                                    </segments>
+                                                    <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="showPeople:" destination="zaB-Dd-afF" eventType="valueChanged" id="280-P8-Rit"/>
+                                                    </connections>
+                                                </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -474,6 +485,7 @@
                                             <outlet property="eventDeleteButton" destination="kUX-5W-N6z" id="t7T-Si-BzW"/>
                                             <outlet property="eventDescription" destination="S6b-HN-xcM" id="HuF-cR-KAu"/>
                                             <outlet property="eventMinMax" destination="Kxx-gH-2uG" id="ylf-x6-Ape"/>
+                                            <outlet property="eventPeopleGoingWaiting" destination="uXV-h2-iPc" id="5s3-rt-MqI"/>
                                             <outlet property="eventPlace" destination="HSp-0Q-IsT" id="6lb-OJ-rtW"/>
                                             <outlet property="eventTitle" destination="8BK-pS-e0Y" id="1Bz-dR-5af"/>
                                         </connections>
@@ -508,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826" y="105"/>
+            <point key="canvasLocation" x="826" y="102"/>
         </scene>
         <!--Add Friends View Controller-->
         <scene sceneID="iKE-b6-Vyg">
