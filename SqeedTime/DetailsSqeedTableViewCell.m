@@ -54,10 +54,15 @@
 }
 
 - (IBAction)showPeople:(id)sender {
+    NSMutableString *people = [NSMutableString stringWithCapacity:2000];
     if ([_eventPeopleGoingWaiting selectedSegmentIndex] == 0) {
-        [AlertHelper show:[NSString stringWithFormat:@"%d", [[[[CacheHandler instance] tmpSqeed] going] count]] :@"Going"];
+        for (User *user in [[[CacheHandler instance] tmpSqeed] going])
+            [people appendFormat:@"%@ %@\n", [user forname], [user name]];
+        [AlertHelper show:[NSString stringWithFormat:@"%@", people] :@"Going"];
     } else {
-        [AlertHelper show:[NSString stringWithFormat:@"%d", [[[[CacheHandler instance] tmpSqeed] waiting] count]] :@"Waiting"];
+        for (User *user in [[[CacheHandler instance] tmpSqeed] waiting])
+            [people appendFormat:@"%@ %@\n", [user forname], [user name]];
+        [AlertHelper show:[NSString stringWithFormat:@"%@", people] :@"Waiting"];
     }
     [_eventPeopleGoingWaiting setSelectedSegmentIndex:-1];
 }

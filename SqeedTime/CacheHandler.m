@@ -19,6 +19,7 @@
 @synthesize lastUpdate;
 @synthesize categories;
 @synthesize token;
+@synthesize contacts;
 
 static CacheHandler* instance = nil;
 

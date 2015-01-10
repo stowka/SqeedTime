@@ -12,15 +12,16 @@
 #import "SqeedCategory.h"
 
 @interface CacheHandler : NSObject
-@property (strong) NSString* currentUserId;
-@property (strong) User* currentUser;
-@property (strong) User* tmpUser;
-@property (strong) Sqeed* currentSqeed;
-@property (strong) Sqeed* tmpSqeed;
-@property (strong) Sqeed* createSqeed;
-@property (weak, nonatomic) NSDate* lastUpdate;
-@property (strong) NSArray* categories;
-@property (strong, nonatomic) NSString* token;
+@property (strong) NSString *currentUserId;
+@property (strong) User *currentUser;
+@property (strong) User *tmpUser;
+@property (strong) Sqeed *currentSqeed;
+@property (strong) Sqeed *tmpSqeed;
+@property (strong) Sqeed *createSqeed;
+@property (weak, nonatomic) NSDate *lastUpdate;
+@property (strong) NSArray *categories;
+@property (strong, nonatomic) NSString *token;
+@property (weak, nonatomic) NSArray *contacts;
 
 + (CacheHandler*) instance;
 @end

@@ -10,6 +10,8 @@
 #import "FriendTableViewCell.h"
 #import "CacheHandler.h"
 
+@import AddressBook;
+
 @interface FriendsViewController ()
 
 @end
@@ -21,6 +23,17 @@ NSArray* friends;
 - (void)viewDidLoad {
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
+    ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
+        if (!granted) {
+            NSLog(@"Access to address book denied.");
+            return;
+        }
+        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
+        [[CacheHandler instance] setContacts:(__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef)];
+
+        NSLog(@"Access to address book authorized.");
+        NSLog(@"%d contacts in address book.", [[[CacheHandler instance] contacts] count]);
+    });
 }
 
 - (void)didReceiveMemoryWarning {

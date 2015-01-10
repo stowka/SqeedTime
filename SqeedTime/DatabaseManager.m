@@ -154,8 +154,77 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 + (void) fetchDiscovered: (User*) user {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{
-                             @"function": @"eventsByUser",
-                             @"id": [user userId]
+                             @"function": @"discover",
+                             @"userId": [user userId]
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Fetching discovered for user: %@", [user username]);
+        NSArray* tmp_sqeeds = response[@"result"];
+        NSMutableArray* sqeeds = [[NSMutableArray alloc] init];
+        Sqeed* tmp_sqeed;
+        NSString* sqeedId;
+        NSString* title;
+        NSString* place;
+        SqeedCategory* category;
+        NSString* creatorFirstName;
+        NSString* creatorName;
+        NSString* peopleMin;
+        NSString* peopleMax;
+        NSDate* dateStart;
+        NSDate* dateEnd;
+        
+        NSString *datetime_start;
+        NSString *datetime_end;
+        
+        for (NSDictionary* sqeed in tmp_sqeeds) {
+            sqeedId = sqeed[@"id"];
+            title = sqeed[@"title"];
+            place = sqeed[@"place"];
+            category = [[SqeedCategory alloc] initWithId:sqeed[@"category_id"]];
+            creatorFirstName = sqeed[@"creator_first_name"];
+            creatorName = sqeed[@"creator_name"];
+            peopleMin = sqeed[@"people_min"];
+            peopleMax = sqeed[@"people_max"];
+            
+            if ([sqeed[@"datetime_start"] class] == [NSNull class])
+                datetime_start = @"0";
+            else
+                datetime_start = sqeed[@"datetime_start"];
+            
+            if ([sqeed[@"datetime_end"] class] == [NSNull class])
+                datetime_end = @"0";
+            else
+                datetime_end = sqeed[@"datetime_end"];
+            
+            dateStart = [NSDate dateWithTimeIntervalSince1970:[datetime_start doubleValue]];
+            dateEnd = [NSDate dateWithTimeIntervalSince1970:[datetime_end doubleValue]];
+            
+            tmp_sqeed = [[Sqeed alloc] init: sqeedId];
+            [tmp_sqeed setHeaders:title :place :category :creatorFirstName :creatorName :peopleMin :peopleMax :dateStart :dateEnd];
+            
+            [sqeeds addObject:tmp_sqeed];
+        }
+        [user setDiscovered:sqeeds];
+        [[CacheHandler instance] setTmpUser:user];
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        [avc refresh];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to fetch discovered!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void) fetchDiscovered :(User *) user :(SqeedCategory *) category {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"discover",
+                             @"userId": [user userId],
+                             @"categoryId": [category categoryId]
                              };
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Fetching discovered for user: %@", [user username]);
@@ -204,6 +273,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSLog(@"Error: %@", error);
     }];
 }
+
 + (void) fetchFriends: (User*) user {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{
@@ -459,21 +529,36 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 
 }
 
-+ (UIViewController *)visibleViewController:(UIViewController *)rootViewController
-{
-    if (rootViewController.presentedViewController == nil)
-    {
++ (void) searchUser: (NSString *) string {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"search",
+                             @"": string
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Search: %@", string);
+        
+        /*
+         * TODO
+         */
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to search!"];
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (UIViewController *)visibleViewController:(UIViewController *)rootViewController {
+    if (rootViewController.presentedViewController == nil) {
         return rootViewController;
     }
-    if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]])
-    {
+    if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
         UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
         
         return [self visibleViewController:lastViewController];
     }
-    if ([rootViewController.presentedViewController isKindOfClass:[UITabBarController class]])
-    {
+    if ([rootViewController.presentedViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabBarController = (UITabBarController *)rootViewController.presentedViewController;
         UIViewController *selectedViewController = tabBarController.selectedViewController;
         
