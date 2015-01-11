@@ -25,4 +25,5 @@
 - (IBAction)answer:(id)sender;
 - (IBAction)showPeople:(id)sender;
 - (void) confirm :(NSString *)message :(NSString *)title;
+- (int) hasAnswered;
 @end

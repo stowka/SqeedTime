@@ -100,4 +100,15 @@
     
     [DatabaseManager updateUser:userId :email :name :forname :phoneExt :phone :facebookUrl];
 }
+
+- (BOOL)isEqual :(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![other isKindOfClass:[self class]])
+        return NO;
+    if ([self.userId isEqualToString:((User *)other).userId])
+        return YES;
+    return NO;
+}
+
 @end

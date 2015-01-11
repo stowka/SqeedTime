@@ -141,6 +141,7 @@ int flag = -1;
         } else {
             cell.eventDeleteButton.hidden = YES;
             cell.eventAnswer.hidden = NO;
+            cell.eventAnswer.selectedSegmentIndex = cell.hasAnswered;
             cell.eventPeopleGoingWaiting.hidden = YES;
         }
         

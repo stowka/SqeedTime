@@ -120,6 +120,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             creatorName = sqeed[@"creator_name"];
             peopleMin = sqeed[@"people_min"];
             peopleMax = sqeed[@"people_max"];
+            
             if (![sqeed[@"datetime_start"] isKindOfClass:[NSNull class]])
                 dateStart = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_start"] doubleValue]];
             else
@@ -173,9 +174,6 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         NSDate* dateStart;
         NSDate* dateEnd;
         
-        NSString *datetime_start;
-        NSString *datetime_end;
-        
         for (NSDictionary* sqeed in tmp_sqeeds) {
             sqeedId = sqeed[@"id"];
             title = sqeed[@"title"];
@@ -186,18 +184,14 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             peopleMin = sqeed[@"people_min"];
             peopleMax = sqeed[@"people_max"];
             
-            if ([sqeed[@"datetime_start"] class] == [NSNull class])
-                datetime_start = @"0";
+            if (![sqeed[@"datetime_start"] isKindOfClass:[NSNull class]])
+                dateStart = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_start"] doubleValue]];
             else
-                datetime_start = sqeed[@"datetime_start"];
-            
-            if ([sqeed[@"datetime_end"] class] == [NSNull class])
-                datetime_end = @"0";
+                dateStart = [NSDate dateWithTimeIntervalSince1970:0];
+            if (![sqeed[@"datetime_end"] isKindOfClass:[NSNull class]])
+                dateEnd = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_end"] doubleValue]];
             else
-                datetime_end = sqeed[@"datetime_end"];
-            
-            dateStart = [NSDate dateWithTimeIntervalSince1970:[datetime_start doubleValue]];
-            dateEnd = [NSDate dateWithTimeIntervalSince1970:[datetime_end doubleValue]];
+                dateEnd = [NSDate dateWithTimeIntervalSince1970:0];
             
             tmp_sqeed = [[Sqeed alloc] init: sqeedId];
             [tmp_sqeed setHeaders:title :place :category :creatorFirstName :creatorName :peopleMin :peopleMax :dateStart :dateEnd];
@@ -251,8 +245,15 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
             creatorName = sqeed[@"creator_name"];
             peopleMin = sqeed[@"people_min"];
             peopleMax = sqeed[@"people_max"];
-            dateStart = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_start"] doubleValue]];
-            dateEnd = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_end"] doubleValue]];
+            
+            if (![sqeed[@"datetime_start"] isKindOfClass:[NSNull class]])
+                dateStart = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_start"] doubleValue]];
+            else
+                dateStart = [NSDate dateWithTimeIntervalSince1970:0];
+            if (![sqeed[@"datetime_end"] isKindOfClass:[NSNull class]])
+                dateEnd = [NSDate dateWithTimeIntervalSince1970:[sqeed[@"datetime_end"] doubleValue]];
+            else
+                dateEnd = [NSDate dateWithTimeIntervalSince1970:0];
             
             tmp_sqeed = [[Sqeed alloc] init: sqeedId];
             [tmp_sqeed setHeaders:title :place :category :creatorFirstName :creatorName :peopleMin :peopleMax :dateStart :dateEnd];

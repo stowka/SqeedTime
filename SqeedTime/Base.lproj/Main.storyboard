@@ -116,7 +116,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="❮ Back" id="fs4-Qu-mJc">
                                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="custom" identifier="segueDisplaySettingsBack" customClass="DismissStoryboardSegue" id="wRP-UC-TqU"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueDisplaySettingsBack" id="wRP-UC-TqU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -247,7 +247,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zvj-62-hYJ">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvj-62-hYJ">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -1402,8 +1402,8 @@
         <image name="who.png" width="256" height="229"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bL9-u0-cdO"/>
+        <segue reference="RHm-lK-AOL"/>
+        <segue reference="iOI-Sj-far"/>
         <segue reference="Z64-wf-tf3"/>
-        <segue reference="1Oc-jq-8dQ"/>
     </inferredMetricsTieBreakers>
 </document>

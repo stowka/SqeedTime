@@ -32,4 +32,5 @@
 - (void) fetchFriends;
 - (void) fetchFriendRequests;
 - (void) update:(NSString*) key :(NSString*) value;
+- (BOOL)isEqual :(id)other;
 @end

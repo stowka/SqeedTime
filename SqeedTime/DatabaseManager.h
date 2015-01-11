@@ -19,7 +19,7 @@
 + (void) fetchUser :(User *)user;
 + (void) fetchMySqeeds :(User *)user;
 + (void) fetchDiscovered :(User *)user;
-+ (void) fetchDiscovered :(User *)user :(SqeedCategory *) category;
++ (void) fetchDiscovered :(User *)user :(SqeedCategory *)category;
 + (void) fetchFriends :(User *)user;
 + (void) fetchFriendRequests :(User *)user;
 

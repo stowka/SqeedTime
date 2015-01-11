@@ -66,4 +66,13 @@
     }
     [_eventPeopleGoingWaiting setSelectedSegmentIndex:-1];
 }
+
+- (int) hasAnswered {
+    if ([[[[CacheHandler instance] tmpSqeed] waiting] containsObject:[[CacheHandler instance] currentUser]])
+        return -1;
+    else if ([[[[CacheHandler instance] tmpSqeed] going] containsObject:[[CacheHandler instance] currentUser]])
+        return 0;
+    return -1;
+}
+
 @end
