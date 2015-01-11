@@ -337,6 +337,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wTg-4c-dkI">
                                 <rect key="frame" x="0.0" y="106" width="320" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellID" rowHeight="120" id="HPj-Y5-JAH" customClass="SqeedTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -464,6 +465,16 @@
                                                         <action selector="deleteSqeed:" destination="zaB-Dd-afF" eventType="touchUpInside" id="gZa-lu-uhc"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCq-Mx-pCp">
+                                                    <rect key="frame" x="252" y="262" width="60" height="30"/>
+                                                    <state key="normal" title="Decline">
+                                                        <color key="titleColor" red="1" green="0.1960784314" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="decline:" destination="zaB-Dd-afF" eventType="touchUpInside" id="YaI-YF-nJU"/>
+                                                    </connections>
+                                                </button>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="uXV-h2-iPc">
                                                     <rect key="frame" x="16" y="120" width="288" height="29"/>
                                                     <segments>
@@ -475,6 +486,17 @@
                                                         <action selector="showPeople:" destination="zaB-Dd-afF" eventType="valueChanged" id="280-P8-Rit"/>
                                                     </connections>
                                                 </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2X9-8r-Omy">
+                                                    <rect key="frame" x="16" y="121" width="288" height="30"/>
+                                                    <color key="tintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Join!">
+                                                        <color key="titleColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="join:" destination="zaB-Dd-afF" eventType="touchUpInside" id="csK-5y-EaC"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -482,8 +504,10 @@
                                             <outlet property="eventCategoryIcon" destination="5wE-df-baP" id="pha-kR-Vz1"/>
                                             <outlet property="eventCreator" destination="Aqf-f9-86z" id="dNi-X1-97R"/>
                                             <outlet property="eventDate" destination="Xke-cl-rcP" id="t3N-I4-FuN"/>
+                                            <outlet property="eventDecline" destination="mCq-Mx-pCp" id="Wd7-GT-h30"/>
                                             <outlet property="eventDeleteButton" destination="kUX-5W-N6z" id="t7T-Si-BzW"/>
                                             <outlet property="eventDescription" destination="S6b-HN-xcM" id="HuF-cR-KAu"/>
+                                            <outlet property="eventJoin" destination="2X9-8r-Omy" id="e5P-f1-OlR"/>
                                             <outlet property="eventMinMax" destination="Kxx-gH-2uG" id="ylf-x6-Ape"/>
                                             <outlet property="eventPeopleGoingWaiting" destination="uXV-h2-iPc" id="5s3-rt-MqI"/>
                                             <outlet property="eventPlace" destination="HSp-0Q-IsT" id="6lb-OJ-rtW"/>
@@ -520,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAv-ei-8zU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826" y="102"/>
+            <point key="canvasLocation" x="826" y="100"/>
         </scene>
         <!--Add Friends View Controller-->
         <scene sceneID="iKE-b6-Vyg">
@@ -1023,7 +1047,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rel-BU-nK4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rel-BU-nK4">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1050,6 +1074,33 @@
                                         <connections>
                                             <outlet property="name" destination="uZP-64-MDx" id="3g6-26-hUw"/>
                                             <outlet property="username" destination="klJ-il-Ib2" id="Y1I-Xc-Etf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellContactID" rowHeight="62" id="eLD-UA-Jy1" customClass="ContactTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="eLD-UA-Jy1" id="VfY-qm-2Sx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HO-uQ-YNX">
+                                                    <rect key="frame" x="277" y="17" width="35" height="32"/>
+                                                    <state key="normal" image="add70.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sms:" destination="eLD-UA-Jy1" eventType="touchUpInside" id="PVr-ue-SMM"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15l-1a-Lrx">
+                                                    <rect key="frame" x="14" y="22" width="255" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="15l-1a-Lrx" id="920-LG-ebO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1091,7 +1142,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2963" y="116"/>
+            <point key="canvasLocation" x="2963" y="109"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="9ae-dN-Ojy">
@@ -1122,33 +1173,66 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Hz1-pf-w8n">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="noS-yK-hcR">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JOb-Wh-MIc" id="pGp-VE-5nx"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dCE-bs-2Lc">
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableFooterView" contentMode="redraw" searchBarStyle="prominent" placeholder="Search people" id="fBW-Uv-2Q0">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="JOb-Wh-MIc" id="al2-pz-AJM"/>
-                                    </connections>
-                                </searchBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellFriendID" id="bSE-qf-Qtc">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSE-qf-Qtc" id="5jI-Tb-3PH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cellSearchFriendID" rowHeight="62" id="LT0-M7-uZ2" customClass="SearchFriendTableViewCell">
+                                        <rect key="frame" x="10" y="118" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LT0-M7-uZ2" id="VaB-94-fEH">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeI-et-C8Y">
+                                                    <rect key="frame" x="8" y="9" width="261" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifu-XC-0rZ">
+                                                    <rect key="frame" x="8" y="34" width="261" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmQ-Q2-kbD">
+                                                    <rect key="frame" x="277" y="15" width="35" height="32"/>
+                                                    <state key="normal" image="add70.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="add:" destination="LT0-M7-uZ2" eventType="touchUpInside" id="wFp-d9-8wp"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="jmQ-Q2-kbD" id="WKd-L4-gvv"/>
+                                            <outlet property="name" destination="WeI-et-C8Y" id="EfX-VS-Wsc"/>
+                                            <outlet property="username" destination="ifu-XC-0rZ" id="Q8H-lo-kih"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="JOb-Wh-MIc" id="Jfd-bQ-uNC"/>
+                                    <outlet property="delegate" destination="JOb-Wh-MIc" id="t9z-to-iV5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="search" destination="noS-yK-hcR" id="klY-qA-Zzf"/>
                         <outlet property="searchDisplayController" destination="Z3f-wG-KrL" id="0Bk-4v-4Et"/>
+                        <outlet property="table" destination="dCE-bs-2Lc" id="Eyo-LG-TdH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eD3-CT-zYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1163,14 +1247,13 @@
                 <searchDisplayController id="Z3f-wG-KrL">
                     <connections>
                         <outlet property="delegate" destination="JOb-Wh-MIc" id="ad6-pn-tC0"/>
-                        <outlet property="searchBar" destination="fBW-Uv-2Q0" id="OCt-Pp-SXN"/>
                         <outlet property="searchContentsController" destination="JOb-Wh-MIc" id="ew6-CE-hmt"/>
                         <outlet property="searchResultsDataSource" destination="JOb-Wh-MIc" id="Lyy-E6-7Lj"/>
                         <outlet property="searchResultsDelegate" destination="JOb-Wh-MIc" id="qIe-6D-atq"/>
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3406" y="124"/>
+            <point key="canvasLocation" x="3406" y="110"/>
         </scene>
         <!--Modal What View Controller-->
         <scene sceneID="dfb-km-YpO">
@@ -1388,6 +1471,7 @@
     </scenes>
     <resources>
         <image name="1.png" width="64" height="70"/>
+        <image name="add70.png" width="64" height="58"/>
         <image name="close.png" width="64" height="64"/>
         <image name="icon-coconut.png" width="32" height="32"/>
         <image name="icon-settings.png" width="30" height="30"/>
@@ -1402,8 +1486,8 @@
         <image name="who.png" width="256" height="229"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RHm-lK-AOL"/>
-        <segue reference="iOI-Sj-far"/>
+        <segue reference="UY6-gh-lXK"/>
+        <segue reference="bL9-u0-cdO"/>
         <segue reference="Z64-wf-tf3"/>
     </inferredMetricsTieBreakers>
 </document>

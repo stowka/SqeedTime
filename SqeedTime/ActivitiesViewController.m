@@ -34,8 +34,8 @@ int flag = -1;
     
     // PULL DOWN TO REFRESH
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
-    self.refreshControl.tintColor = [UIColor whiteColor];
+    //self.refreshControl.backgroundColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
+    self.refreshControl.tintColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
     [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.sqeedsTable addSubview:self.refreshControl];
 }
@@ -46,15 +46,15 @@ int flag = -1;
 
 #pragma mark - REFRESH HANDLER
 - (void)handleRefresh:(id)sender {
-    if (self.refreshControl) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-    }
+//    if (self.refreshControl) {
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"MMM d, h:mm a"];
+//        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+//        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor grayColor]
+//                                                                    forKey:NSForegroundColorAttributeName];
+//        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+//        self.refreshControl.attributedTitle = attributedTitle;
+//    }
     if ([[self segmentedControl] selectedSegmentIndex] == 0)
         [[[CacheHandler instance] currentUser] fetchMySqeeds];
     else
@@ -81,6 +81,7 @@ int flag = -1;
         [self.sqeedsTable reloadData];
     }
     [self.refreshControl endRefreshing];
+    NSLog(@"Refreshing...");
 }
 
 #pragma mark - PASS DATA BY SEGUE
@@ -131,6 +132,8 @@ int flag = -1;
         cell.eventDate.text = [NSString stringWithFormat:@"%@ — %@",[formatter stringFromDate:[sqeeds[indexPath.row] dateStart]],[formatter stringFromDate:[sqeeds[indexPath.row] dateEnd]]];
 
         cell.eventAnswer.selectedSegmentIndex = -1;
+        cell.eventDecline.hidden = YES;
+        cell.eventJoin.hidden = YES;
         if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
             cell.eventDeleteButton.hidden = NO;
             cell.eventAnswer.hidden = YES;
@@ -142,7 +145,22 @@ int flag = -1;
             cell.eventDeleteButton.hidden = YES;
             cell.eventAnswer.hidden = NO;
             cell.eventAnswer.selectedSegmentIndex = cell.hasAnswered;
-            cell.eventPeopleGoingWaiting.hidden = YES;
+            if (cell.eventAnswer.selectedSegmentIndex == 0) {
+                cell.eventPeopleGoingWaiting.hidden = NO;
+                cell.eventPeopleGoingWaiting.selectedSegmentIndex = -1;
+                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going", [[[[CacheHandler instance] tmpSqeed] going] count]] forSegmentAtIndex:0];
+                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting", [[[[CacheHandler instance] tmpSqeed] waiting] count]] forSegmentAtIndex:1];
+                cell.eventAnswer.hidden = YES;
+                cell.eventDecline.hidden = NO;
+            } else {
+                cell.eventPeopleGoingWaiting.hidden = YES;
+            }
+            
+            if ([[self segmentedControl] selectedSegmentIndex] == 1) {
+                cell.eventAnswer.hidden = YES;
+                cell.eventPeopleGoingWaiting.hidden = YES;
+                cell.eventJoin.hidden = NO;
+            }
         }
         
         return cell;

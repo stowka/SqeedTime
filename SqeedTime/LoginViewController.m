@@ -48,4 +48,8 @@
     [_password resignFirstResponder];
     [_username resignFirstResponder];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 @end

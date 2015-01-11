@@ -20,7 +20,11 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *eventAnswer;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *eventPeopleGoingWaiting;
 @property (strong, nonatomic) IBOutlet UIButton *eventDeleteButton;
+@property (strong, nonatomic) IBOutlet UIButton *eventDecline;
+@property (strong, nonatomic) IBOutlet UIButton *eventJoin;
 
+- (IBAction)join:(id)sender;
+- (IBAction)decline:(id)sender;
 - (IBAction)deleteSqeed:(id)sender;
 - (IBAction)answer:(id)sender;
 - (IBAction)showPeople:(id)sender;

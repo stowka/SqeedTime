@@ -165,4 +165,8 @@ NSArray* friends;
         [[[CacheHandler instance] createSqeed] setPublicAccess:@"true"];
     }
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 @end

@@ -418,6 +418,15 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
                              };
     [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Participate! (id = %@)", sqeedId);
+        
+        // Refreshes (loads) the activity table
+        [[UIApplication sharedApplication] delegate] ;
+        RootViewController *rvc = (RootViewController*)[self visibleViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        
+        ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
+        
+        [avc refresh];
+        [[avc sqeedsTable] reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to participate!"];
         NSLog(@"Error: %@", error);
@@ -441,6 +450,7 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
         ActivitiesViewController *avc = [[[rvc swipeViewController] viewControllers] lastObject];
         
         [avc refresh];
+        [[avc sqeedsTable] reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AlertHelper error:@"Failed to not participate!"];
         NSLog(@"Error: %@", error);

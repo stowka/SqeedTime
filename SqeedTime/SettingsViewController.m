@@ -134,7 +134,7 @@ NSDictionary* myData;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
-    [self performSegueWithIdentifier:segue sender:self];
+    //[self performSegueWithIdentifier:segue sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView reloadData];
 }
@@ -154,6 +154,10 @@ NSDictionary* myData;
     {
          // TODO
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 @end

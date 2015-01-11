@@ -7,13 +7,17 @@
 //
 
 #import "SearchViewController.h"
-#import "FriendTableViewCell.h"
+#import "SearchFriendTableViewCell.h"
 
 @interface SearchViewController ()
 
 @end
 
 @implementation SearchViewController
+
+@synthesize search;
+@synthesize table;
+@synthesize results;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,14 +34,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"cellFriendID";
-    FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+    static NSString *cellIdentifier = @"cellSearchFriendID";
+    SearchFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                  cellIdentifier];
     if (cell == nil) {
-        cell = [[FriendTableViewCell alloc]initWithStyle:
+        cell = [[SearchFriendTableViewCell alloc]initWithStyle:
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     return cell;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 /*

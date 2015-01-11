@@ -79,6 +79,9 @@
 		719968251A14FA6100974683 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 719968231A14FA6100974683 /* LaunchScreen.xib */; };
 		719968311A14FA6100974683 /* SqeedTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968301A14FA6100974683 /* SqeedTimeTests.m */; };
 		7199683B1A14FA9B00974683 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7199683A1A14FA9B00974683 /* logo.png */; };
+		71BC4EE61A62B489009D060B /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC4EE51A62B489009D060B /* SearchFriendTableViewCell.m */; };
+		71BC4EE91A62BF4D009D060B /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC4EE81A62BF4D009D060B /* ContactTableViewCell.m */; };
+		71BC4EEB1A62D0A2009D060B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BC4EEA1A62D0A2009D060B /* MessageUI.framework */; };
 		71CB18851A20E47400A6FB93 /* DismissModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18841A20E47400A6FB93 /* DismissModalSegue.m */; };
 		71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18921A20EA6B00A6FB93 /* ModalWhereViewController.m */; };
 		71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CB18951A20EA7500A6FB93 /* ModalWhenViewController.m */; };
@@ -214,6 +217,11 @@
 		7199682F1A14FA6100974683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		719968301A14FA6100974683 /* SqeedTimeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SqeedTimeTests.m; sourceTree = "<group>"; };
 		7199683A1A14FA9B00974683 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		71BC4EE41A62B489009D060B /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
+		71BC4EE51A62B489009D060B /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
+		71BC4EE71A62BF4D009D060B /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		71BC4EE81A62BF4D009D060B /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
+		71BC4EEA1A62D0A2009D060B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		71CB18831A20E47400A6FB93 /* DismissModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissModalSegue.h; sourceTree = "<group>"; };
 		71CB18841A20E47400A6FB93 /* DismissModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissModalSegue.m; sourceTree = "<group>"; };
 		71CB18911A20EA6B00A6FB93 /* ModalWhereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWhereViewController.h; sourceTree = "<group>"; };
@@ -247,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71BC4EEB1A62D0A2009D060B /* MessageUI.framework in Frameworks */,
 				71CDF02F1A42A18000757EED /* AddressBookUI.framework in Frameworks */,
 				71CDF02D1A42A14800757EED /* AddressBook.framework in Frameworks */,
 				710CBF651A2331160077B2B7 /* QuartzCore.framework in Frameworks */,
@@ -462,6 +471,10 @@
 		715E9E1B1A24B63E007D4006 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				71BC4EE71A62BF4D009D060B /* ContactTableViewCell.h */,
+				71BC4EE81A62BF4D009D060B /* ContactTableViewCell.m */,
+				71BC4EE41A62B489009D060B /* SearchFriendTableViewCell.h */,
+				71BC4EE51A62B489009D060B /* SearchFriendTableViewCell.m */,
 				71CDF0291A428CFB00757EED /* AddFriendTableViewCell.h */,
 				71CDF02A1A428CFB00757EED /* AddFriendTableViewCell.m */,
 				714B1E381A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.h */,
@@ -523,6 +536,7 @@
 		719968081A14FA6100974683 = {
 			isa = PBXGroup;
 			children = (
+				71BC4EEA1A62D0A2009D060B /* MessageUI.framework */,
 				71CDF02E1A42A18000757EED /* AddressBookUI.framework */,
 				71CDF02C1A42A14800757EED /* AddressBook.framework */,
 				710CBF641A2331160077B2B7 /* QuartzCore.framework */,
@@ -759,6 +773,7 @@
 				71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */,
 				71931EEB1A3F60EE00133385 /* AFSecurityPolicy.m in Sources */,
 				71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */,
+				71BC4EE61A62B489009D060B /* SearchFriendTableViewCell.m in Sources */,
 				71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */,
 				715E9DAE1A23A258007D4006 /* Sqeed.m in Sources */,
 				71CDAE6B1A2B511400186FDB /* Constants.m in Sources */,
@@ -789,6 +804,7 @@
 				715E9E181A24B4CF007D4006 /* SqeedCategory.m in Sources */,
 				71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */,
 				71931EE91A3F60EE00133385 /* AFHTTPSessionManager.m in Sources */,
+				71BC4EE91A62BF4D009D060B /* ContactTableViewCell.m in Sources */,
 				71931EEF1A3F60EE00133385 /* AFURLSessionManager.m in Sources */,
 				71931EEC1A3F60EE00133385 /* AFURLConnectionOperation.m in Sources */,
 				719968171A14FA6100974683 /* main.m in Sources */,

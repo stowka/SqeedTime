@@ -41,6 +41,14 @@
     }
 }
 
+- (IBAction)join:(id)sender {
+    [DatabaseManager participate:[[CacheHandler instance] currentUserId] :_eventId];
+}
+
+- (IBAction)decline:(id)sender {
+    [DatabaseManager notParticipate:[[CacheHandler instance] currentUserId] :_eventId];
+}
+
 - (IBAction)deleteSqeed:(id)sender {
     [self confirm:@"Are you sure you want to delete this Sqeed?" :@"Delete Sqeed"];
 }

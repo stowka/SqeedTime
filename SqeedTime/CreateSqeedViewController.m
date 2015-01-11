@@ -23,12 +23,22 @@
 NSDictionary* categories;
 
 @implementation CreateSqeedViewController
+@synthesize whatLabel;
+@synthesize whenLabel;
+@synthesize whereLabel;
+@synthesize whoLabel;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [[[CacheHandler instance] currentUser] fetchFriends];
     [[[CacheHandler instance] currentUser] fetchFriendRequests];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSLog(@"will appear %@", whereLabel.text);
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,11 +119,13 @@ NSDictionary* categories;
 }
 
 - (void) updateLabels {
-    _whereLabel.text = [[[CacheHandler instance] createSqeed] place];
-    _whatLabel.text = [[[CacheHandler instance] createSqeed] sqeedDescription];
+    NSLog(@"Updating labels: %@", [[[CacheHandler instance] createSqeed] place]);
+    NSLog(@"%@", whatLabel.text);
+    whereLabel.text = [[[CacheHandler instance] createSqeed] place];
+    whatLabel.text = [[[CacheHandler instance] createSqeed] sqeedDescription];
     NSString *peopleLabel = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] createSqeed] peopleMin], [[[CacheHandler instance] createSqeed] peopleMax]];
-    _whoLabel.text = peopleLabel;
-    _whereLabel.text = [[[[CacheHandler instance] createSqeed] dateStart] description];
+    whoLabel.text = peopleLabel;
+    whereLabel.text = [[[[CacheHandler instance] createSqeed] dateStart] description];
 }
 
 - (IBAction)showWherePopUp:(id)sender {
@@ -135,4 +147,9 @@ NSDictionary* categories;
 - (IBAction)save:(id)sender {
     [_whatToDoTextField resignFirstResponder];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 @end
