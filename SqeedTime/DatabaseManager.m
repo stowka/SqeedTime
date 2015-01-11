@@ -458,11 +458,34 @@ static NSString* serverURL = @"http://sqtdbws.net-production.ch/";
 }
 
 + (void) addFriend: (NSString*) userId : (NSString*) friendId {
-
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"addFriend",
+                             @"user1Id": userId,
+                             @"user2Id": friendId
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Add friend! (id = %@)", friendId);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to not participate!"];
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 + (void) deleteFriend: (NSString*) userId : (NSString*) friendId {
-    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function": @"deleteFriend",
+                             @"user1Id": userId,
+                             @"user2Id": friendId
+                             };
+    [manager POST:serverURL parameters:params success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"Remove friend! (id = %@)", friendId);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AlertHelper error:@"Failed to not participate!"];
+        NSLog(@"Error: %@", error);
+    }];
+
 }
 
 + (void) createSqeed: (NSString*) title : (NSString*) place : (User*) creator : (NSString*) description : (NSString*) peopleMax : (NSString*) peopleMin : (SqeedCategory*) category :(NSDate*) datetimeStart : (NSDate*) datetimeEnd : (NSArray*) friends {

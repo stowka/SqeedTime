@@ -33,9 +33,6 @@ NSArray* friendRequests;
         }
         ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
         [[CacheHandler instance] setContacts:(__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef)];
-
-        NSLog(@"Access to address book authorized.");
-        NSLog(@"%d contacts in address book.", [[[CacheHandler instance] contacts] count]);
     });
 }
 
