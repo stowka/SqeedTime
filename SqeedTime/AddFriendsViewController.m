@@ -105,6 +105,7 @@ NSArray* friends;
             :[[[CacheHandler instance] createSqeed] sqeedCategory]
             :[[[CacheHandler instance] createSqeed] dateStart]
             :[[[CacheHandler instance] createSqeed] dateEnd]
+            :[[[CacheHandler instance] createSqeed] privateAccess]
             :friendIds];
     } else {
         NSLog(@"Error: You are a dumbass!");
@@ -160,10 +161,10 @@ NSArray* friends;
     UISwitch *switchPublicPrivate = sender;
     if ([switchPublicPrivate isOn]) {
         self.publicPrivate.image = [UIImage imageNamed:@"private.png"];
-        [[[CacheHandler instance] createSqeed] setPublicAccess:@"false"];
+        [[[CacheHandler instance] createSqeed] setPrivateAccess:@"1"];
     } else {
         self.publicPrivate.image = [UIImage imageNamed:@"public.png"];
-        [[[CacheHandler instance] createSqeed] setPublicAccess:@"true"];
+        [[[CacheHandler instance] createSqeed] setPrivateAccess:@"0"];
     }
 }
 

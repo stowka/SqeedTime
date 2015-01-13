@@ -17,12 +17,13 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 # pragma mark - Log In
 
 + (void)loginRequest :(NSString *)username :(NSString *)password {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
     @"function" : @"loginRequestV1",
     @"username" : username
-  };
+    };
   [manager POST:serverURL
       parameters:params
       success:^(AFHTTPRequestOperation *operation, id response) {
@@ -34,15 +35,18 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 
           [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginRequestDidComplete"
                                                               object:nil];
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Error: %@", error);
           [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginRequestDidFail"
                                                               object:nil];
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }];
 }
 
 + (void)login :(NSString *)username :(NSString *)password {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -62,17 +66,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginDidFail"
                                                                 object:nil];
           }
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Error: %@", error);
           [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginDidFail"
                                                               object:nil];
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }];
 }
 
 # pragma mark - Fetch data
 
 + (void)fetchUser :(User *)user {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{ @"function" : @"getUser", @"id" : [user userId] };
@@ -101,15 +108,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchUserDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchUserDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchMySqeeds :(User *)user {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -173,15 +185,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedsDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedsDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchDiscovered :(User *)user {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -245,15 +262,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedsDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedsDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchDiscovered :(User *)user :(SqeedCategory *)category {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -319,16 +341,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           [[NSNotificationCenter defaultCenter]
               postNotificationName:@"FetchSqeedsDidComplete"
                             object:nil];
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter]
               postNotificationName:@"FetchSqeedsDidFail"
                             object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchFriends :(User *)user {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -355,16 +381,21 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchFriendsDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter]
               postNotificationName:@"FetchFriendsDidFail"
                             object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchFriendRequests :(User *)user {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -392,16 +423,21 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           [[NSNotificationCenter defaultCenter]
               postNotificationName:@"FetchFriendRequestsDidComplete"
                             object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter]
               postNotificationName:@"FetchFriendRequestsDidFail"
                             object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchSqeed :(Sqeed *)sqeed :(NSIndexPath *)indexPath {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -446,15 +482,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                                                               object:nil
                                                             userInfo:[NSDictionary dictionaryWithObject:indexPath
                                                                                                  forKey:@"indexPath"]];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)fetchCategories {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{ @"function" : @"getCategories" };
@@ -473,8 +514,10 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
             [categories addObject:tmp_cat];
           }
           [[CacheHandler instance] setCategories:categories];
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
@@ -482,6 +525,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 # pragma mark - Action on Sqeeds
 
 + (void)participate :(NSString *)userId :(NSString *)sqeedId {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -495,15 +539,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           NSLog(@"Participate! (id = %@)", sqeedId);
           [[NSNotificationCenter defaultCenter] postNotificationName:@"ParticipateDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"ParticipateDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)notParticipate :(NSString *)userId :(NSString *)sqeedId {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -517,10 +566,14 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           NSLog(@"Not participate! (id = %@)", sqeedId);
           [[NSNotificationCenter defaultCenter] postNotificationName:@"NotParticipateDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"NotParticipateDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
@@ -534,7 +587,9 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                     :(SqeedCategory *)category
                     :(NSDate *)datetimeStart
                     :(NSDate *)datetimeEnd
+                    :(NSString *) privateAccess
                     :(NSArray *)friends {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager =
     [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{
@@ -546,6 +601,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                              @"peopleMax"        : peopleMax,
                              @"peopleMin"        : peopleMin,
                              @"categoryId"       : [category categoryId],
+                             @"private"          : privateAccess,
                              @"datetimeStart"    : [NSString stringWithFormat:@"%f",
                                                     [datetimeStart timeIntervalSince1970]],
                              @"datetimeEnd"      : [NSString stringWithFormat:@"%f",
@@ -562,15 +618,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"CreateSqeedDidComplete"
                                                                   object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               [[NSNotificationCenter defaultCenter] postNotificationName:@"CreateSqeedDidFail"
                                                                   object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
               NSLog(@"Error: %@", error);
           }];
 }
 
 + (void)deleteSqeed:(NSString *)sqeedId {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager =
     [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{
@@ -584,10 +645,14 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteSqeedDidComplete"
                                                                   object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteSqeedDidFail"
                                                                   object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
               NSLog(@"Error: %@", error);
           }];
 }
@@ -595,6 +660,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
 # pragma mark - Action on users
 
 + (void)addFriend :(NSString *)userId :(NSString *)friendId {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -609,15 +675,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           
           [[NSNotificationCenter defaultCenter] postNotificationName:@"AddFriendDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"AddFriendDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)deleteFriend :(NSString *)userId :(NSString *)friendId {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{
@@ -632,15 +703,20 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           
           [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteFriendDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"DeleteFriendDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
 
 + (void)invite :(NSString *)sqeedId :(NSArray *)friendIds {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSError *error;
@@ -662,10 +738,14 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           
           [[NSNotificationCenter defaultCenter] postNotificationName:@"InviteDidComplete"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"InviteDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }
@@ -681,9 +761,11 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateUserDidComplete"
                                                         object:nil];
+    
 }
 
 + (void)searchUser :(NSString *)string {
+  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
   NSDictionary *params = @{ @"function" : @"search",
@@ -710,10 +792,14 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                                                               object:nil
                                                             userInfo:[NSDictionary dictionaryWithObject:users
                                                                                                  forKey:@"users"]];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchDidFail"
                                                               object:nil];
+          
+          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           NSLog(@"Error: %@", error);
       }];
 }

@@ -17,6 +17,7 @@
 		71290CDD1A1FC63E003B7B09 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CDC1A1FC63E003B7B09 /* ChatViewController.m */; };
 		71290CDF1A1FE619003B7B09 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71290CDE1A1FE619003B7B09 /* MapKit.framework */; };
 		71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */; };
+		712B54701A65717700AAABE2 /* SqeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 712B546F1A65717700AAABE2 /* SqeedsViewController.m */; };
 		714B1E3A1A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 714B1E391A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m */; };
 		714B1E631A42226D0025BEA6 /* add70.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1E431A42226C0025BEA6 /* add70.png */; };
 		714B1E641A42226D0025BEA6 /* rarr.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B1E441A42226C0025BEA6 /* rarr.png */; };
@@ -127,6 +128,8 @@
 		71290CDE1A1FE619003B7B09 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		71290CE01A1FF2F8003B7B09 /* CreateSqeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSqeedViewController.h; sourceTree = "<group>"; };
 		71290CE11A1FF2F8003B7B09 /* CreateSqeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSqeedViewController.m; sourceTree = "<group>"; };
+		712B546E1A65717700AAABE2 /* SqeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqeedsViewController.h; sourceTree = "<group>"; };
+		712B546F1A65717700AAABE2 /* SqeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqeedsViewController.m; sourceTree = "<group>"; };
 		714B1E381A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsSqeedTableViewCell.h; sourceTree = "<group>"; };
 		714B1E391A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsSqeedTableViewCell.m; sourceTree = "<group>"; };
 		714B1E431A42226C0025BEA6 /* add70.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add70.png; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 		71290CC81A1F9C83003B7B09 /* Sqeed */ = {
 			isa = PBXGroup;
 			children = (
+				712B546E1A65717700AAABE2 /* SqeedsViewController.h */,
+				712B546F1A65717700AAABE2 /* SqeedsViewController.m */,
 				71290CE61A1FF31C003B7B09 /* CreateSqeed */,
 				710E257E1A1BBE4E007C137E /* ActivitiesViewController.h */,
 				710E257F1A1BBE4E007C137E /* ActivitiesViewController.m */,
@@ -812,6 +817,7 @@
 				71CB18961A20EA7500A6FB93 /* ModalWhenViewController.m in Sources */,
 				71CDAE681A2B503500186FDB /* DatabaseManager.m in Sources */,
 				71290CDA1A1FC61E003B7B09 /* MapViewController.m in Sources */,
+				712B54701A65717700AAABE2 /* SqeedsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

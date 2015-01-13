@@ -28,7 +28,7 @@
 @property NSDate* dateStart;
 @property NSDate* dateEnd;
 
-@property NSString* publicAccess;
+@property NSString* privateAccess;
 
 @property NSArray* going;
 @property NSArray* waiting;
