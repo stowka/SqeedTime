@@ -15,8 +15,9 @@
 @property (strong, nonatomic) IBOutlet NSNumber* userId;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-- (IBAction)login:(id)sender;
+- (IBAction)loginRequest:(id)sender;
 - (IBAction)signin:(id)sender;
 - (IBAction)backgroundClick:(id)sender;
+- (void)login;
 @end
 

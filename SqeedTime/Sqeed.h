@@ -39,8 +39,6 @@
 - (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd;
 
 - (void) setDescription: (NSString *)_description;
-- (void) fetchGoing;
-- (void) fetchWaiting;
 
 - (void) createSqeed;
 @end

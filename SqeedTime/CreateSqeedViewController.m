@@ -35,12 +35,6 @@ NSDictionary* categories;
     [[[CacheHandler instance] currentUser] fetchFriendRequests];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    NSLog(@"will appear %@", whereLabel.text);
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -65,7 +59,7 @@ NSDictionary* categories;
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [_whatToDoTextField resignFirstResponder];
-    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:row]];
+    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:(int)row]];
 }
 
 - (IBAction)backgroundClick:(id)sender

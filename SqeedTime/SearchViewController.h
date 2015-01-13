@@ -11,6 +11,5 @@
 @interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UISearchBar *search;
 @property (strong, nonatomic) IBOutlet UITableView *table;
-@property (weak, nonatomic) NSArray *results;
 
 @end

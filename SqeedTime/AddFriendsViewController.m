@@ -22,6 +22,7 @@ NSArray* friends;
 - (void)viewDidLoad {
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
+    [[self friendTable] setScrollsToTop:YES];
     [_switchButton setOn:NO animated:NO];
 }
 

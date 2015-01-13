@@ -17,6 +17,6 @@
 
 - (IBAction)display:(id)sender;
 - (IBAction)createSqeed:(id)sender;
-- (void) showDetails :(NSIndexPath *)indexPath;
+- (void) showDetails :(NSNotification *)notification;
 - (void) refresh;
 @end

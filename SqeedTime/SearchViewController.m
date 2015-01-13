@@ -8,29 +8,48 @@
 
 #import "SearchViewController.h"
 #import "SearchFriendTableViewCell.h"
+#import "DatabaseManager.h"
+#import "CacheHandler.h"
+#import "AlertHelper.h"
 
 @interface SearchViewController ()
 
 @end
 
+NSArray* result;
+
 @implementation SearchViewController
 
 @synthesize search;
 @synthesize table;
-@synthesize results;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [[self table] setScrollsToTop:YES];
+    [[self search] becomeFirstResponder];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh:)
+                                                 name:@"SearchDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(displayError)
+                                                 name:@"SearchDidFail"
+                                               object:nil];
+}
+
+- (void) refresh :(NSNotification *)notification {
+    result = [[notification userInfo] objectForKey:@"users"];
+    [[self table] reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [result count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -38,9 +57,17 @@
     SearchFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                  cellIdentifier];
     if (cell == nil) {
-        cell = [[SearchFriendTableViewCell alloc]initWithStyle:
-                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[SearchFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                reuseIdentifier:cellIdentifier];
     }
+    
+    [[cell name] setText :[NSString stringWithFormat:@"%@ %@",
+                           [result[[indexPath row]] forname],
+                           [result[[indexPath row]] name]]];
+    
+    [[cell username] setText :[NSString stringWithFormat:@"%@",
+                               [result[[indexPath row]] username]]];
+    
     return cell;
 }
 
@@ -48,14 +75,14 @@
     return UIStatusBarStyleLightContent;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Search: %@", [searchBar text]);
+    [[self search] resignFirstResponder];
+    [DatabaseManager searchUser :[searchBar text]];
 }
-*/
+
+- (void) displayError {
+    [AlertHelper error:@"Error! Please try again in a moment."];
+}
 
 @end

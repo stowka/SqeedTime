@@ -26,6 +26,8 @@ NSArray* friendRequests;
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
     friendRequests = [[[CacheHandler instance] currentUser] friendRequests];
+    [[self friendTable] setScrollsToTop:YES];
+    
     ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
         if (!granted) {
             NSLog(@"Access to address book denied.");

@@ -36,7 +36,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="backgroundClick:" destination="x5A-6p-PRh" eventType="editingDidEndOnExit" id="DoK-d4-2EL"/>
-                                    <action selector="login:" destination="x5A-6p-PRh" eventType="editingDidEnd" id="Ta3-Hr-hYX"/>
+                                    <action selector="loginRequest:" destination="vXZ-lx-hvc" eventType="editingDidEnd" id="5iP-aP-1DJ"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-Gk-I9d">
@@ -52,7 +52,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Kp9-Nl-pjI"/>
+                                    <action selector="loginRequest:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IMf-be-sCp"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6ph-5Z-MtD">
@@ -136,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYt-d8-508" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="-1378"/>
+            <point key="canvasLocation" x="826" y="-1426"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="pmw-Rf-jvY">
@@ -214,7 +214,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="vXZ-lx-hvc" kind="presentation" identifier="segueLogOut" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="V2b-Ks-Mah"/>
+                                            <segue destination="vXZ-lx-hvc" kind="show" identifier="segueLogOut" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="V2b-Ks-Mah"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -228,12 +228,11 @@
                         <outlet property="settingsTable" destination="6h0-MU-8Yr" id="hS0-9W-6j7"/>
                         <segue destination="28n-fn-VLc" kind="presentation" identifier="segueEditSettings" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="bFh-iX-yY5"/>
                         <segue destination="hKB-xQ-lZu" kind="presentation" identifier="segueDisplaySettings" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="7hh-fJ-mpI"/>
-                        <segue destination="Ycb-dW-Xg8" kind="show" identifier="segueMap" id="mE5-KL-4OM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wad-Ua-Pt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="-622"/>
+            <point key="canvasLocation" x="826" y="-623"/>
         </scene>
         <!--Edit Settings View Controller-->
         <scene sceneID="Ip4-DN-tgW">
@@ -296,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6R-XB-Shw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="-622"/>
+            <point key="canvasLocation" x="1377" y="-623"/>
         </scene>
         <!--Activities View Controller-->
         <scene sceneID="Lzi-E6-dEk">
@@ -322,7 +321,7 @@
                                         <barButtonItem key="leftBarButtonItem" image="icon-settings.png" id="oRw-Xa-8Xw">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="QHu-ow-cMf" kind="presentation" identifier="segueSettings" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="bL9-u0-cdO"/>
+                                                <segue destination="QHu-ow-cMf" kind="show" identifier="segueSettings" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="bL9-u0-cdO"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cYe-J4-zY3">
@@ -569,7 +568,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5ka-iy-JrJ">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="W5V-3o-ge3" kind="showDetail" identifier="segueBackToActivities" id="1Oc-jq-8dQ"/>
+                                                <segue destination="W5V-3o-ge3" kind="show" identifier="segueBackToActivities" id="1Oc-jq-8dQ"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="7SD-wE-QfW">
@@ -645,54 +644,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wjB-pZ-4GH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1377" y="867"/>
-        </scene>
-        <!--Map View Controller-->
-        <scene sceneID="AIP-i8-8UO">
-            <objects>
-                <viewController id="Ycb-dW-Xg8" customClass="MapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="S6E-oy-z5v"/>
-                        <viewControllerLayoutGuide type="bottom" id="cud-rn-QaF"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TzV-9F-xU1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lwr-E3-fD0">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                            </mapView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pp-rN-H7N">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="barTintColor" red="0.26274509800000001" green="0.61568627450000002" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Map" id="CXI-rd-uAC">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="kby-E9-2kf"/>
-                                        <barButtonItem key="leftBarButtonItem" image="larr.png" id="QvI-FF-hCh">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <connections>
-                                                <segue destination="QHu-ow-cMf" kind="presentation" identifier="segueMapBack" modalTransitionStyle="coverVertical" id="DLR-Pq-FP4"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="l06-5i-HAl">
-                                            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="mapView" destination="Lwr-E3-fD0" id="0BE-CV-N55"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QPm-r5-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="268" y="867"/>
         </scene>
         <!--Swipe View Controller-->
         <scene sceneID="W6j-jz-xEk">
@@ -826,7 +777,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="fmC-T3-pwO" kind="showDetail" identifier="segueAddFriends" id="QM2-FP-RHw"/>
+                                            <segue destination="fmC-T3-pwO" kind="show" identifier="segueAddFriends" id="QM2-FP-RHw"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqv-mF-j99">
@@ -1486,8 +1437,8 @@
         <image name="who.png" width="256" height="229"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UY6-gh-lXK"/>
-        <segue reference="bL9-u0-cdO"/>
-        <segue reference="Z64-wf-tf3"/>
+        <segue reference="NFk-E1-8zc"/>
+        <segue reference="iOI-Sj-far"/>
+        <segue reference="FVu-YV-z4i"/>
     </inferredMetricsTieBreakers>
 </document>

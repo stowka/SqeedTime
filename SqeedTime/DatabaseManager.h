@@ -24,8 +24,6 @@
 + (void) fetchFriendRequests :(User *)user;
 
 + (void) fetchSqeed: (Sqeed*) sqeed :(NSIndexPath *)indexPath;
-+ (void) fetchGoing: (Sqeed*) sqeed;
-+ (void) fetchWaiting: (Sqeed*) sqeed;
 
 + (void) fetchCategories;
 
@@ -39,6 +37,4 @@
 + (void) updateUser :(NSString *)userId :(NSString *)email :(NSString *)forname :(NSString *)name :(NSString *)phoneExt :(NSString *)phone :(NSString *)facebookUrl;
 
 + (void) searchUser :(NSString *)string;
-
-+ (UIViewController*) visibleViewController :(UIViewController *)rootViewController;
 @end

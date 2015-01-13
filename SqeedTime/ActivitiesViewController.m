@@ -13,6 +13,7 @@
 #import "SettingsViewController.h"
 #import "CacheHandler.h"
 #import "DatabaseManager.h"
+#import "AlertHelper.h"
 
 @interface ActivitiesViewController ()
 
@@ -30,31 +31,64 @@ int flag = -1;
     if (NULL == [[[CacheHandler instance] currentUser] username])
         [[CacheHandler instance] setCurrentUser:[[CacheHandler instance] tmpUser]];
     
-    [self handleRefresh:self];
+    [self fetchSqeeds:self];
+    [[self sqeedsTable] setScrollsToTop:YES];
     
-    // PULL DOWN TO REFRESH
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    //self.refreshControl.backgroundColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
-    self.refreshControl.tintColor = [UIColor colorWithRed:255 / 255 green:50 / 255 blue:3 / 255 alpha:1];
-    [self.refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.sqeedsTable addSubview:self.refreshControl];
+    // Observers for FetchSqeeds (all sqeeds)
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"FetchSqeedsDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(displayError)
+                                                 name:@"FetchSqeedsDidFail"
+                                               object:nil];
+    
+    // Observers for FetchSqeed (show details)
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showDetails:)
+                                                 name:@"FetchSqeedDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(displayError)
+                                                 name:@"FetchSqeedDidFail"
+                                               object:nil];
+    
+    // Other observers
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"ParticipateDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"NotParticipateDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"DeleteDidComplete"
+                                               object:nil];
+    
+    // Pull down to refresh
+    [self setRefreshControl :[[UIRefreshControl alloc] init]];
+    [[self refreshControl] setTintColor:[UIColor colorWithRed:255 / 255
+                                                        green:50 / 255
+                                                         blue:3 / 255
+                                                        alpha:1]];
+    [[self refreshControl] addTarget:self
+                              action:@selector(fetchSqeeds:) forControlEvents:UIControlEventValueChanged];
+    [[self sqeedsTable] addSubview:[self refreshControl]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - REFRESH HANDLER
-- (void)handleRefresh:(id)sender {
-//    if (self.refreshControl) {
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"MMM d, h:mm a"];
-//        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-//        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor grayColor]
-//                                                                    forKey:NSForegroundColorAttributeName];
-//        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-//        self.refreshControl.attributedTitle = attributedTitle;
-//    }
+#pragma mark - Reload data
+- (void)fetchSqeeds:(id)sender {
     if ([[self segmentedControl] selectedSegmentIndex] == 0)
         [[[CacheHandler instance] currentUser] fetchMySqeeds];
     else
@@ -62,54 +96,40 @@ int flag = -1;
 }
 
 - (IBAction)display:(id)sender {
-    [self handleRefresh:sender];
-}
-
-- (IBAction)createSqeed:(id)sender {
-    
+    [self fetchSqeeds:sender];
 }
 
 - (void) refresh {
-    if ([[NSDate date] timeIntervalSinceReferenceDate] - [[[CacheHandler instance] lastUpdate] timeIntervalSinceReferenceDate] > 1) {
-        flag = -1;
-        [[CacheHandler instance] setLastUpdate:[NSDate date]];
-        if ([[self segmentedControl] selectedSegmentIndex] == 0) {
-            sqeeds = [[[CacheHandler instance] currentUser] mySqeeds];
-        } else {
-            sqeeds = [[[CacheHandler instance] currentUser] discovered];
-        }
-        [self.sqeedsTable reloadData];
+    flag = -1;
+    [[CacheHandler instance] setLastUpdate:[NSDate date]];
+    
+    if ([[self segmentedControl] selectedSegmentIndex] == 0) {
+        sqeeds = [[[CacheHandler instance] currentUser] mySqeeds];
+    } else {
+        sqeeds = [[[CacheHandler instance] currentUser] discovered];
     }
-    [self.refreshControl endRefreshing];
-    NSLog(@"Refreshing...");
-}
+    
+    [[self sqeedsTable] reloadData];
+    [[self refreshControl] endRefreshing];
 
-#pragma mark - PASS DATA BY SEGUE
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"segueSqeed"]) {
-        NSIndexPath *indexPath = [self.sqeedsTable indexPathForCell:sender];
-        SqeedViewController* destViewController = segue.destinationViewController;
-        SqeedTableViewCell* cell = (SqeedTableViewCell*)[self.sqeedsTable cellForRowAtIndexPath:indexPath];
-        destViewController.eventId = cell.eventId;
-    }
+    NSLog(@"Reloading data");
 }
 
 
-#pragma mark - DISPLAY SQEEDS IN A TABLE VIEW
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#pragma mark - Display Sqeed list
+- (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [sqeeds count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == flag) {
+- (CGFloat)tableView :(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([indexPath row] == flag) {
         return 300;
     } else {
         return 120;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView :(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == flag) {
         static NSString *cellIdentifier = @"cellDetailsID";
         DetailsSqeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
@@ -134,13 +154,28 @@ int flag = -1;
         cell.eventAnswer.selectedSegmentIndex = -1;
         cell.eventDecline.hidden = YES;
         cell.eventJoin.hidden = YES;
-        if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",[[[CacheHandler instance] currentUser] forname], [[[CacheHandler instance] currentUser] name]]]) {
+        if ([cell.eventCreator.text isEqualToString:[NSString stringWithFormat:@"by %@ %@",
+                                                     [[[CacheHandler instance] currentUser] forname],
+                                                     [[[CacheHandler instance] currentUser] name]]]) {
+            
+            // TODO - does not work!
+            UIView *selectionColor = [[UIView alloc] init];
+            [selectionColor setBackgroundColor :[UIColor colorWithRed:35 / 255.0
+                                                                green:186 / 255.0
+                                                                 blue:18 / 255.0
+                                                                alpha:0.5]];
+            [cell setSelectedBackgroundView :selectionColor];
+            
             cell.eventDeleteButton.hidden = NO;
             cell.eventAnswer.hidden = YES;
             cell.eventPeopleGoingWaiting.hidden = NO;
             cell.eventPeopleGoingWaiting.selectedSegmentIndex = -1;
-            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going", [[[[CacheHandler instance] tmpSqeed] going] count]] forSegmentAtIndex:0];
-            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting", [[[[CacheHandler instance] tmpSqeed] waiting] count]] forSegmentAtIndex:1];
+            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going",
+                                                    [[[[CacheHandler instance] tmpSqeed] going] count]]
+                                 forSegmentAtIndex:0];
+            [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting",
+                                                    [[[[CacheHandler instance] tmpSqeed] waiting] count]]
+                                 forSegmentAtIndex:1];
         } else {
             cell.eventDeleteButton.hidden = YES;
             cell.eventAnswer.hidden = NO;
@@ -148,15 +183,19 @@ int flag = -1;
             if (cell.eventAnswer.selectedSegmentIndex == 0) {
                 cell.eventPeopleGoingWaiting.hidden = NO;
                 cell.eventPeopleGoingWaiting.selectedSegmentIndex = -1;
-                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going", [[[[CacheHandler instance] tmpSqeed] going] count]] forSegmentAtIndex:0];
-                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting", [[[[CacheHandler instance] tmpSqeed] waiting] count]] forSegmentAtIndex:1];
+                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d going",
+                                                        [[[[CacheHandler instance] tmpSqeed] going] count]]
+                                     forSegmentAtIndex:0];
+                [cell.eventPeopleGoingWaiting setTitle:[NSString stringWithFormat:@"%d waiting",
+                                                        [[[[CacheHandler instance] tmpSqeed] waiting] count]]
+                                     forSegmentAtIndex:1];
                 cell.eventAnswer.hidden = YES;
                 cell.eventDecline.hidden = NO;
             } else {
                 cell.eventPeopleGoingWaiting.hidden = YES;
             }
             
-            if ([[self segmentedControl] selectedSegmentIndex] == 1) {
+            if (1 == [[self segmentedControl] selectedSegmentIndex]) {
                 cell.eventAnswer.hidden = YES;
                 cell.eventPeopleGoingWaiting.hidden = YES;
                 cell.eventJoin.hidden = NO;
@@ -189,23 +228,32 @@ int flag = -1;
     }
 }
 
-- (void) showDetails :(NSIndexPath *)indexPath {
-    // [tableView indexPathsForVisibleRows]
+# pragma mark - Show Sqeed details
+- (void) showDetails :(NSNotification *)notification {
+    NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
     [[_sqeedsTable cellForRowAtIndexPath:indexPath] setSelected:NO];
     int old_flag = flag;
-    flag = indexPath.row;
+    flag = (int)[indexPath row];
     [_sqeedsTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [_sqeedsTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-
-// DISPLAY SQEED AFTER SELECTION
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
     if (flag != indexPath.row) {
         [DatabaseManager fetchSqeed:sqeeds[indexPath.row] :indexPath];
     } else {
         flag = -1;
         [_sqeedsTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+# pragma mark - General
+
+- (IBAction)createSqeed:(id)sender {
+    // TODO
+}
+
+- (void)displayError {
+    [AlertHelper error :@"Error!\nPlease try again in a moment."];
 }
 @end

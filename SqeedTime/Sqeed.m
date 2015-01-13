@@ -52,28 +52,8 @@
 
 - (void) setDescription:(NSString *)_description {
     sqeedDescription = _description;
-    [self fetchGoing];
-    [self fetchWaiting];
     
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
-}
-
-- (void) fetchGoing {
-    if (self == nil)
-    {
-        NSLog(@"Sqeed not initialized!");
-        return;
-    }
-    [DatabaseManager fetchGoing:self];
-}
-
-- (void) fetchWaiting {
-    if (self == nil)
-    {
-        NSLog(@"Sqeed not initialized!");
-        return;
-    }
-    [DatabaseManager fetchWaiting:self];
 }
 
 - (void) createSqeed

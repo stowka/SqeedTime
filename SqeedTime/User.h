@@ -10,12 +10,12 @@
 
 @interface User : NSObject
 @property NSString* userId;
-@property (readonly) NSString* username;
+@property NSString* username;
 @property NSString* name;
 @property NSString* forname;
 @property NSString* email;
-@property (readonly) NSString* phoneNumber;
-@property (readonly) NSString* salt;
+@property NSString* phoneNumber;
+@property NSString* salt;
 @property NSArray* mySqeeds;
 @property NSArray* discovered;
 @property NSArray* friends;
