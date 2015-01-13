@@ -43,7 +43,8 @@
 }
 
 - (IBAction)saveToCache:(id)sender {
-    NSLog(@"Saving people to cache...");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMinMaxDidChange"
+                                                        object:nil];
     [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
     [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
 }

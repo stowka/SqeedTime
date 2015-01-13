@@ -33,6 +33,27 @@ NSDictionary* categories;
     [super viewDidLoad];
     [[[CacheHandler instance] currentUser] fetchFriends];
     [[[CacheHandler instance] currentUser] fetchFriendRequests];
+    
+    // Add observers to update labels
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePlaceLabel)
+                                                 name:@"ModalPlaceDidChange"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatePeopleMinMaxLabel)
+                                                 name:@"ModalPeopleMinMaxDidChange"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDescriptionLabel)
+                                                 name:@"ModalDescriptionDidChange"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDateLabel)
+                                                 name:@"ModalDateDidChange"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,14 +133,29 @@ NSDictionary* categories;
     }
 }
 
-- (void) updateLabels {
-    NSLog(@"Updating labels: %@", [[[CacheHandler instance] createSqeed] place]);
-    NSLog(@"%@", whatLabel.text);
-    whereLabel.text = [[[CacheHandler instance] createSqeed] place];
-    whatLabel.text = [[[CacheHandler instance] createSqeed] sqeedDescription];
+- (void) updatePlaceLabel {
+    if ([[[[CacheHandler instance] createSqeed] place] isEqualToString:@""])
+        [whereLabel setText :@"Place"];
+    else
+        [whereLabel setText :[[[CacheHandler instance] createSqeed] place]];
+}
+
+- (void) updatePeopleMinMaxLabel {
     NSString *peopleLabel = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] createSqeed] peopleMin], [[[CacheHandler instance] createSqeed] peopleMax]];
-    whoLabel.text = peopleLabel;
-    whereLabel.text = [[[[CacheHandler instance] createSqeed] dateStart] description];
+    [whoLabel setText :peopleLabel];
+}
+
+- (void) updateDescriptionLabel {
+    if ([[[[CacheHandler instance] createSqeed] sqeedDescription] isEqualToString:@""])
+        [whatLabel setText :@"Description"];
+    else
+        [whatLabel setText :[[[CacheHandler instance] createSqeed] sqeedDescription]];
+}
+
+- (void) updateDateLabel {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, HH:mm"];
+    [whenLabel setText :[formatter stringFromDate:[[[CacheHandler instance] createSqeed] dateStart]]];
 }
 
 - (IBAction)showWherePopUp:(id)sender {

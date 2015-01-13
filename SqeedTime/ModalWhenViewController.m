@@ -54,7 +54,8 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    NSLog(@"Saving dates to cache...");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalDateDidChange"
+                                                        object:nil];
     [[[CacheHandler instance] createSqeed] setDateStart:[[self startPicker] date]];
     [[[CacheHandler instance] createSqeed] setDateEnd:[[self endPicker] date]];
 }

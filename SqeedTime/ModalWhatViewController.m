@@ -48,7 +48,8 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    NSLog(@"Saving description to cache...");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalDescriptionDidChange"
+                                                                                                 object:nil];
     [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self description] text]];
 }
 @end

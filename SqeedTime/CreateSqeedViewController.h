@@ -17,7 +17,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *whatLabel;
 @property (strong, nonatomic) IBOutlet UILabel *whenLabel;
 
-- (void) updateLabels;
+- (void) updatePlaceLabel;
+- (void) updatePeopleMinMaxLabel;
+- (void) updateDescriptionLabel;
+- (void) updateDateLabel;
 
 - (IBAction)showWherePopUp:(id)sender;
 - (IBAction)showHowManyPeoplePopUp:(id)sender;

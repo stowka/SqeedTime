@@ -31,7 +31,7 @@ int flag = -1;
     if (NULL == [[[CacheHandler instance] currentUser] username])
         [[CacheHandler instance] setCurrentUser:[[CacheHandler instance] tmpUser]];
     
-    [self fetchSqeeds:self];
+    [self fetchSqeeds];
     [[self sqeedsTable] setScrollsToTop:YES];
     
     // Observers for FetchSqeeds (all sqeeds)
@@ -58,17 +58,17 @@ int flag = -1;
     
     // Other observers
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refresh)
+                                             selector:@selector(fetchSqeeds)
                                                  name:@"ParticipateDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refresh)
+                                             selector:@selector(fetchSqeeds)
                                                  name:@"NotParticipateDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refresh)
+                                             selector:@selector(fetchSqeeds)
                                                  name:@"DeleteDidComplete"
                                                object:nil];
     
@@ -79,7 +79,7 @@ int flag = -1;
                                                          blue:3 / 255
                                                         alpha:1]];
     [[self refreshControl] addTarget:self
-                              action:@selector(fetchSqeeds:) forControlEvents:UIControlEventValueChanged];
+                              action:@selector(fetchSqeeds) forControlEvents:UIControlEventValueChanged];
     [[self sqeedsTable] addSubview:[self refreshControl]];
 }
 
@@ -88,7 +88,8 @@ int flag = -1;
 }
 
 #pragma mark - Reload data
-- (void)fetchSqeeds:(id)sender {
+
+- (void)fetchSqeeds {
     if ([[self segmentedControl] selectedSegmentIndex] == 0)
         [[[CacheHandler instance] currentUser] fetchMySqeeds];
     else
@@ -96,7 +97,7 @@ int flag = -1;
 }
 
 - (IBAction)display:(id)sender {
-    [self fetchSqeeds:sender];
+    [self fetchSqeeds];
 }
 
 - (void) refresh {
@@ -111,12 +112,12 @@ int flag = -1;
     
     [[self sqeedsTable] reloadData];
     [[self refreshControl] endRefreshing];
-
     NSLog(@"Reloading data");
 }
 
 
 #pragma mark - Display Sqeed list
+
 - (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [sqeeds count];
 }
@@ -229,6 +230,7 @@ int flag = -1;
 }
 
 # pragma mark - Show Sqeed details
+
 - (void) showDetails :(NSNotification *)notification {
     NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
     [[_sqeedsTable cellForRowAtIndexPath:indexPath] setSelected:NO];

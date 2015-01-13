@@ -33,6 +33,10 @@ static CacheHandler* instance = nil;
         [instance setCurrentSqeed:[[Sqeed alloc] init]];
         [instance setCreateSqeed:[[Sqeed alloc] init]];
         [[instance createSqeed] setTitle:@""];
+        [[instance createSqeed] setPeopleMin:@"1"];
+        [[instance createSqeed] setPeopleMax:@"10"];
+        [[instance createSqeed] setDateStart:[NSDate date]];
+        [[instance createSqeed] setDateEnd:[NSDate dateWithTimeIntervalSinceNow:3600 * 3]];
         [[instance createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:0]];
     }
     return instance;

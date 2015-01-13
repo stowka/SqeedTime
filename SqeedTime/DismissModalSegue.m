@@ -14,9 +14,8 @@
 - (void)perform
 {
     UIViewController *sourceViewController = self.sourceViewController;
-    CreateSqeedViewController *destViewController = self.destinationViewController;
     [sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [destViewController updateLabels];
+        
     }];
 }
 

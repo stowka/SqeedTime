@@ -49,7 +49,8 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    NSLog(@"Saving place to cache...");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPlaceDidChange"
+                                                        object:nil];
     [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
 }
 @end
