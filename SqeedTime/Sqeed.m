@@ -20,6 +20,10 @@
 @synthesize peopleMax;
 @synthesize dateStart;
 @synthesize dateEnd;
+@synthesize dateStart2;
+@synthesize dateEnd2;
+@synthesize dateStart3;
+@synthesize dateEnd3;
 @synthesize privateAccess;
 @synthesize going;
 @synthesize waiting;
@@ -46,6 +50,24 @@
     peopleMax = _peopleMax;
     dateStart = _dateStart;
     dateEnd = _dateEnd;
+    privateAccess = @"0";
+    [[CacheHandler instance] setLastUpdate:[NSDate date]];
+}
+
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 {
+    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMin :_peopleMax :_dateStart :_dateEnd];
+    dateStart2 = _dateStart2;
+    dateEnd2 = _dateEnd2;
+    privateAccess = @"0";
+    [[CacheHandler instance] setLastUpdate:[NSDate date]];
+}
+
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 :(NSDate *)_dateStart3 :(NSDate *)_dateEnd3 {
+    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMin :_peopleMax :_dateStart :_dateEnd];
+    dateStart2 = _dateStart2;
+    dateEnd2 = _dateEnd2;
+    dateStart2 = _dateStart3;
+    dateEnd2 = _dateEnd3;
     privateAccess = @"0";
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }

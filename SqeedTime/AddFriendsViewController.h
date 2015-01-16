@@ -13,6 +13,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *publicPrivate;
 @property (strong, nonatomic) IBOutlet UISwitch *switchButton;
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (IBAction)save:(id)sender;
 - (IBAction)switchAccess:(id)sender;
 

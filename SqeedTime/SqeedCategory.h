@@ -12,6 +12,6 @@
 @property NSString* categoryId;
 @property NSString* label;
 
-- (id) initWithIndex :(int)index;
-- (id) initWithId :(NSString *)_categoryId;
+- (id)initWithIndex :(int)index;
+- (id)initWithId :(NSString *)_categoryId;
 @end

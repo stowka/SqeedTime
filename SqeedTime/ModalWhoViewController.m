@@ -19,9 +19,12 @@
 @synthesize close;
 @synthesize min;
 @synthesize max;
+@synthesize errorLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [errorLabel setHidden:YES];
     min.text = [[[CacheHandler instance] createSqeed] peopleMin];
     max.text = [[[CacheHandler instance] createSqeed] peopleMax];
     min.text = [min.text isEqualToString:@""] ? @"1" : min.text;
@@ -43,9 +46,13 @@
 }
 
 - (IBAction)saveToCache:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMinMaxDidChange"
-                                                        object:nil];
     [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
     [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMinMaxDidChange"
+                                                        object:nil];
+}
+
+- (IBAction)close:(id)sender {
+    [self performSegueWithIdentifier:@"segueDimissWho" sender:self];
 }
 @end

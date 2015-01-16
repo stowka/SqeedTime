@@ -28,8 +28,7 @@ NSDictionary* categories;
 @synthesize whereLabel;
 @synthesize whoLabel;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [[[CacheHandler instance] currentUser] fetchFriends];
     [[[CacheHandler instance] currentUser] fetchFriendRequests];
@@ -56,35 +55,30 @@ NSDictionary* categories;
                                                object:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)thePickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)thePickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
     
-    return [[[CacheHandler instance] categories] count];
+    return [[[CacheHandler instance] categories] count] + 1;
 }
 
-- (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return (NSString*)[[[CacheHandler instance] categories][row] label];
+- (NSString*)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return row == 0 ? @"Pick a category" : (NSString*)[[[CacheHandler instance] categories][row - 1] label];
 }
 
-- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [_whatToDoTextField resignFirstResponder];
-    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:(int)row]];
+    if (0 != row)
+        [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:((int)row - 1)]];
 }
 
-- (IBAction)backgroundClick:(id)sender
-{
+- (IBAction)backgroundClick:(id)sender {
     [_whatToDoTextField resignFirstResponder];
 }
 
@@ -104,7 +98,7 @@ NSDictionary* categories;
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"segueAddFriends"])
-        return ![[_whatToDoTextField text] isEqualToString:@""];
+        return (![[_whatToDoTextField text] isEqualToString:@""] && [_categoryPickerView selectedRowInComponent:0]);
     else
         return YES;
 }

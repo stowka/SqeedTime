@@ -27,6 +27,10 @@
 
 @property NSDate* dateStart;
 @property NSDate* dateEnd;
+@property NSDate* dateStart2;
+@property NSDate* dateEnd2;
+@property NSDate* dateStart3;
+@property NSDate* dateEnd3;
 
 @property NSString* privateAccess;
 

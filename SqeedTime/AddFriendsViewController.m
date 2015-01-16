@@ -24,6 +24,12 @@ NSArray* friends;
     friends = [[[CacheHandler instance] currentUser] friends];
     [[self friendTable] setScrollsToTop:YES];
     [_switchButton setOn:NO animated:NO];
+    [[self loadingView] setHidden:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showSqeed:)
+                                                 name:@"InviteDidComplete"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,15 +64,11 @@ NSArray* friends;
     return cell;
 }
 - (IBAction)save:(id)sender {
+    [[self loadingView] setHidden:NO];
+    [[self activityIndicator] startAnimating];
     if (![[[[CacheHandler instance] createSqeed] title] isEqualToString:@""]) {
         NSLog(@"Saving...");
-        [_saveButton setTitle:@""];
-        
-        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
-        [self navigationItem].rightBarButtonItem = barButton;
-        [activityIndicator startAnimating];
-        
+
         if (nil == [[[CacheHandler instance] createSqeed] sqeedDescription])
             [[[CacheHandler instance] createSqeed] setSqeedDescription: @""];
     
@@ -166,6 +168,11 @@ NSArray* friends;
         self.publicPrivate.image = [UIImage imageNamed:@"public.png"];
         [[[CacheHandler instance] createSqeed] setPrivateAccess:@"0"];
     }
+}
+
+- (void)showSqeed:(NSNotification *)notification {
+    [[self activityIndicator] stopAnimating];
+    [self performSegueWithIdentifier:@"segueBackToActivities" sender:self];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

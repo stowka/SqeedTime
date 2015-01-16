@@ -26,7 +26,23 @@ NSArray* friendRequests;
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
     friendRequests = [[[CacheHandler instance] currentUser] friendRequests];
+    
     [[self friendTable] setScrollsToTop:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetch)
+                                                 name:@"AddFriendDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetch)
+                                                 name:@"DeleteFriendDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"FetchUserDidComplete"
+                                               object:nil];
     
     ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
         if (!granted) {
@@ -72,7 +88,8 @@ NSArray* friendRequests;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    NSLog(@"%d %d", [indexPath section], [indexPath row]);
+    if (0 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellFriendID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                 cellIdentifier];
@@ -81,11 +98,19 @@ NSArray* friendRequests;
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
     
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", [friends[indexPath.row] forname], [friends[indexPath.row] name]];
-        cell.username.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row] username]];
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", [friends[[indexPath row]] forname], [friends[[indexPath row]] name]]];
+        [[cell username] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] username]]];
+        
+        [cell setUserId:[friends [[indexPath row]] userId]];
+        
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
+        [[cell buttonAdd] setHighlighted:YES];
+        
+        [cell setIsFriend:@"YES"];
+        
         return cell;
-    } else if (indexPath.section == 1) {
+    } else if (1 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellFriendID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                      cellIdentifier];
@@ -94,11 +119,19 @@ NSArray* friendRequests;
                     UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", [friendRequests[indexPath.row] forname], [friendRequests[indexPath.row] name]];
-        cell.username.text = [NSString stringWithFormat:@"%@", [friendRequests[indexPath.row] username]];
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", [friendRequests[[indexPath row]] forname], [friendRequests[[indexPath row]] name]]];
+        [[cell username] setText:[NSString stringWithFormat:@"%@", [friendRequests[[indexPath row]] username]]];
+        
+        [cell setUserId:[friendRequests [[indexPath row]] userId]];
+    
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
+        [[cell buttonAdd] setHighlighted:NO];
+        
+        [cell setIsFriend:@"NO"];
+        
         return cell;
-    } else if (indexPath.section == 2) {
+    } else if (2 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellContactID";
         ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                      cellIdentifier];
@@ -106,22 +139,29 @@ NSArray* friendRequests;
             cell = [[ContactTableViewCell alloc]initWithStyle:
                     UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        NSString * lastName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:indexPath.row]), kABPersonLastNameProperty);
-        NSString * firstName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:indexPath.row]), kABPersonFirstNameProperty);
-        //NSString * phone = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:indexPath.row]), kABPersonPhoneProperty);
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", lastName, firstName];
+        NSString *lastName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonLastNameProperty);
+        NSString *firstName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonFirstNameProperty);
+        //NSString *phone = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonPhoneProperty);
+        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", lastName, firstName]];
         return cell;
     } else {
         return nil;
     }
 }
 
+- (void)refresh {
+    friends = [[[CacheHandler instance] currentUser] friends];
+    friendRequests = [[[CacheHandler instance] currentUser] friendRequests];
+    [[self friendTable] reloadData];
+}
+
+- (void)fetch {
+    [[[CacheHandler instance] currentUser] fetchFriends];
+    [[[CacheHandler instance] currentUser] fetchFriendRequests];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0 || indexPath.section == 1) {
-        return 44;
-    } else {
-        return 62;
-    }
+    return 62;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

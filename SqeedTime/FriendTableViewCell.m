@@ -7,6 +7,8 @@
 //
 
 #import "FriendTableViewCell.h"
+#import "DatabaseManager.h"
+#import "CacheHandler.h"
 
 @interface FriendTableViewCell()
 
@@ -20,5 +22,16 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+- (IBAction)add:(id)sender {
+    if ([_isFriend isEqualToString:@"NO"]) {
+        [DatabaseManager addFriend:[[[CacheHandler instance] currentUser] userId] :_userId];
+        [self setIsFriend:@"YES"];
+        [[self buttonAdd] setHighlighted:YES];
+    } else {
+        [DatabaseManager deleteFriend:[[[CacheHandler instance] currentUser] userId] :_userId];
+        [self setIsFriend:@"NO"];
+        [[self buttonAdd] setHighlighted:NO];
+    }
 }
 @end

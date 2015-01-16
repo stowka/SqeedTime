@@ -14,5 +14,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *username;
 @property (strong, nonatomic) IBOutlet UIButton *button;
 
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *isFriend;
+
 
 @end

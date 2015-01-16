@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "ActivitiesViewController.h"
+#import "SqeedsViewController.h"
 #import "CreateSqeedViewController.h"
 #import "FriendsViewController.h"
 #import "CacheHandler.h"
@@ -20,10 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(displayError)
+                                                 name:@"PressNextDidComplete"
+                                               object:nil];
     self.swipeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SwipeViewController"];
     self.swipeViewController.dataSource = self;
     
-    ActivitiesViewController* startingViewController = [self viewActivities];
+    SqeedsViewController* startingViewController = [self viewSqeeds];
     NSArray *viewControllers = @[startingViewController];
     [self.swipeViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
@@ -42,17 +46,15 @@
 
 #pragma mark - Page View Controller Data Source
 
-- (UIViewController*)pageViewController:(UIPageViewController*)pageViewController viewControllerBeforeViewController:(UIViewController*)viewController
-{
-    if ([viewController class] == [ActivitiesViewController class])
+- (UIViewController*)pageViewController:(UIPageViewController*)pageViewController viewControllerBeforeViewController:(UIViewController*)viewController {
+    if ([viewController class] == [SqeedsViewController class])
         return nil;
     else if ([viewController class] == [CreateSqeedViewController class])
-        return [self viewActivities];
+        return [self viewSqeeds];
     return [self viewCreateSqeed];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
-{
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     if ([viewController class] == [FriendsViewController class])
         return nil;
     if ([viewController class] == [CreateSqeedViewController class]) {
@@ -64,20 +66,17 @@
     return [self viewCreateSqeed];
 }
 
-- (ActivitiesViewController*)viewActivities
-{
-    ActivitiesViewController *activitiesVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ActivitiesViewController"];
-    return activitiesVC;
+- (SqeedsViewController*)viewSqeeds {
+    SqeedsViewController *sqeedsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SqeedsViewController"];
+    return sqeedsVC;
 }
 
-- (CreateSqeedViewController*)viewCreateSqeed
-{
+- (CreateSqeedViewController*)viewCreateSqeed {
     CreateSqeedViewController *createSqeedVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateSqeedViewController"];
     return createSqeedVC;
 }
 
-- (FriendsViewController*)viewFriends
-{
+- (FriendsViewController*)viewFriends {
     FriendsViewController *friendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AddFriendsToSqeedViewController"];
     return friendsVC;
 }

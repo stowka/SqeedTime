@@ -18,4 +18,5 @@
 @property (strong) UIImage* imageOfUnderlyingView;
 
 - (IBAction)saveToCache:(id)sender;
+- (IBAction)close:(id)sender;
 @end

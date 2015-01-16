@@ -159,12 +159,11 @@ int flag = -1;
                                                      [[[CacheHandler instance] currentUser] forname],
                                                      [[[CacheHandler instance] currentUser] name]]]) {
             
-            // TODO - does not work!
             UIView *selectionColor = [[UIView alloc] init];
             [selectionColor setBackgroundColor :[UIColor colorWithRed:35 / 255.0
                                                                 green:186 / 255.0
                                                                  blue:18 / 255.0
-                                                                alpha:0.5]];
+                                                                alpha:0.1]];
             [cell setSelectedBackgroundView :selectionColor];
             
             cell.eventDeleteButton.hidden = NO;
@@ -178,6 +177,11 @@ int flag = -1;
                                                     [[[[CacheHandler instance] tmpSqeed] waiting] count]]
                                  forSegmentAtIndex:1];
         } else {
+            UIView *selectionColor = [[UIView alloc] init];
+            [selectionColor setBackgroundColor :[UIColor colorWithRed:35 / 255.0
+                                                                green:186 / 255.0
+                                                                 blue:18 / 255.0
+                                                                alpha:0.1]];
             cell.eventDeleteButton.hidden = YES;
             cell.eventAnswer.hidden = NO;
             cell.eventAnswer.selectedSegmentIndex = cell.hasAnswered;
@@ -202,7 +206,6 @@ int flag = -1;
                 cell.eventJoin.hidden = NO;
             }
         }
-        
         return cell;
     } else {
         static NSString *cellIdentifier = @"cellID";

@@ -10,6 +10,11 @@
 
 @interface FriendTableViewCell : UITableViewCell
 
+- (IBAction)add:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *buttonAdd;
 @property (strong, nonatomic) IBOutlet UILabel* name;
 @property (strong, nonatomic) IBOutlet UILabel* username;
+
+@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *isFriend;
 @end

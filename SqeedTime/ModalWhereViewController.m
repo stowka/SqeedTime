@@ -53,4 +53,8 @@
                                                         object:nil];
     [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
 }
+
+- (IBAction)close:(id)sender {
+    [self performSegueWithIdentifier:@"segueDimissWhere" sender:self];
+}
 @end

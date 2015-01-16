@@ -52,4 +52,8 @@
                                                                                                  object:nil];
     [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self description] text]];
 }
+
+- (IBAction)close:(id)sender {
+    [self performSegueWithIdentifier:@"segueDimissWhat" sender:self];
+}
 @end

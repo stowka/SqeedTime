@@ -7,19 +7,31 @@
 //
 
 #import "SearchFriendTableViewCell.h"
+#import "DatabaseManager.h"
+#import "CacheHandler.h"
 
 @implementation SearchFriendTableViewCell
+
+@synthesize userId;
+@synthesize isFriend;
 
 - (void)awakeFromNib {
     // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    [super setSelected:NO animated:animated];
 }
 
 - (IBAction)add:(id)sender {
+    if ([isFriend isEqualToString:@"NO"]) {
+        [DatabaseManager addFriend:[[[CacheHandler instance] currentUser] userId] :userId];
+        [self setIsFriend:@"YES"];
+        [[self button] setHighlighted:YES];
+    } else {
+        [DatabaseManager deleteFriend:[[[CacheHandler instance] currentUser] userId] :userId];
+        [self setIsFriend:@"NO"];
+        [[self button] setHighlighted:NO];
+    }
 }
 @end

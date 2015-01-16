@@ -11,7 +11,8 @@
 @interface ModalWhatViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) IBOutlet UIButton *close;
-@property (strong, nonatomic, readonly) IBOutlet UITextField *description;
+@property (strong, nonatomic, readonly) IBOutlet UITextView *description;
 @property (strong) UIImage* imageOfUnderlyingView;
 - (IBAction)saveToCache:(id)sender;
+- (IBAction)close:(id)sender;
 @end

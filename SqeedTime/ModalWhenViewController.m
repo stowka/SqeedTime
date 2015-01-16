@@ -33,7 +33,7 @@
     [self.view addSubview:close];
     [self.view addSubview:startLabel];
     [self.view addSubview:startPicker];
-    [self.endPicker setDate:[NSDate dateWithTimeIntervalSinceNow:3600]];
+    [self.endPicker setDate:[NSDate dateWithTimeIntervalSinceNow:(3600 * 3)]];
     [self.view addSubview:endLabel];
     [self.view addSubview:endPicker];
 }
@@ -58,6 +58,10 @@
                                                         object:nil];
     [[[CacheHandler instance] createSqeed] setDateStart:[[self startPicker] date]];
     [[[CacheHandler instance] createSqeed] setDateEnd:[[self endPicker] date]];
+    [[self endPicker] setMinimumDate:[NSDate dateWithTimeInterval:(60 * 15) sinceDate:[[self startPicker] date]]];
 }
 
+- (IBAction)close:(id)sender {
+    [self performSegueWithIdentifier:@"segueDimissWhen" sender:self];
+}
 @end

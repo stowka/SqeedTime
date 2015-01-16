@@ -28,6 +28,7 @@ NSArray* result;
     [[self table] setScrollsToTop:YES];
     [[self search] becomeFirstResponder];
     
+    // Add observers for search
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh:)
                                                  name:@"SearchDidComplete"
@@ -36,6 +37,16 @@ NSArray* result;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(displayError)
                                                  name:@"SearchDidFail"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reload)
+                                                 name:@"AddFriendDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh:)
+                                                 name:@"DeleteFriendDidComplete"
                                                object:nil];
 }
 
@@ -68,6 +79,21 @@ NSArray* result;
     [[cell username] setText :[NSString stringWithFormat:@"%@",
                                [result[[indexPath row]] username]]];
     
+    [cell setUserId:[result[[indexPath row]] userId]];
+    
+    if ([[[[CacheHandler instance] currentUser] friends] containsObject:result[[indexPath row]]]) {
+        [cell setIsFriend:@"YES"];
+    } else {
+        [cell setIsFriend:@"NO"];
+    }
+    
+    UIImage *image = [UIImage imageNamed:@"remove.png"];
+    [[cell button] setImage:image forState:UIControlStateHighlighted];
+    
+    if ([[cell isFriend] isEqualToString:@"YES"]) {
+        [[cell button] setHighlighted:YES];
+    }
+    
     return cell;
 }
 
@@ -83,6 +109,10 @@ NSArray* result;
 
 - (void) displayError {
     [AlertHelper error:@"Error! Please try again in a moment."];
+}
+
+- (void) reload {
+    [DatabaseManager searchUser :[[self search] text]];
 }
 
 @end
