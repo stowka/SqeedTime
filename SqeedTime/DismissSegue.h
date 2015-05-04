@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DismissSegue : UIStoryboardSegue
+@interface DismissSegue:UIStoryboardSegue
 
 @end

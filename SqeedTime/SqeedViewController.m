@@ -15,8 +15,7 @@
 
 @implementation SqeedViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [[CacheHandler instance] setCurrentSqeed:[[Sqeed alloc] init:self.eventId]];
     

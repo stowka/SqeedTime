@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CacheHandler.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +17,61 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    NSString* token = [[[[deviceToken description]
+                                stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                               stringByReplacingOccurrencesOfString: @">" withString: @""]
+                              stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    [[CacheHandler instance] setPn_token:token];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
+    NSLog(@"Failed to get push notifications token, error: %@", error);
+    [[CacheHandler instance] setPn_token:@""];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"NOTIFICATION: %@", userInfo);
+    
+    if (application.applicationState == UIApplicationStateActive) { // APP IS OPEN
+        
+        if ([userInfo[@"aps"][@"alert"][@"kind"] isEqualToString:@"invitation"]) {
+            NSLog(@"NOTIFICATION: Invitation");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"InvitationReveived"
+                                                                object:nil
+                                                              userInfo:userInfo];
+        } else if ([userInfo[@"aps"][@"alert"][@"kind"] isEqualToString:@"message"]) {
+            NSLog(@"NOTIFICATION: Message");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MessageReveived"
+                                                                object:nil
+                                                              userInfo:userInfo];
+        } else if ([userInfo[@"aps"][@"alert"][@"kind"] isEqualToString:@"request"]) {
+            NSLog(@"NOTIFICATION: Request");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RequestReveived"
+                                                                object:nil
+                                                              userInfo:userInfo];
+        } else {
+            NSLog(@"NOTIFICATION: Other");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DidReceiveRemoteNotification"
+                                                                object:nil
+                                                              userInfo:userInfo];
+        }
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1];
+    } else {
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -35,7 +89,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

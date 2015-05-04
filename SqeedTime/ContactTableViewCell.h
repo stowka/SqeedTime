@@ -12,5 +12,8 @@
 
 - (IBAction)sms:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *phoneNumber;
+
+@property (strong, nonatomic) NSString *phone;
 
 @end

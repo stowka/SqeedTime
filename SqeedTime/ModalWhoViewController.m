@@ -19,25 +19,32 @@
 @synthesize close;
 @synthesize min;
 @synthesize max;
-@synthesize errorLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    if ([[CacheHandler instance] editing]) {
+        [min setText:[[[CacheHandler instance] editSqeed] peopleMin]];
+        [max setText:[[[CacheHandler instance] editSqeed] peopleMax]];
+    } else {
+        [min setText:[[[CacheHandler instance] createSqeed] peopleMin]];
+        [max setText:[[[CacheHandler instance] createSqeed] peopleMax]];
+    }
     
-    [errorLabel setHidden:YES];
-    min.text = [[[CacheHandler instance] createSqeed] peopleMin];
-    max.text = [[[CacheHandler instance] createSqeed] peopleMax];
-    min.text = [min.text isEqualToString:@""] ? @"1" : min.text;
-    max.text = [max.text isEqualToString:@""] ? @"10" : max.text;
-    self.view.backgroundColor = [UIColor clearColor];
-    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    backView.image = imageOfUnderlyingView;
-    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-    [self.view addSubview:backView];
-    [self.view addSubview:icon];
-    [self.view addSubview:close];
-    [self.view addSubview:min];
-    [self.view addSubview:max];
+    
+    [min setText:[min.text isEqualToString:@""] ? @"1" : [min text]];
+    [max setText:[max.text isEqualToString:@""] ? @"10" : [max text]];
+    [[self view] setBackgroundColor:[UIColor clearColor]];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:[[self view] frame]];
+    [backView setImage:imageOfUnderlyingView];
+    [backView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6]];
+    [[self view] addSubview:backView];
+    [[self view] addSubview:icon];
+    [[self view] addSubview:close];
+    [[self view] addSubview:min];
+    [[self view] addSubview:max];
+    [[min layer] setCornerRadius:8];
+    [[max layer] setCornerRadius:8];
     [[self min] becomeFirstResponder];
 }
 
@@ -45,14 +52,34 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    //first, check if the new string is numeric only. If not, return NO;
+    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    if ([newString rangeOfCharacterFromSet:characterSet].location != NSNotFound) {
+        return NO;
+    }
+    
+    return [newString doubleValue] < 30 && [newString doubleValue] > 1;
+}
+
 - (IBAction)saveToCache:(id)sender {
-    [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
-    [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
+    NSLog(@"saved");
+    if ([[CacheHandler instance] editing]) {
+        [[[CacheHandler instance] editSqeed] setPeopleMin:[[self min] text]];
+        [[[CacheHandler instance] editSqeed] setPeopleMax:[[self max] text]];
+    } else {
+        [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
+        [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMinMaxDidChange"
                                                         object:nil];
 }
 
 - (IBAction)close:(id)sender {
-    [self performSegueWithIdentifier:@"segueDimissWho" sender:self];
+    [self saveToCache:sender];
+    [self performSegueWithIdentifier:@"segueDismissWho"
+                              sender:self];
 }
 @end

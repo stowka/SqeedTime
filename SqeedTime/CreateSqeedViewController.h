@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateSqeedViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate>
+@interface CreateSqeedViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIPickerView *categoryPickerView;
 @property (strong, nonatomic) IBOutlet UITextField *whatToDoTextField;
 
@@ -16,6 +16,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *whoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *whatLabel;
 @property (strong, nonatomic) IBOutlet UILabel *whenLabel;
+@property (strong, nonatomic) IBOutlet UITableView *autocompleteTableView;
+
+@property (strong, nonatomic) NSArray *allSuggestions;
+@property (strong, nonatomic) NSMutableArray *suggestions;
 
 - (void) updatePlaceLabel;
 - (void) updatePeopleMinMaxLabel;

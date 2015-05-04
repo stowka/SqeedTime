@@ -11,6 +11,7 @@
 #import "EditSettingsViewController.h"
 #import "DisplaySettingsViewController.h"
 #import "CacheHandler.h"
+#import "DatabaseManager.h"
 
 @interface SettingsViewController ()
 
@@ -20,33 +21,31 @@
 
 NSDictionary* myData;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showLogin)
+                                                 name:@"LogoutDidComplete"
+                                               object:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return section ? @"More informations" : @"My account";
 }
 
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return section ? 4 : 5;
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    return section ? 4 : 4;
 }
 
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
-{
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     static NSString *cellIdentifier = @"settingsCellID";
     SettingsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:
                                 cellIdentifier];
@@ -55,10 +54,8 @@ NSDictionary* myData;
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    if (!indexPath.section)
-    {
-        switch(indexPath.row)
-        {
+    if (!indexPath.section) {
+        switch(indexPath.row) {
             case 0:
                 cell.title.text = @"Username"; // NON MUTABLE
                 cell.value.text = [[[CacheHandler instance] currentUser] username];
@@ -72,16 +69,11 @@ NSDictionary* myData;
                 cell.key = @"phone";
                 break;
             case 2:
-                cell.title.text = @"Forname";
-                cell.value.text = [[[CacheHandler instance] currentUser] forname];
-                cell.key = @"forname";
-                break;
-            case 3:
                 cell.title.text = @"Name";
                 cell.value.text = [[[CacheHandler instance] currentUser] name];
                 cell.key = @"name";
                 break;
-            case 4:
+            case 3:
                 cell.title.text = @"E-mail";
                 cell.value.text = [[[CacheHandler instance] currentUser] email];
                 cell.key = @"email";
@@ -92,10 +84,8 @@ NSDictionary* myData;
                 break;
         }
     }
-    else
-    {
-        switch(indexPath.row)
-        {
+    else {
+        switch(indexPath.row) {
             case 0:
                 cell.title.text = @"Privacy Policy";
                 cell.value.text = @"❯";
@@ -122,15 +112,13 @@ NSDictionary* myData;
     return cell;
 }
 
--(void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
-{
+-(void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     NSString* segue;
     if (!indexPath.section && (indexPath.row >= 2 && indexPath.row <= 4))       // MY ACCOUNT
         segue = @"segueEditSettings";
     else if (indexPath.section)                                                 // MORE INFO
         segue = @"segueDisplaySettings";
-    else
-    {
+    else {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
@@ -139,19 +127,16 @@ NSDictionary* myData;
     [tableView reloadData];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.settingsTable indexPathForSelectedRow];
     EditSettingsViewController* destViewController = segue.destinationViewController;
     SettingsTableViewCell* cell = (SettingsTableViewCell*)[self.settingsTable cellForRowAtIndexPath:indexPath];
-    if ([segue.identifier isEqualToString:@"segueEditSettings"])
-    {
+    if ([segue.identifier isEqualToString:@"segueEditSettings"]) {
         destViewController.key = cell.key;
         destViewController.value = cell.value.text;
     }
     
-    if ([segue.identifier isEqualToString:@"segueDisplaySettings"])
-    {
+    if ([segue.identifier isEqualToString:@"segueDisplaySettings"]) {
          // TODO
     }
 }
@@ -160,4 +145,19 @@ NSDictionary* myData;
     return UIStatusBarStyleLightContent;
 }
 
+- (IBAction)logout:(id)sender {
+    // Destroy local data
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *session = @"off";
+    NSString *userId = @"";
+    NSString *token = @"";
+    [prefs setObject:session forKey:@"session"];
+    [prefs setObject:userId forKey:@"userId"];
+    [prefs setObject:token forKey:@"token"];
+    [DatabaseManager logout];
+}
+
+- (void)showLogin {
+    [self performSegueWithIdentifier:@"segueLogout" sender:self];
+}
 @end

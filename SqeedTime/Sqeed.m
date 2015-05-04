@@ -24,6 +24,8 @@
 @synthesize dateEnd2;
 @synthesize dateStart3;
 @synthesize dateEnd3;
+@synthesize dateOptions;
+@synthesize voteIds;
 @synthesize privateAccess;
 @synthesize going;
 @synthesize waiting;
@@ -78,8 +80,6 @@
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
-- (void) createSqeed
-{
-    //[DatabaseManager createSqeed:title :place :description :peopleMin :peopleMax :[category categoryId] : : :<#(NSString *)#>];
+- (void) createSqeed {
 }
 @end

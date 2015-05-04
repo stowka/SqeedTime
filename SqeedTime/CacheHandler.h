@@ -18,10 +18,17 @@
 @property (strong) Sqeed *currentSqeed;
 @property (strong) Sqeed *tmpSqeed;
 @property (strong) Sqeed *createSqeed;
+@property (strong) Sqeed *editSqeed;
+@property (strong) NSArray *friendIds;
+@property (strong) NSArray *phoneMatches;
 @property (weak, nonatomic) NSDate *lastUpdate;
 @property (strong) NSArray *categories;
 @property (strong, nonatomic) NSString *token;
-@property (weak, nonatomic) NSArray *contacts;
+@property (strong, nonatomic) NSString *pn_token;
+@property (strong, nonatomic) NSArray *contacts;
+@property (weak, nonatomic) NSArray *chatMessages;
+@property BOOL editing;
+@property (strong, nonatomic) NSString *categoryFilter;
 
 + (CacheHandler*) instance;
 @end

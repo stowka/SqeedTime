@@ -16,7 +16,15 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *startPicker;
 @property (strong, nonatomic) IBOutlet UIDatePicker *endPicker;
 @property (strong) UIImage* imageOfUnderlyingView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *dateChoice;
+@property (strong, nonatomic) IBOutlet UISwitch *active;
+@property (strong, nonatomic) IBOutlet UILabel *activeLabel;
 
+@property BOOL date2Active;
+@property BOOL date3Active;
+
+- (IBAction)switchDate:(id)sender;
+- (IBAction)activate:(id)sender;
 - (IBAction)saveToCache:(id)sender;
 - (IBAction)close:(id)sender;
 @end

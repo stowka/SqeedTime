@@ -10,31 +10,40 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "Sqeed.h"
+#import "VoteOption.h"
 
 @interface DatabaseManager : NSObject
 
-+ (void) loginRequest : (NSString *)username :(NSString *)password;
-+ (void) login :(NSString *)userId :(NSString *)password;
++ (void) login :(NSString *)username :(NSString *)password;
 
++ (void) fetchUser;
 + (void) fetchUser :(User *)user;
-+ (void) fetchMySqeeds :(User *)user;
-+ (void) fetchDiscovered :(User *)user;
-+ (void) fetchDiscovered :(User *)user :(SqeedCategory *)category;
-+ (void) fetchFriends :(User *)user;
-+ (void) fetchFriendRequests :(User *)user;
++ (void) fetchMySqeeds;
++ (void) fetchDiscovered;
++ (void) fetchDiscovered :(NSString *)categoryId;
++ (void) fetchFriends;
 
-+ (void) fetchSqeed: (Sqeed*) sqeed :(NSIndexPath *)indexPath;
++ (void) fetchSqeed :(Sqeed*)sqeed :(NSIndexPath *)indexPath;
 
 + (void) fetchCategories;
 
-+ (void) participate :(NSString *)userId :(NSString *)sqeedId;
-+ (void) notParticipate :(NSString *)userId :(NSString *)sqeedId;
-+ (void) addFriend :(NSString *)userId :(NSString *)friendId;
-+ (void) deleteFriend :(NSString *)userId :(NSString *)friendId;
-+ (void) createSqeed :(NSString *)title :(NSString *)place :(User *)creator :(NSString *)description :(NSString *)peopleMax :(NSString *)peopleMin :(SqeedCategory *) category :(NSDate *)datetimeStart :(NSDate *)datetimeEnd :(NSString *)privateAccess :(NSArray *)friends;
++ (void) participate :(NSString *)sqeedId;
++ (void) notParticipate :(NSString *)sqeedId;
++ (void) addFriend :(NSString *)friendId;
++ (void) deleteFriend :(NSString *)friendId;
++ (void) createSqeed :(NSString *)title :(NSString *)place :(NSString *)description :(NSString *)peopleMax :(NSString *)peopleMin :(SqeedCategory *) category :(NSDate *)datetimeStart :(NSDate *)datetimeEnd :(NSString *)privateAccess;
++ (void)addDatetimeOption :(NSString *)sqeedId :(VoteOption *)voteOption :(int)index;
++ (void)deleteDatetimeOption :(NSString *)sqeedId :(NSString *)voteId;
++ (void)vote :(NSString *)sqeedId :(NSString *)optionId;
 + (void) deleteSqeed :(NSString *)sqeedId;
 + (void) invite :(NSString *)sqeedId :(NSArray *)friendIds;
-+ (void) updateUser :(NSString *)userId :(NSString *)email :(NSString *)forname :(NSString *)name :(NSString *)phoneExt :(NSString *)phone :(NSString *)facebookUrl;
++ (void) updateUser :(NSString *)email :(NSString *)name :(NSString *)phoneExt :(NSString *)phone :(NSString *)facebookUrl;
 
 + (void) searchUser :(NSString *)string;
++ (void)searchByPhones :(NSArray *)phoneArray;
+
++ (void) postMessage :(NSString *)sqeedId :(NSString *)message;
++ (void) fetchMessages :(NSString *)sqeedId;
+
++ (void) logout;
 @end

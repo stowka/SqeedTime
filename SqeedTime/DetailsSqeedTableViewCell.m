@@ -42,11 +42,11 @@
 }
 
 - (IBAction)join:(id)sender {
-    [DatabaseManager participate:[[CacheHandler instance] currentUserId] :_eventId];
+    [DatabaseManager participate:[self eventId]];
 }
 
 - (IBAction)decline:(id)sender {
-    [DatabaseManager notParticipate:[[CacheHandler instance] currentUserId] :_eventId];
+    [DatabaseManager notParticipate:[self eventId]];
 }
 
 - (IBAction)deleteSqeed:(id)sender {
@@ -55,9 +55,9 @@
 
 - (IBAction)answer:(id)sender {
     if ([_eventAnswer selectedSegmentIndex] == 0) {
-        [DatabaseManager participate:[[CacheHandler instance] currentUserId] :_eventId];
+        [DatabaseManager participate:[self eventId]];
     } else if ([_eventAnswer selectedSegmentIndex] == 1) {
-        [DatabaseManager notParticipate:[[CacheHandler instance] currentUserId] :_eventId];
+        [DatabaseManager notParticipate:[self eventId]];
     }
 }
 
@@ -65,11 +65,11 @@
     NSMutableString *people = [NSMutableString stringWithCapacity:2000];
     if ([_eventPeopleGoingWaiting selectedSegmentIndex] == 0) {
         for (User *user in [[[CacheHandler instance] tmpSqeed] going])
-            [people appendFormat:@"%@ %@\n", [user forname], [user name]];
+            [people appendFormat:@"%@\n", [user name]];
         [AlertHelper show:[NSString stringWithFormat:@"%@", people] :@"Going"];
     } else {
         for (User *user in [[[CacheHandler instance] tmpSqeed] waiting])
-            [people appendFormat:@"%@ %@\n", [user forname], [user name]];
+            [people appendFormat:@"%@\n", [user name]];
         [AlertHelper show:[NSString stringWithFormat:@"%@", people] :@"Waiting"];
     }
     [_eventPeopleGoingWaiting setSelectedSegmentIndex:-1];

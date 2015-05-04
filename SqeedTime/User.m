@@ -15,7 +15,6 @@
 @synthesize userId;
 @synthesize username;
 @synthesize name;
-@synthesize forname;
 @synthesize email;
 @synthesize phoneNumber;
 @synthesize salt;
@@ -23,7 +22,8 @@
 @synthesize mySqeeds;
 @synthesize discovered;
 @synthesize friends;
-@synthesize friendRequests;
+@synthesize requests;
+@synthesize pending;
 
 @synthesize phone;
 @synthesize phoneExt;
@@ -35,10 +35,15 @@
     return self;
 }
 
-- (void) set: (NSString*) _username : (NSString*) _name : (NSString*) _forname : (NSString*) _email : (NSString*) _phoneExt : (NSString*) _phone : (NSString*) _salt : (NSString*) _facebookUrl {
+- (void) set :(NSString*) _username
+             :(NSString*) _name
+             :(NSString*) _email
+             :(NSString*) _phoneExt
+             :(NSString*) _phone
+             :(NSString*) _salt
+             :(NSString*) _facebookUrl {
     username = _username;
     name = _name;
-    forname = _forname;
     email = _email;
     phoneExt = _phoneExt;
     phone = _phone;
@@ -54,7 +59,7 @@
         NSLog(@"User not initialized!");
         return;
     }
-    [DatabaseManager fetchMySqeeds:self];
+    [DatabaseManager fetchMySqeeds];
 }
 
 - (void) fetchDiscovered {
@@ -63,7 +68,7 @@
         NSLog(@"User not initialized!");
         return;
     }
-    [DatabaseManager fetchDiscovered:self];
+    [DatabaseManager fetchDiscovered];
 }
 
 - (void) fetchFriends {
@@ -72,33 +77,22 @@
         NSLog(@"User not initialized!");
         return;
     }
-    [DatabaseManager fetchFriends:self];
-}
-
-- (void) fetchFriendRequests {
-    if (self == nil)
-    {
-        NSLog(@"User not initialized!");
-        return;
-    }
-    [DatabaseManager fetchFriendRequests:self];
+    [DatabaseManager fetchFriends];
 }
 
 - (void) update:(NSString*) key :(NSString*) value {
     NSMutableDictionary* userData = [[NSMutableDictionary alloc] init];
-    [userData setObject:forname forKey:@"forname"];
     [userData setObject:name forKey:@"name"];
     [userData setObject:email forKey:@"email"];
     [userData setObject:facebookUrl forKey:@"facebookUrl"];
     
     [userData setObject:value forKey:key];
     
-    forname = [userData valueForKey:@"forname"];
     name = [userData valueForKey:@"name"];
     email = [userData valueForKey:@"email"];
     facebookUrl = [userData valueForKey:@"facebookUrl"];
     
-    [DatabaseManager updateUser:userId :email :name :forname :phoneExt :phone :facebookUrl];
+    [DatabaseManager updateUser :email :name :phoneExt :phone :facebookUrl];
 }
 
 - (BOOL)isEqual :(id)other {

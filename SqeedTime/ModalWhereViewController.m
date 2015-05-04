@@ -21,15 +21,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    place.text = [[[CacheHandler instance] createSqeed] place];
+    if ([[CacheHandler instance] editing])
+        [place setText:[[[CacheHandler instance] editSqeed] place]];
+    else
+        [place setText:[[[CacheHandler instance] createSqeed] place]];
     self.view.backgroundColor = [UIColor clearColor];
-    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:[[self view]frame]];
     backView.image = imageOfUnderlyingView;
     backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-    [self.view addSubview:backView];
-    [self.view addSubview:icon];
-    [self.view addSubview:close];
-    [self.view addSubview:place];
+    [[self view] addSubview:backView];
+    [[self view] addSubview:icon];
+    [[self view] addSubview:close];
+    [[self view] addSubview:place];
     [[self place] becomeFirstResponder];
 }
 
@@ -49,12 +52,16 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
+    if ([[CacheHandler instance] editing]) {
+        [[[CacheHandler instance] editSqeed] setPlace:[[self place] text]];
+    } else {
+        [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPlaceDidChange"
                                                         object:nil];
-    [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
 }
 
 - (IBAction)close:(id)sender {
-    [self performSegueWithIdentifier:@"segueDimissWhere" sender:self];
+    [self performSegueWithIdentifier:@"segueDismissWhere" sender:self];
 }
 @end

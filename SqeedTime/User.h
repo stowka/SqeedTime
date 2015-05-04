@@ -12,25 +12,24 @@
 @property NSString* userId;
 @property NSString* username;
 @property NSString* name;
-@property NSString* forname;
 @property NSString* email;
 @property NSString* phoneNumber;
 @property NSString* salt;
 @property NSArray* mySqeeds;
 @property NSArray* discovered;
 @property NSArray* friends;
-@property NSArray* friendRequests;
+@property NSArray* requests;
+@property NSArray* pending;
 
 @property NSString* phone;
 @property NSString* phoneExt;
 @property NSString* facebookUrl;
 
 - (id) init: (NSString*) _userId;
-- (void) set: (NSString*) _username : (NSString*) _name : (NSString*) _forname : (NSString*) _email : (NSString*) _phoneExt : (NSString*) _phone : (NSString*) _salt : (NSString*) _facebookUrl;
+- (void) set: (NSString *)_username :(NSString *)_name :(NSString *)_email :(NSString *)_phoneExt :(NSString *)_phone :(NSString *)_salt :(NSString *)_facebookUrl;
 - (void) fetchMySqeeds;
 - (void) fetchDiscovered;
 - (void) fetchFriends;
-- (void) fetchFriendRequests;
 - (void) update:(NSString*) key :(NSString*) value;
 - (BOOL)isEqual :(id)other;
 @end

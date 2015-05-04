@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+- (IBAction)logout:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView* settingsTable;
 @end

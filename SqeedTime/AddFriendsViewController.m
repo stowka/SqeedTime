@@ -18,6 +18,7 @@
 NSArray* friends;
 
 @implementation AddFriendsViewController
+@synthesize navigationBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +26,18 @@ NSArray* friends;
     [[self friendTable] setScrollsToTop:YES];
     [_switchButton setOn:NO animated:NO];
     [[self loadingView] setHidden:YES];
+    
+    [[navigationBar topItem] setTitle:@"Propose to"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(addNextOption:)
+                                                 name:@"CreateSqeedDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(addNextOption:)
+                                                 name:@"AddDatetimeOptionDidComplete"
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(showSqeed:)
@@ -53,7 +66,7 @@ NSArray* friends;
         cell.name.text = @"Invite all";
         cell.username.text = @"";
     } else {
-        cell.name.text = [NSString stringWithFormat:@"%@ %@", [friends[indexPath.row - 1] forname], [friends[indexPath.row - 1] name]];
+        cell.name.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row - 1] name]];
         cell.username.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row - 1] username]];
         cell.userId = [friends[indexPath.row - 1] userId];
     }
@@ -85,10 +98,11 @@ NSArray* friends;
             [[[CacheHandler instance] createSqeed] setDateStart: [NSDate date]];
         
         if (nil == [[[CacheHandler instance] createSqeed] dateEnd])
-            [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeIntervalSinceNow:3600]];
+            [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeInterval:1800 sinceDate:[[[CacheHandler instance] createSqeed] dateStart]]];
     
         NSArray *selectedIndexPaths = [_friendTable indexPathsForSelectedRows];
         NSMutableArray *friendIds = [[NSMutableArray alloc] init];
+        NSMutableArray *dateOptions = [[NSMutableArray alloc] init];
     
         for (NSIndexPath *indexPath in selectedIndexPaths) {
             if (0 != indexPath.row) {
@@ -96,19 +110,29 @@ NSArray* friends;
                 [friendIds addObject:[tmp_cell userId]];
             }
         }
+        
+        if (nil != [[[CacheHandler instance] createSqeed] dateStart2]) {
+            [dateOptions addObject:[[VoteOption alloc] init :@"0" :[[[CacheHandler instance] createSqeed] dateStart2] :[[[CacheHandler instance] createSqeed] dateEnd2] :@"0"]];
+        }
+        
+        if (nil != [[[CacheHandler instance] createSqeed] dateStart3]) {
+            [dateOptions addObject:[[VoteOption alloc] init :@"0" :[[[CacheHandler instance] createSqeed] dateStart3] :[[[CacheHandler instance] createSqeed] dateEnd3] :@"0"]];
+        }
+        
+        [[CacheHandler instance] setFriendIds:friendIds];
+        [[[CacheHandler instance] createSqeed] setDateOptions:dateOptions];
     
         [DatabaseManager createSqeed
             :[[[CacheHandler instance] createSqeed] title]
             :[[[CacheHandler instance] createSqeed] place]
-            :[[CacheHandler instance] currentUser]
             :[[[CacheHandler instance] createSqeed] sqeedDescription]
             :[[[CacheHandler instance] createSqeed] peopleMax]
             :[[[CacheHandler instance] createSqeed] peopleMin]
             :[[[CacheHandler instance] createSqeed] sqeedCategory]
             :[[[CacheHandler instance] createSqeed] dateStart]
             :[[[CacheHandler instance] createSqeed] dateEnd]
-            :[[[CacheHandler instance] createSqeed] privateAccess]
-            :friendIds];
+            :[[[CacheHandler instance] createSqeed] privateAccess]];
+        
     } else {
         NSLog(@"Error: You are a dumbass!");
     }
@@ -172,7 +196,24 @@ NSArray* friends;
 
 - (void)showSqeed:(NSNotification *)notification {
     [[self activityIndicator] stopAnimating];
-    [self performSegueWithIdentifier:@"segueBackToActivities" sender:self];
+    
+    // EMPTY createSqeed in cache
+    [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+    [self performSegueWithIdentifier:@"segueInviteFriendsDidComplete" sender:self];
+}
+
+- (void)addNextOption:(NSNotification *)notification {
+    int index = (int)[[notification userInfo][@"index"] integerValue];
+    
+    if ([[[[CacheHandler instance] createSqeed] dateOptions] count] == 0) { // NO OPTION AT ALL
+        [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId] :[[CacheHandler instance] friendIds]];
+    }
+    
+    if ([[[[CacheHandler instance] createSqeed] dateOptions] count] == index) { // NO MORE OPTION
+        [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId] :[[CacheHandler instance] friendIds]];
+    } else {
+        [DatabaseManager addDatetimeOption :[[[CacheHandler instance] createSqeed] sqeedId] :[[[CacheHandler instance] createSqeed] dateOptions][index] :index];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

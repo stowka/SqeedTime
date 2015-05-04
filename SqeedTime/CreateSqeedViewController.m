@@ -8,13 +8,14 @@
 
 #import "CreateSqeedViewController.h"
 #import "CacheHandler.h"
-#import "SwipeViewController.h"
 #import "UIImage+ImageEffects.h"
 
 #import "ModalWhatViewController.h"
 #import "ModalWhenViewController.h"
 #import "ModalWhereViewController.h"
 #import "ModalWhoViewController.h"
+
+#import "SuggestionTableViewCell.h"
 
 @interface CreateSqeedViewController ()
 
@@ -27,11 +28,20 @@ NSDictionary* categories;
 @synthesize whenLabel;
 @synthesize whereLabel;
 @synthesize whoLabel;
+@synthesize autocompleteTableView;
+
+@synthesize allSuggestions;
+@synthesize suggestions;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[CacheHandler instance] currentUser] fetchFriends];
-    [[[CacheHandler instance] currentUser] fetchFriendRequests];
+    
+    if ([[CacheHandler instance] editing]) {
+        [[self whatToDoTextField] setText:[[[CacheHandler instance] editSqeed] title]];
+       // [[self categoryPickerView] selectedRowInComponent:[[[[[CacheHandler instance] editSqeed] sqeedCategory] categoryId] integerValue]];
+    } else {
+        [[self whatToDoTextField] setText:@""];
+    }
     
     // Add observers to update labels
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -53,6 +63,260 @@ NSDictionary* categories;
                                              selector:@selector(updateDateLabel)
                                                  name:@"ModalDateDidChange"
                                                object:nil];
+    
+    // Autocomplete suggestion
+    allSuggestions = @[@"Athlétisme",
+                       @"Arts martiaux",
+                       @"Aviron",
+                       @"Anniversaire",
+                       @"Accro-branches",
+                       @"Américain",
+                       @"Anni",
+                       @"Airsoft",
+                       @"Aquapark",
+                       @"Afterwork",
+                       @"After dinner",
+                       @"Apéro",
+                       @"Balade",
+                       @"BBQ",
+                       @"Barbecue",
+                       @"Bouffe",
+                       @"Burger",
+                       @"Beach",
+                       @"Ballade",
+                       @"Bière-pong",
+                       @"Bains",
+                       @"Bateau",
+                       @"Bronzette",
+                       @"Bains Thermaux",
+                       @"Badmington",
+                       @"Baseball",
+                       @"Braserade",
+                       @"Biblio",
+                       @"Bibliothèque",
+                       @"Buzz",
+                       @"Boom",
+                       @"Barathon<",
+                       @"Bridge",
+                       @"Bière",
+                       @"Bowling",
+                       @"Boxe",
+                       @"Carte",
+                       @"Casino",
+                       @"Café",
+                       @"Chibre",
+                       @"Condition physique",
+                       @"Canoë",
+                       @"Canyoning",
+                       @"Capoeira",
+                       @"Croisière",
+                       @"Chinois",
+                       @"Cheval",
+                       @"Citygolf",
+                       @"Cinéma",
+                       @"Cirque",
+                       @"Cuisine",
+                       @"Curling",
+                       @"Course à pied",
+                       @"Danse",
+                       @"Dîner",
+                       @"Dîner de cons",
+                       @"Dimanche soir",
+                       @"Digestif",
+                       @"Escalade",
+                       @"Escrime",
+                       @"Excursion",
+                       @"Entrainement",
+                       @"Equitation",
+                       @"Foot",
+                       @"Football",
+                       @"Football américain",
+                       @"Fondue",
+                       @"Fitness",
+                       @"Fiesta",
+                       @"Fiesta Cabana",
+                       @"Fifa",
+                       @"Golf",
+                       @"Go Dancefloor",
+                       @"Gymnastique",
+                       @"Hockey",
+                       @"Hackaton",
+                       @"Indien",
+                       @"Judo",
+                       @"Jeudi soir",
+                       @"Jeu de carte",
+                       @"Jeu de société",
+                       @"Jeu de l’oie",
+                       @"Jogging",
+                       @"Jardinage",
+                       @"Karting",
+                       @"Laser game",
+                       @"Lac",
+                       @"Luge",
+                       @"LHC",
+                       @"Lunch",
+                       @"Lundi soir",
+                       @"Mardi tout est permis",
+                       @"Mercredi tout est permis",
+                       @"Meeting",
+                       @"Marche",
+                       @"Match",
+                       @"Minigolf",
+                       @"Midi",
+                       @"Musée",
+                       @"Mardi soir",
+                       @"Murge",
+                       @"Natation",
+                       @"Night",
+                       @"Niole",
+                       @"Nouvel an",
+                       @"Nordic-walking",
+                       @"Opéra",
+                       @"Patrouille",
+                       @"Pakistané",
+                       @"Peau de phoque",
+                       @"Promenade",
+                       @"Pause",
+                       @"Party",
+                       @"Patinoire",
+                       @"Parcours vita",
+                       @"Pendaison de crémaillaire",
+                       @"Pelote basque",
+                       @"Piscine",
+                       @"Place-de-jeux",
+                       @"Pierrade",
+                       @"Plage",
+                       @"Playa",
+                       @"Pétée",
+                       @"Plongée",
+                       @"Peau de phoque",
+                       @"Pêche",
+                       @"Pêche au gros",
+                       @"Partie de foot",
+                       @"Pétanque",
+                       @"Playstation",
+                       @"Poker",
+                       @"Ping-pong",
+                       @"Randonnée",
+                       @"Repas",
+                       @"Ra",
+                       @"Resto",
+                       @"Resto chinois",
+                       @"Réunion",
+                       @"Rafting",
+                       @"Ski",
+                       @"Skate",
+                       @"Samedi soir",
+                       @"Safari",
+                       @"Snowboard",
+                       @"Snorkeling",
+                       @"Souper",
+                       @"Soir",
+                       @"Soirée",
+                       @"Shopping",
+                       @"Soirée télé",
+                       @"Soirée Foot",
+                       @"Soirée Champions",
+                       @"Soirée Match",
+                       @"Soirée series",
+                       @"Sortie bateau",
+                       @"Sushis",
+                       @"Softball",
+                       @"Séries",
+                       @"Séminaire",
+                       @"Swin-Golf",
+                       @"Tournoi",
+                       @"Théatre",
+                       @"Taekwendo",
+                       @"Tarot",
+                       @"Tennis",
+                       @"Team building",
+                       @"Tennis de table",
+                       @"Travail de groupe",
+                       @"Travail de séminaire",
+                       @"Tir",
+                       @"trampoline",
+                       @"Voile",
+                       @"Vélo",
+                       @"Vendredi soir",
+                       @"Week-end",
+                       @"Waterpolo",
+                       @"Yoga",
+                       @"Zumba",
+                       @"Zoo",
+                       @"5 vs 5"];
+    
+    [autocompleteTableView setScrollEnabled:YES];
+    [autocompleteTableView setHidden:YES];
+    suggestions = [[NSMutableArray alloc] init];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
+    return [suggestions count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)suggestionTableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Setup cell identifier
+    static NSString *cellIdentifier = @"cellSuggestionID";
+    
+    SuggestionTableViewCell *cell = [suggestionTableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    [[cell title] setText:[NSString stringWithFormat:@"%@", suggestions[indexPath.row]]];
+    return cell;
+}
+
+// AUTOCOMPLETE
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    [autocompleteTableView setHidden:NO];
+    
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring
+                 stringByReplacingCharactersInRange:range withString:string];
+    [self searchAutocompleteEntriesWithSubstring:substring];
+    return YES;
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    [suggestions removeAllObjects];
+    for(NSString *curString in allSuggestions) {
+        NSRange substringRange = [curString rangeOfString:substring];
+        if (substringRange.location == 0) {
+            [suggestions addObject:curString];
+        }
+    }
+
+    if (0 == [suggestions count]) {
+        [autocompleteTableView setHidden:YES];
+    }
+    [autocompleteTableView reloadData];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [autocompleteTableView setHidden:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section {
+    if (0 == section)
+        return @"Suggestions";
+    else
+        return @"";
+}
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [_whatToDoTextField setText:suggestions[[indexPath row]]];
+    [[[CacheHandler instance] createSqeed] setTitle:suggestions[[indexPath row]]];
+    [autocompleteTableView setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,8 +338,14 @@ NSDictionary* categories;
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [_whatToDoTextField resignFirstResponder];
-    if (0 != row)
-        [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:((int)row - 1)]];
+    
+    if ([[CacheHandler instance] editing]) {
+        if (0 != row)
+            [[[CacheHandler instance] editSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:((int)row - 1)]];
+    } else {
+        if (0 != row)
+            [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:((int)row - 1)]];
+    }
 }
 
 - (IBAction)backgroundClick:(id)sender {
@@ -85,16 +355,6 @@ NSDictionary* categories;
 - (IBAction)saveToCache:(id)sender {
     [[[CacheHandler instance] createSqeed] setTitle:[[self whatToDoTextField] text]];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"segueAddFriends"])
@@ -110,8 +370,10 @@ NSDictionary* categories;
                                                  saturationDeltaFactor:1.3
                                                              maskImage:nil];
     if ([[segue identifier] isEqualToString:@"segueWhen"]) {
-        ModalWhenViewController* destViewController = [segue destinationViewController];
-        [destViewController setImageOfUnderlyingView:imageOfUnderlyingView];
+        if (![[CacheHandler instance] editing]) {
+            ModalWhenViewController* destViewController = [segue destinationViewController];
+            [destViewController setImageOfUnderlyingView:imageOfUnderlyingView];
+        }
     }
     if ([[segue identifier] isEqualToString:@"segueWhere"]) {
         ModalWhereViewController* destViewController = [segue destinationViewController];
@@ -128,13 +390,21 @@ NSDictionary* categories;
 }
 
 - (void) updatePlaceLabel {
-    if ([[[[CacheHandler instance] createSqeed] place] isEqualToString:@""])
-        [whereLabel setText :@"Place"];
-    else
-        [whereLabel setText :[[[CacheHandler instance] createSqeed] place]];
+    if ([[CacheHandler instance] editing]) {
+        if ([[[[CacheHandler instance] editSqeed] place] isEqualToString:@""])
+            [whereLabel setText :@"Place"];
+        else
+            [whereLabel setText :[[[CacheHandler instance] editSqeed] place]];
+    } else {
+        if ([[[[CacheHandler instance] createSqeed] place] isEqualToString:@""])
+            [whereLabel setText :@"Place"];
+        else
+            [whereLabel setText :[[[CacheHandler instance] createSqeed] place]];
+    }
 }
 
 - (void) updatePeopleMinMaxLabel {
+    NSLog(@"mm: %@", [[[CacheHandler instance] createSqeed] peopleMin]);
     NSString *peopleLabel = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] createSqeed] peopleMin], [[[CacheHandler instance] createSqeed] peopleMax]];
     [whoLabel setText :peopleLabel];
 }

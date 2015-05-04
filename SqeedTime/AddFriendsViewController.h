@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 - (IBAction)save:(id)sender;
 - (IBAction)switchAccess:(id)sender;
 

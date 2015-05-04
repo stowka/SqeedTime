@@ -32,6 +32,9 @@
 @property NSDate* dateStart3;
 @property NSDate* dateEnd3;
 
+@property NSArray *dateOptions;
+@property NSArray *voteIds;
+
 @property NSString* privateAccess;
 
 @property NSArray* going;

@@ -14,7 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *min;
 @property (strong, nonatomic) IBOutlet UITextField *max;
 @property (strong) UIImage* imageOfUnderlyingView;
-@property (strong, nonatomic) IBOutlet UILabel *errorLabel;
+
 - (IBAction)saveToCache:(id)sender;
 - (IBAction)close:(id)sender;
 

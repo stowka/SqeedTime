@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModalWhatViewController : UIViewController
+@interface ModalWhatViewController : UIViewController<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) IBOutlet UIButton *close;
-@property (strong, nonatomic, readonly) IBOutlet UITextView *description;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionField;
+
 @property (strong) UIImage* imageOfUnderlyingView;
-- (IBAction)saveToCache:(id)sender;
+- (void)saveToCache;
 - (IBAction)close:(id)sender;
 @end

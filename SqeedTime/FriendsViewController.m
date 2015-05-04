@@ -10,6 +10,8 @@
 #import "FriendTableViewCell.h"
 #import "ContactTableViewCell.h"
 #import "CacheHandler.h"
+#import "DatabaseManager.h"
+#import "Contact.h"
 
 @import AddressBook;
 
@@ -17,15 +19,19 @@
 
 @end
 
-NSArray* friends;
-NSArray* friendRequests;
+NSArray *friends;
+NSArray *requests;
+NSArray *pending;
+NSArray *phoneMatches;
 
 @implementation FriendsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
-    friendRequests = [[[CacheHandler instance] currentUser] friendRequests];
+    requests = [[[CacheHandler instance] currentUser] requests];
+    pending = [[[CacheHandler instance] currentUser] pending];
+    phoneMatches = [[CacheHandler instance] phoneMatches];
     
     [[self friendTable] setScrollsToTop:YES];
     
@@ -35,13 +41,18 @@ NSArray* friendRequests;
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh)
+                                                 name:@"SearchByPhonesDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(fetch)
                                                  name:@"DeleteFriendDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh)
-                                                 name:@"FetchUserDidComplete"
+                                                 name:@"FetchFriendDidComplete"
                                                object:nil];
     
     ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
@@ -50,7 +61,59 @@ NSArray* friendRequests;
             return;
         }
         ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
-        [[CacheHandler instance] setContacts:(__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef)];
+        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+        CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
+                                                                   CFArrayGetCount(people),
+                                                                   people);
+        
+        
+        CFArraySortValues(peopleMutable,
+                          CFRangeMake(0, CFArrayGetCount(peopleMutable)),
+                          (CFComparatorFunction) ABPersonComparePeopleByName,
+                          (void *)ABPersonGetSortOrdering());
+        
+        NSArray *abArray = (__bridge_transfer NSArray *)peopleMutable;
+        
+        NSMutableArray *contacts = [[NSMutableArray alloc] init];
+        Contact *contact;
+        NSString *lastName;
+        NSString *firstName;
+        NSString *phone;
+        ABRecordRef person;
+        ABMultiValueRef phones;
+        
+        for (int i = 0; i < CFArrayGetCount(peopleMutable); i += 1) {
+            contact = [[Contact alloc] init];
+            
+            person = (__bridge ABRecordRef)([abArray objectAtIndex:i]);
+            phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(person, kABPersonPhoneProperty));
+            
+            phone = @"";
+            
+            for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+                phone = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phones, j);
+            
+            lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+            if (lastName == nil)
+                lastName = @"";
+            firstName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+            if (firstName == nil)
+                firstName = @"";
+            [contact setName:[NSString stringWithFormat:@"%@ %@", firstName, lastName]];
+            [contact setPhone:phone];
+            if (![phone isEqualToString:@""])
+                [contacts addObject:contact];
+        }
+        [[CacheHandler instance] setContacts:contacts];
+        
+        NSMutableArray *phoneArray = [[NSMutableArray alloc] init];
+        for (Contact *contact in [[CacheHandler instance] contacts]) {
+            [phoneArray addObject:contact.phone];
+        }
+        
+        [DatabaseManager searchByPhones:phoneArray];
+        
+        [[self friendTable] reloadData];
     });
 }
 
@@ -58,37 +121,41 @@ NSArray* friendRequests;
     [super didReceiveMemoryWarning];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 5;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return @"Friends";
     } else if (section == 1) {
         return @"Friend requests";
     } else if (section == 2) {
-        return @"Contacts";
+        return @"Pending";
+    } else if (section == 3) {
+        return @"Contacts using SqeedTime";
+    } else if (section == 4) {
+        return @"Address book";
     }
     else return @"";
 }
 
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return [friends count];
     } else if (section == 1) {
-        return [friendRequests count];
+        return [requests count];
     } else if (section == 2) {
+        return [pending count];
+    } else if (section == 3) {
+        return [phoneMatches count];
+    } else if (section == 4) {
         return [[[CacheHandler instance] contacts] count];
     }
     else return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%d %d", [indexPath section], [indexPath row]);
     if (0 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellFriendID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
@@ -98,7 +165,7 @@ NSArray* friendRequests;
                 UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
     
-        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", [friends[[indexPath row]] forname], [friends[[indexPath row]] name]]];
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] name]]];
         [[cell username] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] username]]];
         
         [cell setUserId:[friends [[indexPath row]] userId]];
@@ -106,6 +173,7 @@ NSArray* friendRequests;
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
         [[cell buttonAdd] setHighlighted:YES];
+        [[cell buttonAdd] setHidden:YES];
         
         [cell setIsFriend:@"YES"];
         
@@ -119,30 +187,74 @@ NSArray* friendRequests;
                     UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
-        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", [friendRequests[[indexPath row]] forname], [friendRequests[[indexPath row]] name]]];
-        [[cell username] setText:[NSString stringWithFormat:@"%@", [friendRequests[[indexPath row]] username]]];
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [requests[[indexPath row]] name]]];
+        [[cell username] setText:[NSString stringWithFormat:@"%@", [requests[[indexPath row]] username]]];
         
-        [cell setUserId:[friendRequests [[indexPath row]] userId]];
-    
+        [cell setUserId:[requests [[indexPath row]] userId]];
+        
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
         [[cell buttonAdd] setHighlighted:NO];
+        [[cell buttonAdd] setHidden:YES];
         
         [cell setIsFriend:@"NO"];
         
         return cell;
     } else if (2 == [indexPath section]) {
+        static NSString *cellIdentifier = @"cellFriendID";
+        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                     cellIdentifier];
+        if (cell == nil) {
+            cell = [[FriendTableViewCell alloc]initWithStyle:
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [pending[[indexPath row]] name]]];
+        [[cell username] setText:[NSString stringWithFormat:@"%@", [pending[[indexPath row]] username]]];
+        
+        [cell setUserId:[pending [[indexPath row]] userId]];
+        
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
+        [[cell buttonAdd] setHighlighted:YES];
+        [[cell buttonAdd] setHidden:YES];
+        
+        [cell setIsFriend:@"YES"];
+        
+        return cell;
+    } else if (3 == [indexPath section]) {
+        static NSString *cellIdentifier = @"cellFriendID";
+        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                     cellIdentifier];
+        if (cell == nil) {
+            cell = [[FriendTableViewCell alloc]initWithStyle:
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [phoneMatches[[indexPath row]] name]]];
+        
+        [cell setUserId:[phoneMatches [[indexPath row]] userId]];
+        
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
+        [[cell buttonAdd] setHighlighted:NO];
+        [[cell buttonAdd] setHidden:YES];
+        
+        [cell setIsFriend:@"NO"];
+        
+        return cell;
+    } else if (4 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellContactID";
         ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                     cellIdentifier];
+                                      cellIdentifier];
         if (cell == nil) {
             cell = [[ContactTableViewCell alloc]initWithStyle:
                     UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        NSString *lastName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonLastNameProperty);
-        NSString *firstName = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonFirstNameProperty);
-        //NSString *phone = (__bridge NSString *)ABRecordCopyValue((__bridge ABRecordRef)([[[CacheHandler instance] contacts] objectAtIndex:[indexPath row]]), kABPersonPhoneProperty);
-        [[cell name] setText:[NSString stringWithFormat:@"%@ %@", lastName, firstName]];
+        
+        [[cell name] setText:[[[CacheHandler instance] contacts][indexPath.row] name]];
+        [[cell phoneNumber] setText:[[[CacheHandler instance] contacts][indexPath.row] phone]];
+        
         return cell;
     } else {
         return nil;
@@ -151,31 +263,42 @@ NSArray* friendRequests;
 
 - (void)refresh {
     friends = [[[CacheHandler instance] currentUser] friends];
-    friendRequests = [[[CacheHandler instance] currentUser] friendRequests];
+    requests = [[[CacheHandler instance] currentUser] requests];
+    pending = [[[CacheHandler instance] currentUser] pending];
+    phoneMatches = [[CacheHandler instance] phoneMatches];
     [[self friendTable] reloadData];
 }
 
 - (void)fetch {
     [[[CacheHandler instance] currentUser] fetchFriends];
-    [[[CacheHandler instance] currentUser] fetchFriendRequests];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 62;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
+    if ([indexPath section] <= 2) {
+        [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:NO];
+    } else
+        [_friendTable deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
-    [_friendTable deselectRowAtIndexPath:indexPath animated:YES];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [_friendTable deselectRowAtIndexPath:[_friendTable indexPathForSelectedRow] animated:YES];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath section] <= 2)
+        [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:YES];
+    return indexPath;
 }
 
 
 - (IBAction)remove:(id)sender {
-    NSLog(@"Remove friend: %@",@"");
+    NSLog(@"Remove friend!");
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

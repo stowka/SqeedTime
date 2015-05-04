@@ -14,22 +14,30 @@
 @end
 
 @implementation ModalWhatViewController
-@synthesize description;
+@synthesize descriptionField;
 @synthesize icon;
 @synthesize close;
 @synthesize imageOfUnderlyingView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([[CacheHandler instance] editing]) {
+        [descriptionField setText:[[[CacheHandler instance] editSqeed] sqeedDescription]];
+    } else {
+        [descriptionField setText:[[[CacheHandler instance] createSqeed] sqeedDescription]];
+    }
+    
     self.view.backgroundColor = [UIColor clearColor];
-    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:[[self view] frame]];
     backView.image = imageOfUnderlyingView;
     backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-    [self.view addSubview:backView];
-    [self.view addSubview:icon];
-    [self.view addSubview:close];
-    [self.view addSubview:description];
-    [[self description] becomeFirstResponder];
+    [[self view] addSubview:backView];
+    [[self view] addSubview:icon];
+    [[self view] addSubview:close];
+    [[self view] addSubview:descriptionField];
+    [[descriptionField layer] setCornerRadius:8];
+    [[self descriptionField] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,13 +55,15 @@
 }
 */
 
-- (IBAction)saveToCache:(id)sender {
+- (void)saveToCache {
+    [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self descriptionField] text]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalDescriptionDidChange"
-                                                                                                 object:nil];
-    [[[CacheHandler instance] createSqeed] setSqeedDescription:[[self description] text]];
+                      object:nil];
 }
 
 - (IBAction)close:(id)sender {
-    [self performSegueWithIdentifier:@"segueDimissWhat" sender:self];
+    [self saveToCache];
+    [self performSegueWithIdentifier:@"segueDismissWhat"
+                              sender:self];
 }
 @end

@@ -72,8 +72,7 @@ NSArray* result;
                                                 reuseIdentifier:cellIdentifier];
     }
     
-    [[cell name] setText :[NSString stringWithFormat:@"%@ %@",
-                           [result[[indexPath row]] forname],
+    [[cell name] setText :[NSString stringWithFormat:@"%@",
                            [result[[indexPath row]] name]]];
     
     [[cell username] setText :[NSString stringWithFormat:@"%@",
@@ -92,6 +91,10 @@ NSArray* result;
     
     if ([[cell isFriend] isEqualToString:@"YES"]) {
         [[cell button] setHighlighted:YES];
+    }
+    
+    if ([[[CacheHandler instance] currentUser] isEqual:result[[indexPath row]]]) {
+        [[cell button] setHidden:YES];
     }
     
     return cell;

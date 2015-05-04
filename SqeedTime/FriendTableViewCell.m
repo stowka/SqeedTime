@@ -25,11 +25,11 @@
 }
 - (IBAction)add:(id)sender {
     if ([_isFriend isEqualToString:@"NO"]) {
-        [DatabaseManager addFriend:[[[CacheHandler instance] currentUser] userId] :_userId];
+        [DatabaseManager addFriend:[self userId]];
         [self setIsFriend:@"YES"];
         [[self buttonAdd] setHighlighted:YES];
     } else {
-        [DatabaseManager deleteFriend:[[[CacheHandler instance] currentUser] userId] :_userId];
+        [DatabaseManager deleteFriend:[self userId]];
         [self setIsFriend:@"NO"];
         [[self buttonAdd] setHighlighted:NO];
     }
