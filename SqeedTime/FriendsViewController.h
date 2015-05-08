@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface FriendsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface FriendsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
 - (IBAction)remove:(id)sender;
 

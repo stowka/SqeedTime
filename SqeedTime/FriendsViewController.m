@@ -12,6 +12,7 @@
 #import "CacheHandler.h"
 #import "DatabaseManager.h"
 #import "Contact.h"
+#import <MessageUI/MessageUI.h>
 
 @import AddressBook;
 
@@ -280,6 +281,8 @@ NSArray *phoneMatches;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
     if ([indexPath section] <= 2) {
         [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:NO];
+    } else if ([indexPath section] == 4) {
+        [self showSMS:indexPath];
     } else
         [_friendTable deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -294,6 +297,49 @@ NSArray *phoneMatches;
     if ([indexPath section] <= 2)
         [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:YES];
     return indexPath;
+}
+
+- (void)showSMS:(NSIndexPath *) indexPath {
+    
+    if(![MFMessageComposeViewController canSendText]) {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    NSString *phone = [[(ContactTableViewCell *)[_friendTable cellForRowAtIndexPath:indexPath] phoneNumber] text];
+    NSArray *recipents = @[phone];
+    NSString *message = @"Hi mate, Sqeedtime's fantatic, check it out!";
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

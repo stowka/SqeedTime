@@ -21,6 +21,8 @@
 }
 
 - (IBAction)sms:(id)sender {
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[[NSString stringWithFormat:@"sms:%@", [[self phoneNumber] text]] stringByReplacingOccurrencesOfString:@" " withString:@""]]];
+    //[[UIApplication sharedApplication]openURL:[NSURL URLWithString:[[NSString stringWithFormat:@"sms:%@", [[self phoneNumber] text]] stringByReplacingOccurrencesOfString:@" " withString:@""]]];
 }
+
+
 @end
