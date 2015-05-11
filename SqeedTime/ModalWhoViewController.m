@@ -17,23 +17,19 @@
 @synthesize imageOfUnderlyingView;
 @synthesize icon;
 @synthesize close;
-@synthesize min;
 @synthesize max;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     if ([[CacheHandler instance] editing]) {
-        [min setText:[[[CacheHandler instance] editSqeed] peopleMin]];
         [max setText:[[[CacheHandler instance] editSqeed] peopleMax]];
     } else {
-        [min setText:[[[CacheHandler instance] createSqeed] peopleMin]];
         [max setText:[[[CacheHandler instance] createSqeed] peopleMax]];
     }
     
     
-    [min setText:[min.text isEqualToString:@""] ? @"1" : [min text]];
-    [max setText:[max.text isEqualToString:@""] ? @"10" : [max text]];
+    [max setText:[max.text isEqualToString:@""] ? @"" : [max text]];
     [[self view] setBackgroundColor:[UIColor clearColor]];
     UIImageView* backView = [[UIImageView alloc] initWithFrame:[[self view] frame]];
     [backView setImage:imageOfUnderlyingView];
@@ -41,11 +37,9 @@
     [[self view] addSubview:backView];
     [[self view] addSubview:icon];
     [[self view] addSubview:close];
-    [[self view] addSubview:min];
     [[self view] addSubview:max];
-    [[min layer] setCornerRadius:8];
     [[max layer] setCornerRadius:8];
-    [[self min] becomeFirstResponder];
+    [[self max] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,13 +61,11 @@
 - (IBAction)saveToCache:(id)sender {
     NSLog(@"saved");
     if ([[CacheHandler instance] editing]) {
-        [[[CacheHandler instance] editSqeed] setPeopleMin:[[self min] text]];
         [[[CacheHandler instance] editSqeed] setPeopleMax:[[self max] text]];
     } else {
-        [[[CacheHandler instance] createSqeed] setPeopleMin:[[self min] text]];
         [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMinMaxDidChange"
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMaxDidChange"
                                                         object:nil];
 }
 

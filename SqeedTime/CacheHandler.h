@@ -26,7 +26,7 @@
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *pn_token;
 @property (strong, nonatomic) NSArray *contacts;
-@property (weak, nonatomic) NSArray *chatMessages;
+@property (weak, nonatomic) NSMutableArray *chatMessages;
 @property BOOL editing;
 @property (strong, nonatomic) NSString *categoryFilter;
 

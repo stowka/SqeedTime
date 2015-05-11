@@ -16,7 +16,6 @@
 @synthesize sqeedDescription;
 @synthesize sqeedCategory;
 @synthesize place;
-@synthesize peopleMin;
 @synthesize peopleMax;
 @synthesize dateStart;
 @synthesize dateEnd;
@@ -42,13 +41,12 @@
     return self;
 }
 
-- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd {
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName  :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd {
     title = _title;
     place = _place;
     sqeedCategory = _category;
     creatorFirstName = _creatorFirstName;
     creatorName = _creatorName;
-    peopleMin = _peopleMin;
     peopleMax = _peopleMax;
     dateStart = _dateStart;
     dateEnd = _dateEnd;
@@ -56,16 +54,16 @@
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
-- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 {
-    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMin :_peopleMax :_dateStart :_dateEnd];
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 {
+    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMax :_dateStart :_dateEnd];
     dateStart2 = _dateStart2;
     dateEnd2 = _dateEnd2;
     privateAccess = @"0";
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
 }
 
-- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMin :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 :(NSDate *)_dateStart3 :(NSDate *)_dateEnd3 {
-    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMin :_peopleMax :_dateStart :_dateEnd];
+- (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd :(NSDate *)_dateStart2 :(NSDate *)_dateEnd2 :(NSDate *)_dateStart3 :(NSDate *)_dateEnd3 {
+    [self setHeaders:_title :_place :_category :_creatorFirstName :_creatorName :_peopleMax :_dateStart :_dateEnd];
     dateStart2 = _dateStart2;
     dateEnd2 = _dateEnd2;
     dateStart2 = _dateStart3;

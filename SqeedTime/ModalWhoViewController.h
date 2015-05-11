@@ -11,7 +11,6 @@
 @interface ModalWhoViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) IBOutlet UIButton *close;
-@property (strong, nonatomic) IBOutlet UITextField *min;
 @property (strong, nonatomic) IBOutlet UITextField *max;
 @property (strong) UIImage* imageOfUnderlyingView;
 

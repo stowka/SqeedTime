@@ -308,7 +308,7 @@ NSArray *phoneMatches;
     }
     NSString *phone = [[(ContactTableViewCell *)[_friendTable cellForRowAtIndexPath:indexPath] phoneNumber] text];
     NSArray *recipents = @[phone];
-    NSString *message = @"Hi mate, Sqeedtime's fantatic, check it out!";
+    NSString *message = @"Hi mate, Sqeedtime's fantastic! Check it out: www.sqeedtime.ch";
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;

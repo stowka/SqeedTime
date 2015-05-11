@@ -135,7 +135,11 @@ int sqeedFlag = -1;
     sqeedFlag = (int)[indexPath row];
     if (-1 != old_flag)
         [_sqeedsTable reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:section]]];
-    [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
+    
+    #pragma mark - ERROR after creating a sqeed
+        [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
+    #pragma mark - ERROR after creating a sqeed
+    
     [_sqeedsTable scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 }
 
@@ -211,7 +215,7 @@ int sqeedFlag = -1;
             [[cell filter] insertSegmentWithImage:newImage atIndex:index animated:NO];
             index += 1;
         }
-        index = [[[CacheHandler instance] categoryFilter] integerValue];
+        index = (int)[[[CacheHandler instance] categoryFilter] integerValue];
         [[cell filter] setSelectedSegmentIndex:index];
         return cell;
     }
@@ -280,9 +284,9 @@ int sqeedFlag = -1;
         if ([[[cell eventCreator] text] isEqualToString:[NSString stringWithFormat:@"by %@",
                                                          [[[CacheHandler instance] currentUser] name]]]) {
             
-            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:113.0 / 255.0
-                                                                   green:113.0 / 255.0
-                                                                    blue:113.0 / 255.0
+            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
+                                                                   green:178.0 / 255.0
+                                                                    blue:178.0 / 255.0
                                                                    alpha:1]];
             
             [[cell eventCreator] setTextColor:[UIColor whiteColor]];
@@ -345,7 +349,7 @@ int sqeedFlag = -1;
         [[cell eventSmallBadge] setHidden:NO];
         NSString *bigBadgeText;
         
-        if ([[sqeeds[[indexPath row]] peopleMin] integerValue] < 10)
+        if ([[sqeeds[[indexPath row]] goingCount] integerValue] < 10)
             bigBadgeText = [NSString stringWithFormat:@" %@", [sqeeds[[indexPath row]] goingCount]];
         else
             bigBadgeText = [sqeeds[[indexPath row]] goingCount];
@@ -404,9 +408,9 @@ int sqeedFlag = -1;
         if ([[[cell eventCreator] text] isEqualToString:[NSString stringWithFormat:@"by %@",
                                                          [[[CacheHandler instance] currentUser] name]]]) {
             
-            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:113.0 / 255.0
-                                                                   green:113.0 / 255.0
-                                                                    blue:113.0 / 255.0
+            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
+                                                                   green:178.0 / 255.0
+                                                                    blue:178.0 / 255.0
                                                                    alpha:1]];
             
             [[cell eventCreator] setTextColor:[UIColor whiteColor]];

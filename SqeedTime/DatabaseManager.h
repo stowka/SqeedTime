@@ -31,7 +31,7 @@
 + (void) notParticipate :(NSString *)sqeedId;
 + (void) addFriend :(NSString *)friendId;
 + (void) deleteFriend :(NSString *)friendId;
-+ (void) createSqeed :(NSString *)title :(NSString *)place :(NSString *)description :(NSString *)peopleMax :(NSString *)peopleMin :(SqeedCategory *) category :(NSDate *)datetimeStart :(NSDate *)datetimeEnd :(NSString *)privateAccess;
++ (void) createSqeed :(NSString *)title :(NSString *)place :(NSString *)description :(NSString *)peopleMax :(SqeedCategory *) category :(NSDate *)datetimeStart :(NSDate *)datetimeEnd :(NSString *)privateAccess;
 + (void)addDatetimeOption :(NSString *)sqeedId :(VoteOption *)voteOption :(int)index;
 + (void)deleteDatetimeOption :(NSString *)sqeedId :(NSString *)voteId;
 + (void)vote :(NSString *)sqeedId :(NSString *)optionId;

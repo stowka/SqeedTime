@@ -55,7 +55,7 @@
     
     NSString *bigBadgeText;
     NSString *smallBadgeText;
-    if ([[[[CacheHandler instance] tmpSqeed] peopleMin] integerValue] < 10)
+    if ([[[[CacheHandler instance] tmpSqeed] goingCount] integerValue] < 10)
         bigBadgeText = [NSString stringWithFormat:@" %@", [[[CacheHandler instance] tmpSqeed] goingCount]];
     else
         bigBadgeText = [[[CacheHandler instance] tmpSqeed] goingCount];
@@ -135,14 +135,17 @@
         
         [cell setFromMe:[(Message *)messages[[indexPath section]] fromMe]];
         
-        [[cell from] setText:[NSString stringWithFormat:@"%@ %@", [(Message *)messages[[indexPath section]] forname], [(Message *)messages[[indexPath section]] name]]];
-        
         [[cell message] setText:[(Message *)messages[[indexPath section]] message]];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"MMM d, HH:mm"];
-        [[cell time] setText:[NSString stringWithFormat:@"%@",
-                              [formatter stringFromDate:[messages[[indexPath section]] datetime]]]];
+        
+        if ([(Message *)messages[[indexPath section]] pending]) {
+            [[cell time] setText:@"Sending…"];
+        } else {
+            [[cell time] setText:[NSString stringWithFormat:@"%@",
+                                  [formatter stringFromDate:[messages[[indexPath section]] datetime]]]];
+        }
         
         [[cell message] setTextAlignment:NSTextAlignmentRight];
         [[cell message] setTextColor:[UIColor whiteColor]];
@@ -159,7 +162,7 @@
         
         [cell setFromMe:[(Message *)messages[[indexPath section]] fromMe]];
         
-        [[cell from] setText:[NSString stringWithFormat:@"%@ %@", [(Message *)messages[[indexPath section]] forname], [(Message *)messages[[indexPath section]] name]]];
+        [[cell from] setText:[NSString stringWithFormat:@"%@", [(Message *)messages[[indexPath section]] name]]];
         
         [[cell message] setText:[(Message *)messages[[indexPath section]] message]];
         [[cell message] setTextColor:[UIColor blackColor]];
@@ -186,11 +189,11 @@
     NSString *text;
     text = [(Message *)messages[[indexPath section]] message];
 
-    CGSize constraint = CGSizeMake(289.0f, 65.0f);
+    CGSize constraint = CGSizeMake(289.0f, 55.0f);
     
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:12.0f] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     
-    return CGSizeMake(240.0f, 65.0f + size.height);
+    return CGSizeMake(240.0f, 55.0f + size.height);
 }
 
 - (UIEdgeInsets)collectionView:
@@ -245,6 +248,22 @@
 }
 
 - (IBAction)send:(id)sender {
+    [sendButton setEnabled:NO];
+    
+    Message *pending = [[Message alloc] init];
+    [pending setMessage:[outbox text]];
+    [pending setDatetime:[NSDate date]];
+    [pending setFromMe:YES];
+    [pending setName:@""];
+    [pending setPending:YES];
+    
+    [messages addObject:pending];
+    [messageList reloadData];
+    
+    // Scroll to bottom
+    if (0 < [messageList numberOfSections])
+        [messageList scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:([messageList numberOfSections] - 1)] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    
     if (![[outbox text] isEqualToString:@""])
         [DatabaseManager postMessage:sqeedId :[outbox text]];
 }

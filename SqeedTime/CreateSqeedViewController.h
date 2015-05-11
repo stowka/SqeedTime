@@ -22,7 +22,7 @@
 @property (strong, nonatomic) NSMutableArray *suggestions;
 
 - (void) updatePlaceLabel;
-- (void) updatePeopleMinMaxLabel;
+- (void) updatePeopleMaxLabel;
 - (void) updateDescriptionLabel;
 - (void) updateDateLabel;
 

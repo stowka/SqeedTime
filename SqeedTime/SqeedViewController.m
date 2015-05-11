@@ -21,7 +21,7 @@
     
     self.eventTitle.text = [[[CacheHandler instance] currentSqeed] title];
     self.eventPlace.text = [[[CacheHandler instance] currentSqeed] place];
-    self.eventMinMax.text = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] currentSqeed] peopleMin], [[[CacheHandler instance] currentSqeed] peopleMax]];
+    self.eventMinMax.text = [NSString stringWithFormat:@"%@", [[[CacheHandler instance] currentSqeed] peopleMax]];
     self.eventDescription.text = [[[CacheHandler instance] currentSqeed] sqeedDescription];
 }
 

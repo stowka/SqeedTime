@@ -222,7 +222,6 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                                category:
                        creatorFirstName:
                             creatorName:
-                              peopleMin:
                               peopleMax:
                               dateStart:dateEnd];
                   
@@ -263,7 +262,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSArray *tmp_sqeeds = response[@"result"];
-              NSLog(@"Fetching discovered (%lu)", tmp_sqeeds.count);
+              NSLog(@"Fetching discovered (%lu)", (unsigned long)tmp_sqeeds.count);
               NSMutableArray *sqeeds = [[NSMutableArray alloc] init];
               Sqeed *tmp_sqeed;
               NSString *sqeedId;
@@ -310,7 +309,6 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                                category:
                        creatorFirstName:
                             creatorName:
-                              peopleMin:
                               peopleMax:
                               dateStart:dateEnd];
                   
@@ -399,7 +397,6 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                                category:
                        creatorFirstName:
                             creatorName:
-                              peopleMin:
                               peopleMax:
                               dateStart:dateEnd];
                   
@@ -675,7 +672,6 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                     :(NSString *)place
                     :(NSString *)description
                     :(NSString *)peopleMax
-                    :(NSString *)peopleMin
                     :(SqeedCategory *)category
                     :(NSDate *)datetimeStart
                     :(NSDate *)datetimeEnd
@@ -695,7 +691,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                              @"creatorId"       : [[CacheHandler instance] currentUserId],
                              @"description"     : description,
                              @"peopleMax"       : peopleMax,
-                             @"peopleMin"       : peopleMin,
+                             @"peopleMin"       : @"1",
                              @"categoryId"      : [category categoryId],
                              @"private"         : privateAccess,
                              @"datetimeStart"   : [NSString stringWithFormat:@"%f",

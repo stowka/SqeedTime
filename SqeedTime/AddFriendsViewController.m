@@ -87,9 +87,6 @@ NSArray* friends;
     
         if (nil == [[[CacheHandler instance] createSqeed] place])
             [[[CacheHandler instance] createSqeed] setPlace: @""];
-    
-        if (nil == [[[CacheHandler instance] createSqeed] peopleMin])
-            [[[CacheHandler instance] createSqeed] setPeopleMin: @"1"];
         
         if (nil == [[[CacheHandler instance] createSqeed] peopleMax])
             [[[CacheHandler instance] createSqeed] setPeopleMax: @"10"];
@@ -127,7 +124,6 @@ NSArray* friends;
             :[[[CacheHandler instance] createSqeed] place]
             :[[[CacheHandler instance] createSqeed] sqeedDescription]
             :[[[CacheHandler instance] createSqeed] peopleMax]
-            :[[[CacheHandler instance] createSqeed] peopleMin]
             :[[[CacheHandler instance] createSqeed] sqeedCategory]
             :[[[CacheHandler instance] createSqeed] dateStart]
             :[[[CacheHandler instance] createSqeed] dateEnd]

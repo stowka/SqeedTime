@@ -42,7 +42,6 @@ static CacheHandler* instance = nil;
         [instance setFriendIds:[[NSArray alloc] init]];
         [instance setChatMessages:[[NSArray alloc] init]];
         [[instance createSqeed] setTitle:@""];
-        [[instance createSqeed] setPeopleMin:@"1"];
         [[instance createSqeed] setPeopleMax:@"10"];
         [[instance createSqeed] setPrivateAccess:@"0"];
         [[instance createSqeed] setDateStart:[NSDate date]];
@@ -51,7 +50,6 @@ static CacheHandler* instance = nil;
         
         
         [[instance editSqeed] setTitle:@""];
-        [[instance editSqeed] setPeopleMin:@"1"];
         [[instance editSqeed] setPeopleMax:@"10"];
         [[instance editSqeed] setPrivateAccess:@"0"];
         [[instance editSqeed] setDateStart:[NSDate date]];

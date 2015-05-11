@@ -12,6 +12,6 @@
 @synthesize message;
 @synthesize datetime;
 @synthesize name;
-@synthesize forname;
 @synthesize fromMe;
+@synthesize pending;
 @end

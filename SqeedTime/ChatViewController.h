@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *messageList;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *sendbox;
-@property (strong, nonatomic) NSArray *messages;
+@property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) NSString *sqeedId;
 @property (strong, nonatomic) IBOutlet UIControl *control;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;

@@ -50,8 +50,8 @@ NSDictionary* categories;
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePeopleMinMaxLabel)
-                                                 name:@"ModalPeopleMinMaxDidChange"
+                                             selector:@selector(updatePeopleMaxLabel)
+                                                 name:@"ModalPeopleMaxDidChange"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -403,9 +403,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
-- (void) updatePeopleMinMaxLabel {
-    NSLog(@"mm: %@", [[[CacheHandler instance] createSqeed] peopleMin]);
-    NSString *peopleLabel = [NSString stringWithFormat:@"%@ / %@", [[[CacheHandler instance] createSqeed] peopleMin], [[[CacheHandler instance] createSqeed] peopleMax]];
+- (void) updatePeopleMaxLabel {
+    NSString *peopleLabel = [NSString stringWithFormat:@"%@", [[[CacheHandler instance] createSqeed] peopleMax]];
     [whoLabel setText :peopleLabel];
 }
 

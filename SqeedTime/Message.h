@@ -12,7 +12,7 @@
 @property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) NSDate *datetime;
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *forname;
 @property BOOL fromMe;
+@property BOOL pending;
 
 @end
