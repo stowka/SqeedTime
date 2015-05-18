@@ -176,6 +176,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSLog(@"Fetching my sqeeds");
               NSArray *tmp_sqeeds = response[@"result"];
+              NSLog(@"%@", tmp_sqeeds);
               NSMutableArray *sqeeds = [[NSMutableArray alloc] init];
               Sqeed *tmp_sqeed;
               NSString *sqeedId;
@@ -191,6 +192,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSDate *dateStart;
               NSDate *dateEnd;
               BOOL hasJoined;
+              NSString *private;
               
               for (NSDictionary *sqeed in tmp_sqeeds) {
                   sqeedId = sqeed[@"id"];
@@ -203,6 +205,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   peopleMax = sqeed[@"people_max"];
                   
                   hasJoined = [sqeed[@"hasJoined"] isEqualToString:@"true"];
+                  private = sqeed[@"private"];
                   
                   goingCount = sqeed[@"going"];
                   waitingCount = sqeed[@"waiting"];
@@ -231,6 +234,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   [tmp_sqeed setGoingCount:goingCount];
                   [tmp_sqeed setWaitingCount:waitingCount];
                   [tmp_sqeed setHasJoined:hasJoined];
+                  [tmp_sqeed setPrivateAccess:private];
                   
                   
                   [sqeeds addObject:tmp_sqeed];
@@ -266,8 +270,12 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
     [manager POST:serverURL
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id response) {
-              NSArray *tmp_sqeeds = response[@"result"];
-              NSLog(@"Fetching discovered (%lu)", (unsigned long)tmp_sqeeds.count);
+              NSArray *tmp_sqeeds;
+              if ([response[@"result"] isKindOfClass:[NSNull class]])
+                  tmp_sqeeds = [[NSArray alloc] init];
+              else
+                  tmp_sqeeds = response[@"result"];
+              NSLog(@"Fetching discovered");
               NSMutableArray *sqeeds = [[NSMutableArray alloc] init];
               Sqeed *tmp_sqeed;
               NSString *sqeedId;
@@ -718,6 +726,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSLog(@"Sqeed created! (id = %@)", sqeedId);
               
               [[[CacheHandler instance] createSqeed] setSqeedId:sqeedId];
+              [[CacheHandler instance] setLastInsertSqeedId:sqeedId];
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"CreateSqeedDidComplete"
                                                                   object:nil

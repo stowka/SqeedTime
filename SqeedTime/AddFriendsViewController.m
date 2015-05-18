@@ -101,11 +101,11 @@ NSArray* friends;
         
         if (nil == [[[CacheHandler instance] createSqeed] dateEnd])
             [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeInterval:1800 sinceDate:[[[CacheHandler instance] createSqeed] dateStart]]];
-    
+        
         NSArray *selectedIndexPaths = [_friendTable indexPathsForSelectedRows];
         NSMutableArray *friendIds = [[NSMutableArray alloc] init];
         NSMutableArray *dateOptions = [[NSMutableArray alloc] init];
-    
+        
         for (NSIndexPath *indexPath in selectedIndexPaths) {
             if (0 != indexPath.row) {
                 AddFriendTableViewCell *tmp_cell = (AddFriendTableViewCell *)[_friendTable cellForRowAtIndexPath:indexPath];
@@ -200,6 +200,12 @@ NSArray* friends;
     
     // EMPTY createSqeed in cache
     [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+    [[[CacheHandler instance] createSqeed] setTitle:@""];
+    [[[CacheHandler instance] createSqeed] setPeopleMax:@"10"];
+    [[[CacheHandler instance] createSqeed] setPrivateAccess:@"0"];
+    [[[CacheHandler instance] createSqeed] setDateStart:[NSDate date]];
+    [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeIntervalSinceNow:1800]];
+    [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:0]];
     
     [[[CacheHandler instance] currentUser] fetchMySqeeds];
     [[[CacheHandler instance] currentUser] fetchDiscovered];

@@ -3001,6 +3001,8 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Juj-5W-M7L" firstAttribute="leading" secondItem="42v-xi-tij" secondAttribute="leading" id="FMj-cs-FiA"/>
+                            <constraint firstItem="wdz-Pg-GUG" firstAttribute="top" secondItem="HGM-TH-TGh" secondAttribute="bottom" id="Gbp-0p-mVi"/>
+                            <constraint firstItem="wdz-Pg-GUG" firstAttribute="top" secondItem="HGM-TH-TGh" secondAttribute="bottom" id="Htm-u0-5Bd"/>
                             <constraint firstItem="HGM-TH-TGh" firstAttribute="trailing" secondItem="Juj-5W-M7L" secondAttribute="trailing" id="KI1-sz-gxS"/>
                             <constraint firstItem="HGM-TH-TGh" firstAttribute="top" secondItem="Juj-5W-M7L" secondAttribute="bottom" id="Rbv-K3-Yyo"/>
                             <constraint firstItem="HGM-TH-TGh" firstAttribute="bottom" secondItem="wdz-Pg-GUG" secondAttribute="top" id="Zh6-yd-MnH"/>
@@ -3010,6 +3012,7 @@
                             <constraint firstItem="Juj-5W-M7L" firstAttribute="leading" secondItem="HGM-TH-TGh" secondAttribute="leading" id="gDk-EQ-nJV"/>
                             <constraint firstItem="Juj-5W-M7L" firstAttribute="leading" secondItem="UGO-bV-54h" secondAttribute="leading" id="lzu-Ec-f3d"/>
                             <constraint firstItem="UGO-bV-54h" firstAttribute="top" secondItem="c2Z-n3-u54" secondAttribute="bottom" constant="24" id="ob8-Vd-4B7"/>
+                            <constraint firstItem="wdz-Pg-GUG" firstAttribute="top" secondItem="HGM-TH-TGh" secondAttribute="bottom" id="sKC-Gu-cpo"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -3023,6 +3026,9 @@
                                 <exclude reference="KI1-sz-gxS"/>
                                 <exclude reference="Rbv-K3-Yyo"/>
                                 <exclude reference="Zh6-yd-MnH"/>
+                                <exclude reference="Gbp-0p-mVi"/>
+                                <exclude reference="Htm-u0-5Bd"/>
+                                <exclude reference="sKC-Gu-cpo"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3037,6 +3043,9 @@
                                 <include reference="KI1-sz-gxS"/>
                                 <include reference="Rbv-K3-Yyo"/>
                                 <include reference="Zh6-yd-MnH"/>
+                                <include reference="Gbp-0p-mVi"/>
+                                <include reference="Htm-u0-5Bd"/>
+                                <include reference="sKC-Gu-cpo"/>
                             </mask>
                         </variation>
                     </view>

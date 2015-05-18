@@ -29,6 +29,7 @@
 @property (weak, nonatomic) NSMutableArray *chatMessages;
 @property BOOL editing;
 @property (strong, nonatomic) NSString *categoryFilter;
+@property NSString *lastInsertSqeedId;
 
 + (CacheHandler*) instance;
 @end

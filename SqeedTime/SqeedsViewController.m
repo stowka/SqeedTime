@@ -328,6 +328,15 @@ int sqeedFlag = -1;
         [[cell eventCategoryIcon] setImage:image];
         [[cell eventTitle] setText:(NSString*)[sqeeds[[indexPath row]] title]];
         
+        // PRIVACY
+        if ([[sqeeds[[indexPath row]] privateAccess] isEqualToString:@"0"]) {
+            image = [UIImage imageNamed:@"public.png"];
+            [[cell privacyIcon] setImage:image];
+        } else if ([[sqeeds[[indexPath row]] privateAccess] isEqualToString:@"1"]) {
+            image = [UIImage imageNamed:@"private.png"];
+            [[cell privacyIcon] setImage:image];
+        }
+        
         
         // ANSWER SEGMENTS
         [[cell eventAnswer] removeAllSegments];

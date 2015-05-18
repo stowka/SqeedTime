@@ -27,6 +27,7 @@
 @synthesize editing;
 @synthesize chatMessages;
 @synthesize categoryFilter;
+@synthesize lastInsertSqeedId;
 
 static CacheHandler* instance = nil;
 
@@ -40,7 +41,10 @@ static CacheHandler* instance = nil;
         [instance setCurrentSqeed:[[Sqeed alloc] init]];
         [instance setCreateSqeed:[[Sqeed alloc] init]];
         [instance setFriendIds:[[NSArray alloc] init]];
-        [instance setChatMessages:[[NSArray alloc] init]];
+        [instance setChatMessages:[[NSMutableArray alloc] init]];
+        
+        [instance setLastInsertSqeedId:@"0"];
+        
         [[instance createSqeed] setTitle:@""];
         [[instance createSqeed] setPeopleMax:@"10"];
         [[instance createSqeed] setPrivateAccess:@"0"];
