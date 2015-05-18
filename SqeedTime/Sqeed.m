@@ -33,6 +33,7 @@
 @synthesize creator;
 @synthesize creatorFirstName;
 @synthesize creatorName;
+@synthesize hasJoined;
 
 - (id) init: (NSString*) _sqeedId
 {

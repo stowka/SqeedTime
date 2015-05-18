@@ -90,7 +90,9 @@ int sqeedFlag = -1;
                                                         alpha:1]];
     
     [[self refreshControl] addTarget:self
-                              action:@selector(fetchSqeeds) forControlEvents:UIControlEventValueChanged];
+                              action:@selector(fetchSqeeds)
+                    forControlEvents:UIControlEventValueChanged];
+    
     [[self sqeedsTable] addSubview:[self refreshControl]];
     
     // Double tap gesture
@@ -101,7 +103,6 @@ int sqeedFlag = -1;
 }
 
 - (void)fetchSqeeds {
-    NSLog(@"fetching…");
     if ([[self segmentedControl] selectedSegmentIndex] == 0)
         [[[CacheHandler instance] currentUser] fetchMySqeeds];
     else
@@ -136,9 +137,9 @@ int sqeedFlag = -1;
     if (-1 != old_flag)
         [_sqeedsTable reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:section]]];
     
-    #pragma mark - ERROR after creating a sqeed
-        [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
-    #pragma mark - ERROR after creating a sqeed
+    #pragma mark - ERROR from time to time
+    [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
+    #pragma mark - ERROR from time to time
     
     [_sqeedsTable scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 }
@@ -233,8 +234,13 @@ int sqeedFlag = -1;
         [[cell eventPlace] setTextColor:[UIColor blackColor]];
         [[cell eventDate] setTextColor:[UIColor blackColor]];
         
+        NSString* categoryIconPath;
         // CATEGORY ICON
-        NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        if ([sqeeds[[indexPath row]] hasJoined]) {
+            categoryIconPath = [NSString stringWithFormat:@"%@-sel.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        } else {
+            categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        }
         UIImage *image = [UIImage imageNamed: categoryIconPath];
         [[cell eventCategoryIcon] setImage:image];
         [[cell eventTitle] setText:(NSString*)[sqeeds[indexPath.row] title]];
@@ -310,7 +316,14 @@ int sqeedFlag = -1;
         [cell setSqeed:sqeeds[[indexPath row]]];
         [[CacheHandler instance] setEditSqeed:[cell sqeed]];
         
-        NSString* categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        
+        NSString *categoryIconPath;
+        // CATEGORY
+        if ([sqeeds[[indexPath row]] hasJoined]) {
+            categoryIconPath = [NSString stringWithFormat:@"%@-sel.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        } else {
+            categoryIconPath = [NSString stringWithFormat:@"%@.png", [[sqeeds[[indexPath row]] sqeedCategory] categoryId]];
+        }
         UIImage *image = [UIImage imageNamed: categoryIconPath];
         [[cell eventCategoryIcon] setImage:image];
         [[cell eventTitle] setText:(NSString*)[sqeeds[[indexPath row]] title]];

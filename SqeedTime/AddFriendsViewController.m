@@ -40,8 +40,13 @@ NSArray* friends;
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showSqeed:)
+                                             selector:@selector(fetchSqeeds:)
                                                  name:@"InviteDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showSqeed:)
+                                                 name:@"FetchSqeedsDidComplete"
                                                object:nil];
 }
 
@@ -195,6 +200,18 @@ NSArray* friends;
     
     // EMPTY createSqeed in cache
     [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+    
+    [[[CacheHandler instance] currentUser] fetchMySqeeds];
+    [[[CacheHandler instance] currentUser] fetchDiscovered];
+}
+
+- (void)fetchSqeeds:(NSNotification *)notification {
+    [[self activityIndicator] stopAnimating];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"FetchSqeedsDidComplete"
+                                                  object:nil];
+    
     [self performSegueWithIdentifier:@"segueInviteFriendsDidComplete" sender:self];
 }
 

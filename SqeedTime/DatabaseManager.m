@@ -190,6 +190,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSString *waitingCount;
               NSDate *dateStart;
               NSDate *dateEnd;
+              BOOL hasJoined;
               
               for (NSDictionary *sqeed in tmp_sqeeds) {
                   sqeedId = sqeed[@"id"];
@@ -200,6 +201,8 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   creatorName = sqeed[@"creator_name"];
                   peopleMin = sqeed[@"people_min"];
                   peopleMax = sqeed[@"people_max"];
+                  
+                  hasJoined = [sqeed[@"hasJoined"] isEqualToString:@"true"];
                   
                   goingCount = sqeed[@"going"];
                   waitingCount = sqeed[@"waiting"];
@@ -227,6 +230,8 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   
                   [tmp_sqeed setGoingCount:goingCount];
                   [tmp_sqeed setWaitingCount:waitingCount];
+                  [tmp_sqeed setHasJoined:hasJoined];
+                  
                   
                   [sqeeds addObject:tmp_sqeed];
               }
@@ -277,6 +282,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSString *waitingCount;
               NSDate *dateStart;
               NSDate *dateEnd;
+              BOOL hasJoined;
               
               for (NSDictionary *sqeed in tmp_sqeeds) {
                   sqeedId = sqeed[@"id"];
@@ -287,6 +293,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   creatorName = sqeed[@"creator_name"];
                   peopleMin = sqeed[@"people_min"];
                   peopleMax = sqeed[@"people_max"];
+                  hasJoined = [sqeed[@"hasJoined"] isEqualToString:@"true"];
                   
                   goingCount = sqeed[@"going"];
                   waitingCount = sqeed[@"waiting"];
@@ -314,6 +321,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   
                   [tmp_sqeed setGoingCount:goingCount];
                   [tmp_sqeed setWaitingCount:waitingCount];
+                  [tmp_sqeed setHasJoined:hasJoined];
                   
                   [sqeeds addObject:tmp_sqeed];
               }
@@ -365,6 +373,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSString *waitingCount;
               NSDate *dateStart;
               NSDate *dateEnd;
+              BOOL hasJoined;
               
               for (NSDictionary *sqeed in tmp_sqeeds) {
                   sqeedId = sqeed[@"id"];
@@ -375,6 +384,8 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   creatorName = sqeed[@"creator_name"];
                   peopleMin = sqeed[@"people_min"];
                   peopleMax = sqeed[@"people_max"];
+                  
+                  hasJoined = [sqeed[@"hasJoined"] isEqualToString:@"true"];
                   
                   goingCount = sqeed[@"going"];
                   waitingCount = sqeed[@"waiting"];
@@ -402,6 +413,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                   
                   [tmp_sqeed setGoingCount:goingCount];
                   [tmp_sqeed setWaitingCount:waitingCount];
+                  [tmp_sqeed setHasJoined:hasJoined];
                   
                   [sqeeds addObject:tmp_sqeed];
               }

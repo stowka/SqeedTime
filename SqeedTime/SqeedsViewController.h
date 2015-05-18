@@ -13,7 +13,6 @@
 @property (strong, nonatomic) UIRefreshControl* refreshControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
-- (IBAction)edgePanGestureDidPerform:(id)sender;
 - (IBAction)display:(id)sender;
 - (void) showDetails :(NSNotification *)notification;
 - (void)displayError;

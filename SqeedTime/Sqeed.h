@@ -41,6 +41,8 @@
 @property NSString* goingCount;
 @property NSString* waitingCount;
 
+@property BOOL hasJoined;
+
 - (id) init:(NSString*) _sqeedId;
 - (void) setHeaders :(NSString *)_title :(NSString *) _place :(SqeedCategory *)_category : (NSString *)_creatorFirstName :(NSString *)_creatorName :(NSString *)_peopleMax :(NSDate *)_dateStart :(NSDate *)_dateEnd;
 
