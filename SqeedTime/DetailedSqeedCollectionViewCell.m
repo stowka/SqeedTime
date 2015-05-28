@@ -130,7 +130,7 @@
 }
 
 - (IBAction)facebook:(id)sender {
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"fb://profile/netprod"]];
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"fb://"]];
 }
 
 - (IBAction)phone:(id)sender {

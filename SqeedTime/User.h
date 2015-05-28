@@ -17,6 +17,7 @@
 @property NSString* salt;
 @property NSArray* mySqeeds;
 @property NSArray* discovered;
+@property NSArray *groups;
 @property NSArray* friends;
 @property NSArray* requests;
 @property NSArray* pending;
@@ -30,6 +31,7 @@
 - (void) fetchMySqeeds;
 - (void) fetchDiscovered;
 - (void) fetchFriends;
+- (void) fetchGroups;
 - (void) update:(NSString*) key :(NSString*) value;
 - (BOOL)isEqual :(id)other;
 @end

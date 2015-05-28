@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "VoteOption.h"
 #import "Message.h"
+#import "AlertHelper.h"
 
 @implementation DatabaseManager
 
@@ -367,6 +368,10 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSLog(@"Fetching discovered (%@)", categoryId);
               NSArray *tmp_sqeeds = response[@"result"];
+              if ([response[@"result"] isKindOfClass:[NSNull class]])
+                  tmp_sqeeds = [[NSArray alloc] init];
+              else
+                  tmp_sqeeds = response[@"result"];
               NSMutableArray *sqeeds = [[NSMutableArray alloc] init];
               Sqeed *tmp_sqeed;
               NSString *sqeedId;
@@ -1026,6 +1031,213 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           }];
 }
 
++ (void) getGroups {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    NSDictionary *params = @{ @"function"   : @"getGroups",
+                              @"token"      : [[CacheHandler instance] token]
+                              };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Get groups");
+              
+              NSLog(@"%@", response);
+              
+              // TODO
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"GetGroupsDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"GetGroupsDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void) addGroup:(NSString *)title :(NSArray *)friendIds {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    
+    NSError *error;
+    NSData *dataFriendIds = [NSJSONSerialization dataWithJSONObject:friendIds
+                                                            options:kNilOptions
+                                                              error:&error];
+    NSString *jsonFriendIds =
+    [[NSString alloc] initWithData:dataFriendIds
+                          encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{ @"function"   : @"addGroup",
+                              @"token"      : [[CacheHandler instance] token],
+                              @"title"      : title,
+                              @"userIds"    : jsonFriendIds
+                              };
+    
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Add group");
+              
+              // TODO
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"AddGroupDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"AddGroupDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void) updateGroup:(NSString *)groupId :(NSArray *)friendIds {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    
+    NSError *error;
+    NSData *dataFriendIds = [NSJSONSerialization dataWithJSONObject:friendIds
+                                                            options:kNilOptions
+                                                              error:&error];
+    NSString *jsonFriendIds =
+    [[NSString alloc] initWithData:dataFriendIds
+                          encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{ @"function"   : @"updateGroup",
+                              @"token"      : [[CacheHandler instance] token],
+                              @"groupId"    : groupId,
+                              @"userIds"           : jsonFriendIds
+                              };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Update group");
+              
+              // TODO
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void) delGroup:(NSString *)groupId :(NSArray *)friendIds {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    
+    NSError *error;
+    NSData *dataFriendIds = [NSJSONSerialization dataWithJSONObject:friendIds
+                                                            options:kNilOptions
+                                                              error:&error];
+    NSString *jsonFriendIds =
+    [[NSString alloc] initWithData:dataFriendIds
+                          encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{ @"function"   : @"delGroup",
+                              @"token"      : [[CacheHandler instance] token],
+                              @"groupId"    : groupId,
+                              @"userIds"        : jsonFriendIds
+                              };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Del group");
+              
+              // TODO
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"DelGroupDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"DelGroupDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void) addToGroup:(NSString *)groupId :(NSArray *)friendIds {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    
+    NSError *error;
+    NSData *dataFriendIds = [NSJSONSerialization dataWithJSONObject:friendIds
+                                                            options:kNilOptions
+                                                              error:&error];
+    NSString *jsonFriendIds =
+    [[NSString alloc] initWithData:dataFriendIds
+                          encoding:NSUTF8StringEncoding];
+    
+    NSDictionary *params = @{ @"function"   : @"getGroups",
+                              @"token"      : [[CacheHandler instance] token],
+                              @"groupId"    : groupId,
+                              @"userIds"    : jsonFriendIds
+                              };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Add to group");
+              
+              // TODO
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToGroupDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToGroupDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
 + (void)searchUser :(NSString *)string {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager =
@@ -1244,6 +1456,53 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               
               [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
               NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void) signup:(NSString *)email :(NSString *)password :(NSString *)phone :(NSString *)phoneExt :(NSString *)gender :(NSString *)birthYear {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{
+                             @"function"    : @"signup",
+                             @"email"       : email,
+                             @"password"    : password,
+                             @"phone"       : phone,
+                             @"phoneExt"    : phoneExt,
+                             @"gender"      : gender,
+                             @"birthyear"   : birthYear
+                             };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Signed up!");
+              if (200 == [[response valueForKey:@"code"] integerValue]) {
+                  [[CacheHandler instance] setToken:[response valueForKey:@"token"]];
+                  NSLog(@"Token: %@", [[CacheHandler instance] token]);
+                  [[CacheHandler instance] setCurrentUserId:[[[CacheHandler instance] token] componentsSeparatedByString:@":"][0]];
+                  [[[CacheHandler instance] currentUser] setUserId:[[CacheHandler instance] currentUserId]];
+                  
+                  // Store data locally
+                  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+                  NSString *session = @"on";
+                  NSString *userId = [[CacheHandler instance] currentUserId];
+                  NSString *token = [[CacheHandler instance] token];
+                  [prefs setObject:session forKey:@"session"];
+                  [prefs setObject:userId forKey:@"userId"];
+                  [prefs setObject:token forKey:@"token"];
+                  
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupDidComplete"
+                                                                      object:nil];
+              } else {
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupDidFail"
+                                                                      object:nil
+                                                                    userInfo:@{@"message":[response valueForKey:@"message"]}];
+              }
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           }];
 }
 @end

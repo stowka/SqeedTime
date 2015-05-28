@@ -21,6 +21,7 @@
 
 @synthesize mySqeeds;
 @synthesize discovered;
+@synthesize groups;
 @synthesize friends;
 @synthesize requests;
 @synthesize pending;
@@ -78,6 +79,15 @@
         return;
     }
     [DatabaseManager fetchFriends];
+}
+
+- (void) fetchGroups {
+    if (self == nil)
+    {
+        NSLog(@"User not initialized!");
+        return;
+    }
+    [DatabaseManager getGroups];
 }
 
 - (void) update:(NSString*) key :(NSString*) value {

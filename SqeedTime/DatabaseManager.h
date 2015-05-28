@@ -39,11 +39,19 @@
 + (void) invite :(NSString *)sqeedId :(NSArray *)friendIds;
 + (void) updateUser :(NSString *)email :(NSString *)name :(NSString *)phoneExt :(NSString *)phone :(NSString *)facebookUrl;
 
++ (void) getGroups;
++ (void) addGroup :(NSString *)title :(NSArray *)friendIds;
++ (void) updateGroup :(NSString *)groupId :(NSArray *)friendIds;
++ (void) delGroup :(NSString *)groupId :(NSArray *)friendIds;
++ (void) addToGroup :(NSString *)groupId :(NSArray *)friendIds;
+
 + (void) searchUser :(NSString *)string;
 + (void)searchByPhones :(NSArray *)phoneArray;
 
 + (void) postMessage :(NSString *)sqeedId :(NSString *)message;
 + (void) fetchMessages :(NSString *)sqeedId;
+
++ (void) signup :(NSString *)email :(NSString *)password :(NSString *)phone :(NSString *)phoneExt :(NSString *)gender :(NSString *)birthYear;
 
 + (void) logout;
 @end

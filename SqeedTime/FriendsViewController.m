@@ -20,6 +20,7 @@
 
 @end
 
+NSArray *groups;
 NSArray *friends;
 NSArray *requests;
 NSArray *pending;
@@ -29,6 +30,8 @@ NSArray *phoneMatches;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    groups = [[[CacheHandler instance] currentUser] groups];
     friends = [[[CacheHandler instance] currentUser] friends];
     requests = [[[CacheHandler instance] currentUser] requests];
     pending = [[[CacheHandler instance] currentUser] pending];
@@ -123,19 +126,21 @@ NSArray *phoneMatches;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return @"Friends";
+        return @"Groups";
     } else if (section == 1) {
-        return @"Friend requests";
+        return @"Friends";
     } else if (section == 2) {
-        return @"Pending";
+        return @"Friend requests";
     } else if (section == 3) {
-        return @"Contacts using SqeedTime";
+        return @"Pending";
     } else if (section == 4) {
+        return @"Contacts using SqeedTime";
+    } else if (section == 5) {
         return @"Address book";
     }
     else return @"";
@@ -143,14 +148,16 @@ NSArray *phoneMatches;
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return [friends count];
+        return [groups count];
     } else if (section == 1) {
-        return [requests count];
+        return [friends count];
     } else if (section == 2) {
-        return [pending count];
+        return [requests count];
     } else if (section == 3) {
-        return [phoneMatches count];
+        return [pending count];
     } else if (section == 4) {
+        return [phoneMatches count];
+    } else if (section == 5) {
         return [[[CacheHandler instance] contacts] count];
     }
     else return 0;
@@ -158,14 +165,14 @@ NSArray *phoneMatches;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (0 == [indexPath section]) {
-        static NSString *cellIdentifier = @"cellFriendID";
+        static NSString *cellIdentifier = @"cellGroupID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                cellIdentifier];
+                                     cellIdentifier];
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc]initWithStyle:
-                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-    
+        
         [[cell name] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] name]]];
         [[cell username] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] username]]];
         
@@ -182,23 +189,22 @@ NSArray *phoneMatches;
     } else if (1 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellFriendID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                     cellIdentifier];
+                                cellIdentifier];
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc]initWithStyle:
-                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+    
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [friends[[indexPath row]] name]]];
         
-        [[cell name] setText:[NSString stringWithFormat:@"%@", [requests[[indexPath row]] name]]];
-        [[cell username] setText:[NSString stringWithFormat:@"%@", [requests[[indexPath row]] username]]];
-        
-        [cell setUserId:[requests [[indexPath row]] userId]];
+        [cell setUserId:[friends [[indexPath row]] userId]];
         
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
-        [[cell buttonAdd] setHighlighted:NO];
+        [[cell buttonAdd] setHighlighted:YES];
         [[cell buttonAdd] setHidden:YES];
         
-        [cell setIsFriend:@"NO"];
+        [cell setIsFriend:@"YES"];
         
         return cell;
     } else if (2 == [indexPath section]) {
@@ -210,8 +216,28 @@ NSArray *phoneMatches;
                     UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
+        [[cell name] setText:[NSString stringWithFormat:@"%@", [requests[[indexPath row]] name]]];
+        
+        [cell setUserId:[requests [[indexPath row]] userId]];
+        
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [[cell buttonAdd] setImage:[UIImage imageNamed:@"remove"] forState:UIControlStateHighlighted];
+        [[cell buttonAdd] setHighlighted:NO];
+        [[cell buttonAdd] setHidden:YES];
+        
+        [cell setIsFriend:@"NO"];
+        
+        return cell;
+    } else if (3 == [indexPath section]) {
+        static NSString *cellIdentifier = @"cellFriendID";
+        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                     cellIdentifier];
+        if (cell == nil) {
+            cell = [[FriendTableViewCell alloc]initWithStyle:
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
         [[cell name] setText:[NSString stringWithFormat:@"%@", [pending[[indexPath row]] name]]];
-        [[cell username] setText:[NSString stringWithFormat:@"%@", [pending[[indexPath row]] username]]];
         
         [cell setUserId:[pending [[indexPath row]] userId]];
         
@@ -223,7 +249,7 @@ NSArray *phoneMatches;
         [cell setIsFriend:@"YES"];
         
         return cell;
-    } else if (3 == [indexPath section]) {
+    } else if (4 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellFriendID";
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                      cellIdentifier];
@@ -244,7 +270,7 @@ NSArray *phoneMatches;
         [cell setIsFriend:@"NO"];
         
         return cell;
-    } else if (4 == [indexPath section]) {
+    } else if (5 == [indexPath section]) {
         static NSString *cellIdentifier = @"cellContactID";
         ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                                       cellIdentifier];
@@ -279,9 +305,9 @@ NSArray *phoneMatches;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath :(NSIndexPath *)indexPath {
-    if ([indexPath section] <= 2) {
+    if (indexPath.section != 0 && [indexPath section] <= 4) {
         [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:NO];
-    } else if ([indexPath section] == 4) {
+    } else if ([indexPath section] == 5) {
         [self showSMS:indexPath];
     } else
         [_friendTable deselectRowAtIndexPath:indexPath animated:YES];
@@ -294,8 +320,7 @@ NSArray *phoneMatches;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] <= 2)
-        [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:YES];
+    [[((FriendTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]) buttonAdd] setHidden:YES];
     return indexPath;
 }
 

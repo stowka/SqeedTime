@@ -34,6 +34,8 @@ int sqeedFlag = -1;
     [self fetchSqeeds];
     [[self sqeedsTable] setScrollsToTop:YES];
     
+    [[[CacheHandler instance] currentUser] fetchGroups];
+    
     // Observers for FetchSqeeds (all sqeeds)
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh)
@@ -99,7 +101,7 @@ int sqeedFlag = -1;
     UITapGestureRecognizer *doubleTapFolderGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processDoubleTap:)];
     [doubleTapFolderGesture setNumberOfTapsRequired:2];
     [doubleTapFolderGesture setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:doubleTapFolderGesture];
+    //[self.view addGestureRecognizer:doubleTapFolderGesture];
 }
 
 - (void)fetchSqeeds {
@@ -290,15 +292,15 @@ int sqeedFlag = -1;
         if ([[[cell eventCreator] text] isEqualToString:[NSString stringWithFormat:@"by %@",
                                                          [[[CacheHandler instance] currentUser] name]]]) {
             
-            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
-                                                                   green:178.0 / 255.0
-                                                                    blue:178.0 / 255.0
-                                                                   alpha:1]];
-            
-            [[cell eventCreator] setTextColor:[UIColor whiteColor]];
-            [[cell eventTitle] setTextColor:[UIColor whiteColor]];
-            [[cell eventPlace] setTextColor:[UIColor whiteColor]];
-            [[cell eventDate] setTextColor:[UIColor whiteColor]];
+//            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
+//                                                                   green:178.0 / 255.0
+//                                                                    blue:178.0 / 255.0
+//                                                                   alpha:1]];
+//            
+//            [[cell eventCreator] setTextColor:[UIColor whiteColor]];
+//            [[cell eventTitle] setTextColor:[UIColor whiteColor]];
+//            [[cell eventPlace] setTextColor:[UIColor whiteColor]];
+//            [[cell eventDate] setTextColor:[UIColor whiteColor]];
         }
         [[cell layer] setCornerRadius:10.0f];
 //        CGRect shadowFrame = [[cell layer] bounds];
@@ -350,13 +352,13 @@ int sqeedFlag = -1;
         [[cell eventTitle] setTextColor:[UIColor blackColor]];
         [[cell eventPlace] setTextColor:[UIColor blackColor]];
         [[cell eventDescription] setTextColor:[UIColor blackColor]];
-        [[cell eventDateDoodle] setTintColor:[UIColor colorWithRed:35.0 / 255.0
-                                                             green:186.0 / 255.0
-                                                              blue:18.0 / 255.0
+        [[cell eventDateDoodle] setTintColor:[UIColor colorWithRed:67.0 / 255.0
+                                                             green:157.0 / 255.0
+                                                              blue:187.0 / 255.0
                                                              alpha:1]];
-        [[cell eventAnswer] setTintColor:[UIColor colorWithRed:255.0 / 255.0
-                                                         green:50.0 / 255.0
-                                                          blue:3.0 / 255.0
+        [[cell eventAnswer] setTintColor:[UIColor colorWithRed:67.0 / 255.0
+                                                         green:157.0 / 255.0
+                                                          blue:187.0 / 255.0
                                                          alpha:1]];
         [[cell eventGoingWaiting] setTintColor:[UIColor colorWithRed:67.0 / 255.0
                                                                green:157.0 / 255.0
@@ -430,21 +432,21 @@ int sqeedFlag = -1;
         if ([[[cell eventCreator] text] isEqualToString:[NSString stringWithFormat:@"by %@",
                                                          [[[CacheHandler instance] currentUser] name]]]) {
             
-            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
-                                                                   green:178.0 / 255.0
-                                                                    blue:178.0 / 255.0
-                                                                   alpha:1]];
-            
-            [[cell eventCreator] setTextColor:[UIColor whiteColor]];
-            [[cell eventTitle] setTextColor:[UIColor whiteColor]];
-            [[cell eventPlace] setTextColor:[UIColor whiteColor]];
-            [[cell eventDescription] setTextColor:[UIColor whiteColor]];
-            [[cell eventMore] setTintColor:[UIColor whiteColor]];
-            [[cell eventMore] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [[cell eventDateDoodle] setTintColor:[UIColor whiteColor]];
-            [[cell eventAnswer] setTintColor:[UIColor whiteColor]];
-            [[cell eventGoingWaiting] setTintColor:[UIColor whiteColor]];
-            [[cell peopleList] setTextColor:[UIColor whiteColor]];
+//            [[cell contentView] setBackgroundColor:[UIColor colorWithRed:178.0 / 255.0
+//                                                                   green:178.0 / 255.0
+//                                                                    blue:178.0 / 255.0
+//                                                                   alpha:1]];
+//            
+//            [[cell eventCreator] setTextColor:[UIColor whiteColor]];
+//            [[cell eventTitle] setTextColor:[UIColor whiteColor]];
+//            [[cell eventPlace] setTextColor:[UIColor whiteColor]];
+//            [[cell eventDescription] setTextColor:[UIColor whiteColor]];
+//            [[cell eventMore] setTintColor:[UIColor whiteColor]];
+//            [[cell eventMore] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            [[cell eventDateDoodle] setTintColor:[UIColor whiteColor]];
+//            [[cell eventAnswer] setTintColor:[UIColor whiteColor]];
+//            [[cell eventGoingWaiting] setTintColor:[UIColor whiteColor]];
+//            [[cell peopleList] setTextColor:[UIColor whiteColor]];
             [[cell peopleList] setFont:[UIFont fontWithName:@"Helvetica Neue" size:14.0f]];
             
             [[cell eventMore] setHidden:NO];
@@ -463,13 +465,6 @@ int sqeedFlag = -1;
             }
         }
         [[cell layer] setCornerRadius:10.0f];
-//        CGRect shadowFrame = [[cell layer] bounds];
-//        CGPathRef shadowPath = [[UIBezierPath bezierPathWithRect:shadowFrame] CGPath];
-//        [[cell layer] setShadowPath:shadowPath];
-//        [[cell layer] setShadowColor:[[UIColor blackColor] CGColor]];
-//        [[cell layer] setShadowOffset:CGSizeMake(3.0f, 3.0f)];
-//        [[cell layer] setShadowRadius:5.0f];
-//        [[cell layer] setShadowOpacity:0.50f];
         return cell;
     }
 }

@@ -133,6 +133,7 @@
     [prefs setObject:username forKey:@"username"];
     [prefs setObject:password forKey:@"password"];
     
+    [[[CacheHandler instance] currentUser] fetchGroups];
     [[[CacheHandler instance] currentUser] fetchFriends];
     
     // No further use for Login observers

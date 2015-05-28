@@ -90,6 +90,8 @@
 		719968311A14FA6100974683 /* SqeedTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 719968301A14FA6100974683 /* SqeedTimeTests.m */; };
 		7199683B1A14FA9B00974683 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7199683A1A14FA9B00974683 /* logo.png */; };
 		71AE881C1AA2B44B007AD138 /* MultiSelectSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AE881B1AA2B44B007AD138 /* MultiSelectSegmentedControl.m */; };
+		71B4028A1B175699004F85EA /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B402891B175699004F85EA /* GroupTableViewCell.m */; };
+		71B4028D1B17662B004F85EA /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71B4028C1B17662B004F85EA /* SignupViewController.m */; };
 		71BC4EE61A62B489009D060B /* SearchFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC4EE51A62B489009D060B /* SearchFriendTableViewCell.m */; };
 		71BC4EE91A62BF4D009D060B /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC4EE81A62BF4D009D060B /* ContactTableViewCell.m */; };
 		71BC4EEB1A62D0A2009D060B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BC4EEA1A62D0A2009D060B /* MessageUI.framework */; };
@@ -115,6 +117,9 @@
 		71DFA9E11A9BD823000BA3D0 /* ChatCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71DFA9E01A9BD823000BA3D0 /* ChatCollectionViewCell.m */; };
 		71EA18891A434FB00059BCDD /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EA18881A434FB00059BCDD /* DismissSegue.m */; };
 		71ECFCD31A90E5B300C55382 /* VoteOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 71ECFCD21A90E5B300C55382 /* VoteOption.m */; };
+		71EEE41C1B1373AB00D9E24B /* FriendGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EEE41B1B1373AB00D9E24B /* FriendGroup.m */; };
+		71EEE41F1B137DE600D9E24B /* FriendGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EEE41E1B137DE600D9E24B /* FriendGroupViewController.m */; };
+		71EEE4221B137E0400D9E24B /* AddFriendsToGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EEE4211B137E0400D9E24B /* AddFriendsToGroupViewController.m */; };
 		71F92A431AF5022200ED2231 /* sqeedtime.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F92A421AF5022200ED2231 /* sqeedtime.png */; };
 /* End PBXBuildFile section */
 
@@ -252,6 +257,10 @@
 		7199683A1A14FA9B00974683 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		71AE881A1AA2B44B007AD138 /* MultiSelectSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectSegmentedControl.h; sourceTree = "<group>"; };
 		71AE881B1AA2B44B007AD138 /* MultiSelectSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectSegmentedControl.m; sourceTree = "<group>"; };
+		71B402881B175699004F85EA /* GroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewCell.h; sourceTree = "<group>"; };
+		71B402891B175699004F85EA /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
+		71B4028B1B17662B004F85EA /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		71B4028C1B17662B004F85EA /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		71BC4EE41A62B489009D060B /* SearchFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFriendTableViewCell.h; sourceTree = "<group>"; };
 		71BC4EE51A62B489009D060B /* SearchFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFriendTableViewCell.m; sourceTree = "<group>"; };
 		71BC4EE71A62BF4D009D060B /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
@@ -295,6 +304,12 @@
 		71EA18881A434FB00059BCDD /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
 		71ECFCD11A90E5B300C55382 /* VoteOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteOption.h; sourceTree = "<group>"; };
 		71ECFCD21A90E5B300C55382 /* VoteOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteOption.m; sourceTree = "<group>"; };
+		71EEE41A1B1373AB00D9E24B /* FriendGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendGroup.h; sourceTree = "<group>"; };
+		71EEE41B1B1373AB00D9E24B /* FriendGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendGroup.m; sourceTree = "<group>"; };
+		71EEE41D1B137DE600D9E24B /* FriendGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendGroupViewController.h; sourceTree = "<group>"; };
+		71EEE41E1B137DE600D9E24B /* FriendGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendGroupViewController.m; sourceTree = "<group>"; };
+		71EEE4201B137E0400D9E24B /* AddFriendsToGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsToGroupViewController.h; sourceTree = "<group>"; };
+		71EEE4211B137E0400D9E24B /* AddFriendsToGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsToGroupViewController.m; sourceTree = "<group>"; };
 		71F92A421AF5022200ED2231 /* sqeedtime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sqeedtime.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -479,6 +494,8 @@
 				71ECFCD21A90E5B300C55382 /* VoteOption.m */,
 				71345B701A9C2B1D008902A7 /* Message.h */,
 				71345B711A9C2B1E008902A7 /* Message.m */,
+				71EEE41A1B1373AB00D9E24B /* FriendGroup.h */,
+				71EEE41B1B1373AB00D9E24B /* FriendGroup.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -495,6 +512,12 @@
 		715E9DB11A23A35C007D4006 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				71B4028B1B17662B004F85EA /* SignupViewController.h */,
+				71B4028C1B17662B004F85EA /* SignupViewController.m */,
+				71EEE41D1B137DE600D9E24B /* FriendGroupViewController.h */,
+				71EEE41E1B137DE600D9E24B /* FriendGroupViewController.m */,
+				71EEE4201B137E0400D9E24B /* AddFriendsToGroupViewController.h */,
+				71EEE4211B137E0400D9E24B /* AddFriendsToGroupViewController.m */,
 				71DFA9DC1A9BD6C7000BA3D0 /* ChatViewController.h */,
 				71DFA9DD1A9BD6C7000BA3D0 /* ChatViewController.m */,
 				71CDF0241A427BD400757EED /* SearchViewController.h */,
@@ -555,6 +578,8 @@
 				7195D7A01A1CA7E400A8C995 /* SqeedTableViewCell.m */,
 				71290C271A1F5C8A003B7B09 /* SettingsTableViewCell.h */,
 				71290C281A1F5C8A003B7B09 /* SettingsTableViewCell.m */,
+				71B402881B175699004F85EA /* GroupTableViewCell.h */,
+				71B402891B175699004F85EA /* GroupTableViewCell.m */,
 			);
 			name = ViewCells;
 			sourceTree = "<group>";
@@ -869,6 +894,7 @@
 				71CB189C1A20EA9700A6FB93 /* ModalWhatViewController.m in Sources */,
 				71931EEB1A3F60EE00133385 /* AFSecurityPolicy.m in Sources */,
 				71290CCE1A1FC3DC003B7B09 /* EditSettingsViewController.m in Sources */,
+				71B4028A1B175699004F85EA /* GroupTableViewCell.m in Sources */,
 				71BC4EE61A62B489009D060B /* SearchFriendTableViewCell.m in Sources */,
 				71290C231A1F5C2B003B7B09 /* SettingsViewController.m in Sources */,
 				715E9DAE1A23A258007D4006 /* Sqeed.m in Sources */,
@@ -882,6 +908,7 @@
 				71630B921A27ADD000E71015 /* AlertHelper.m in Sources */,
 				71290C291A1F5C8A003B7B09 /* SettingsTableViewCell.m in Sources */,
 				71CDF02B1A428CFB00757EED /* AddFriendTableViewCell.m in Sources */,
+				71EEE41C1B1373AB00D9E24B /* FriendGroup.m in Sources */,
 				71931EEE1A3F60EE00133385 /* AFURLResponseSerialization.m in Sources */,
 				71CB18931A20EA6B00A6FB93 /* ModalWhereViewController.m in Sources */,
 				714B1E3A1A41F5CA0025BEA6 /* DetailsSqeedTableViewCell.m in Sources */,
@@ -899,11 +926,14 @@
 				7195D7A11A1CA7E400A8C995 /* SqeedTableViewCell.m in Sources */,
 				71CDF0261A427BD400757EED /* SearchViewController.m in Sources */,
 				714B1EB51A42688A0025BEA6 /* FriendsViewController.m in Sources */,
+				71B4028D1B17662B004F85EA /* SignupViewController.m in Sources */,
 				71290CE21A1FF2F8003B7B09 /* CreateSqeedViewController.m in Sources */,
 				712B54761A6619ED00AAABE2 /* DetailedSqeedCollectionViewCell.m in Sources */,
 				715E9E181A24B4CF007D4006 /* SqeedCategory.m in Sources */,
 				71290CD11A1FC3F3003B7B09 /* DisplaySettingsViewController.m in Sources */,
+				71EEE41F1B137DE600D9E24B /* FriendGroupViewController.m in Sources */,
 				71931EE91A3F60EE00133385 /* AFHTTPSessionManager.m in Sources */,
+				71EEE4221B137E0400D9E24B /* AddFriendsToGroupViewController.m in Sources */,
 				71BC4EE91A62BF4D009D060B /* ContactTableViewCell.m in Sources */,
 				71931EEF1A3F60EE00133385 /* AFURLSessionManager.m in Sources */,
 				71DFA9DE1A9BD6C7000BA3D0 /* ChatViewController.m in Sources */,
