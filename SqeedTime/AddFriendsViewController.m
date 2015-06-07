@@ -10,12 +10,14 @@
 #import "CacheHandler.h"
 #import "DatabaseManager.h"
 #import "AddFriendTableViewCell.h"
+#import "AlertHelper.h"
 
 @interface AddFriendsViewController ()
 
 @end
 
 NSArray* friends;
+NSArray* groups;
 
 @implementation AddFriendsViewController
 @synthesize navigationBar;
@@ -23,6 +25,7 @@ NSArray* friends;
 - (void)viewDidLoad {
     [super viewDidLoad];
     friends = [[[CacheHandler instance] currentUser] friends];
+    groups = [[[CacheHandler instance] currentUser] groups];
     [[self friendTable] setScrollsToTop:YES];
     [_switchButton setOn:NO animated:NO];
     [[self loadingView] setHidden:YES];
@@ -48,38 +51,101 @@ NSArray* friends;
                                              selector:@selector(showSqeed:)
                                                  name:@"FetchSqeedsDidComplete"
                                                object:nil];
+    
+    
+    
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLoader)
+                                                 name:@"CreateSqeedDidFail"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLoader)
+                                                 name:@"AddDatetimeOptionDidFail"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLoader)
+                                                 name:@"InviteDidFail"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideLoader)
+                                                 name:@"FetchSqeedsDidFail"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (0 == section) {
+        return @"Groups";
+    } else {
+        return @"Friends";
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [friends count] + 1;
+    if (0 == section) {
+        return [groups count];
+    } else {
+        return [friends count] + 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"cellInviteFriendID";
-    AddFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                                 cellIdentifier];
-    if (cell == nil) {
-        cell = [[AddFriendTableViewCell alloc]initWithStyle:
-                UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
     
-    if (0 == indexPath.row) {
-        cell.name.text = @"Invite all";
-        cell.username.text = @"";
+    if (0 == indexPath.section) {
+        static NSString *cellIdentifier = @"cellInviteFriendID";
+        AddFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                        cellIdentifier];
+        if (cell == nil) {
+            cell = [[AddFriendTableViewCell alloc]initWithStyle:
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        cell.name.text = [NSString stringWithFormat:@"%@ (%d)", [groups[indexPath.row] title], [[groups[indexPath.row] friends] count]];
+        cell.username.text = [NSString stringWithFormat:@""];
+        cell.userId = [groups[indexPath.row] groupId];
+
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        UIView *selectionColor = [[UIView alloc] init];
+        selectionColor.backgroundColor = [UIColor colorWithRed:(67/255.0) green:(157/255.0) blue:(187/255.0) alpha:0.7];
+        
+        cell.selectedBackgroundView = selectionColor;
+        return cell;
     } else {
-        cell.name.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row - 1] name]];
-        cell.username.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row - 1] username]];
-        cell.userId = [friends[indexPath.row - 1] userId];
+        static NSString *cellIdentifier = @"cellInviteFriendID";
+        AddFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                     cellIdentifier];
+        if (cell == nil) {
+            cell = [[AddFriendTableViewCell alloc]initWithStyle:
+                    UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        if (0 == indexPath.row) {
+            cell.name.text = @"Invite all";
+            cell.username.text = @"";
+        } else {
+            cell.name.text = [NSString stringWithFormat:@"%@", [friends[indexPath.row - 1] name]];
+            cell.username.text = [NSString stringWithFormat:@""];
+            cell.userId = [friends[indexPath.row - 1] userId];
+        }
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        UIView *selectionColor = [[UIView alloc] init];
+        selectionColor.backgroundColor = [UIColor colorWithRed:(67/255.0) green:(157/255.0) blue:(187/255.0) alpha:0.7];
+        cell.selectedBackgroundView = selectionColor;
+        return cell;
     }
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:(67/255.0) green:(157/255.0) blue:(187/255.0) alpha:0.7];
-    cell.selectedBackgroundView = selectionColor;
-    return cell;
 }
 - (IBAction)save:(id)sender {
     [[self loadingView] setHidden:NO];
@@ -100,16 +166,42 @@ NSArray* friends;
             [[[CacheHandler instance] createSqeed] setDateStart: [NSDate date]];
         
         if (nil == [[[CacheHandler instance] createSqeed] dateEnd])
-            [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeInterval:1800 sinceDate:[[[CacheHandler instance] createSqeed] dateStart]]];
+            [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeInterval:1800
+                                                                                 sinceDate:[[[CacheHandler instance] createSqeed] dateStart]]];
         
         NSArray *selectedIndexPaths = [_friendTable indexPathsForSelectedRows];
         NSMutableArray *friendIds = [[NSMutableArray alloc] init];
+        NSMutableArray *groupIds = [[NSMutableArray alloc] init];
         NSMutableArray *dateOptions = [[NSMutableArray alloc] init];
         
         for (NSIndexPath *indexPath in selectedIndexPaths) {
-            if (0 != indexPath.row) {
+            if (0 == indexPath.section) {
                 AddFriendTableViewCell *tmp_cell = (AddFriendTableViewCell *)[_friendTable cellForRowAtIndexPath:indexPath];
-                [friendIds addObject:[tmp_cell userId]];
+                [groupIds addObject:[tmp_cell userId]];
+            } else {
+                if (0 != indexPath.row) {
+                    AddFriendTableViewCell *tmp_cell = (AddFriendTableViewCell *)[_friendTable cellForRowAtIndexPath:indexPath];
+                    [friendIds addObject:[tmp_cell userId]];
+                }
+            }
+        }
+        
+        BOOL isAlreadyInvited = NO;
+        
+        for (FriendGroup *g in groups) {
+            for (NSString *groupId in groupIds) {
+                if ([[g groupId] isEqualToString:groupId]) {
+                    for (User *u in [g friends]) {
+                        for (NSString *friendId in friendIds) {
+                            if ([[u userId] isEqualToString:friendId]) {
+                                isAlreadyInvited = YES;
+                            }
+                        }
+                        if (!isAlreadyInvited)
+                            [friendIds addObject:[u userId]];
+                        isAlreadyInvited = NO;
+                    }
+                }
             }
         }
         
@@ -141,45 +233,59 @@ NSArray* friends;
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[_friendTable cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
-    BOOL allSelected = YES;
-    for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
-        if (0 != ip.row && ![[_friendTable cellForRowAtIndexPath:ip] isSelected]) {
-            allSelected = NO;
-            break;
-        }
-    }
-    if (0 != indexPath.row && !allSelected) {
-        [_friendTable deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];
-        [[_friendTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] setAccessoryType:UITableViewCellAccessoryNone];
-    }
     
-    if (0 == indexPath.row) {
+    if (0 == indexPath.section) {
+        
+    } else {
+        BOOL allSelected = YES;
         for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
-            [_friendTable deselectRowAtIndexPath:ip animated:YES];
-            [[_friendTable cellForRowAtIndexPath:ip] setAccessoryType:UITableViewCellAccessoryNone];
+            if (1 == ip.section
+                && 0 != ip.row
+                && ![[_friendTable cellForRowAtIndexPath:ip] isSelected]) {
+                allSelected = NO;
+                break;
+            }
+        }
+        if (0 != indexPath.row && !allSelected) {
+            [_friendTable deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:YES];
+            [[_friendTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] setAccessoryType:UITableViewCellAccessoryNone];
+        }
+        
+        if (0 == indexPath.row) {
+            for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
+                [_friendTable deselectRowAtIndexPath:ip animated:YES];
+                [[_friendTable cellForRowAtIndexPath:ip] setAccessoryType:UITableViewCellAccessoryNone];
+            }
         }
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[_friendTable cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
-    BOOL allSelected = YES;
-    for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
-        if (0 != ip.row && ![[_friendTable cellForRowAtIndexPath:ip] isSelected]) {
-            allSelected = NO;
-            break;
-        }
-    }
     
-    if (0 != indexPath.row && allSelected) {
-        [_friendTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-        [[_friendTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] setAccessoryType:UITableViewCellAccessoryCheckmark];
-    }
-    
-    if (0 == indexPath.row) {
+    if (0 == indexPath.section) {
+        
+    } else {
+        BOOL allSelected = YES;
         for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
-            [_friendTable selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionTop];
-            [[_friendTable cellForRowAtIndexPath:ip] setAccessoryType:UITableViewCellAccessoryCheckmark];
+            if (1 == ip.section
+                && 0 != ip.row
+                && ![[_friendTable cellForRowAtIndexPath:ip] isSelected]) {
+                allSelected = NO;
+                break;
+            }
+        }
+        
+        if (0 != indexPath.row && allSelected) {
+            [_friendTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:YES scrollPosition:UITableViewScrollPositionNone];
+            [[_friendTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
+        
+        if (0 == indexPath.row) {
+            for (NSIndexPath *ip in [_friendTable indexPathsForVisibleRows]) {
+                [_friendTable selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionTop];
+                [[_friendTable cellForRowAtIndexPath:ip] setAccessoryType:UITableViewCellAccessoryCheckmark];
+            }
         }
     }
 }
@@ -200,23 +306,50 @@ NSArray* friends;
     
     // EMPTY createSqeed in cache
     [[CacheHandler instance] setCreateSqeed:[[Sqeed alloc] init]];
+    [[[CacheHandler instance] createSqeed] setSqeedId:@"0"];
     [[[CacheHandler instance] createSqeed] setTitle:@""];
     [[[CacheHandler instance] createSqeed] setPeopleMax:@"10"];
     [[[CacheHandler instance] createSqeed] setPrivateAccess:@"0"];
     [[[CacheHandler instance] createSqeed] setDateStart:[NSDate date]];
     [[[CacheHandler instance] createSqeed] setDateEnd:[NSDate dateWithTimeIntervalSinceNow:1800]];
     [[[CacheHandler instance] createSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:0]];
-    
-    [[[CacheHandler instance] currentUser] fetchMySqeeds];
-    [[[CacheHandler instance] currentUser] fetchDiscovered];
 }
 
 - (void)fetchSqeeds:(NSNotification *)notification {
-    [[self activityIndicator] stopAnimating];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"FetchSqeedsDidComplete"
                                                   object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"CreateSqeedDidComplete"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"AddDatetimeOptionDidComplete"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"InviteDidComplete"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"FetchSqeedsDidFail"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"CreateSqeedDidFail"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"AddDatetimeOptionDidFail"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"InviteDidFail"
+                                                  object:nil];
+    
+    [[CacheHandler instance] setCreated:YES];
     
     [self performSegueWithIdentifier:@"segueInviteFriendsDidComplete" sender:self];
 }
@@ -225,14 +358,31 @@ NSArray* friends;
     int index = (int)[[notification userInfo][@"index"] integerValue];
     
     if ([[[[CacheHandler instance] createSqeed] dateOptions] count] == 0) { // NO OPTION AT ALL
-        [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId] :[[CacheHandler instance] friendIds]];
-    }
-    
-    if ([[[[CacheHandler instance] createSqeed] dateOptions] count] == index) { // NO MORE OPTION
-        [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId] :[[CacheHandler instance] friendIds]];
+        [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId]
+                                :[[CacheHandler instance] friendIds]];
     } else {
-        [DatabaseManager addDatetimeOption :[[[CacheHandler instance] createSqeed] sqeedId] :[[[CacheHandler instance] createSqeed] dateOptions][index] :index];
+        if ([[[[CacheHandler instance] createSqeed] dateOptions] count] == index) { // NO MORE OPTION
+            [DatabaseManager invite :[[[CacheHandler instance] createSqeed] sqeedId]
+                                    :[[CacheHandler instance] friendIds]];
+        } else {
+            [DatabaseManager addDatetimeOption :[[[CacheHandler instance] createSqeed] sqeedId]
+                                               :[[[CacheHandler instance] createSqeed] dateOptions][index]
+                                               :index];
+        }
     }
+}
+
+-(void)hideLoader {
+    [[self loadingView] setHidden:YES];
+    [[self activityIndicator] stopAnimating];
+    [AlertHelper error:@"The network connection was lost. Please try again in a moment."];
+    if (![[[[CacheHandler instance] createSqeed] sqeedId] isEqualToString:@"0"]) {
+        [self deleteFailedSqeed];
+    }
+}
+
+-(void)deleteFailedSqeed {
+    [DatabaseManager deleteSqeed:[[[CacheHandler instance] createSqeed] sqeedId]];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

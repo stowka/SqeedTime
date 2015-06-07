@@ -10,8 +10,9 @@
 
 @interface FriendGroup : NSObject
 
-@property NSString* groupId;
-@property NSString* title;
-@property NSString* creatorId;
+@property NSString *groupId;
+@property NSString *title;
+@property NSString *creatorId;
+@property NSMutableArray *friends;
 
 @end

@@ -17,7 +17,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *birthYear;
 
 - (IBAction)signup:(id)sender;
-- (void) segueSignup;
+- (void) fetchUser;
+- (void) fetchStuff;
+- (void) showSqeeds;
 - (void) errorSignup :(NSNotification *)notif;
 
 @end

@@ -7,14 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MultiSelectSegmentedControl.h"
 
-@interface SqeedsViewController : UIViewController<UIActionSheetDelegate>
+@interface SqeedsViewController : UIViewController<UIActionSheetDelegate, MultiSelectSegmentedControlDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView* sqeedsTable;
 @property (strong, nonatomic) UIRefreshControl* refreshControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet UINavigationBar *navbar;
 
 - (IBAction)display:(id)sender;
-- (void) showDetails :(NSNotification *)notification;
+- (void)showDetails :(NSNotification *)notification;
 - (void)displayError;
-- (void) refresh;
+- (void)refresh;
+- (void)reload;
+- (void)attempt;
+- (void)voteFailed:(NSNotification *)notif;
 @end

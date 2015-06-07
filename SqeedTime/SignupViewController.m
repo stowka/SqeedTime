@@ -20,9 +20,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(segueSignup)
+                                             selector:@selector(fetchUser)
                                                  name:@"SignupDidComplete"
                                                object:nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchStuff)
+                                                 name:@"FetchUserDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showSqeeds)
+                                                 name:@"FetchFriendsDidComplete"
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(errorSignup:)
                                                  name:@"SignupDidFail"
@@ -49,7 +61,7 @@
     NSString *password = self.password.text;
     NSString *phoneExt = self.phoneExt.text;
     NSString *phone = self.phone.text;
-    NSString *gender = [NSString stringWithFormat:@"%d", self.gender.selectedSegmentIndex];
+    NSString *gender = [NSString stringWithFormat:@"%ld", (long)self.gender.selectedSegmentIndex];
     NSString *birthYear = self.birthYear.text;
     
     if (![email isEqualToString:@""]
@@ -57,16 +69,22 @@
         && ![phoneExt isEqualToString:@""]
         && ![phone isEqualToString:@""]
         && ![birthYear isEqualToString:@""]) {
-        [DatabaseManager signup:email :password :phoneExt :phone :gender :birthYear];
+        [DatabaseManager signup:email :password :phone :phoneExt :gender :birthYear];
     } else {
         [AlertHelper error:@"Please fulfill all the fields!"];
     }
 }
 
-- (void)segueSignup {
+- (void)fetchUser {
+    [DatabaseManager fetchUser];
+}
+
+- (void)fetchStuff {
     [[[CacheHandler instance] currentUser] fetchGroups];
     [[[CacheHandler instance] currentUser] fetchFriends];
+}
     
+- (void)showSqeeds {
     [self performSegueWithIdentifier:@"segueSignup" sender:self];
 }
 

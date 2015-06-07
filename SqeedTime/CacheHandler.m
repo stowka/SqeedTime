@@ -12,6 +12,7 @@
 @implementation CacheHandler
 @synthesize currentUserId;
 @synthesize currentUser;
+@synthesize currentGroup;
 @synthesize tmpUser;
 @synthesize currentSqeed;
 @synthesize tmpSqeed;
@@ -25,6 +26,8 @@
 @synthesize pn_token;
 @synthesize contacts;
 @synthesize editing;
+@synthesize created;
+@synthesize segment;
 @synthesize chatMessages;
 @synthesize categoryFilter;
 @synthesize lastInsertSqeedId;
@@ -37,7 +40,6 @@ static CacheHandler* instance = nil;
         dispatch_once(&pred, ^{
             instance = [[CacheHandler alloc] init];
         });
-        [DatabaseManager fetchCategories];
         [instance setCurrentSqeed:[[Sqeed alloc] init]];
         [instance setCreateSqeed:[[Sqeed alloc] init]];
         [instance setFriendIds:[[NSArray alloc] init]];
@@ -45,6 +47,7 @@ static CacheHandler* instance = nil;
         
         [instance setLastInsertSqeedId:@"0"];
         
+        [[instance createSqeed] setSqeedId:@"0"];
         [[instance createSqeed] setTitle:@""];
         [[instance createSqeed] setPeopleMax:@"10"];
         [[instance createSqeed] setPrivateAccess:@"0"];
@@ -61,6 +64,10 @@ static CacheHandler* instance = nil;
         [[instance editSqeed] setSqeedCategory:[[SqeedCategory alloc] initWithIndex:0]];
         
         [instance setCategoryFilter:@"0"];
+        
+        [instance setCreated:NO];
+        [instance setEditing:NO];
+        [instance setSegment:-1];
     }
     return instance;
 }

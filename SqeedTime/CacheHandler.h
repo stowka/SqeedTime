@@ -10,9 +10,11 @@
 #import "User.h"
 #import "Sqeed.h"
 #import "SqeedCategory.h"
+#import "FriendGroup.h"
 
 @interface CacheHandler : NSObject
 @property (strong) NSString *currentUserId;
+@property (strong) FriendGroup *currentGroup;
 @property (strong) User *currentUser;
 @property (strong) User *tmpUser;
 @property (strong) Sqeed *currentSqeed;
@@ -28,6 +30,8 @@
 @property (strong, nonatomic) NSArray *contacts;
 @property (weak, nonatomic) NSMutableArray *chatMessages;
 @property BOOL editing;
+@property BOOL created;
+@property int segment;
 @property (strong, nonatomic) NSString *categoryFilter;
 @property NSString *lastInsertSqeedId;
 

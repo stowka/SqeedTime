@@ -12,6 +12,7 @@
 #import "VoteOption.h"
 #import "Message.h"
 #import "AlertHelper.h"
+#import "FriendGroup.h"
 
 @implementation DatabaseManager
 
@@ -83,7 +84,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
               NSLog(@"Fetching user: %@", username);
               NSString *name = [response valueForKey:@"name"];
               NSString *email = [response valueForKey:@"email"];
-              NSString *phoneExt = [response valueForKey:@"phoneExt"];
+              NSString *phoneExt = [response valueForKey:@"phone_ext"];
               NSString *phone = [response valueForKey:@"phone"];
               NSString *salt = [response valueForKey:@"salt"];
               NSString *facebookUrl = [response valueForKey:@"facebookUrl"];
@@ -756,6 +757,12 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
     [manager setRequestSerializer:requestSerializer];
+    
+    NSLog(@"%@ %@ %@ %@", [[CacheHandler instance] token],
+          sqeedId, [NSString stringWithFormat:@"%f",
+                    [[voteOption datetimeStart] timeIntervalSince1970]], [NSString stringWithFormat:@"%f",
+          [[voteOption datetimeEnd] timeIntervalSince1970]]);
+    
     NSDictionary *params = @{
                              @"function"        : @"addDatetimeOption",
                              @"token"           : [[CacheHandler instance] token],
@@ -769,6 +776,8 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSLog(@"Add datetime option! (%d)", index);
+              
+              NSLog(@"%@", response);
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"AddDatetimeOptionDidComplete"
                                                                   object:nil
@@ -845,7 +854,9 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               [[NSNotificationCenter defaultCenter] postNotificationName:@"VoteDidFail"
-                                                                  object:nil];
+                                                                  object:nil
+                                                                userInfo:@{@"optionId" :optionId,
+                                                                           @"sqeedId"  :sqeedId}];
               
               [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
               NSLog(@"Error: %@", error);
@@ -990,11 +1001,89 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           }];
 }
 
++ (void)updateEvent:(NSString *)sqeedId
+                   :(NSString *)title
+                   :(NSString *)place
+                   :(NSString *)description
+                   :(NSString *)peopleMax
+                   :(SqeedCategory *)category {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    NSDictionary *params = @{
+                             @"function"    : @"updateEvent",
+                             @"token"       : [[CacheHandler instance] token],
+                             @"sqeedId"     : sqeedId,
+                             @"title"       : title,
+                             @"place"       : place,
+                             @"description" : description,
+                             @"peopleMax"   : peopleMax,
+                             @"categoryId"  : [category categoryId]
+                             };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Event updated!");
+              NSLog(@"%@", response[@"message"]);
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateEventDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateEventDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
++ (void)updateEventAccess:(NSString *)sqeedId
+                         :(NSString *)isPrivate {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFHTTPRequestOperationManager *manager =
+    [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:[[CacheHandler instance] token] forHTTPHeaderField:@"token"];
+    [manager setRequestSerializer:requestSerializer];
+    NSDictionary *params = @{
+                             @"function"    : @"updateEvent",
+                             @"token"       : [[CacheHandler instance] token],
+                             @"sqeedId"     : sqeedId,
+                             @"private"     : isPrivate,
+                             };
+    [manager POST:serverURL
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id response) {
+              NSLog(@"Event access updated!");
+              NSLog(@"%@", response[@"message"]);
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateEventAccessDidComplete"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateEventAccessDidFail"
+                                                                  object:nil];
+              
+              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+              NSLog(@"Error: %@", error);
+          }];
+}
+
 + (void)updateUser :(NSString *)email
                    :(NSString *)name
                    :(NSString *)phoneExt
                    :(NSString *)phone
-                   :(NSString *)facebookUrl {
+                   :(NSString *)facebookUrl  {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager =
@@ -1007,6 +1096,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
                              @"function"    : @"updateUser",
                              @"token"       : [[CacheHandler instance] token],
                              @"email"       : email,
+                             @"forname"     : @"",
                              @"name"        : name,
                              @"phoneExt"    : phoneExt,
                              @"phone"       : phone,
@@ -1046,10 +1136,26 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSLog(@"Get groups");
+              NSMutableArray *groups = [[NSMutableArray alloc] init];
+              FriendGroup *tmp_group;
+              User *tmp_user;
               
-              NSLog(@"%@", response);
+              for (NSDictionary *group in response[@"groups"]) {
+                  tmp_group = [[FriendGroup alloc] init];
+                  [tmp_group setGroupId:group[@"id"]];
+                  [tmp_group setCreatorId:group[@"idUser"]];
+                  [tmp_group setTitle:group[@"title"]];
+                  [tmp_group setFriends:[[NSMutableArray alloc] init]];
+                  for (NSDictionary *user in group[@"users"]) {
+                      tmp_user = [[User alloc] init:user[@"userId"]];
+                      [tmp_user setName:user[@"name"]];
+                      [[tmp_group friends] addObject:tmp_user];
+                  }
+                  [groups addObject:tmp_group];
+              }
               
-              // TODO
+              
+              [[[CacheHandler instance] currentUser] setGroups:groups];
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"GetGroupsDidComplete"
                                                                   object:nil];
@@ -1136,7 +1242,7 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           success:^(AFHTTPRequestOperation *operation, id response) {
               NSLog(@"Update group");
               
-              // TODO
+              NSLog(@"%@", response);
               
               [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateGroupDidComplete"
                                                                   object:nil];
@@ -1502,6 +1608,9 @@ static NSString *serverURL = @"http://sqtdbws.net-production.ch/";
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupDidFail"
+                                                                  object:nil
+                                                                userInfo:@{@"message":@"Fields ain't properly fulfilled!"}];
               [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
           }];
 }

@@ -10,5 +10,9 @@
 
 @interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 - (IBAction)logout:(id)sender;
+
+- (void)fetchUser;
+- (void)reload;
+
 @property (strong, nonatomic) IBOutlet UITableView* settingsTable;
 @end

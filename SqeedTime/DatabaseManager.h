@@ -37,6 +37,9 @@
 + (void)vote :(NSString *)sqeedId :(NSString *)optionId;
 + (void) deleteSqeed :(NSString *)sqeedId;
 + (void) invite :(NSString *)sqeedId :(NSArray *)friendIds;
++ (void) updateEvent :(NSString *)sqeedId :(NSString *)title :(NSString *)place :(NSString *)description :(NSString *)peopleMax :(SqeedCategory *)category;
++ (void) updateEventAccess :(NSString *)sqeedId :(NSString *)isPrivate;
+
 + (void) updateUser :(NSString *)email :(NSString *)name :(NSString *)phoneExt :(NSString *)phone :(NSString *)facebookUrl;
 
 + (void) getGroups;

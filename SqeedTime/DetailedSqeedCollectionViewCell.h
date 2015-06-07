@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Sqeed.h"
+#import "MultiSelectSegmentedControl.h"
 
 @interface DetailedSqeedCollectionViewCell : UICollectionViewCell<UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *eventCategoryIcon;
@@ -19,7 +20,7 @@
 @property (strong, nonatomic) IBOutlet NSString *eventId;
 @property (strong, nonatomic) IBOutlet UITextView *eventDescription;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *eventAnswer;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *eventDateDoodle;
+@property (strong, nonatomic) IBOutlet MultiSelectSegmentedControl *eventDateDoodle;
 @property (strong, nonatomic) IBOutlet UIButton *eventMore;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *eventGoingWaiting;
 @property (strong, nonatomic) IBOutlet UITextView *peopleList;

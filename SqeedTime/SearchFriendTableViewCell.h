@@ -11,7 +11,6 @@
 @interface SearchFriendTableViewCell : UITableViewCell
 - (IBAction)add:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *name;
-@property (strong, nonatomic) IBOutlet UILabel *username;
 @property (strong, nonatomic) IBOutlet UIButton *button;
 
 @property (strong, nonatomic) NSString *userId;

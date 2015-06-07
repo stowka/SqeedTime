@@ -8,7 +8,6 @@
 
 #import "SettingsViewController.h"
 #import "SettingsTableViewCell.h"
-#import "EditSettingsViewController.h"
 #import "DisplaySettingsViewController.h"
 #import "CacheHandler.h"
 #import "DatabaseManager.h"
@@ -19,6 +18,8 @@
 
 @implementation SettingsViewController
 
+@synthesize settingsTable;
+
 NSDictionary* myData;
 
 - (void)viewDidLoad {
@@ -27,6 +28,22 @@ NSDictionary* myData;
                                              selector:@selector(showLogin)
                                                  name:@"LogoutDidComplete"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fetchUser)
+                                                 name:@"UpdateUserDidComplete"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reload)
+                                                 name:@"FetchUserDidComplete"
+                                               object:nil];
+}
+
+- (void)fetchUser {
+    [DatabaseManager fetchUser];
+}
+
+- (void)reload {
+    [settingsTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +59,24 @@ NSDictionary* myData;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return section ? 4 : 4;
+    return section ? 3 : 3;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        NSString *name = [[alertView textFieldAtIndex:0] text];
+        NSLog(@"%@ %@ %@ %@ %@", [[[CacheHandler instance] currentUser] email],
+              name,
+              [[[CacheHandler instance] currentUser] phoneExt],
+              [[[CacheHandler instance] currentUser] phone],
+              [[[CacheHandler instance] currentUser] facebookUrl]);
+        
+        [DatabaseManager updateUser:[[[CacheHandler instance] currentUser] email]
+                                   :name
+                                   :@"33"
+                                   :[[[CacheHandler instance] currentUser] phone]
+                                   :@""];
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -57,26 +91,21 @@ NSDictionary* myData;
     if (!indexPath.section) {
         switch(indexPath.row) {
             case 0:
-                cell.title.text = @"Username"; // NON MUTABLE
-                cell.value.text = [[[CacheHandler instance] currentUser] username];
-                cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
-                cell.key = @"username";
-                break;
-            case 1:
                 cell.title.text = @"Phone"; // NON MUTABLE
                 cell.value.text = [[[CacheHandler instance] currentUser] phoneNumber];
                 cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
                 cell.key = @"phone";
                 break;
+            case 1:
+                cell.title.text = @"E-mail";
+                cell.value.text = [[[CacheHandler instance] currentUser] email];
+                cell.value.font = [UIFont italicSystemFontOfSize:16.0f];
+                cell.key = @"email";
+                break;
             case 2:
                 cell.title.text = @"Name";
                 cell.value.text = [[[CacheHandler instance] currentUser] name];
                 cell.key = @"name";
-                break;
-            case 3:
-                cell.title.text = @"E-mail";
-                cell.value.text = [[[CacheHandler instance] currentUser] email];
-                cell.key = @"email";
                 break;
             default:
                 cell.title.text = @"ERROR";
@@ -95,10 +124,6 @@ NSDictionary* myData;
                 cell.value.text = @"❯";
                 break;
             case 2:
-                cell.title.text = @"Geolocation";
-                cell.value.text = @"❯";
-                break;
-            case 3:
                 cell.title.text = @"About us";
                 cell.value.text = @"❯";
                 break;
@@ -113,31 +138,38 @@ NSDictionary* myData;
 }
 
 -(void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    NSString* segue;
-    if (!indexPath.section && (indexPath.row >= 2 && indexPath.row <= 4))       // MY ACCOUNT
-        segue = @"segueEditSettings";
-    else if (indexPath.section)                                                 // MORE INFO
-        segue = @"segueDisplaySettings";
-    else {
+    //NSString* segue;
+    if (!indexPath.section && indexPath.row == 2) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Edit your name"
+                                                        message:@"The name that will be displayed to your friends"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Save", nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *tf = [alert textFieldAtIndex:0];
+        tf.placeholder = @"Name";
+        tf.text = [[[CacheHandler instance] currentUser] name];
+        [alert show];
+    } else if (indexPath.section) {
+        //segue = @"segueDisplaySettings";
+        //[self performSegueWithIdentifier:segue sender:self];
+    } else {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
-    //[self performSegueWithIdentifier:segue sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.settingsTable indexPathForSelectedRow];
-    EditSettingsViewController* destViewController = segue.destinationViewController;
-    SettingsTableViewCell* cell = (SettingsTableViewCell*)[self.settingsTable cellForRowAtIndexPath:indexPath];
-    if ([segue.identifier isEqualToString:@"segueEditSettings"]) {
-        destViewController.key = cell.key;
-        destViewController.value = cell.value.text;
-    }
     
-    if ([segue.identifier isEqualToString:@"segueDisplaySettings"]) {
-         // TODO
+    switch (indexPath.row) {
+        case 0:
+            NSLog(@"");
+            break;
+            
+        default:
+            break;
     }
 }
 

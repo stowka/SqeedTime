@@ -19,5 +19,7 @@
 - (IBAction)save:(id)sender;
 - (IBAction)switchAccess:(id)sender;
 
+-(void)hideLoader;
+-(void)deleteFailedSqeed;
 
 @end

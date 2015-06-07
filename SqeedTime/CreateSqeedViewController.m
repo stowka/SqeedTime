@@ -16,6 +16,7 @@
 #import "ModalWhoViewController.h"
 
 #import "SuggestionTableViewCell.h"
+#import "AlertHelper.h"
 
 @interface CreateSqeedViewController ()
 
@@ -29,6 +30,9 @@ NSDictionary* categories;
 @synthesize whereLabel;
 @synthesize whoLabel;
 @synthesize autocompleteTableView;
+@synthesize nextButton;
+@synthesize lsw;
+@synthesize rsw;
 
 @synthesize allSuggestions;
 @synthesize suggestions;
@@ -36,12 +40,7 @@ NSDictionary* categories;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([[CacheHandler instance] editing]) {
-        [[self whatToDoTextField] setText:[[[CacheHandler instance] editSqeed] title]];
-       // [[self categoryPickerView] selectedRowInComponent:[[[[[CacheHandler instance] editSqeed] sqeedCategory] categoryId] integerValue]];
-    } else {
-        [[self whatToDoTextField] setText:@""];
-    }
+    [[self whatToDoTextField] setText:@""];
     
     // Add observers to update labels
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -356,11 +355,23 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[[CacheHandler instance] createSqeed] setTitle:[[self whatToDoTextField] text]];
 }
 
+- (IBAction)cancel:(id)sender {
+}
+
+- (IBAction)saveEdit:(id)sender {
+}
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"segueAddFriends"])
-        return (![[_whatToDoTextField text] isEqualToString:@""] && [_categoryPickerView selectedRowInComponent:0]);
-    else
+        if ((![[_whatToDoTextField text] isEqualToString:@""] && [_categoryPickerView selectedRowInComponent:0])) {
+            return YES;
+        } else {
+            [AlertHelper alert:@"You must at least set a title and choose a category." :@"Warning"];
+            return NO;
+        }
+    else {
         return YES;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

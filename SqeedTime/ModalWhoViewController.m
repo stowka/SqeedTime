@@ -8,6 +8,7 @@
 
 #import "ModalWhoViewController.h"
 #import "CacheHandler.h"
+#import "AlertHelper.h"
 
 @interface ModalWhoViewController ()
 
@@ -60,18 +61,19 @@
 
 - (IBAction)saveToCache:(id)sender {
     NSLog(@"saved");
-    if ([[CacheHandler instance] editing]) {
-        [[[CacheHandler instance] editSqeed] setPeopleMax:[[self max] text]];
-    } else {
-        [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
-    }
+    [[[CacheHandler instance] createSqeed] setPeopleMax:[[self max] text]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPeopleMaxDidChange"
                                                         object:nil];
 }
 
 - (IBAction)close:(id)sender {
-    [self saveToCache:sender];
-    [self performSegueWithIdentifier:@"segueDismissWho"
-                              sender:self];
+    if ([[[self max] text] integerValue] > 30
+        || [[[self max] text] integerValue] <= 0) {
+        [AlertHelper error:@"This value is bound between 1 and 30"];
+    } else {
+        [self saveToCache:sender];
+        [self performSegueWithIdentifier:@"segueDismissWho"
+                                  sender:self];
+    }
 }
 @end

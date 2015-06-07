@@ -21,10 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[CacheHandler instance] editing])
-        [place setText:[[[CacheHandler instance] editSqeed] place]];
-    else
-        [place setText:[[[CacheHandler instance] createSqeed] place]];
+    [place setText:[[[CacheHandler instance] createSqeed] place]];
     self.view.backgroundColor = [UIColor clearColor];
     UIImageView* backView = [[UIImageView alloc] initWithFrame:[[self view]frame]];
     backView.image = imageOfUnderlyingView;
@@ -52,16 +49,15 @@
 */
 
 - (IBAction)saveToCache:(id)sender {
-    if ([[CacheHandler instance] editing]) {
-        [[[CacheHandler instance] editSqeed] setPlace:[[self place] text]];
-    } else {
-        [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
-    }
+    
+    [[[CacheHandler instance] createSqeed] setPlace:[[self place] text]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ModalPlaceDidChange"
                                                         object:nil];
 }
 
-- (IBAction)close:(id)sender {
+- (IBAction)dismiss:(id)sender{
+    [self saveToCache:sender];
     [self performSegueWithIdentifier:@"segueDismissWhere" sender:self];
 }
 @end

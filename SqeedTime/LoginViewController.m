@@ -23,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [CacheHandler instance];
+    [DatabaseManager fetchCategories];
+    
     // Manage session
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     

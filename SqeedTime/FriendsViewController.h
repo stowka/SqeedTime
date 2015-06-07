@@ -12,5 +12,7 @@
 @interface FriendsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *friendTable;
 - (IBAction)remove:(id)sender;
+- (void) getGroups :(NSNotification *)notif;
+//- (void) showGroup :(NSNotification *)notif;
 
 @end

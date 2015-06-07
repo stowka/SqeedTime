@@ -17,6 +17,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *whatLabel;
 @property (strong, nonatomic) IBOutlet UILabel *whenLabel;
 @property (strong, nonatomic) IBOutlet UITableView *autocompleteTableView;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
+@property (strong, nonatomic) IBOutlet UIImageView *lsw;
+@property (strong, nonatomic) IBOutlet UIImageView *rsw;
 
 @property (strong, nonatomic) NSArray *allSuggestions;
 @property (strong, nonatomic) NSMutableArray *suggestions;
@@ -33,5 +36,7 @@
 - (IBAction)save:(id)sender;
 - (IBAction)backgroundClick:(id)sender;
 - (IBAction)saveToCache:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)saveEdit:(id)sender;
 
 @end

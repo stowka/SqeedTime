@@ -33,7 +33,16 @@
 }
 
 - (IBAction)chooseDate:(id)sender {
-    [DatabaseManager vote:[sqeed sqeedId] :[[sqeed dateOptions][[[self eventDateDoodle] selectedSegmentIndex]] voteId]];
+//    NSIndexSet *indexes = [[self eventDateDoodle] selectedSegmentIndexes];
+//    NSMutableArray *newVoteIds = [[NSMutableArray alloc] init];
+//    
+//    NSUInteger currentIndex = [indexes firstIndex];
+//    while (currentIndex != NSNotFound) {
+//        [newVoteIds addObject:[NSString stringWithFormat:@"%d", currentIndex]];
+//        currentIndex = [indexes indexGreaterThanIndex:currentIndex];
+//    }
+//
+//    [DatabaseManager vote:[sqeed sqeedId] :[[sqeed dateOptions][[[self eventDateDoodle] selectedSegmentIndex]] voteId]];
 }
 
 - (void)alertView :(UIAlertView *)alertView clickedButtonAtIndex :(NSInteger)buttonIndex {

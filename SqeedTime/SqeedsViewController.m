@@ -22,17 +22,21 @@
 
 @implementation SqeedsViewController
 
+@synthesize sqeedsTable;
+@synthesize navbar;
+
 NSArray* sqeeds;
 int sqeedFlag = -1;
+int attemps = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [[CacheHandler instance] setEditing:NO];
     
-    [[self segmentedControl] setSelectedSegmentIndex:1];
-    [self fetchSqeeds];
+    [self attempt];
     [[self sqeedsTable] setScrollsToTop:YES];
+    
     
     [[[CacheHandler instance] currentUser] fetchGroups];
     
@@ -43,7 +47,7 @@ int sqeedFlag = -1;
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(displayError)
+                                             selector:@selector(attempt)
                                                  name:@"FetchSqeedsDidFail"
                                                object:nil];
     
@@ -60,28 +64,33 @@ int sqeedFlag = -1;
     
     // Other observers
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(fetchSqeeds)
+                                             selector:@selector(attempt)
                                                  name:@"ParticipateDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(fetchSqeeds)
+                                             selector:@selector(attempt)
                                                  name:@"NotParticipateDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(fetchSqeeds)
+                                             selector:@selector(attempt)
                                                  name:@"DeleteSqeedDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(fetchSqeeds)
-                                                 name:@"CreateSqeedDidComplete"
+                                                 name:@"InviteDidComplete"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(displayActionSheet:)
                                                  name:@"DisplayMoreDidComplete"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(voteFailed:)
+                                                 name:@"VoteDidFail"
                                                object:nil];
     
     // Pull down to refresh
@@ -92,16 +101,30 @@ int sqeedFlag = -1;
                                                         alpha:1]];
     
     [[self refreshControl] addTarget:self
-                              action:@selector(fetchSqeeds)
+                              action:@selector(attempt)
                     forControlEvents:UIControlEventValueChanged];
     
     [[self sqeedsTable] addSubview:[self refreshControl]];
+    
+    [sqeedsTable setAlwaysBounceVertical:YES];
+    
+    [self refresh];
+    
     
     // Double tap gesture
     UITapGestureRecognizer *doubleTapFolderGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processDoubleTap:)];
     [doubleTapFolderGesture setNumberOfTapsRequired:2];
     [doubleTapFolderGesture setNumberOfTouchesRequired:1];
-    //[self.view addGestureRecognizer:doubleTapFolderGesture];
+    [self.view addGestureRecognizer:doubleTapFolderGesture];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    if ([[CacheHandler instance] created])
+        [[self segmentedControl] setSelectedSegmentIndex:0];
+    else if ([[CacheHandler instance] segment] == -1)
+        [[self segmentedControl] setSelectedSegmentIndex:1];
+    else
+        [[self segmentedControl] setSelectedSegmentIndex:[[CacheHandler instance] segment]];
 }
 
 - (void)fetchSqeeds {
@@ -111,7 +134,12 @@ int sqeedFlag = -1;
         [[[CacheHandler instance] currentUser] fetchDiscovered];
 }
 
+- (void)reload {
+    [sqeedsTable reloadData];
+}
+
 - (void) refresh {
+    attemps = 0;
     sqeedFlag = -1;
     [[CacheHandler instance] setLastUpdate:[NSDate date]];
     
@@ -132,18 +160,37 @@ int sqeedFlag = -1;
 
 - (void) showDetails :(NSNotification *)notification {
     NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
-    [[_sqeedsTable cellForItemAtIndexPath:indexPath] setSelected:NO];
+    [[sqeedsTable cellForItemAtIndexPath:indexPath] setSelected:NO];
+    
+    
     long section = [[self segmentedControl] selectedSegmentIndex];
     int old_flag = sqeedFlag;
-    sqeedFlag = (int)[indexPath row];
+    sqeedFlag = indexPath.row;
+    
+    if (old_flag == sqeedFlag)
+        sqeedFlag = -1;
+    
     if (-1 != old_flag)
-        [_sqeedsTable reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:section]]];
+        [sqeedsTable reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:old_flag inSection:section]]];
     
-    #pragma mark - ERROR from time to time
-    [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
-    #pragma mark - ERROR from time to time
+    if ([[CacheHandler instance] created])
+        [[self segmentedControl] setSelectedSegmentIndex:0];
+    [self reload];
     
-    [_sqeedsTable scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    [sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
+    
+    [sqeedsTable scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    
+    [sqeedsTable setAlwaysBounceVertical:YES];
+}
+
+- (void) attempt {
+    if (++attemps == 4) {
+        attemps = 0;
+        [self displayError];
+    } else {
+        [self fetchSqeeds];
+    }
 }
 
 - (void)displayError {
@@ -160,6 +207,7 @@ int sqeedFlag = -1;
 }
 
 -(void)actionSheet :(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [actionSheet setHidden:YES];
     if (0 == buttonIndex) { // Delete
         [DatabaseManager deleteSqeed:[sqeeds[sqeedFlag] sqeedId]];
     } else if (1 == buttonIndex) { // Edit
@@ -171,11 +219,9 @@ int sqeedFlag = -1;
 }
 
 - (IBAction)display:(id)sender {
+    [[CacheHandler instance] setCreated:NO];
+    [[CacheHandler instance] setSegment:[[self segmentedControl] selectedSegmentIndex]];
     [self fetchSqeeds];
-}
-
-- (IBAction)createSqeed:(id)sender {
-    // TODO
 }
 
 - (void)didReceiveMemoryWarning {
@@ -266,7 +312,7 @@ int sqeedFlag = -1;
         else
             bigBadgeText = [sqeeds[[indexPath row]] goingCount];
         
-        smallBadgeText = [NSString stringWithFormat:@"%ld", ([[sqeeds[[indexPath row]] goingCount] integerValue] + [[sqeeds[[indexPath row]] waitingCount] integerValue])];
+        smallBadgeText = [NSString stringWithFormat:@"%@", [sqeeds[[indexPath row]] peopleMax]];
         
         [[cell eventBigBadge] setText:bigBadgeText];
         [[cell eventSmallBadge] setText:smallBadgeText];
@@ -356,6 +402,7 @@ int sqeedFlag = -1;
                                                              green:157.0 / 255.0
                                                               blue:187.0 / 255.0
                                                              alpha:1]];
+        [[cell eventDateDoodle] setDelegate:self];
         [[cell eventAnswer] setTintColor:[UIColor colorWithRed:67.0 / 255.0
                                                          green:157.0 / 255.0
                                                           blue:187.0 / 255.0
@@ -379,7 +426,7 @@ int sqeedFlag = -1;
             bigBadgeText = [sqeeds[[indexPath row]] goingCount];
         
         [[cell eventBigBadge] setText:bigBadgeText];
-        [[cell eventSmallBadge] setText:[sqeeds[[indexPath row]] waitingCount]];
+        [[cell eventSmallBadge] setText:[sqeeds[[indexPath row]] peopleMax]];
         
         // DO NOT DISPLAY SMALL BADGE IF DISCOVERED
         if (1 == [[self segmentedControl] selectedSegmentIndex])
@@ -417,15 +464,16 @@ int sqeedFlag = -1;
             [[cell eventDateDoodle] setSelectedSegmentIndex:0];
         } else {
             int n = 0;
+            NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
             for (VoteOption *vo in [[cell sqeed] dateOptions]) {
-                NSLog(@"voteOption = %@", [vo voteId]);
                 for (VoteOption *optionId in [[cell sqeed] voteIds]) {
                     if ([optionId.voteId isEqualToString:vo.voteId]) {
-                        [[cell eventDateDoodle] setSelectedSegmentIndex:n];
+                        [indexSet addIndex:n];
                     }
                 }
                 n += 1;
             }
+            [[cell eventDateDoodle] setSelectedSegmentIndexes:indexSet];
         }
         
         // IF CREATED BY CURRENT USER
@@ -469,13 +517,38 @@ int sqeedFlag = -1;
     }
 }
 
+-(void)multiSelect:(MultiSelectSegmentedControl*) multiSelecSegmendedControl didChangeValue:(BOOL)value atIndex:(NSUInteger)index {
+    NSIndexPath *indexPath;
+    indexPath = [NSIndexPath indexPathForRow:sqeedFlag inSection:[[self segmentedControl] selectedSegmentIndex]];
+    
+    if (1 != [[sqeeds[[indexPath row]] dateOptions] count]) {
+        Sqeed *sqeed = [(DetailedSqeedCollectionViewCell *)[sqeedsTable cellForItemAtIndexPath:indexPath] sqeed];
+        NSArray *dateOptions = [sqeed dateOptions];
+        VoteOption *selectedOption = [dateOptions objectAtIndex:index];
+        [DatabaseManager vote:[sqeed sqeedId] :[selectedOption voteId]];
+    } else {
+        if (!value)
+            [multiSelecSegmendedControl setSelectedSegmentIndex:index];
+    }
+}
+
+-(void)voteFailed:(NSNotification *)notif {
+    NSString *sqeedId = [notif userInfo][@"sqeedId"];
+    NSString *optionId = [notif userInfo][@"optionId"];
+    [DatabaseManager vote:sqeedId :optionId];
+}
+
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath row] != sqeedFlag) {
+    if (indexPath.row != sqeedFlag) {
+        [self refresh];
         [DatabaseManager fetchSqeed:sqeeds[indexPath.row] :indexPath];
     } else {
-        sqeedFlag = -1;
-        [_sqeedsTable reloadItemsAtIndexPaths:@[indexPath]];
+        [self refresh];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FetchSqeedDidComplete"
+                                                            object:nil
+                                                          userInfo:[NSDictionary dictionaryWithObject:indexPath
+                                                                                               forKey:@"indexPath"]];
     }
 }
 
@@ -499,7 +572,11 @@ int sqeedFlag = -1;
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10, 0, 10, 0);
+    if (![[self segmentedControl] selectedSegmentIndex]
+        || ([[self segmentedControl] selectedSegmentIndex] && section == 1))
+        return UIEdgeInsetsMake(10, 0, 610, 0);
+    else
+        return UIEdgeInsetsMake(10, 0, 10, 0);
 }
 
 #pragma mark - Light status bar

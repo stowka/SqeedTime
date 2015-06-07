@@ -14,5 +14,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *place;
 @property (strong) UIImage* imageOfUnderlyingView;
 - (IBAction)saveToCache:(id)sender;
-- (IBAction)close:(id)sender;
+- (IBAction)dismiss:(id)sender;
 @end

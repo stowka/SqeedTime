@@ -13,5 +13,6 @@
 @synthesize groupId;
 @synthesize title;
 @synthesize creatorId;
+@synthesize friends;
 
 @end

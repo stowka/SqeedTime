@@ -15,8 +15,10 @@
 
 @implementation AppDelegate
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         
@@ -95,5 +97,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+#pragma clang diagnostic pop
 @end

@@ -75,26 +75,16 @@ NSArray* result;
     [[cell name] setText :[NSString stringWithFormat:@"%@",
                            [result[[indexPath row]] name]]];
     
-    [[cell username] setText :[NSString stringWithFormat:@"%@",
-                               [result[[indexPath row]] username]]];
-    
     [cell setUserId:[result[[indexPath row]] userId]];
     
     if ([[[[CacheHandler instance] currentUser] friends] containsObject:result[[indexPath row]]]) {
         [cell setIsFriend:@"YES"];
+        UIImage *image = [UIImage imageNamed:@"remove.png"];
+        [[cell button] setImage:image forState:UIControlStateNormal];
     } else {
         [cell setIsFriend:@"NO"];
-    }
-    
-    UIImage *image = [UIImage imageNamed:@"remove.png"];
-    [[cell button] setImage:image forState:UIControlStateHighlighted];
-    
-    if ([[cell isFriend] isEqualToString:@"YES"]) {
-        [[cell button] setHighlighted:YES];
-    }
-    
-    if ([[[CacheHandler instance] currentUser] isEqual:result[[indexPath row]]]) {
-        [[cell button] setHidden:YES];
+        UIImage *image = [UIImage imageNamed:@"add.png"];
+        [[cell button] setImage:image forState:UIControlStateNormal];
     }
     
     return cell;
